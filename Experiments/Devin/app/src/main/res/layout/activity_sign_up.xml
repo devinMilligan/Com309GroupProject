@@ -6,4 +6,164 @@
     android:layout_height="match_parent"
     tools:context=".SignUp">
 
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="207dp"
+        android:layout_height="47dp"
+        android:background="@drawable/button_style_sign_on"
+        android:text="Sign Up"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="486dp" />
+
+    <TextView
+        android:id="@+id/txtSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="Sign In!"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/btnSignUp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/txtBox2"
+        app:layout_constraintTop_toTopOf="@+id/txtBox2" />
+
+    <TextView
+        android:id="@+id/txtBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:text="Already Have An Account? "
+        android:textColor="@color/AccentText"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txtSignIn"
+        app:layout_constraintStart_toStartOf="@+id/btnSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignUp"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/edEmailSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="@+id/btnSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/txtBox3" />
+
+    <EditText
+        android:id="@+id/edPassSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="@+id/edEmailSign"
+        app:layout_constraintTop_toBottomOf="@+id/txtBox4" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="185dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/edEmailSign"
+        app:layout_constraintStart_toStartOf="@+id/edEmailSign"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cyexpress" />
+
+    <EditText
+        android:id="@+id/edPass2Sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Re-Enter Password"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="@+id/edEmailSign"
+        app:layout_constraintTop_toBottomOf="@+id/txtBox5" />
+
+    <TextView
+        android:id="@+id/txtBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="*Required"
+        android:textColor="@color/AccentText"
+        app:layout_constraintEnd_toEndOf="@+id/edEmailSign"
+        app:layout_constraintTop_toBottomOf="@+id/imageView1" />
+
+    <TextView
+        android:id="@+id/txtBox6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textColor="@color/AccentText"
+        app:layout_constraintBottom_toTopOf="@+id/edEmailSign"
+        app:layout_constraintStart_toStartOf="@+id/edEmailSign" />
+
+    <TextView
+        android:id="@+id/txtBox7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textColor="@color/AccentText"
+        app:layout_constraintBottom_toTopOf="@+id/edPassSign"
+        app:layout_constraintStart_toStartOf="@+id/edEmailSign" />
+
+    <TextView
+        android:id="@+id/txtBox8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Re-Enter Password"
+        android:textColor="@color/AccentText"
+        app:layout_constraintBottom_toTopOf="@+id/edPass2Sign"
+        app:layout_constraintStart_toStartOf="@+id/edEmailSign" />
+
+    <TextView
+        android:id="@+id/txtBox9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        android:textColor="@color/AccentText"
+        app:layout_constraintBottom_toTopOf="@+id/edAddress"
+        app:layout_constraintStart_toStartOf="@+id/edEmailSign" />
+
+    <TextView
+        android:id="@+id/txtBox4"
+        android:layout_width="61dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="3dp"
+        android:text="*Required"
+        android:textColor="@color/AccentText"
+        app:layout_constraintEnd_toEndOf="@+id/edPassSign"
+        app:layout_constraintTop_toBottomOf="@+id/edEmailSign" />
+
+    <TextView
+        android:id="@+id/txtBox5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="*Required"
+        android:textColor="@color/AccentText"
+        app:layout_constraintEnd_toEndOf="@+id/edPass2Sign"
+        app:layout_constraintTop_toBottomOf="@+id/edPassSign" />
+
+    <EditText
+        android:id="@+id/edAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Cuurent Address"
+        android:inputType="textPostalAddress"
+        app:layout_constraintStart_toStartOf="@+id/edPass2Sign"
+        app:layout_constraintTop_toBottomOf="@+id/edPass2Sign" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
