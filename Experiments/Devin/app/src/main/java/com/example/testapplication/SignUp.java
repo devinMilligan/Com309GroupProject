@@ -33,7 +33,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         btnSignUp.setOnClickListener(this);
 
         edAddress = (EditText)findViewById(R.id.edAddress);
-        edEmail = (EditText)findViewById(R.id.edEmail);
+        edEmail = (EditText)findViewById(R.id.edEmailSign);
         edPassword = (EditText)findViewById(R.id.edPassSign);
         edRePass = (EditText)findViewById(R.id.edPass2Sign);
     }
@@ -78,7 +78,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 }
                 if(!check && !rePass.equals(pass)){
 
-                    txtPass.setTextColor(Color.RED);
                     txtRePass.setTextColor(Color.RED);
                     check = true;
                 }

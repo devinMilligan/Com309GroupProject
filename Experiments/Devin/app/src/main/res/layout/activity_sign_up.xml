@@ -4,18 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     tools:context=".SignUp">
 
     <Button
         android:id="@+id/btnSignUp"
         android:layout_width="207dp"
         android:layout_height="47dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/button_style_sign_on"
         android:text="Sign Up"
+        app:layout_constraintBottom_toTopOf="@+id/txtSignIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/edAddress"
+        app:layout_constraintVertical_bias="0.77" />
 
     <TextView
         android:id="@+id/txtSignIn"
@@ -50,19 +54,19 @@
 
     <EditText
         android:id="@+id/edEmailSign"
-        android:layout_width="wrap_content"
+        android:layout_width="215dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="@+id/btnSignUp"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="@+id/btnSignUp"
         app:layout_constraintTop_toBottomOf="@+id/txtReEm" />
 
     <EditText
         android:id="@+id/edPassSign"
-        android:layout_width="wrap_content"
+        android:layout_width="215dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Password"
@@ -82,7 +86,7 @@
 
     <EditText
         android:id="@+id/edPass2Sign"
-        android:layout_width="wrap_content"
+        android:layout_width="215dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Re-Enter Password"
@@ -138,8 +142,8 @@
 
     <TextView
         android:id="@+id/txtRePass"
-        android:layout_width="61dp"
-        android:layout_height="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:text="*Required"
         android:textColor="@color/AccentText"
@@ -158,11 +162,11 @@
 
     <EditText
         android:id="@+id/edAddress"
-        android:layout_width="wrap_content"
+        android:layout_width="215dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Cuurent Address"
+        android:hint="Curent Address"
         android:inputType="textPostalAddress"
         app:layout_constraintStart_toStartOf="@+id/edPass2Sign"
         app:layout_constraintTop_toBottomOf="@+id/edPass2Sign" />
