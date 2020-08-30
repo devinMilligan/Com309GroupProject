@@ -56,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 }
 
+                Intent signIn = new Intent(this, MainScreen.class);
+                startActivity(signIn);
+                finish();
 
                 break;
         }

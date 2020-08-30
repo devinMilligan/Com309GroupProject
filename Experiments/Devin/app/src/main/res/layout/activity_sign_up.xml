@@ -15,6 +15,7 @@
         android:layout_marginBottom="100dp"
         android:background="@drawable/button_style_sign_on"
         android:text="Sign Up"
+        android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/txtSignIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
