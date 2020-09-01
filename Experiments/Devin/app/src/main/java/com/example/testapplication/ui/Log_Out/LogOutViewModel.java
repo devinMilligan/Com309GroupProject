@@ -1,14 +1,14 @@
-package com.example.testapplication.ui.tools;
+package com.example.testapplication.ui.Log_Out;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ToolsViewModel extends ViewModel {
+public class LogOutViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public ToolsViewModel() {
+    public LogOutViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is tools fragment");
     }

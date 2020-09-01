@@ -1,4 +1,4 @@
-package com.example.testapplication.ui.tools;
+package com.example.testapplication.ui.Log_Out;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.testapplication.R;
 
-public class ToolsFragment extends Fragment {
+public class LogOutFragment extends Fragment {
 
-    private ToolsViewModel toolsViewModel;
+    private LogOutViewModel logOutViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        toolsViewModel =
-                ViewModelProviders.of(this).get(ToolsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_tools, container, false);
-        final TextView textView = root.findViewById(R.id.text_tools);
-        toolsViewModel.getText().observe(this, new Observer<String>() {
+        logOutViewModel =
+                ViewModelProviders.of(this).get(LogOutViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_log_out, container, false);
+        final TextView textView = root.findViewById(R.id.text_log_out);
+        logOutViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
