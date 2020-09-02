@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Addition</string>
+    <string name="pageTwoToastText">Please enter values before continuing to page 2.</string>
+    <string name="addToastText">Please enter values before continuing.</string>
+</resources>

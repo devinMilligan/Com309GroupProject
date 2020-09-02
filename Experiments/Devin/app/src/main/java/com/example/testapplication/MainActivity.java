@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         edPass = (EditText)findViewById(R.id.edPass);
 
         btnSignIn = (Button)findViewById(R.id.button);
+        btnSignIn.setOnClickListener(this);
 
     }
 
