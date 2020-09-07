@@ -1,16 +1,16 @@
-package com.example.project309.ui.tools;
+package com.example.project309.ui.switchuser;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ToolsViewModel extends ViewModel {
+public class SwitchUserViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public ToolsViewModel() {
+    public SwitchUserViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is tools fragment");
+        mText.setValue("This is switch user fragment");
     }
 
     public LiveData<String> getText() {

@@ -35,7 +35,7 @@ public class MainNavigationScreen extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "This is able to do something", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -45,7 +45,7 @@ public class MainNavigationScreen extends AppCompatActivity {
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_map, R.id.nav_log_out,
-                R.id.nav_tools, R.id.nav_profile)
+                R.id.nav_switch_user, R.id.nav_profile)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

@@ -1,4 +1,4 @@
-package com.example.project309.ui.tools;
+package com.example.project309.ui.switchuser;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.project309.R;
 
-public class ToolsFragment extends Fragment {
+public class SwitchUserFragment extends Fragment {
 
-    private ToolsViewModel toolsViewModel;
+    private SwitchUserViewModel switchUserViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        toolsViewModel =
-                ViewModelProviders.of(this).get(ToolsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_tools, container, false);
-        final TextView textView = root.findViewById(R.id.text_tools);
-        toolsViewModel.getText().observe(this, new Observer<String>() {
+        switchUserViewModel =
+                ViewModelProviders.of(this).get(SwitchUserViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_switch_user, container, false);
+        final TextView textView = root.findViewById(R.id.text_switch_user);
+        switchUserViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

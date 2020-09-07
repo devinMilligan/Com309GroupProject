@@ -13,10 +13,6 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_map" />
 
-        <item
-            android:id="@+id/nav_tools"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_tools" />
     </group>
 
     <item android:title="Profile">
@@ -29,6 +25,10 @@
                 android:id="@+id/nav_log_out"
                 android:icon="@drawable/ic_menu_slideshow"
                 android:title="@string/menu_log_out" />
+            <item
+                android:id="@+id/nav_switch_user"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/menu_switch_user" />
         </menu>
     </item>
 

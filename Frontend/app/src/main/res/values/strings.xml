@@ -3,14 +3,14 @@
     <string name="title_activity_main_navigation_screen">MainNavigationScreen</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Devin Milligan</string>
+    <string name="nav_header_subtitle">milldev@iastate.edu</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_map">Map</string>
-    <string name="menu_log_out">log_out</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_profile">profile</string>
+    <string name="menu_log_out">Log Out</string>
+    <string name="menu_switch_user">Switch User</string>
+    <string name="menu_profile">Profile</string>
 </resources>
