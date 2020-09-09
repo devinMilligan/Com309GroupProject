@@ -42,6 +42,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:background="@color/colorPrimaryDark"
         app:backgroundTint="@color/colorPrimaryDark"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@drawable/paperpen"
+        app:maxImageSize="@dimen/design_fab_content_size"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
