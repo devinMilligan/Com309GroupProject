@@ -1,19 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_profile"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/text_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/txtPic"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="143dp"
+            android:fontFamily="@font/fresca"
+            android:text="Email"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/txtTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/txtPassRe"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="500dp"
+            android:text="Bottom"
+            android:textAlignment="center"
+            android:textSize="28sp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/txtPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/txtEmail"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="83dp"
+            android:fontFamily="@font/fresca"
+            android:text="Password"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/txtHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/btnChangePass"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="64dp"
+            android:fontFamily="@font/fresca"
+            android:text="Home Location"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/txtDelivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/edAddress"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="111dp"
+            android:fontFamily="@font/fresca"
+            android:text="Delivery Employee"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/txtPassRe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/txtPass"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="83dp"
+            android:fontFamily="@font/fresca"
+            android:text="Re-Enter Password"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btnChangePass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/txtPassRe"
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="93dp"
+            android:layout_marginEnd="0dp"
+            android:background="@drawable/gen_button_style"
+            android:text="Update Password"
+            android:textColor="@color/colorAccent" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/txtEmail"
+            android:layout_alignTop="@id/txtEmail"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="36dp"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:text="milldev@iastat.edu" />
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/txtPass"
+            android:layout_alignTop="@id/txtPass"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="36dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:text="fdasfsasda" />
+
+        <EditText
+            android:id="@+id/editText4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/txtPassRe"
+            android:layout_alignTop="@id/txtPassRe"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="36dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:text="fdasfsasda" />
+
+        <TextView
+            android:id="@+id/txtPic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="162dp"
+            android:layout_marginTop="59dp"
+            android:foregroundGravity="clip_horizontal|center"
+            android:gravity="center"
+            android:text="Profile Picture" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="130dp"
+            android:layout_height="98dp"
+            android:layout_alignTop="@id/txtPic"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="143dp"
+            android:layout_marginTop="22dp"
+            app:srcCompat="@drawable/profile" />
+
+        <EditText
+            android:id="@+id/edAddress"
+            android:layout_width="277dp"
+            android:layout_height="94dp"
+            android:layout_alignTop="@id/txtHome"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="47dp"
+            android:layout_marginTop="39dp"
+            android:ems="10"
+            android:gravity="bottom|start"
+            android:inputType="textMultiLine"
+            android:text="4888  Passaic Street \nFreehold, NJ 07728" />
+
+        <Switch
+            android:id="@+id/swDelivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/txtDelivery"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="255dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="27dp"
+            android:textSize="18sp"
+            android:thumbTint="@color/colorPrimaryDark"
+            android:trackTint="@color/colorPrimary" />
+
+    </RelativeLayout>
+
+</ScrollView>
+
+
