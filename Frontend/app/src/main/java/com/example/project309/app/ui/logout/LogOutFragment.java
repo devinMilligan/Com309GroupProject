@@ -1,4 +1,4 @@
-package com.example.project309.ui.switchuser;
+package com.example.project309.app.ui.logout;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.project309.R;
 
-public class SwitchUserFragment extends Fragment {
+public class LogOutFragment extends Fragment {
 
-    private SwitchUserViewModel switchUserViewModel;
+    private LogOutViewModel logOutViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        switchUserViewModel =
-                ViewModelProviders.of(this).get(SwitchUserViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_switch_user, container, false);
-        final TextView textView = root.findViewById(R.id.text_switch_user);
-        switchUserViewModel.getText().observe(this, new Observer<String>() {
+        logOutViewModel =
+                ViewModelProviders.of(this).get(LogOutViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_log_out, container, false);
+        final TextView textView = root.findViewById(R.id.text_log_out);
+        logOutViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
