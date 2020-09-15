@@ -8,17 +8,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Application{
 
-
-	  public static void main(String[] args) {
-	      SpringApplication sa = new SpringApplication(Application.class);
-
-
-		  ExampleClient exampleClient = new ExampleClient();
-		  exampleClient.run();
-	      sa.run(args);
-	  }
+	@Autowired
+	ExampleClient exampleClient;
+	
+	public static void main(String[] args) {
+	    SpringApplication sa = new SpringApplication(Application.class);
+	    sa.run(args);
+	}
 	  
-	  public void run(String... args) {
-	  }
-
+	public void run(String[] args) {
+		exampleClient.run();
+	}
 }

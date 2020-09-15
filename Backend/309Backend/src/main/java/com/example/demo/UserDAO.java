@@ -15,8 +15,8 @@ public class UserDAO {
   private JdbcTemplate jdbcTemplate;
 
   public void registerUser(User user) {
-      String sql = "insert into Users (username, password) values (?, ?)";
-      jdbcTemplate.update(sql, user.getUsername(), user.getPassword());
+      String sql = "insert into Users (username, password) values (user.getUsername() " + "user.getPassword())";
+      jdbcTemplate.update(sql);
   }
   
   public List<User> getUsers() {

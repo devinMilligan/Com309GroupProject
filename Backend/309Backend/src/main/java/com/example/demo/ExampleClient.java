@@ -7,13 +7,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ExampleClient {
-	
+
   @Autowired
   private UserDAO dao;
 
   public void run() {
       User person = User.create("Dana", "abc123#");
-      System.out.println("saving person: " + person);
+      System.out.println("saving person: " + person.getUsername());
       dao.registerUser(person);
 
       person = User.create("Robin", "hello1!");
