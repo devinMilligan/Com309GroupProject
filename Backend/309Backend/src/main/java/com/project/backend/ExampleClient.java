@@ -10,11 +10,11 @@ public class ExampleClient {
     private UserDao dao;
 
     public void run() {
-        User user = User.create("Dana", "Whitley", "464 Yellow Drive");
+        User user = User.create("danaw46", "abc123", "Dana", "Whitley", "464 Yellow Drive");
         System.out.println("saving user: " + user);
         dao.save(user);
 
-        user = User.create("Robin", "Cash", "64 Logic Park");
+        user = User.create("TheRobMan", "Hello1!", "Robin", "Cash", "64 Logic Park");
         System.out.println("saving user: " + user);
         dao.save(user);
 
