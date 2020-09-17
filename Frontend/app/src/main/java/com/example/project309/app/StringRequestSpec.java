@@ -10,7 +10,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.example.project309.net_utils.Const;
 
-public class StringRequestSepc {
+public class StringRequestSpec {
 
     private String TAG = this.getClass().toString();
     private Context context;
@@ -18,7 +18,7 @@ public class StringRequestSepc {
     // This tag will be used to cancel the request
     private String tag_string_req = "string_req";
 
-    public void tringRequest(Context mContext) {
+    public StringRequestSpec(Context mContext) {
 
         context = mContext;
         TAG = TAG + "," + context.getClass().toString();
