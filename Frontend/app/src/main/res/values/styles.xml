@@ -19,10 +19,12 @@
 
 
     <style parent="@style/Theme.AppCompat.Dialog" name="PositiveButtonStyle">
+        <!-- text color for the message -->
+        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
         <!-- text color for the button -->
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
         <!-- Background tint for the button -->
-        <item name="background">@color/colorAccent</item>
+        <item name="background">@color/colorPrimaryDark</item>
     </style>
 
 </resources>

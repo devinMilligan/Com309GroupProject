@@ -3,6 +3,7 @@ package com.example.project309.app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,8 @@ import android.widget.EditText;
 import com.example.project309.R;
 
 public class LogOnTest extends AppCompatActivity implements View.OnClickListener {
+
+    public static final String TAG = "LOGON";
 
     private StringRequestSpec stringRe;
 
@@ -56,10 +59,10 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
                 tempUser = edUser.getText().toString().trim();
                 tempPass = edPass.getText().toString().trim();
 
-                stringRe.makeStringReq();
 
                 if(checkIfComplete(tempUser, tempPass)){
-                    message.showMessage("Sending Request To Sign On", 1);
+                    message.showMessage("Loading...", 3);
+                    stringRe.makeStringReq(1);
                 }
                 else{
                     message.showMessage("Please fill out user and password",1);
@@ -94,6 +97,13 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
             return false;
         }
         return true;
+
+    }
+    public void sendResponse(String txt){
+
+        Log.d(TAG,txt);
+        message.dismissMessage();
+        message.showMessage(txt,1);
 
     }
 }

@@ -61,13 +61,13 @@ public class MessageBoxBuilder {
 
                 }
             });
-            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialogInterface) {
-
-                }
-            });
         }
+        else if(style == 3){
+
+
+
+        }
+
 
         dialog = builder.create();
         dialog.show();
