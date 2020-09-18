@@ -21,4 +21,3 @@ public class SpringBootMain implements CommandLineRunner {
         exampleClient.run();
     }
 }
-
