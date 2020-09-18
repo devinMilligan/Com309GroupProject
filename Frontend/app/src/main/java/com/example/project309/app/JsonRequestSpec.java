@@ -13,6 +13,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.project309.net_utils.Const;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -37,7 +38,8 @@ public class JsonRequestSpec {
     /**
      * Making json object request
      * */
-    private void makeJsonObjReq() {
+    private void makeJsonObjReqParams() {
+        final int jsonType = 1;
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 Const.URL_JSON_OBJECT, null,
                 new Response.Listener<JSONObject>() {
@@ -45,14 +47,14 @@ public class JsonRequestSpec {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
-
+                        responseHandler(response, jsonType);
                     }
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-
+                responseHandler(error, jsonType);
             }
         }) {
 
@@ -90,18 +92,19 @@ public class JsonRequestSpec {
      * Making json array request
      * */
     private void makeJsonArryReq() {
+        final int jsonType = 1;
         JsonArrayRequest req = new JsonArrayRequest(Const.URL_JSON_ARRAY,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.d(TAG, response.toString());
-
+                        responseHandler(response,jsonType);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-
+                responseHandler(error,jsonType);
             }
         });
 
@@ -112,4 +115,117 @@ public class JsonRequestSpec {
         // Cancelling request
         // ApplicationController.getInstance().getRequestQueue().cancelAll(tag_json_arry);
     }
+
+    private void makeJsonReqBody(){
+
+        final int jsonType = 2;
+        JSONObject body = new JSONObject();
+
+        try {
+
+            body.put("user", "milldev@iastate.edu:");
+            body.put("pass", "password4");
+        }
+        catch(JSONException e){
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                Const.URL_JSON_OBJECT, body,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, response.toString());
+                        responseHandler(response,jsonType);
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                responseHandler(error,jsonType);
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq,
+                tag_json_obj);
+
+
+    }
+
+
+    private void responseHandler(JSONObject response, int jsonType){
+
+        if(jsonType == 0){
+
+        }
+        else if(jsonType == 1){
+
+        }
+        else if(jsonType == 2){
+
+        }
+
+        if(context instanceof LogOnTest){
+            ((LogOnTest)context).sendResponseJSON(response.toString());
+        }
+
+
+
+    }
+
+    private void responseHandler(JSONArray response, int jsonType){
+
+        if(jsonType == 0){
+
+        }
+        else if(jsonType == 1){
+
+        }
+        else if(jsonType == 2){
+
+        }
+
+        if(context instanceof LogOnTest){
+            ((LogOnTest)context).sendResponseJSON(response.toString());
+        }
+
+
+
+    }
+
+    private void responseHandler(VolleyError error, int jsonType){
+
+        if(jsonType == 0){
+
+        }
+        else if(jsonType == 1){
+
+        }
+        else if(jsonType == 2){
+
+        }
+
+        if(context instanceof LogOnTest){
+            ((LogOnTest)context).sendResponseJSON(error.toString());
+        }
+
+
+
+    }
+
 }

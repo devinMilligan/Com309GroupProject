@@ -58,7 +58,7 @@ public class StringRequestSpec implements Response.ErrorListener, Response.Liste
         Log.d(TAG, response.toString());
 
         if(context instanceof LogOnTest){
-            ((LogOnTest)context).sendResponse(response.toString());
+            ((LogOnTest)context).sendResponseString(response.toString());
         }
 
     }

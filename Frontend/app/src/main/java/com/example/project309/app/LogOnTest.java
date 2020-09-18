@@ -99,7 +99,15 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
         return true;
 
     }
-    public void sendResponse(String txt){
+    public void sendResponseString(String txt){
+
+        Log.d(TAG,txt);
+        message.dismissMessage();
+        message.showMessage(txt,1);
+
+    }
+
+    public void sendResponseJSON(String txt){
 
         Log.d(TAG,txt);
         message.dismissMessage();
