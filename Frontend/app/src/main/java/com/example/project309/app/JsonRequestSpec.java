@@ -1,5 +1,6 @@
 package com.example.project309.app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
@@ -16,10 +17,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JsonRequestSpec {
+public class JsonRequestSpec extends JSONAbstract {
 
     private String TAG = this.getClass().toString();
     private Context context;
@@ -38,8 +40,10 @@ public class JsonRequestSpec {
     /**
      * Making json object request
      * */
-    private void makeJsonObjReqParams() {
-        final int jsonType = 1;
+    private void makeJsonObjReqParams(ArrayList<JSONVariable> list) {
+
+        final ArrayList<JSONVariable> mList = list;
+
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 Const.URL_JSON_OBJECT, null,
                 new Response.Listener<JSONObject>() {
@@ -47,14 +51,14 @@ public class JsonRequestSpec {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
-                        responseHandler(response, jsonType);
+                        responseListParam(response);
                     }
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                responseHandler(error, jsonType);
+                responseListParam(error);
             }
         }) {
 
@@ -71,9 +75,10 @@ public class JsonRequestSpec {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("name", "Androidhive");
-                params.put("email", "abc@androidhive.info");
-                params.put("pass", "password123");
+
+                for(int i = 0; i<mList.size(); i++) {
+                    params.put(mList.get(i).getId(), mList.get(i).getValue());
+                }
 
                 return params;
             }
@@ -92,19 +97,19 @@ public class JsonRequestSpec {
      * Making json array request
      * */
     private void makeJsonArryReq() {
-        final int jsonType = 1;
+
         JsonArrayRequest req = new JsonArrayRequest(Const.URL_JSON_ARRAY,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.d(TAG, response.toString());
-                        responseHandler(response,jsonType);
+                        responseListArray(response);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                responseHandler(error,jsonType);
+                responseListArray(error);
             }
         });
 
@@ -116,36 +121,36 @@ public class JsonRequestSpec {
         // ApplicationController.getInstance().getRequestQueue().cancelAll(tag_json_arry);
     }
 
-    private void makeJsonReqBody(){
+    public void makeJsonReqBody(ArrayList<JSONVariable> list){
 
-        final int jsonType = 2;
         JSONObject body = new JSONObject();
 
         try {
 
-            body.put("user", "milldev@iastate.edu:");
-            body.put("pass", "password4");
+            for(int i=0; i<list.size(); i++) {
+                body.put(list.get(i).getId(), list.get(i).getValue());
+            }
         }
         catch(JSONException e){
             e.printStackTrace();
         }
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Const.URL_JSON_OBJECT, body,
-                new Response.Listener<JSONObject>() {
+                Const.URL_JSON_BODY, body,new Response.Listener<JSONObject>() {
 
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d(TAG, response.toString());
-                        responseHandler(response,jsonType);
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+                responseListBody(response);
 
-                    }
-                }, new Response.ErrorListener() {
+            }
+        }
+                , new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                responseHandler(error,jsonType);
+                responseListBody(error);
             }
         }) {
 
@@ -168,64 +173,33 @@ public class JsonRequestSpec {
     }
 
 
-    private void responseHandler(JSONObject response, int jsonType){
-
-        if(jsonType == 0){
-
-        }
-        else if(jsonType == 1){
-
-        }
-        else if(jsonType == 2){
-
-        }
-
-        if(context instanceof LogOnTest){
-            ((LogOnTest)context).sendResponseJSON(response.toString());
-        }
-
-
-
+    @Override
+    protected void responseListBody(JSONObject response) {
+        Log.d(TAG, response.toString() + " DO NOTHING");
     }
 
-    private void responseHandler(JSONArray response, int jsonType){
-
-        if(jsonType == 0){
-
-        }
-        else if(jsonType == 1){
-
-        }
-        else if(jsonType == 2){
-
-        }
-
-        if(context instanceof LogOnTest){
-            ((LogOnTest)context).sendResponseJSON(response.toString());
-        }
-
-
-
+    @Override
+    protected void responseListArray(JSONArray response) {
+        Log.d(TAG, response.toString() + " DO NOTHING");
     }
 
-    private void responseHandler(VolleyError error, int jsonType){
-
-        if(jsonType == 0){
-
-        }
-        else if(jsonType == 1){
-
-        }
-        else if(jsonType == 2){
-
-        }
-
-        if(context instanceof LogOnTest){
-            ((LogOnTest)context).sendResponseJSON(error.toString());
-        }
-
-
-
+    @Override
+    protected void responseListParam(JSONObject response) {
+        Log.d(TAG, response.toString() + " DO NOTHING");
     }
 
+    @Override
+    protected void responseListBody(VolleyError error) {
+        Log.d(TAG, error.toString() + " ERROR DO NOTHING");
+    }
+
+    @Override
+    protected void responseListArray(VolleyError error) {
+        Log.d(TAG, error.toString() + " ERROR DO NOTHING");
+    }
+
+    @Override
+    protected void responseListParam(VolleyError error) {
+        Log.d(TAG, error.toString() + " ERROR DO NOTHING");
+    }
 }

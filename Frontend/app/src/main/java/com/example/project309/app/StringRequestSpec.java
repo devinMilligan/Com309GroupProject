@@ -5,13 +5,13 @@ import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.example.project309.net_utils.Const;
 
-public class StringRequestSpec implements Response.ErrorListener, Response.Listener<String> {
+
+public class StringRequestSpec extends StringRequestAbstract {
 
     private String TAG = this.getClass().toString();
     private Context context;
@@ -30,13 +30,27 @@ public class StringRequestSpec implements Response.ErrorListener, Response.Liste
 
         String url = "";
 
+
+        responseListString("STrng");
         if(urlNum == 1){
             url = Const.URL_STRING_REQ;
         }
 
         Log.d(TAG, "Made Request");
 
-        StringRequest strReq = new StringRequest(Request.Method.GET, Const.URL_STRING_REQ,this,this);
+        StringRequest strReq = new StringRequest(Request.Method.GET, Const.URL_STRING_REQ, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, response.toString());
+                responseListString(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error " + error.toString());
+                responseListString(error);
+            }
+        });
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
@@ -45,21 +59,12 @@ public class StringRequestSpec implements Response.ErrorListener, Response.Liste
 
 
     @Override
-    public void onErrorResponse(VolleyError error) {
-
-        VolleyLog.d(TAG, "Error: " + error.getMessage() + " " + error.networkResponse);
-        Log.d(TAG,"Error: " + error.getMessage() + " " + error.toString() );
-
+    protected void responseListString(String response) {
+        Log.d(TAG, "Dont Go Here");
     }
 
     @Override
-    public void onResponse(String response) {
-
-        Log.d(TAG, response.toString());
-
-        if(context instanceof LogOnTest){
-            ((LogOnTest)context).sendResponseString(response.toString());
-        }
+    protected void responseListString(VolleyError error) {
 
     }
 }

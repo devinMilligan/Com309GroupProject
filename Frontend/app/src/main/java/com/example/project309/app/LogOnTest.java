@@ -8,13 +8,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.example.project309.R;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class LogOnTest extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = "LOGON";
-
-    private StringRequestSpec stringRe;
 
     private MessageBoxBuilder message;
 
@@ -41,6 +45,7 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
         edUser.setText("");
 
         stringRe = new StringRequestSpec(LogOnTest.this);
+        //jsonRe = new JsonRequestSpec(LogOnTest.this);
         message = new MessageBoxBuilder(LogOnTest.this);
 
     }
@@ -62,7 +67,13 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
 
                 if(checkIfComplete(tempUser, tempPass)){
                     message.showMessage("Loading...", 3);
+
+
+                    ArrayList<JSONVariable> list = new ArrayList<>();
+                    list.add(new JSONVariable("user",tempUser));
+                    list.add(new JSONVariable("pass", tempPass));
                     stringRe.makeStringReq(1);
+                    //jsonRe.makeJsonReqBody(list);
                 }
                 else{
                     message.showMessage("Please fill out user and password",1);
@@ -109,9 +120,44 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
 
     public void sendResponseJSON(String txt){
 
+
         Log.d(TAG,txt);
         message.dismissMessage();
         message.showMessage(txt,1);
-
     }
+
+
+    JsonRequestSpec jsonRe = new JsonRequestSpec(LogOnTest.this){
+
+        @Override
+        protected void responseListBody(JSONObject response){
+            Log.d(TAG,response.toString());
+            message.dismissMessage();
+            message.showMessage(response.toString(),1);
+        }
+
+    };
+
+    StringRequestSpec stringRe = new StringRequestSpec(LogOnTest.this){
+
+        @Override
+        protected void responseListString(String response){
+
+            Log.d(TAG,response.toString());
+            message.dismissMessage();
+            message.showMessage(response.toString(),1);
+
+        }
+
+        @Override
+        protected void responseListString(VolleyError error){
+
+            Log.d(TAG,error.toString());
+            message.dismissMessage();
+            message.showMessage(error.toString(),1);
+
+        }
+
+    };
+
 }
