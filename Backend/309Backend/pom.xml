@@ -46,27 +46,12 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-    			<artifactId>maven-assembly-plugin</artifactId>
-    			<executions>
-      			<execution>
-        			<phase>package</phase>
-        			<goals>
-          				<goal>single</goal>
-        			</goals>
-      			</execution>
-    			</executions>
-    			<configuration>
-      			<archive>
-        			<manifest>
-          			<addClasspath>true</addClasspath>
-          			<mainClass>com.project.backend.SpringBootMain</mainClass>
-        			</manifest>
-      			</archive>
-      			<descriptorRefs>
-        			<descriptorRef>jar-with-dependencies</descriptorRef>
-      			</descriptorRefs>
-    			</configuration>
-  			</plugin> 
+            	<artifactId>maven-compiler-plugin</artifactId>
+            	<configuration>
+                	<fork>true</fork>
+                	<executable>C:\Program Files\Java\jdk-15\bin\javac.exe</executable>
+            	</configuration>
+        	</plugin>
     	</plugins>
 	</build>
 
