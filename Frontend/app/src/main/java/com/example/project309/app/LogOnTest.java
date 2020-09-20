@@ -44,7 +44,6 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
         edPass.setText("");
         edUser.setText("");
 
-        stringRe = new StringRequestSpec(LogOnTest.this);
         //jsonRe = new JsonRequestSpec(LogOnTest.this);
         message = new MessageBoxBuilder(LogOnTest.this);
 
