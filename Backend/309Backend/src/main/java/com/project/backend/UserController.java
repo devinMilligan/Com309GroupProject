@@ -8,8 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
 import java.util.List;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.backend.User;
 
 
@@ -19,12 +23,10 @@ class UserController {
     @Autowired
     private UserDao dao;
 
-    private final Logger logger = LoggerFactory.getLogger(UserController.class);
-
     @PostMapping("/users/new")
-    public ResponseEntity<User> newUser()
+    public ResponseEntity<User> newUser(@RequestParam(value = "User") String input) throws IOException
     {
-    	User user = User.create("danaw46", "abc123", "Dana", "Whitley", "464 Yellow Drive");
+    	final User user = new ObjectMapper().readValue(input, User.class);
     	System.out.println("saving user: " + user);
     	dao.save(user);
     	return ResponseEntity.status(HttpStatus.OK)
