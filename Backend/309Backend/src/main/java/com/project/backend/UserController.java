@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
@@ -29,8 +30,15 @@ class UserController {
     	final User user = new ObjectMapper().readValue(input, User.class);
     	System.out.println("saving user: " + user);
     	dao.save(user);
-    	return ResponseEntity.status(HttpStatus.OK)
-    	        .body(user);
+    	return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
+    
+    @PostMapping("/users/new")
+    public ResponseEntity<User> newUser(@RequestBody User user) throws IOException
+    {
+    	System.out.println("saving user: " + user);
+    	dao.save(user);
+    	return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
     @GetMapping("/users/all")
