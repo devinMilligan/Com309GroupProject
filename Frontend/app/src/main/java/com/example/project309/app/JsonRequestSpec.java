@@ -1,7 +1,5 @@
 package com.example.project309.app;
 
-import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -24,27 +22,31 @@ import java.util.Map;
 public class JsonRequestSpec extends JSONAbstract {
 
     private String TAG = this.getClass().toString();
-    private Context context;
 
     // These tags will be used to cancel the requests
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
 
+    /**
+     * Constructor
+     * @param tag this is used in Log calls in order to specifiy which classes' instance
+     *            has made the call
+     */
+    public JsonRequestSpec(String tag){
 
-    public JsonRequestSpec(Context mContext){
-
-        context = mContext;
-        TAG = TAG + "," + context.getClass().toString();
+        TAG = TAG + "," + tag;
 
     }
 
     /**
-     * Making json object request
+     * Making json object request with parameters
+     * @param list this is the list of JSONVariables to be used as parameters passed with
+     *             request
      * */
     public void makeJsonObjReqParams(ArrayList<JSONVariable> list) {
 
-        String url = Const.URL_JSON_PARAM +"?";
+        String url = Const.URL_JSON_CREATE_USER +"?";
 
-        for(int i = 0; i < list.size(); i++){
+        for(int i = 0; i < list.size(); i++){  //Creation of link with parameters
 
             url+=list.get(i).getId() + "=";
             url+=list.get(i).getValue();
@@ -55,20 +57,20 @@ public class JsonRequestSpec extends JSONAbstract {
 
         }
 
-        final ArrayList<JSONVariable> mList = list;
+        //Create JSONObjectRequest to send as POST
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                 url, null,
                 new Response.Listener<JSONObject>() {
 
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(JSONObject response) {  //Handling of the response
                         Log.d(TAG, response.toString());
                         responseListParam(response);
                     }
                 }, new Response.ErrorListener() {
 
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error) {  //Handling of the error
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 responseListParam(error);
             }
@@ -84,20 +86,6 @@ public class JsonRequestSpec extends JSONAbstract {
                 return headers;
             }
 
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-
-                if(mList == null || mList.size() == 0){
-                    return null;
-                }
-
-                for(int i = 0; i<mList.size(); i++) {
-                    params.put(mList.get(i).getId(), mList.get(i).getValue());
-                }
-
-                return params;
-            }
 
         };
 
@@ -114,14 +102,15 @@ public class JsonRequestSpec extends JSONAbstract {
      * */
     public void makeJsonArryReq() {
 
+        //Make JSON array request
         JsonArrayRequest req = new JsonArrayRequest(Const.URL_JSON_ARRAY,
-                new Response.Listener<JSONArray>() {
+                new Response.Listener<JSONArray>() {    //Handling response
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.d(TAG, response.toString());
                         responseListArray(response);
                     }
-                }, new Response.ErrorListener() {
+                }, new Response.ErrorListener() {   //Handling Error
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
@@ -134,19 +123,36 @@ public class JsonRequestSpec extends JSONAbstract {
                 tag_json_arry);
 
 
-
         // Cancelling request
         // ApplicationController.getInstance().getRequestQueue().cancelAll(tag_json_arry);
     }
 
-    public void makeJsonReqBody(ArrayList<JSONVariable> bodyList, ArrayList<JSONVariable> paramsList){
+    /**
+     *  Making of JSONObjectREquest with a body and option of params
+     * @param bodyList
+     * @param paramsList
+     */
+    public void makeJsonReqBody(String url, ArrayList<JSONVariable> bodyList, ArrayList<JSONVariable> paramsList){
 
-        final ArrayList<JSONVariable> paramsL = paramsList;
+        if(paramsList != null || paramsList.size() != 0){  //Determine if there is params then create url
+            url+="?";
+
+            for(int i = 0; i < paramsList.size(); i++){  //Creation of link with parameters
+
+                url+=paramsList.get(i).getId() + "=";
+                url+=paramsList.get(i).getValue();
+
+                if(i<paramsList.size()-1){
+                    url+="&";
+                }
+            }
+        }
+
 
         JSONObject body = new JSONObject();
 
         try {
-            if(bodyList == null || bodyList.size() == 0){
+            if(bodyList == null || bodyList.size() == 0){  //Determine if there is a body and then create object
                 body = null;
             }else {
                 for (int i = 0; i < bodyList.size(); i++) {
@@ -158,11 +164,12 @@ public class JsonRequestSpec extends JSONAbstract {
             e.printStackTrace();
         }
 
+        //Make JsonObjectRequest as a POST
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Const.URL_JSON_BODY, body,new Response.Listener<JSONObject>() {
+                url, body,new Response.Listener<JSONObject>() {
 
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(JSONObject response) { //Handling of Response
                 Log.d(TAG, response.toString());
                 responseListBody(response);
 
@@ -171,7 +178,7 @@ public class JsonRequestSpec extends JSONAbstract {
                 , new Response.ErrorListener() {
 
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error) {  //Handling of Error
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 responseListBody(error);
             }
@@ -186,23 +193,6 @@ public class JsonRequestSpec extends JSONAbstract {
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-
-                if(paramsL == null || paramsL.size() == 0){
-                    return null;
-                }
-
-                for(int i = 0; i<params.size(); i++) {
-                    params.put(paramsL.get(i).getId(), paramsL.get(i).getValue());
-                }
-
-                return params;
-            }
-
-
         };
 
         // Adding request to request queue
@@ -212,6 +202,8 @@ public class JsonRequestSpec extends JSONAbstract {
 
     }
 
+
+    //Response and Error Handlers meant to be overridden by instance if want more functionality
 
     @Override
     protected void responseListBody(JSONObject response) {

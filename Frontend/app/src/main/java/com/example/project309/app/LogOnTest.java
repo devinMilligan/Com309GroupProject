@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.project309.R;
+import com.example.project309.net_utils.Const;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,6 +71,7 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
 
         switch (v.getId()){
 
+            //Button to go to rest of app
             case R.id.btnNext:
 
                 Intent in = new Intent(this, MainNavigationScreen.class);
@@ -77,6 +79,7 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
 
                 break;
 
+                //Button to send a request with new user data to be created
             case R.id.btnCreateUser:
 
                 tempUser = edUser.getText().toString().trim();
@@ -93,26 +96,22 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
                     list.add(new JSONVariable("firstname",edFirst.getText().toString()));
                     list.add(new JSONVariable("lastname",edLast.getText().toString()));
                     list.add(new JSONVariable("address",edAdd.getText().toString()));
-                    //jsonRe.makeJsonObjReqParams(list);
-                    //stringRe.makeStringReq(1);
-                    //jsonRe.makeJsonReqBody( null,list);
+
                     jsonRe.makeJsonObjReqParams(list);
-                    //jsonRe.makeJsonArryReq();
+                    //jsonRe.makeJsonReqBody(Const.URL_JSON_CREATE_USER,null,list);
                 }
                 else{
                     message.showMessage("Please fill out user and password",1);
                 }
 
-
                 break;
 
+                //button to update and show all the users in the database
             case R.id.btnLogOn:
 
                 message.showMessage("Updating...", 3);
 
                 jsonRe.makeJsonArryReq();
-
-
 
                 break;
 
@@ -120,6 +119,13 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
 
     }
 
+    /**
+     * Checks if the username and password fields have been filled out
+     *
+     * @param user
+     * @param pass
+     * @return
+     */
     private boolean checkIfComplete(String user, String pass){
 
 
@@ -129,25 +135,13 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
         return true;
 
     }
-    public void sendResponseString(String txt){
 
-        Log.d(TAG,txt);
-        message.dismissMessage();
-        message.showMessage(txt,1);
+    /**
+     * JSON Request Object, used for arrays, bodies, and parms
+     */
+    JsonRequestSpec jsonRe = new JsonRequestSpec(TAG){
 
-    }
-
-    public void sendResponseJSON(String txt){
-
-
-        Log.d(TAG,txt);
-        message.dismissMessage();
-        message.showMessage(txt,1);
-    }
-
-
-    JsonRequestSpec jsonRe = new JsonRequestSpec(LogOnTest.this){
-
+        //Overridden methods to specify how to handle responses and errors
         @Override
         protected void responseListBody(JSONObject response){
             Log.d(TAG,response.toString());
@@ -181,7 +175,7 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
             Log.d(TAG,response.toString());
 
             try {
-                for (int i = 0; i < response.length(); i++) {
+                for (int i = 0; i < response.length(); i++) {   //Add all new profiles to the app Profile class and then display in text box
 
                     JSONObject temp = (JSONObject)response.get(i);
 
@@ -219,7 +213,10 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
         }
     };
 
-    StringRequestSpec stringRe = new StringRequestSpec(LogOnTest.this){
+    /**
+     * String request, used to request a string from the database based off a certain URL
+     */
+    StringRequestSpec stringRe = new StringRequestSpec(TAG){
 
         @Override
         protected void responseListString(String response){

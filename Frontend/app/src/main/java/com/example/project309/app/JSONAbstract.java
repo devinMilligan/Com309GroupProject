@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 public abstract class JSONAbstract {
 
-
+    //Methods Meant to be overriden for response handling
     protected abstract void responseListBody(JSONObject response);
     protected abstract void responseListArray(JSONArray response);
     protected abstract void responseListParam(JSONObject response);
