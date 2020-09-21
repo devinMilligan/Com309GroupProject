@@ -23,6 +23,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Button loginButton = findViewById(R.id.login_continue_button);
         loginButton.setOnClickListener(this);
 
+        Button forgotPasswordButton = findViewById(R.id.login_forgot_password_button);
+        forgotPasswordButton.setOnClickListener(this);
+
         Button signUpButton = findViewById(R.id.login_create_account_button);
         signUpButton.setOnClickListener(this);
     }
@@ -51,7 +54,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 break;
             case R.id.login_create_account_button:
-
+                Intent createAccount = new Intent(this, SignUpActivity.class);
+                startActivity(createAccount);
+                break;
+            case R.id.login_forgot_password_button:
+                Toast myToast = Toast.makeText(this, R.string.forgot_password, Toast.LENGTH_SHORT);
+                myToast.show();
                 break;
         }
 

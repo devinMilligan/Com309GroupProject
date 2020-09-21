@@ -17,4 +17,7 @@
     <string name="login_welcome">Welcome to CampusEats!</string>
     <string name="no_email">Please enter an email</string>
     <string name="no_password">Please enter a password</string>
+    <string name="forgot_password">You forgot your password</string>
+    <string name="account_created">Welcome to CampusEats!</string>
+
 </resources>
