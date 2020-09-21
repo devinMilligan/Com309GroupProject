@@ -1,14 +1,11 @@
 package com.project.backend;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
@@ -32,22 +29,31 @@ class UserController {
     	dao.save(user);
     	return ResponseEntity.status(HttpStatus.OK).body(user);
     }
-    
-    @PostMapping("/users/new")
-    public ResponseEntity<User> newUser(@RequestBody User user) throws IOException
+
+    @PostMapping("/users/newUser")
+    public ResponseEntity<User> NewUser(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password,
+    		@RequestParam(value = "firstname") String firstname, @RequestParam(value = "lastname") String lastname, @RequestParam(value = "address") String address) 
+    				throws IOException
     {
+    	User user = new User();    	
+    	user.setUsername(username);
+    	user.setPassword(password);
+    	user.setFirstName(firstname);
+    	user.setLastName(lastname);
+    	user.setAddress(address);
+    	
+    	
     	System.out.println("saving user: " + user);
     	dao.save(user);
     	return ResponseEntity.status(HttpStatus.OK).body(user);
     }
-
+    
     @GetMapping("/users/all")
     public ResponseEntity<List<User>> getAllUsers() {
 
     	System.out.println("-- loading all --");
         List<User> users = dao.loadAll();
         users.forEach(System.out::println);
-        return ResponseEntity.status(HttpStatus.OK)
-    	        .body(users);
+        return ResponseEntity.status(HttpStatus.OK).body(users);
     }
 }
