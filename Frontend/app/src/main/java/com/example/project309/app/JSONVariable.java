@@ -20,5 +20,8 @@ public class JSONVariable {
     public String getValue(){
         return value;
     }
+    public String toString(){
+        return getId() + ":" + getValue();
+    }
 
 }

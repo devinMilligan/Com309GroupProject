@@ -30,8 +30,6 @@ public class StringRequestSpec extends StringRequestAbstract {
 
         String url = "";
 
-
-        responseListString("STrng");
         if(urlNum == 1){
             url = Const.URL_STRING_REQ;
         }

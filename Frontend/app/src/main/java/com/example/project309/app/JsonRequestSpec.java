@@ -40,12 +40,24 @@ public class JsonRequestSpec extends JSONAbstract {
     /**
      * Making json object request
      * */
-    private void makeJsonObjReqParams(ArrayList<JSONVariable> list) {
+    public void makeJsonObjReqParams(ArrayList<JSONVariable> list) {
+
+        String url = Const.URL_JSON_PARAM +"?";
+
+        for(int i = 0; i < list.size(); i++){
+
+            url+=list.get(i).getId() + "=";
+            url+=list.get(i).getValue();
+
+            if(i<list.size()-1){
+                url+="&";
+            }
+
+        }
 
         final ArrayList<JSONVariable> mList = list;
-
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                Const.URL_JSON_OBJECT, null,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                url, null,
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -76,6 +88,10 @@ public class JsonRequestSpec extends JSONAbstract {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
 
+                if(mList == null || mList.size() == 0){
+                    return null;
+                }
+
                 for(int i = 0; i<mList.size(); i++) {
                     params.put(mList.get(i).getId(), mList.get(i).getValue());
                 }
@@ -96,7 +112,7 @@ public class JsonRequestSpec extends JSONAbstract {
     /**
      * Making json array request
      * */
-    private void makeJsonArryReq() {
+    public void makeJsonArryReq() {
 
         JsonArrayRequest req = new JsonArrayRequest(Const.URL_JSON_ARRAY,
                 new Response.Listener<JSONArray>() {
@@ -117,18 +133,25 @@ public class JsonRequestSpec extends JSONAbstract {
         AppController.getInstance().addToRequestQueue(req,
                 tag_json_arry);
 
+
+
         // Cancelling request
         // ApplicationController.getInstance().getRequestQueue().cancelAll(tag_json_arry);
     }
 
-    public void makeJsonReqBody(ArrayList<JSONVariable> list){
+    public void makeJsonReqBody(ArrayList<JSONVariable> bodyList, ArrayList<JSONVariable> paramsList){
+
+        final ArrayList<JSONVariable> paramsL = paramsList;
 
         JSONObject body = new JSONObject();
 
         try {
-
-            for(int i=0; i<list.size(); i++) {
-                body.put(list.get(i).getId(), list.get(i).getValue());
+            if(bodyList == null || bodyList.size() == 0){
+                body = null;
+            }else {
+                for (int i = 0; i < bodyList.size(); i++) {
+                    body.put(bodyList.get(i).getId(), bodyList.get(i).getValue());
+                }
             }
         }
         catch(JSONException e){
@@ -163,6 +186,23 @@ public class JsonRequestSpec extends JSONAbstract {
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                if(paramsL == null || paramsL.size() == 0){
+                    return null;
+                }
+
+                for(int i = 0; i<params.size(); i++) {
+                    params.put(paramsL.get(i).getId(), paramsL.get(i).getValue());
+                }
+
+                return params;
+            }
+
+
         };
 
         // Adding request to request queue
