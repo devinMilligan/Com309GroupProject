@@ -97,8 +97,7 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
                     list.add(new JSONVariable("lastname",edLast.getText().toString()));
                     list.add(new JSONVariable("address",edAdd.getText().toString()));
 
-                    jsonRe.makeJsonObjReqParams(list);
-                    //jsonRe.makeJsonReqBody(Const.URL_JSON_CREATE_USER,null,list);
+                    jsonRe.makeJsonReqBody(Const.URL_JSON_CREATE_USER,null,list);
                 }
                 else{
                     message.showMessage("Please fill out user and password",1);
@@ -111,7 +110,7 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
 
                 message.showMessage("Updating...", 3);
 
-                jsonRe.makeJsonArryReq();
+                jsonRe.makeJsonArryReq(Const.URL_JSON_ARRAY_ALL_USERS);
 
                 break;
 

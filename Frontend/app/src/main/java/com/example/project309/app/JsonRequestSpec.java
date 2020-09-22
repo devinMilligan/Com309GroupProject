@@ -100,10 +100,10 @@ public class JsonRequestSpec extends JSONAbstract {
     /**
      * Making json array request
      * */
-    public void makeJsonArryReq() {
+    public void makeJsonArryReq(String url) {
 
         //Make JSON array request
-        JsonArrayRequest req = new JsonArrayRequest(Const.URL_JSON_ARRAY,
+        JsonArrayRequest req = new JsonArrayRequest(url,
                 new Response.Listener<JSONArray>() {    //Handling response
                     @Override
                     public void onResponse(JSONArray response) {
