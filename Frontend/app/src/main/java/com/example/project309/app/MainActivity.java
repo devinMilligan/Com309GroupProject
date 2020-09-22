@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Intent in = new Intent(this, LogOnTest.class);
-        startActivity(in);
+        startActivity(in); //moving
 
     }
 }
