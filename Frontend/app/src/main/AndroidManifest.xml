@@ -14,11 +14,14 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".app.LogOnTest"></activity>
+        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".LoginActivity" />
         <activity
             android:name=".app.MainNavigationScreen"
             android:label="@string/title_activity_main_navigation_screen"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".app.MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
