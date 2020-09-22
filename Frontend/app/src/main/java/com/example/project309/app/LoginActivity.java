@@ -1,18 +1,15 @@
-package com.example.project309;
+package com.example.project309.app;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.project309.app.MainNavigationScreen;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.project309.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 

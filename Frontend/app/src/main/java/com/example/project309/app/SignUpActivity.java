@@ -1,4 +1,4 @@
-package com.example.project309;
+package com.example.project309.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,10 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.example.project309.R;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
