@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -31,7 +32,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 EditText password = (EditText) findViewById(R.id.signup_password);
                 Toast myToast;
                 if(!email.getText().toString().equals("") && !password.getText().toString().equals("")) {
-                    Intent accountCreated = new Intent(this, MainNavigationScreen.class);
+                    Intent accountCreated = new Intent(this, LoginActivity.class);
+
+                    accountCreated.putExtra("EMAIL", email.getText().toString());
+                    accountCreated.putExtra("PASSWORD", password.getText().toString());
+
                     startActivity(accountCreated);
                 }
                 else {

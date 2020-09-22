@@ -20,6 +20,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        EditText email = (EditText) findViewById(R.id.login_email);
+        EditText password = (EditText) findViewById(R.id.login_password);
+
         Button loginButton = findViewById(R.id.login_continue_button);
         loginButton.setOnClickListener(this);
 
@@ -28,6 +31,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         Button signUpButton = findViewById(R.id.login_create_account_button);
         signUpButton.setOnClickListener(this);
+
+        Intent messageIntent = getIntent();
+        if(!messageIntent.equals(null))
+        {
+            String emailText = messageIntent.getStringExtra("EMAIL");
+            String passwordText = messageIntent.getStringExtra("PASSWORD");
+
+            email.setText(emailText);
+            password.setText(passwordText);
+        }
     }
 
     @Override
