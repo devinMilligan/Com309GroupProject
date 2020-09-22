@@ -6,21 +6,12 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1a265ece-c3ae-4e95-a0fc-71f708694def" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/ui/map/MapActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/values/google_maps_api.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/ui/map/MapFragment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_map.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_map.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/navigation/mobile_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/navigation/mobile_navigation.xml" afterDir="false" />
-    </list>
+    <list default="true" id="1a265ece-c3ae-4e95-a0fc-71f708694def" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_28" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -155,6 +146,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="293" y="208" key="#PSD/0.0.1440.900@0.0.1440.900" timestamp="1600554954918" />
+    <state x="429" y="88" key="#app" timestamp="1600750022823">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="429" y="88" key="#app/0.0.1440.900@0.0.1440.900" timestamp="1600750022823" />
     <state x="533" y="165" key="#com.intellij.ide.util.MemberChooser" timestamp="1600558585956">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

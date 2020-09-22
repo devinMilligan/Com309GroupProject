@@ -3,11 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-559137487/Project309.iml" filepath="$PROJECT_DIR$/.idea/modules/-559137487/Project309.iml" group="Project309" />
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app.iml" group="Project309/app" />
-=======
       <module fileurl="file://$PROJECT_DIR$/.idea/app.iml" filepath="$PROJECT_DIR$/.idea/app.iml" group="Project309/app" />
->>>>>>> map_branch
     </modules>
   </component>
 </project>
