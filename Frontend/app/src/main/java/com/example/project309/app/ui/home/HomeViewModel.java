@@ -1,10 +1,10 @@
-package com.example.project309.ui.home;
+package com.example.project309.app.ui.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.project309.Store;
+import com.example.project309.app.Store;
 
 import java.util.ArrayList;
 

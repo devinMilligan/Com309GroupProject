@@ -1,4 +1,4 @@
-package com.example.project309.ui.logout;
+package com.example.project309.app.ui.logout;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

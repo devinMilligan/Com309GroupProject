@@ -1,7 +1,8 @@
-package com.example.project309;
+package com.example.project309.app;
 
 import android.os.Bundle;
 
+import com.example.project309.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 

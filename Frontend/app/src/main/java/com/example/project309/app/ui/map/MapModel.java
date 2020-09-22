@@ -1,16 +1,16 @@
-package com.example.project309.ui.switchuser;
+package com.example.project309.app.ui.map;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SwitchUserViewModel extends ViewModel {
+public class MapModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public SwitchUserViewModel() {
+    public MapModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is switch user fragment");
+        mText.setValue("This is map fragment");
     }
 
     public LiveData<String> getText() {

@@ -1,4 +1,4 @@
-package com.example.project309.ui.home;
+package com.example.project309.app.ui.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,8 +14,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.project309.R;
-import com.example.project309.Store;
-import com.example.project309.StoreListAdapter;
+import com.example.project309.app.Store;
+import com.example.project309.app.StoreListAdapter;
 
 import java.util.ArrayList;
 

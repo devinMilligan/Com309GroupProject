@@ -1,4 +1,4 @@
-package com.example.project309;
+package com.example.project309.app;
 
 public class MenuItem extends Menu {
 

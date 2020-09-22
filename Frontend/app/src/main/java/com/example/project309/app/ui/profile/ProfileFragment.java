@@ -1,4 +1,4 @@
-package com.example.project309.ui.map;
+package com.example.project309.app.ui.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.project309.R;
 
-public class MapFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
-    private MapModel mapModel;
+    private ProfileViewModel profileViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        mapModel =
-                ViewModelProviders.of(this).get(MapModel.class);
-        View root = inflater.inflate(R.layout.fragment_map, container, false);
-        final TextView textView = root.findViewById(R.id.text_map);
-        mapModel.getText().observe(this, new Observer<String>() {
+        profileViewModel =
+                ViewModelProviders.of(this).get(ProfileViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_profile, container, false);
+        final TextView textView = root.findViewById(R.id.text_profile);
+        profileViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
