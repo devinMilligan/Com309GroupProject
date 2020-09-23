@@ -7,7 +7,7 @@ public class AdminProfile extends Profile {
     protected String lastName;
 
     public AdminProfile(int mId, String userName, String pass, String first, String last) {
-        super(mId, userName, pass, 3, first + last);
+        super(mId, userName, pass, 3, first + " " + last);
 
         firstName = first;
         lastName = last;
@@ -25,10 +25,20 @@ public class AdminProfile extends Profile {
     }
 
     public void setFirstName(String first) {
+
         firstName = first;
+        if(lastName != null && !lastName.isEmpty())
+            name = firstName + " " + lastName;
+        else
+            name = firstName;
     }
     public void setLastName(String last) {
+
         lastName = last;
+        if(firstName != null && !firstName.isEmpty())
+            name = firstName + " " + lastName;
+        else
+            name = lastName;
     }
 
 

@@ -9,7 +9,7 @@ public class CustomerDelivererProfile extends Profile {
     protected boolean deliveryStatus;
 
     public CustomerDelivererProfile(int mId, String userName, String first, String last, String pass, String add, boolean delivery) {
-        super(mId, userName, pass, 1, first + last);
+        super(mId, userName, pass, 1, first + " " + last);
 
         address = add;
         firstName = first;
@@ -39,9 +39,18 @@ public class CustomerDelivererProfile extends Profile {
     }
     public void setFirstName(String first) {
         firstName = first;
+        if(lastName != null && !lastName.isEmpty())
+            name = firstName + " " + lastName;
+        else
+            name = firstName;
     }
     public void setLastName(String last) {
+
         lastName = last;
+        if(firstName != null && !firstName.isEmpty())
+            name = firstName + " " + lastName;
+        else
+            name = lastName;
     }
     public void setDeliveryStatus(boolean delivery) {
         deliveryStatus = delivery;
