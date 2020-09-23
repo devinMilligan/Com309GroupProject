@@ -11,9 +11,9 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
+    <activity
         android:id="@+id/nav_map"
-        android:name="com.example.project309.app.ui.map.MapFragment"
+        android:name="com.example.project309.app.ui.map.MapsActivity"
         android:label="@string/menu_map"
         tools:layout="@layout/fragment_map" />
 
