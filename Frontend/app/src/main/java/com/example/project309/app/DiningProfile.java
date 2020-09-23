@@ -21,10 +21,8 @@ public class DiningProfile extends Profile {
         return store.getLocation();
     }
 
-    public void setName(String n) {
-
-        store.setName(n);
-        name = n;
+    public void setName(String name) {
+        store.setName(name);
     }
     public void setLocation(String loc) {
         store.setLocation(loc);
