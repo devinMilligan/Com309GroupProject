@@ -74,7 +74,7 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
             //Button to go to rest of app
             case R.id.btnNext:
 
-                Intent in = new Intent(this, MainNavigationScreen.class);
+                Intent in = new Intent(this, LoginActivity.class);
                 startActivity(in);
 
                 break;
@@ -181,9 +181,7 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
                     Profile prof = new Profile(((Integer)temp.get("id")).intValue());
                     prof.setUserName(temp.get("username").toString());
                     prof.setPassword(temp.get("password").toString());
-                    prof.setFirstName(temp.get("firstName").toString());
-                    prof.setLastName(temp.get("lastName").toString());
-                    prof.setAddress(temp.get("address").toString());
+                    prof.setAccountType(((Integer)temp.get("accountType")).intValue());
 
                 }
             }catch(JSONException e){

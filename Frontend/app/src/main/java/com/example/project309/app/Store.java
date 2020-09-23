@@ -24,5 +24,10 @@ public class Store {
         return location;
     }
 
-
+    public void setName(String n) {
+        name = n;
+    }
+    public void setLocation(String loc) {
+        location = loc;
+    }
 }

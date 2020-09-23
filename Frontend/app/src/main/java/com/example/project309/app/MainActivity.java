@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.project309.LoginActivity;
 import com.example.project309.R;
 
 public class MainActivity extends AppCompatActivity {
