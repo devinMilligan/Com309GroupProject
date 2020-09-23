@@ -13,11 +13,11 @@
     <string name="menu_log_out">Log Out</string>
     <string name="menu_switch_user">Switch User</string>
     <string name="menu_profile">Profile</string>
-    <string name="title_activity_maps">Map</string>
 
     <string name="login_welcome">Welcome to CampusEats!</string>
     <string name="no_email">Please enter an email</string>
     <string name="no_password">Please enter a password</string>
     <string name="forgot_password">You forgot your password</string>
     <string name="delivery_account">Delivery Account:</string>
+
 </resources>
