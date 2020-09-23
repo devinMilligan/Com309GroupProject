@@ -178,12 +178,10 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
 
                     JSONObject temp = (JSONObject)response.get(i);
 
-                    CustomerDelivererProfile prof = new CustomerDelivererProfile(((Integer)temp.get("id")).intValue());
+                    Profile prof = new Profile(((Integer)temp.get("id")).intValue());
                     prof.setUserName(temp.get("username").toString());
                     prof.setPassword(temp.get("password").toString());
-                    prof.setAddress(temp.get("address").toString());
-                    prof.setFirstName(temp.get("firstName").toString());
-                    prof.setLastName((temp.get("lastName")).toString());
+                    prof.setAccountType(((Integer)temp.get("accountType")).intValue());
 
                 }
             }catch(JSONException e){
