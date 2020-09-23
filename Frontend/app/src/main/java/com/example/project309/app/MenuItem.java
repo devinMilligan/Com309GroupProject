@@ -21,6 +21,9 @@ public class MenuItem extends Menu {
         return mPrice;
     }
 
+    public void setTitle(String t) { mTitle = t; }
+    public void setPrice(double p) { mPrice = p; }
+
     public boolean equals(Object o){
 
         if(o.getClass().equals(MenuItem.class)){
