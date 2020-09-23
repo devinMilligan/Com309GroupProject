@@ -11,11 +11,11 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
-    <activity
+    <fragment
         android:id="@+id/nav_map"
-        android:name="com.example.project309.ui.map.MapActivity"
+        android:name="com.example.project309.app.ui.map.MapFragment"
         android:label="@string/menu_map"
-        tools:layout="@layout/activity_maps" />
+        tools:layout="@layout/fragment_map" />
 
     <fragment
         android:id="@+id/nav_log_out"
