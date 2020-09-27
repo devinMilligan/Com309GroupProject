@@ -31,12 +31,12 @@ class UserController {
     }
 
     @PostMapping("/users/newUser")
-    public ResponseEntity<User> NewUser(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password,
+    public ResponseEntity<User> NewUser(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password,
     		@RequestParam(value = "firstname") String firstname, @RequestParam(value = "lastname") String lastname, @RequestParam(value = "address") String address) 
     				throws IOException
     {
     	User user = new User();    	
-    	user.setUsername(username);
+    	user.setEmail(email);
     	user.setPassword(password);
     	user.setFirstName(firstname);
     	user.setLastName(lastname);

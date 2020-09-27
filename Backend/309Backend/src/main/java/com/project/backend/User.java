@@ -3,7 +3,7 @@
 package com.project.backend;
 
 public class User {
-    private String username;
+    private String email;
     private String password;
     private long id;
     private String firstName;
@@ -18,12 +18,12 @@ public class User {
         this.id = id;
     }
     
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     public String getPassword() {
@@ -62,7 +62,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -70,10 +70,10 @@ public class User {
                 '}';
     }
 
-    public static User create(String userName, String passWord, String firstName, String lastName, String address) {
+    public static User create(String email, String password, String firstName, String lastName, String address) {
         User user = new User();
-        user.setUsername(userName);
-        user.setPassword(passWord);
+        user.setEmail(email);
+        user.setPassword(password);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setAddress(address);

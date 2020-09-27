@@ -14,8 +14,8 @@ public class UserDao {
     private JdbcTemplate jdbcTemplate;
 
     public void save(User user) {
-        String sql = "insert into Users (Username, Password, first_Name, Last_Name, Address) values (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getAddress());
+        String sql = "insert into Users (Email, Password, First_Name, Last_Name, Address) values (?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getAddress());
     }
 
     public List<User> loadAll() {
@@ -27,7 +27,7 @@ public class UserDao {
     private User toUser(ResultSet resultSet) throws SQLException {
         User user = new User();
         user.setId(resultSet.getLong("ID"));
-        user.setUsername(resultSet.getString("USERNAME"));
+        user.setEmail(resultSet.getString("EMAIL"));
         user.setPassword(resultSet.getString("PASSWORD"));
         user.setFirstName(resultSet.getString("FIRST_NAME"));
         user.setLastName(resultSet.getString("LAST_NAME"));
