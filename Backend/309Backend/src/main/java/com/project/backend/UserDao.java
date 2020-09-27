@@ -14,8 +14,8 @@ public class UserDao {
     private JdbcTemplate jdbcTemplate;
 
     public void save(User user) {
-        String sql = "insert into Users (Email, Password, First_Name, Last_Name, Address) values (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getAddress());
+        String sql = "insert into Users (Email, Password, First_Name, Last_Name, Address, Account, Image) values (?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getAddress(), user.getType(), user.getImagePath());
     }
 
     public List<User> loadAll() {
@@ -32,6 +32,8 @@ public class UserDao {
         user.setFirstName(resultSet.getString("FIRST_NAME"));
         user.setLastName(resultSet.getString("LAST_NAME"));
         user.setAddress(resultSet.getString("ADDRESS"));
+        user.setType(resultSet.getString("ACCOUNT"));
+        user.setImagePath(resultSet.getString("IMAGE"));
         return user;
     }
 }

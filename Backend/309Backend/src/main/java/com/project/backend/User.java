@@ -9,6 +9,8 @@ public class User {
     private String firstName;
     private String lastName;
     private String address;
+    private String account;
+    private String image;
 
     public long getId() {
         return id;
@@ -58,6 +60,22 @@ public class User {
         this.address = address;
     }
 
+    public String getType() {
+        return account;
+    }
+
+    public void setType(String acctType) {
+        this.account = acctType;
+    }
+
+    public String getImagePath() {
+        return image;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.image = imagePath;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -67,16 +85,20 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
+                ", account='" + account + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 
-    public static User create(String email, String password, String firstName, String lastName, String address) {
+    public static User create(String email, String password, String firstName, String lastName, String address, String acctType, String imagePath) {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setAddress(address);
+        user.setType(acctType);
+        user.setImagePath(imagePath);
         return user;
     }
 }
