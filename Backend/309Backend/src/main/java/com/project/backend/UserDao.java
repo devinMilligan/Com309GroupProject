@@ -29,7 +29,7 @@ public class UserDao {
     	String sql = "SELECT * FROM Users WHERE email=(?) AND password=(?)";
         return jdbcTemplate.query(sql,
                 new Object[]{email, password},
-                new BeanPropertyRowMapper<User>(User.class)
+                (resultSet, i) -> {return toUser(resultSet);}
         );
     }
 
