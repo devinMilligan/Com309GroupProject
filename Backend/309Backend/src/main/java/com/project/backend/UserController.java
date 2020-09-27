@@ -1,6 +1,5 @@
 package com.project.backend;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,5 +65,14 @@ class UserController {
         List<User> users = dao.loadAll();
         users.forEach(System.out::println);
         return ResponseEntity.status(HttpStatus.OK).body(users);
+    }
+    
+    @GetMapping("/users/search")
+    public ResponseEntity<List<User>> searchUsers(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password) {
+    	
+    	System.out.println("-- searching users --");
+        List<User> result = dao.search(email, password);
+        result.forEach(System.out::println);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }

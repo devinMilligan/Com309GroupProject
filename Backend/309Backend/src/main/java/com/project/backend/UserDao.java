@@ -1,6 +1,7 @@
 package com.project.backend;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
@@ -22,6 +23,14 @@ public class UserDao {
         return jdbcTemplate.query("select * from Users", (resultSet, i) -> {
             return toUser(resultSet);
         });
+    }
+    
+    public List<User> search(String email, String password) {
+    	String sql = "SELECT * FROM Users WHERE email=(?) AND password=(?)";
+        return jdbcTemplate.query(sql,
+                new Object[]{email, password},
+                new BeanPropertyRowMapper<User>(User.class)
+        );
     }
 
     private User toUser(ResultSet resultSet) throws SQLException {
