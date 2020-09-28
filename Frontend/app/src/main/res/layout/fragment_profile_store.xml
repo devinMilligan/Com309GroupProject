@@ -11,7 +11,7 @@
 
 
         <TextView
-            android:id="@+id/text_profile"
+            android:id="@+id/text_profile_store"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -22,10 +22,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txtEmail"
+            android:id="@+id/txtEmail_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/txtLast"
+            android:layout_alignTop="@id/txtLast_store"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="83dp"
@@ -35,10 +35,10 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/txtFirst"
+            android:id="@+id/txtFirst_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/txtPic"
+            android:layout_alignTop="@id/txtPic_store"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="160dp"
@@ -48,10 +48,10 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/txtLast"
+            android:id="@+id/txtLast_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/txtFirst"
+            android:layout_alignTop="@id/txtFirst_store"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="83dp"
@@ -61,10 +61,10 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/txtTemp"
+            android:id="@+id/txtTemp_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/txtPassRe"
+            android:layout_alignTop="@id/txtPassRe_store"
             android:layout_alignParentStart="true"
             android:layout_marginTop="500dp"
             android:text="Bottom"
@@ -73,10 +73,10 @@
             android:visibility="invisible" />
 
         <TextView
-            android:id="@+id/txtPass"
+            android:id="@+id/txtPass_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/txtEmail"
+            android:layout_alignTop="@id/txtEmail_store"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="83dp"
@@ -85,10 +85,10 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/txtPassRe"
+            android:id="@+id/txtPassRe_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/txtPass"
+            android:layout_alignTop="@id/txtPass_store"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="83dp"
@@ -97,10 +97,10 @@
             android:textSize="24sp" />
 
         <Button
-            android:id="@+id/btnChangePass"
+            android:id="@+id/btnChangePass_store"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/txtPassRe"
+            android:layout_alignTop="@id/txtPassRe_store"
             android:layout_alignParentEnd="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="93dp"
@@ -110,11 +110,11 @@
             android:textColor="@color/colorAccent" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/editText2_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/txtEmail"
-            android:layout_alignTop="@id/txtEmail"
+            android:layout_alignLeft="@id/txtEmail_store"
+            android:layout_alignTop="@id/txtEmail_store"
             android:layout_marginLeft="47dp"
             android:layout_marginTop="36dp"
             android:ems="10"
@@ -123,11 +123,11 @@
             android:text="milldev@iastat.edu" />
 
         <EditText
-            android:id="@+id/editFirst"
+            android:id="@+id/editFirst_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/txtFirst"
-            android:layout_alignTop="@id/txtFirst"
+            android:layout_alignLeft="@id/txtFirst_store"
+            android:layout_alignTop="@id/txtFirst_store"
             android:layout_marginLeft="47dp"
             android:layout_marginTop="36dp"
             android:ems="10"
@@ -136,11 +136,11 @@
             android:text="Devin" />
 
         <EditText
-            android:id="@+id/editLast"
+            android:id="@+id/editLast_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/txtLast"
-            android:layout_alignTop="@id/txtLast"
+            android:layout_alignLeft="@id/txtLast_store"
+            android:layout_alignTop="@id/txtLast_store"
             android:layout_marginLeft="47dp"
             android:layout_marginTop="36dp"
             android:ems="10"
@@ -149,11 +149,11 @@
             android:text="milligan" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/editText3_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/txtPass"
-            android:layout_alignTop="@id/txtPass"
+            android:layout_alignLeft="@id/txtPass_store"
+            android:layout_alignTop="@id/txtPass_store"
             android:layout_marginLeft="47dp"
             android:layout_marginTop="36dp"
             android:ems="10"
@@ -162,11 +162,11 @@
             android:text="fdasfsasda" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/editText4_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/txtPassRe"
-            android:layout_alignTop="@id/txtPassRe"
+            android:layout_alignLeft="@id/txtPassRe_store"
+            android:layout_alignTop="@id/txtPassRe_store"
             android:layout_marginLeft="47dp"
             android:layout_marginTop="36dp"
             android:ems="10"
@@ -175,7 +175,7 @@
             android:text="fdasfsasda" />
 
         <TextView
-            android:id="@+id/txtPic"
+            android:id="@+id/txtPic_store"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -187,10 +187,10 @@
             android:text="Profile Picture" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imageView3_store"
             android:layout_width="130dp"
             android:layout_height="98dp"
-            android:layout_alignTop="@id/txtPic"
+            android:layout_alignTop="@id/txtPic_store"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="143dp"
             android:layout_marginTop="22dp"

@@ -1,5 +1,6 @@
 package com.example.project309.app.ui.switchuser;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.project309.R;
+import com.example.project309.app.MainNavigationScreenAdmin;
+import com.example.project309.app.MainNavigationScreenDelivery;
 
 public class SwitchUserFragment extends Fragment {
 
@@ -30,6 +33,12 @@ public class SwitchUserFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+        Intent loggedIn = new Intent(root.getContext(), MainNavigationScreenDelivery.class);
+        startActivity(loggedIn);
+
         return root;
     }
+
+
 }
