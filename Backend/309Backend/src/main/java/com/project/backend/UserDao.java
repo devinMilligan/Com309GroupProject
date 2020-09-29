@@ -1,7 +1,6 @@
 package com.project.backend;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
@@ -13,6 +12,11 @@ public class UserDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    
+    public void update(User user) {
+        String sql = "UPDATE Users SET Email=?, Password=?, First_Name=?, Last_Name=?, Address=?, Account=?, Image=? WHERE id=?";
+        jdbcTemplate.update(sql, user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getAddress(), user.getType(), user.getImagePath(), user.getId());
+    }
 
     public void save(User user) {
         String sql = "insert into Users (Email, Password, First_Name, Last_Name, Address, Account, Image) values (?, ?, ?, ?, ?, ?, ?)";
@@ -31,6 +35,19 @@ public class UserDao {
                 new Object[]{email, password},
                 (resultSet, i) -> {return toUser(resultSet);}
         );
+    }
+    
+    public Boolean checkEmail(String email) {
+    	String sql = "SELECT * FROM Users WHERE email=(?)";
+    	List<User> list = jdbcTemplate.query(sql,
+                new Object[]{email},
+                (resultSet, i) -> {return toUser(resultSet);}
+        );
+    	
+    	if (list.size() > 0)
+    		return true;
+    	else
+    		return false;
     }
 
     private User toUser(ResultSet resultSet) throws SQLException {

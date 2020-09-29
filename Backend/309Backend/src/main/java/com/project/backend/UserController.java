@@ -20,6 +20,44 @@ class UserController {
 
     @Autowired
     private UserDao dao;
+    @PostMapping("/users/updateUser")
+    public ResponseEntity<User> UpdateUser(@RequestParam(value = "id") long id, @RequestParam(value = "email") String email, @RequestParam(value = "password") String password,
+    		@RequestParam(value = "firstname") String firstname, @RequestParam(value = "lastname") String lastname, @RequestParam(value = "address") String address, 
+    		@RequestParam(value = "type") String type, @RequestParam(value = "image") String image) 
+    				throws IOException
+    {
+    	User user = new User();	
+    	user.setId(id);
+    	user.setEmail(email);
+    	user.setPassword(password);
+    	user.setFirstName(firstname);
+    	user.setLastName(lastname);
+    	user.setAddress(address);
+    	user.setType(type);
+    	user.setImagePath(image);
+    	
+    	
+    	System.out.println("updating user: " + user.getId());
+    	dao.update(user);
+    	return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
+    
+    @PostMapping("/users/update")
+    public ResponseEntity<User> Update(@RequestBody User UserDetails) {
+        User input = new User();
+        input.setId(UserDetails.getId());
+        input.setEmail(UserDetails.getEmail());
+        input.setPassword(UserDetails.getPassword());
+        input.setFirstName(UserDetails.getFirstName());
+        input.setLastName(UserDetails.getLastName());
+        input.setAddress(UserDetails.getAddress());
+        input.setType(UserDetails.getType());
+        input.setImagePath(UserDetails.getImagePath());
+
+    	System.out.println("updating user: " + input.getId());
+    	dao.update(input);
+    	return ResponseEntity.status(HttpStatus.OK).body(input);
+    }
 
     @PostMapping("/users/newUser")
     public ResponseEntity<User> NewUser(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password,
@@ -27,7 +65,7 @@ class UserController {
     		@RequestParam(value = "type") String type, @RequestParam(value = "image") String image) 
     				throws IOException
     {
-    	User user = new User();    	
+    	User user = new User();   
     	user.setEmail(email);
     	user.setPassword(password);
     	user.setFirstName(firstname);
@@ -73,6 +111,14 @@ class UserController {
     	System.out.println("-- searching users --");
         List<User> result = dao.search(email, password);
         result.forEach(System.out::println);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+    
+    @GetMapping("/users/checkEmail")
+    public ResponseEntity<Boolean> checkEmail(@RequestParam(value = "email") String email) {
+    	
+    	System.out.println("-- searching users --");
+        Boolean result = dao.checkEmail(email);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }
