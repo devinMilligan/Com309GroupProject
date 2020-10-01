@@ -1,14 +1,14 @@
-
-
 package com.project.backend;
 
 public class User {
-    private String username;
+    private String email;
     private String password;
     private long id;
     private String firstName;
     private String lastName;
     private String address;
+    private String account;
+    private String image;
 
     public long getId() {
         return id;
@@ -18,12 +18,12 @@ public class User {
         this.id = id;
     }
     
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     public String getPassword() {
@@ -58,25 +58,45 @@ public class User {
         this.address = address;
     }
 
+    public String getType() {
+        return account;
+    }
+
+    public void setType(String acctType) {
+        this.account = acctType;
+    }
+
+    public String getImagePath() {
+        return image;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.image = imagePath;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
+                ", account='" + account + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 
-    public static User create(String userName, String passWord, String firstName, String lastName, String address) {
+    public static User create(String email, String password, String firstName, String lastName, String address, String acctType, String imagePath) {
         User user = new User();
-        user.setUsername(userName);
-        user.setPassword(passWord);
+        user.setEmail(email);
+        user.setPassword(password);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setAddress(address);
+        user.setType(acctType);
+        user.setImagePath(imagePath);
         return user;
     }
 }
