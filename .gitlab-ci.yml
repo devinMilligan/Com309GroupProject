@@ -6,7 +6,7 @@ stages:
 maven-build:
     stage: mavenbuild
     tags:
-      - shell
+      - BACKEND
     script:
       - cd Backend/309Backend
       - mvn clean package -B
@@ -14,7 +14,7 @@ maven-build:
 maven-test:
     stage: maventest
     tags:
-      - shell
+      - BACKEND
     script:
       - cd Backend/309Backend
       - mvn test
@@ -26,7 +26,7 @@ maven-test:
 autoDeploy:
   stage: autodeploy
   tags: 
-    - shell
+    - BACKEND
   script: 
     - cd Backend/309Backend
     - mvn test
