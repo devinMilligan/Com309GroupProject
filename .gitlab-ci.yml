@@ -9,8 +9,7 @@ maven-build:
       - BACKEND
     script:
       - cd Backend/309Backend
-      - mvn install
-      - mvn clean package -B
+      - mvn clean
 
 maven-test:
     stage: maventest
