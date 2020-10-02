@@ -9,7 +9,7 @@ maven-build:
       - BACKEND
     script:
       - cd Backend/309Backend
-      - mvn clean package -B
+      - mvn package -B
 
 maven-test:
     stage: maventest
@@ -18,7 +18,7 @@ maven-test:
     script:
       - cd Backend/309Backend
       - mvn test
-      - mvn clean package -B
+      - mvn package -B
     artifacts:
       paths:
         - Backend/309Backend/target/*.jar
@@ -30,7 +30,7 @@ autoDeploy:
   script: 
     - cd Backend/309Backend
     - mvn test
-    - mvn clean package -B
+    - mvn package -B
     - sudo mv target/*.jar /target/web-demo.jar
     - sudo systemctl stop system-web-demo
     - sudo systemctl start system-web-demo
