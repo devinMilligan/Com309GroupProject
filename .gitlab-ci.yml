@@ -2,6 +2,9 @@ stages:
   - mavenbuild
   - maventest
   - autodeploy
+  - androidbuild
+  - androidtest
+  
   
 maven-build:
     stage: mavenbuild
@@ -34,3 +37,30 @@ autoDeploy:
     - sudo mv target/*.jar /target/web-demo.jar
     - sudo systemctl stop web-demo
     - sudo systemctl start web-demo
+    
+android-build:
+    image: javiersantos/android-ci:latest
+    stage: androidbuild
+    before_script:
+        - export GRADLE_USER_HOME='pwd'/.gradle
+        - chmod +x ./Frontend/gradlew
+    tags:
+        - FRONTEND
+    script:
+        - cd Frontend
+        - ./gradlew assemble
+    artifacts:
+        paths:
+            - Frontend/app/build/outputs/
+            
+unitTests:
+    image: javiersantos/android-ci:latest
+    stage: androidtest
+    before_script:
+        - export GRADLE_USER_HOME='pwd'/.gradle
+        - chmod +x ./Frontend/gradlew
+    tags:
+        - FRONTEND
+    script:
+        - cd Frontend
+        - ./gradlew test
