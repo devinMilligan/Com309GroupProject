@@ -30,8 +30,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
 
-    private Button infoButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +56,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         enableMyLocation(mMap); // Enable location tracking.
         // Enable going into StreetView by clicking on an InfoWindow from a
         // point of interest.
-        //setInfoWindowClickToHome(mMap);
+        setInfoWindowClickToPanorama(mMap);
 
         // Setting a custom info window adapter for the google map
         MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
@@ -75,8 +73,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 marker.showInfoWindow();
             }
         });
-
-        setInfoWindowClickToPanorama(mMap);
     }
 
     private void setInfoWindowClickToPanorama(GoogleMap map) {
