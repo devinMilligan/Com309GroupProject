@@ -9,7 +9,6 @@ public class Store {
     private long id;
     private String name;
     private String address;
-    private String phone;
     private double latitude;
     private double longitude;
     private LinkedList<List<Time>> hours;
@@ -36,14 +35,6 @@ public class Store {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public double getLatitude() {
@@ -76,19 +67,17 @@ public class Store {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
                 ", lat/long=('" + latitude + "','" + longitude + "')" +
                 ", hours='" + hours + '\'' +
                 '}';
     }
 
-    public static Store create(String name, String address, String phone, double latitude, double longitude, Time sunOpen, Time sunClose,
+    public static Store create(String name, String address, double latitude, double longitude, Time sunOpen, Time sunClose,
     		Time monOpen, Time monClose, Time tuesOpen, Time tuesClose, Time wedOpen, Time wedClose, Time thursOpen, Time thursClose,
     		Time friOpen, Time friClose, Time satOpen, Time satClose) {
         Store store = new Store();
         store.setName(name);
         store.setAddress(address);
-        store.setPhone(phone);
         store.setLatitude(latitude);
         store.setLongitude(longitude);
 
