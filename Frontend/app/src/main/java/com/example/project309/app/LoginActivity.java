@@ -52,12 +52,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if(email.getText().toString().trim().equals("Admin")){
                         Intent loggedIn = new Intent(this, MainNavigationScreenAdmin.class);
                         startActivity(loggedIn);
+
                     }else if(email.getText().toString().trim().equals("Store")) {
                         Intent loggedIn = new Intent(this, MainNavigationScreenStore.class);
                         startActivity(loggedIn);
+
                     }else {
                         Intent loggedIn = new Intent(this, MainNavigationScreen.class);
                         startActivity(loggedIn);
+
                     }
                 }
                 else {

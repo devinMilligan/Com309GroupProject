@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -18,10 +19,12 @@ import com.example.project309.app.LoginActivity;
 import com.example.project309.app.MainNavigationScreenAdmin;
 import com.example.project309.app.MessageBoxBuilder;
 
-public class LogOutFragment extends Fragment {
+public class LogOutFragment extends Fragment implements View.OnClickListener {
 
     private LogOutViewModel logOutViewModel;
     private MessageBoxBuilder message;
+
+    private Button btnLogOut;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -29,6 +32,10 @@ public class LogOutFragment extends Fragment {
                 ViewModelProviders.of(this).get(LogOutViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_log_out, container, false);
         final TextView textView = root.findViewById(R.id.text_log_out);
+
+        btnLogOut = (Button)root.findViewById(R.id.btnLogOut);
+        btnLogOut.setOnClickListener(this);
+
         logOutViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
@@ -46,12 +53,28 @@ public class LogOutFragment extends Fragment {
             protected void positiveButtonPressed(){
                 Intent loggedIn = new Intent(this.context, LoginActivity.class);
                 startActivity(loggedIn);
+                getActivity().finish();
             }
 
         };
 
-        message.showMessage("Are You Sure You Want To Log Out?", 2);
+        message.showMessage("Logging Out?", 2);
 
         return root;
     }
+
+    @Override
+    public void onClick(View v) {
+
+        switch(v.getId()){
+
+            case R.id.btnLogOut:
+
+                message.showMessage("Logging Out?", 2);
+
+
+        }
+
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.project309.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.project309.R;
@@ -52,6 +53,7 @@ public class MainNavigationScreen extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
     }
 
     @Override
@@ -67,4 +69,5 @@ public class MainNavigationScreen extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
 }

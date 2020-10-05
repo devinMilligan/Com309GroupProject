@@ -28,6 +28,7 @@ public class HomeFragmentAdmin extends Fragment {
     private ArrayList<Store> aStores;
 
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
