@@ -10,10 +10,10 @@
         android:name="com.example.project309.app.uiAdmin.home.HomeFragmentAdmin"
         android:label="@string/menu_home" />
 
-    <activity
-        android:id="@+id/nav_map_admin"
-        android:name="com.example.project309.app.uiAdmin.map.MapsActivityAdmin"
-        android:label="@string/menu_map" />
+    <fragment
+        android:id="@+id/nav_accounts_admin"
+        android:name="com.example.project309.app.uiAdmin.AccountsAdmin.AccountsFragmentAdmin"
+        android:label="@string/menu_admin_accounts" />
 
     <fragment
         android:id="@+id/nav_log_out_admin"

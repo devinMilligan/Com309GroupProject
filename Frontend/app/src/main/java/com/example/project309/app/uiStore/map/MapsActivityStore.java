@@ -32,11 +32,11 @@ public class MapsActivityStore extends AppCompatActivity implements OnMapReadyCa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_map_admin);
+        setContentView(R.layout.fragment_map_store);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         //SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.nav_map);
         SupportMapFragment mapFragment = SupportMapFragment.newInstance();
-        getSupportFragmentManager().beginTransaction().add(R.id.nav_map_admin, mapFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.nav_map_store, mapFragment).commit();
         mapFragment.getMapAsync(this);
     }
 
@@ -92,7 +92,7 @@ public class MapsActivityStore extends AppCompatActivity implements OnMapReadyCa
 
                             // Replace the fragment and add it to the backstack
                             getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.nav_map_admin,
+                                    .replace(R.id.nav_map_store,
                                             streetViewFragment)
                                     .addToBackStack(null).commit();
                         }
