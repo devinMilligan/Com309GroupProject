@@ -52,7 +52,7 @@ public class AccountsFragmentAdmin extends Fragment {
             public void onChanged(ArrayList<Profile> profiles) {
 
                 aAdminAccts = profiles;
-                aAdapter = new AccountsListAdapter(root.getContext(), R.layout.store_list_adapter, aAdminAccts);
+                aAdapter = new AccountsListAdapter(root.getContext(), R.layout.account_list_adapter, aAdminAccts);
                 lvAdminAccts.setAdapter(aAdapter);
 
             }

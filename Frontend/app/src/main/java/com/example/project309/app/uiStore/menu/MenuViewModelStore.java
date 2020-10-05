@@ -1,20 +1,19 @@
-package com.example.project309.app.uiStore.home;
+package com.example.project309.app.uiStore.menu;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.project309.app.Order;
-import com.example.project309.app.Store;
 
 import java.util.ArrayList;
 
-public class HomeViewModelStore extends ViewModel {
+public class MenuViewModelStore extends ViewModel {
 
     private MutableLiveData<String> mText;
     private MutableLiveData<ArrayList<Order>> orders;
 
-    public HomeViewModelStore() {
+    public MenuViewModelStore() {
         mText = new MutableLiveData<>();
         mText.setValue("Dining Centers");
     }

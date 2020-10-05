@@ -13,16 +13,16 @@ import com.example.project309.R;
 
 import java.util.ArrayList;
 
-public class AccountsListAdapter extends ArrayAdapter<Profile> {
+public class OrdersListAdapter extends ArrayAdapter<Order> {
 
-    private ArrayList<Profile> profiles;
+    private ArrayList<Order> orders;
     private LayoutInflater layoutInflater;
     private int viewResourceId;
 
-    public AccountsListAdapter(@NonNull Context context, int resource, ArrayList<Profile> p) {
-        super(context, resource, p);
+    public OrdersListAdapter(@NonNull Context context, int resource, ArrayList<Order> o) {
+        super(context, resource, o);
 
-        this.profiles = p;
+        this.orders = o;
         this.layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         viewResourceId = resource;
 
@@ -30,28 +30,28 @@ public class AccountsListAdapter extends ArrayAdapter<Profile> {
 
 
     @Override
-    public Profile getItem(int position) {
-        return profiles.get(position);
+    public Order getItem(int position) {
+        return orders.get(position);
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
         convertView = layoutInflater.inflate(viewResourceId, null);
 
-        if(position < profiles.size()) {
+        if(position < orders.size()) {
 
-            Profile profile = profiles.get(position);
+            Order order = orders.get(position);
 
 
             //Gets the textviews in the storelistadapter
-            TextView accountName = (TextView) convertView.findViewById(R.id.txtAccountName);
-            TextView accountEmail = (TextView) convertView.findViewById(R.id.txtAccountEmail);
+            TextView orderNum = (TextView) convertView.findViewById(R.id.txtOrderNum);
+            TextView orderPrice = (TextView) convertView.findViewById(R.id.txtOrderPrice);
 
-            if (accountName != null) {
-                accountName.setText(profile.getName());
+            if (orderNum != null) {
+                orderNum.setText(Integer.toString(order.getOrderNumber()));
             }
-            if (accountEmail != null) {     //set the values to the display
-                accountEmail.setText(profile.getUserName());
+            if (orderPrice != null) {     //set the values to the display
+                orderPrice.setText("Price: $" + Double.toString(order.getOrderPrice()));
             }
 
             return convertView;

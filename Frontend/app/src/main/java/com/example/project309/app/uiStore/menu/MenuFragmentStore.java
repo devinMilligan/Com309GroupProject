@@ -1,4 +1,4 @@
-package com.example.project309.app.uiStore.home;
+package com.example.project309.app.uiStore.menu;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,13 +16,12 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.project309.R;
 import com.example.project309.app.Order;
 import com.example.project309.app.OrdersListAdapter;
-import com.example.project309.app.StoreListAdapter;
 
 import java.util.ArrayList;
 
-public class HomeFragmentStore extends Fragment {
+public class MenuFragmentStore extends Fragment {
 
-    private HomeViewModelStore homeViewModelStore;
+    private MenuViewModelStore menuViewModelStore;
 
     private ListView lvOrders;
     private OrdersListAdapter oAdapter;
@@ -34,11 +33,11 @@ public class HomeFragmentStore extends Fragment {
 
 
 
-        homeViewModelStore =
-                ViewModelProviders.of(this).get(HomeViewModelStore.class);
+        menuViewModelStore =
+                ViewModelProviders.of(this).get(MenuViewModelStore.class);
         final View root = inflater.inflate(R.layout.fragment_home_store, container, false);
         final TextView textView = root.findViewById(R.id.text_home_store);
-        homeViewModelStore.getText().observe(this, new Observer<String>() {
+        menuViewModelStore.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
@@ -49,7 +48,7 @@ public class HomeFragmentStore extends Fragment {
 
         lvOrders = (ListView)root.findViewById(R.id.lvOrders_store);
 
-        homeViewModelStore.getOrders().observe(this, new Observer<ArrayList<Order>>() {
+        menuViewModelStore.getOrders().observe(this, new Observer<ArrayList<Order>>() {
             @Override
             public void onChanged(ArrayList<Order> orders) {
 

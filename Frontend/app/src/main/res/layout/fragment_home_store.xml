@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/lvStores_store"
+        android:id="@+id/lvOrders_store"
         android:layout_width="409dp"
         android:layout_height="694dp"
         android:layout_marginStart="1dp"
