@@ -26,6 +26,7 @@ class StoreController {
         input.setAddress(StoreDetails.getAddress());
         input.setLatitude(StoreDetails.getLatitude());
         input.setLongitude(StoreDetails.getLongitude());
+        input.setHours(StoreDetails.getHours());
 
     	System.out.println("saving store: " + input);
     	dao.save(input);
