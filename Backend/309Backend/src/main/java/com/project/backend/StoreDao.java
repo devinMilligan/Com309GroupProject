@@ -60,6 +60,7 @@ public class StoreDao {
         hours.add(sunHours);
         hours.add(monHours);
         hours.add(tuesHours);
+        hours.add(wedHours);
         hours.add(thursHours);
         hours.add(friHours);
         hours.add(satHours);        
