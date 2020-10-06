@@ -34,15 +34,5 @@
 
     <include layout="@layout/content_main_navigation_screen_delivery" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_delivery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:background="@color/colorPrimaryDark"
-        app:backgroundTint="@color/colorPrimaryDark"
-        app:srcCompat="@drawable/paperpen"
-        app:maxImageSize="@dimen/design_fab_content_size"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

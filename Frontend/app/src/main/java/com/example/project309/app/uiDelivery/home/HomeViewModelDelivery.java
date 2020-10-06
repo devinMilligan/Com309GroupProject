@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.project309.app.Order;
 import com.example.project309.app.Store;
 
 import java.util.ArrayList;
@@ -11,37 +12,37 @@ import java.util.ArrayList;
 public class HomeViewModelDelivery extends ViewModel {
 
     private MutableLiveData<String> mText;
-    private MutableLiveData<ArrayList<Store>> stores;
+    private MutableLiveData<ArrayList<Order>> orders;
 
     public HomeViewModelDelivery() {
         mText = new MutableLiveData<>();
-        mText.setValue("Dining Centers");
+        mText.setValue("Orders");
     }
 
     public LiveData<String> getText() {
         return mText;
     }
 
-    public LiveData<ArrayList<Store>> getStores(){
+    public LiveData<ArrayList<Order>> getOrders(){
 
-        if(stores == null){
+        if(orders == null){
 
-            stores = new MutableLiveData<ArrayList<Store>>();
+            orders = new MutableLiveData<ArrayList<Order>>();
 
-            loadStores();
+            loadOrders();
 
         }
-        return stores;
+        return orders;
 
     }
 
-    private void loadStores(){
+    private void loadOrders(){
 
-        ArrayList<Store> aStore = new ArrayList<>();
-        aStore.add(new Store("Seasons Dining Center", "224 Beach Rd, Ames, IA 50011"));
-        aStore.add(new Store("Conversations", "1215 Richardson Ct, Ames, IA 50012"));
+        ArrayList<Order> aStore = new ArrayList<>();
+        aStore.add(new Order(1232,19.99));
+        aStore.add(new Order(1233,20.00));
 
-        stores.setValue(aStore);
+        orders.setValue(aStore);
 
     }
 

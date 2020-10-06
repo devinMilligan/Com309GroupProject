@@ -14,7 +14,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.project309.R;
-import com.example.project309.app.Store;
+import com.example.project309.app.Order;
+import com.example.project309.app.OrdersListAdapter;
 import com.example.project309.app.StoreListAdapter;
 
 import java.util.ArrayList;
@@ -23,9 +24,9 @@ public class HomeFragmentDelivery extends Fragment {
 
     private HomeViewModelDelivery homeViewModelDelivery;
 
-    private ListView lvStores;
-    private StoreListAdapter sAdapter;
-    private ArrayList<Store> aStores;
+    private ListView lvOrders;
+    private OrdersListAdapter oAdapter;
+    private ArrayList<Order> aOrders;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,17 +45,17 @@ public class HomeFragmentDelivery extends Fragment {
             }
         });
 
-        aStores = new ArrayList<>();
+        aOrders = new ArrayList<>();
 
-        lvStores = (ListView)root.findViewById(R.id.lvStores_delivery);
+        lvOrders = (ListView)root.findViewById(R.id.lvOrders_delivery);
 
-        homeViewModelDelivery.getStores().observe(this, new Observer<ArrayList<Store>>() {
+        homeViewModelDelivery.getOrders().observe(this, new Observer<ArrayList<Order>>() {
             @Override
-            public void onChanged(ArrayList<Store> stores) {
+            public void onChanged(ArrayList<Order> orders) {
 
-                aStores = stores;
-                sAdapter = new StoreListAdapter(root.getContext(), R.layout.store_list_adapter, aStores);
-                lvStores.setAdapter(sAdapter);
+                aOrders = orders;
+                oAdapter = new OrdersListAdapter(root.getContext(), R.layout.order_list_adapter, aOrders);
+                lvOrders.setAdapter(oAdapter);
 
             }
         });

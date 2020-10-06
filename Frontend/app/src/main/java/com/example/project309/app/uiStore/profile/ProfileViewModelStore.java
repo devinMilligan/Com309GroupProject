@@ -10,7 +10,7 @@ public class ProfileViewModelStore extends ViewModel {
 
     public ProfileViewModelStore() {
         mText = new MutableLiveData<>();
-        mText.setValue("Profile Settings");
+        mText.setValue("Store Settings");
     }
 
     public LiveData<String> getText() {

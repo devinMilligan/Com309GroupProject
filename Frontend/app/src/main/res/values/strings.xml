@@ -14,6 +14,7 @@
     <string name="menu_log_out">Log Out</string>
     <string name="menu_switch_user">Switch User</string>
     <string name="menu_profile">Profile</string>
+    <string name="menu_profile_store">Store Settings</string>
     <string name="menu_admin_accounts">Admin Accounts</string>
     <string name="menu_store_menu">Menu</string>
 

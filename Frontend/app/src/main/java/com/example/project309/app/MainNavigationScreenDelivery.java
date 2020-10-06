@@ -27,20 +27,12 @@ public class MainNavigationScreenDelivery extends AppCompatActivity {
         setContentView(R.layout.activity_main_navigation_screen_delivery);
         Toolbar toolbar = findViewById(R.id.toolbar_delivery);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab_delivery);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "This is able to do something", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout_delivery);
         NavigationView navigationView = findViewById(R.id.nav_view_delivery);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home_delivery, R.id.nav_map_delivery, R.id.nav_log_out_delivery, R.id.nav_profile_delivery)
+                R.id.nav_home_delivery, R.id.nav_map_delivery, R.id.nav_log_out_delivery, R.id.nav_switch_home_delivery)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_delivery);

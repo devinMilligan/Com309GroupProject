@@ -1,4 +1,4 @@
-package com.example.project309.app.ui.switchuser;
+package com.example.project309.app.uiDelivery.switchuser;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,36 +7,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.project309.R;
-import com.example.project309.app.MainNavigationScreenAdmin;
+import com.example.project309.app.MainNavigationScreen;
 import com.example.project309.app.MainNavigationScreenDelivery;
 
-public class SwitchUserFragment extends Fragment {
+public class SwitchHomeFragment extends Fragment {
 
-    private SwitchUserViewModel switchUserViewModel;
+    private SwitchHomeViewModel switchHomeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        switchUserViewModel =
-                ViewModelProviders.of(this).get(SwitchUserViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_switch_user, container, false);
-        final TextView textView = root.findViewById(R.id.text_switch_user);
-        switchUserViewModel.getText().observe(this, new Observer<String>() {
+        switchHomeViewModel =
+                ViewModelProviders.of(this).get(SwitchHomeViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_switch_home_delivery, container, false);
+        final TextView textView = root.findViewById(R.id.text_switch_home_delivery);
+        switchHomeViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
         });
 
-        Intent loggedIn = new Intent(root.getContext(), MainNavigationScreenDelivery.class);
+        Intent loggedIn = new Intent(root.getContext(), MainNavigationScreen.class);
         startActivity(loggedIn);
-
+        getActivity().finish();
 
         return root;
     }

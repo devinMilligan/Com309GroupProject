@@ -1,16 +1,16 @@
-package com.example.project309.app.uiDelivery.profile;
+package com.example.project309.app.uiDelivery.switchuser;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ProfileViewModelDelivery extends ViewModel {
+public class SwitchHomeViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public ProfileViewModelDelivery() {
+    public SwitchHomeViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Profile Settings");
+        mText.setValue("This is switch home fragment");
     }
 
     public LiveData<String> getText() {
