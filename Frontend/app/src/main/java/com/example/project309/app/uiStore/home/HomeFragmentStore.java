@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.project309.R;
+import com.example.project309.app.MainNavigationScreenStore;
 import com.example.project309.app.Order;
 import com.example.project309.app.OrdersListAdapter;
 import com.example.project309.app.StoreListAdapter;
@@ -32,7 +33,7 @@ public class HomeFragmentStore extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-
+        ((MainNavigationScreenStore)getActivity()).changeThreeDotFunction(MainNavigationScreenStore.SpecialFucntionType.EDIT_ORDER);
 
         homeViewModelStore =
                 ViewModelProviders.of(this).get(HomeViewModelStore.class);

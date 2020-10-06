@@ -29,8 +29,8 @@ public class LogOutFragmentStore extends Fragment implements View.OnClickListene
                              ViewGroup container, Bundle savedInstanceState) {
         logOutViewModelStore =
                 ViewModelProviders.of(this).get(LogOutViewModelStore.class);
-        View root = inflater.inflate(R.layout.fragment_log_out_admin, container, false);
-        final TextView textView = root.findViewById(R.id.text_log_out_admin);
+        View root = inflater.inflate(R.layout.fragment_log_out_store, container, false);
+        final TextView textView = root.findViewById(R.id.text_log_out_store);
 
         btnLogOut = (Button)root.findViewById(R.id.btnLogOut_store);
         btnLogOut.setOnClickListener(this);

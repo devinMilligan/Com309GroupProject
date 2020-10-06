@@ -10,10 +10,10 @@
         android:name="com.example.project309.app.uiStore.home.HomeFragmentStore"
         android:label="@string/menu_home" />
 
-    <activity
-        android:id="@+id/nav_map_store"
-        android:name="com.example.project309.app.uiStore.map.MapsActivityStore"
-        android:label="@string/menu_map" />
+    <fragment
+        android:id="@+id/nav_menu_store"
+        android:name="com.example.project309.app.uiStore.menu.MenuFragmentStore"
+        android:label="@string/menu_store_menu"/>
 
     <fragment
         android:id="@+id/nav_log_out_store"

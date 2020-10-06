@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.project309.app.MenuItem;
 import com.example.project309.app.Order;
 
 import java.util.ArrayList;
@@ -11,37 +12,37 @@ import java.util.ArrayList;
 public class MenuViewModelStore extends ViewModel {
 
     private MutableLiveData<String> mText;
-    private MutableLiveData<ArrayList<Order>> orders;
+    private MutableLiveData<ArrayList<MenuItem>> menuItems;
 
     public MenuViewModelStore() {
         mText = new MutableLiveData<>();
-        mText.setValue("Dining Centers");
+        mText.setValue("Menu");
     }
 
     public LiveData<String> getText() {
         return mText;
     }
 
-    public LiveData<ArrayList<Order>> getOrders(){
+    public LiveData<ArrayList<MenuItem>> getMenuItems(){
 
-        if(orders == null){
+        if(menuItems == null){
 
-            orders = new MutableLiveData<ArrayList<Order>>();
+            menuItems = new MutableLiveData<ArrayList<MenuItem>>();
 
-            loadOrders();
+            loadMenu();
 
         }
-        return orders;
+        return menuItems;
 
     }
 
-    private void loadOrders(){
+    private void loadMenu(){
 
-        ArrayList<Order> aStore = new ArrayList<>();
-        aStore.add(new Order(1232,19.99));
-        aStore.add(new Order(1233,20.00));
+        ArrayList<MenuItem> aMenuItems = new ArrayList<>();
+        aMenuItems.add(new MenuItem("Menu Item 1", 9.99));
+        aMenuItems.add(new MenuItem("Menu Item 2", 9.99));
 
-        orders.setValue(aStore);
+        menuItems.setValue(aMenuItems);
 
     }
 
