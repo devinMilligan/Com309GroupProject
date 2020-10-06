@@ -37,12 +37,12 @@ public class Store {
         this.address = address;
     }
 
-    public long getManager() {
-        return id;
+    public int getManager() {
+        return managerID;
     }
 
-    public void setManager(long id) {
-        this.id = id;
+    public void setManager(int managerID) {
+        this.managerID = managerID;
     }
 
     public double getLatitude() {

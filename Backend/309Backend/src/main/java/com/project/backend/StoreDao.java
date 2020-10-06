@@ -30,6 +30,16 @@ public class StoreDao {
             return toStore(resultSet);
         });
     }
+    
+    public List<Store> search(int manager) {
+    	String sql = "SELECT * FROM Stores WHERE manager=(?)";
+    	List<Store> list = jdbcTemplate.query(sql,
+                new Object[]{manager},
+                (resultSet, i) -> {return toStore(resultSet);}
+        );
+    	
+    	return list;
+    }
 
     private Store toStore(ResultSet resultSet) throws SQLException {
         Store store = new Store();

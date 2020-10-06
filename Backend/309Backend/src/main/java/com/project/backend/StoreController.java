@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -32,6 +33,15 @@ class StoreController {
     	System.out.println("saving store: " + input);
     	dao.save(input);
     	return ResponseEntity.status(HttpStatus.OK).body(input);
+    }
+    
+    @GetMapping("/stores/getByManager")
+    public ResponseEntity<List<Store>> getByManager(@RequestParam(value = "managerID") int manager) {
+        
+    	System.out.println("-- searching --");
+        List<Store> stores = dao.search(manager);
+        stores.forEach(System.out::println);
+        return ResponseEntity.status(HttpStatus.OK).body(stores);
     }
     
     @GetMapping("/stores/all")
