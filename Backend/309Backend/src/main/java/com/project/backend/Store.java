@@ -1,6 +1,5 @@
 package com.project.backend;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,7 +10,7 @@ public class Store {
     private String address;
     private double latitude;
     private double longitude;
-    private LinkedList<List<Time>> hours;
+    private LinkedList<List<Integer>> hours;
 
     public long getId() {
         return id;
@@ -53,11 +52,11 @@ public class Store {
         this.longitude = longitude;
     }
 
-    public LinkedList<List<Time>> getHours() {
+    public LinkedList<List<Integer>> getHours() {
     	return hours;
     }
 
-    public void setHours(LinkedList<List<Time>> hours) {
+    public void setHours(LinkedList<List<Integer>> hours) {
         this.hours = hours;
     }
 
@@ -72,35 +71,35 @@ public class Store {
                 '}';
     }
 
-    public static Store create(String name, String address, double latitude, double longitude, Time sunOpen, Time sunClose,
-    		Time monOpen, Time monClose, Time tuesOpen, Time tuesClose, Time wedOpen, Time wedClose, Time thursOpen, Time thursClose,
-    		Time friOpen, Time friClose, Time satOpen, Time satClose) {
+    public static Store create(String name, String address, double latitude, double longitude, int sunOpen, int sunClose,
+    		int monOpen, int monClose, int tuesOpen, int tuesClose, int wedOpen, int wedClose, int thursOpen, int thursClose,
+    		int friOpen, int friClose, int satOpen, int satClose) {
         Store store = new Store();
         store.setName(name);
         store.setAddress(address);
         store.setLatitude(latitude);
         store.setLongitude(longitude);
 
-        LinkedList<List<Time>> hours = new LinkedList<List<Time>>();
-        List<Time> sunHours = new ArrayList<Time>();
+        LinkedList<List<Integer>> hours = new LinkedList<List<Integer>>();
+        List<Integer> sunHours = new ArrayList<Integer>();
         sunHours.add(sunOpen);
         sunHours.add(sunClose);
-        List<Time> monHours = new ArrayList<Time>();
+        List<Integer> monHours = new ArrayList<Integer>();
         monHours.add(monOpen);
         monHours.add(monClose);
-        List<Time> tuesHours = new ArrayList<Time>();
+        List<Integer> tuesHours = new ArrayList<Integer>();
         tuesHours.add(tuesOpen);
         tuesHours.add(tuesClose);
-        List<Time> wedHours = new ArrayList<Time>();
+        List<Integer> wedHours = new ArrayList<Integer>();
         wedHours.add(wedOpen);
         wedHours.add(wedClose);
-        List<Time> thursHours = new ArrayList<Time>();
+        List<Integer> thursHours = new ArrayList<Integer>();
         thursHours.add(thursOpen);
         thursHours.add(thursClose);
-        List<Time> friHours = new ArrayList<Time>();
+        List<Integer> friHours = new ArrayList<Integer>();
         friHours.add(friOpen);
         friHours.add(friClose);
-        List<Time> satHours = new ArrayList<Time>();
+        List<Integer> satHours = new ArrayList<Integer>();
         satHours.add(satOpen);
         satHours.add(satClose);
         hours.add(sunHours);
