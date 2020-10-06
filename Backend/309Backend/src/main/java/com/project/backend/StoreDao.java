@@ -16,10 +16,10 @@ public class StoreDao {
     private JdbcTemplate jdbcTemplate;
 
     public void save(Store store) {
-        String sql = "insert into Stores (name, address, latitude, longitude, opens_sunday, closes_sunday, opens_monday, closes_monday, opens_tuesday, closes_tuesday," 
+        String sql = "insert into Stores (name, address, manager, latitude, longitude, opens_sunday, closes_sunday, opens_monday, closes_monday, opens_tuesday, closes_tuesday," 
         		+ "opens_wednesday," + "closes_wednesday, opens_thursday, closes_thursday, opens_friday, closes_friday, opens_saturday, closes_saturday)"
-        				+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, store.getName(), store.getAddress(), store.getLatitude(), store.getLongitude(), store.getHours().get(0).get(0), store.getHours().get(0).get(1),
+        				+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, store.getName(), store.getAddress(), store.getManager(), store.getLatitude(), store.getLongitude(), store.getHours().get(0).get(0), store.getHours().get(0).get(1),
         		store.getHours().get(1).get(0),store.getHours().get(1).get(1), store.getHours().get(2).get(0),store.getHours().get(2).get(1),
         		store.getHours().get(3).get(0),store.getHours().get(3).get(1), store.getHours().get(4).get(0),store.getHours().get(4).get(1),
         		store.getHours().get(5).get(0),store.getHours().get(5).get(1), store.getHours().get(6).get(0),store.getHours().get(6).get(1));
@@ -36,6 +36,7 @@ public class StoreDao {
         store.setId(resultSet.getLong("ID"));
         store.setName(resultSet.getString("NAME"));
         store.setAddress(resultSet.getString("ADDRESS"));
+        store.setManager(resultSet.getInt("MANAGER"));
         store.setLatitude(resultSet.getDouble("LATITUDE"));
         store.setLongitude(resultSet.getDouble("LONGITUDE"));
         

@@ -24,6 +24,7 @@ class StoreController {
         Store input = new Store();
         input.setName(StoreDetails.getName());
         input.setAddress(StoreDetails.getAddress());
+        input.setManager(StoreDetails.getManager());
         input.setLatitude(StoreDetails.getLatitude());
         input.setLongitude(StoreDetails.getLongitude());
         input.setHours(StoreDetails.getHours());

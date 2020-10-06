@@ -11,6 +11,7 @@ public class Store {
     private double latitude;
     private double longitude;
     private LinkedList<List<Integer>> hours;
+    private int managerID;
 
     public long getId() {
         return id;
@@ -60,23 +61,33 @@ public class Store {
         this.hours = hours;
     }
 
+    public long getManager() {
+        return id;
+    }
+
+    public void setManager(long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Store{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
+                ", manager id='" + managerID + '\'' +
                 ", lat/long=('" + latitude + "','" + longitude + "')" +
                 ", hours='" + hours + '\'' +
                 '}';
     }
 
-    public static Store create(String name, String address, double latitude, double longitude, int sunOpen, int sunClose,
+    public static Store create(String name, String address, int managerID, double latitude, double longitude, int sunOpen, int sunClose,
     		int monOpen, int monClose, int tuesOpen, int tuesClose, int wedOpen, int wedClose, int thursOpen, int thursClose,
     		int friOpen, int friClose, int satOpen, int satClose) {
         Store store = new Store();
         store.setName(name);
         store.setAddress(address);
+        store.setManager(managerID);
         store.setLatitude(latitude);
         store.setLongitude(longitude);
 
