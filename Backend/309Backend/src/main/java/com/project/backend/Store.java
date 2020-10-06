@@ -8,10 +8,10 @@ public class Store {
     private long id;
     private String name;
     private String address;
+    private int managerID;
     private double latitude;
     private double longitude;
     private LinkedList<List<Integer>> hours;
-    private int managerID;
 
     public long getId() {
         return id;
@@ -37,6 +37,14 @@ public class Store {
         this.address = address;
     }
 
+    public long getManager() {
+        return id;
+    }
+
+    public void setManager(long id) {
+        this.id = id;
+    }
+
     public double getLatitude() {
         return latitude;
     }
@@ -59,14 +67,6 @@ public class Store {
 
     public void setHours(LinkedList<List<Integer>> hours) {
         this.hours = hours;
-    }
-
-    public long getManager() {
-        return id;
-    }
-
-    public void setManager(long id) {
-        this.id = id;
     }
 
     @Override
