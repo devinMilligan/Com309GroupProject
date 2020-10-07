@@ -25,12 +25,38 @@
             android:id="@+id/txtEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignTop="@id/txtLast"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="83dp"
+            android:fontFamily="@font/fresca"
+            android:text="Email"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/txtFirst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignTop="@id/txtPic"
             android:layout_alignParentStart="true"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="143dp"
+            android:layout_marginTop="160dp"
             android:fontFamily="@font/fresca"
-            android:text="Email"
+            android:text="First Name"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/txtLast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/txtFirst"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="83dp"
+            android:fontFamily="@font/fresca"
+            android:text="Last Name"
             android:textAlignment="center"
             android:textSize="24sp" />
 
@@ -56,30 +82,6 @@
             android:layout_marginTop="83dp"
             android:fontFamily="@font/fresca"
             android:text="Password"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/txtHome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/btnChangePass"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="64dp"
-            android:fontFamily="@font/fresca"
-            android:text="Home Location"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/txtDelivery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/edAddress"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="9dp"
-            android:layout_marginTop="111dp"
-            android:fontFamily="@font/fresca"
-            android:text="Delivery Employee"
             android:textSize="24sp" />
 
         <TextView
@@ -116,8 +118,35 @@
             android:layout_marginLeft="47dp"
             android:layout_marginTop="36dp"
             android:ems="10"
+            android:hint="Email"
             android:inputType="textEmailAddress"
             android:text="milldev@iastat.edu" />
+
+        <EditText
+            android:id="@+id/editFirst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/txtFirst"
+            android:layout_alignTop="@id/txtFirst"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="36dp"
+            android:ems="10"
+            android:hint="First Name"
+            android:inputType="textPersonName"
+            android:text="Devin" />
+
+        <EditText
+            android:id="@+id/editLast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/txtLast"
+            android:layout_alignTop="@id/txtLast"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="36dp"
+            android:ems="10"
+            android:hint="Last Name"
+            android:inputType="textPersonName"
+            android:text="milligan" />
 
         <EditText
             android:id="@+id/editText3"
@@ -128,6 +157,7 @@
             android:layout_marginLeft="47dp"
             android:layout_marginTop="36dp"
             android:ems="10"
+            android:hint="Password"
             android:inputType="textPassword"
             android:text="fdasfsasda" />
 
@@ -140,6 +170,7 @@
             android:layout_marginLeft="47dp"
             android:layout_marginTop="36dp"
             android:ems="10"
+            android:hint="Re-Enter Password"
             android:inputType="textPassword"
             android:text="fdasfsasda" />
 
@@ -164,32 +195,6 @@
             android:layout_marginStart="143dp"
             android:layout_marginTop="22dp"
             app:srcCompat="@drawable/profile" />
-
-        <EditText
-            android:id="@+id/edAddress"
-            android:layout_width="277dp"
-            android:layout_height="94dp"
-            android:layout_alignTop="@id/txtHome"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="39dp"
-            android:ems="10"
-            android:gravity="bottom|start"
-            android:inputType="textMultiLine"
-            android:text="4888  Passaic Street \nFreehold, NJ 07728" />
-
-        <Switch
-            android:id="@+id/swDelivery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/txtDelivery"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="255dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="27dp"
-            android:textSize="18sp"
-            android:thumbTint="@color/colorPrimaryDark"
-            android:trackTint="@color/colorPrimary" />
 
     </RelativeLayout>
 

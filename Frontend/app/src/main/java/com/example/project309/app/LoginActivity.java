@@ -49,8 +49,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 EditText email = (EditText) findViewById(R.id.login_email);
                 EditText password = (EditText) findViewById(R.id.login_password);
                 if(!email.getText().toString().equals("") && !password.getText().toString().equals("")) {
-                    Intent loggedIn = new Intent(this, MainNavigationScreen.class);
-                    startActivity(loggedIn);
+                    if(email.getText().toString().trim().equals("Admin")){
+                        Intent loggedIn = new Intent(this, MainNavigationScreenAdmin.class);
+                        startActivity(loggedIn);
+
+                    }else if(email.getText().toString().trim().equals("Store")) {
+                        Intent loggedIn = new Intent(this, MainNavigationScreenStore.class);
+                        startActivity(loggedIn);
+
+                    }else {
+                        Intent loggedIn = new Intent(this, MainNavigationScreen.class);
+                        startActivity(loggedIn);
+
+                    }
                 }
                 else {
                     Toast myToast;

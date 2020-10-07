@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Profile {
 
     public static ArrayList<Profile> allProfiles= new ArrayList<>();
+    public static Profile currentLogin;
 
     protected String userName;
     protected String name;
