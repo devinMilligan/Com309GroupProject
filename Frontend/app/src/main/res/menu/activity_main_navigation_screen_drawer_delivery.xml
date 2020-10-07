@@ -18,11 +18,6 @@
     <item android:title="Profile">
         <menu>
             <item
-                android:id="@+id/nav_log_out_delivery"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_log_out" />
-
-            <item
                 android:id="@+id/nav_switch_home_delivery"
                 android:icon="@drawable/ic_menu_manage"
                 android:title="@string/menu_switch_user" />

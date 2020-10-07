@@ -32,6 +32,14 @@ public class MainNavigationScreenStore extends AppCompatActivity {
         private SpecialFucntionType(String val){
             value = val;
         }
+
+
+
+
+
+
+
+
         public String getValue(){
             return value;
         }

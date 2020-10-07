@@ -34,8 +34,6 @@ public class SwitchHomeFragment extends Fragment {
             }
         });
 
-        Intent loggedIn = new Intent(root.getContext(), MainNavigationScreen.class);
-        startActivity(loggedIn);
         getActivity().finish();
 
         return root;

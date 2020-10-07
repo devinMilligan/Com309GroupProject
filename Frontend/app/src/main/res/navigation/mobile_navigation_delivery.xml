@@ -16,11 +16,6 @@
         android:label="@string/menu_map" />
 
     <fragment
-        android:id="@+id/nav_log_out_delivery"
-        android:name="com.example.project309.app.uiDelivery.logout.LogOutFragmentDelivery"
-        android:label="@string/menu_log_out" />
-
-    <fragment
         android:id="@+id/nav_switch_home_delivery"
         android:name="com.example.project309.app.uiDelivery.switchuser.SwitchHomeFragment"
         android:label="@string/menu_switch_user" />

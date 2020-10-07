@@ -32,7 +32,7 @@ public class MainNavigationScreenDelivery extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home_delivery, R.id.nav_map_delivery, R.id.nav_log_out_delivery, R.id.nav_switch_home_delivery)
+                R.id.nav_home_delivery, R.id.nav_map_delivery, R.id.nav_switch_home_delivery)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_delivery);
