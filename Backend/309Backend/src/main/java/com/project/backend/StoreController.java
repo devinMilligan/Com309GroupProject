@@ -35,6 +35,22 @@ class StoreController {
     	return ResponseEntity.status(HttpStatus.OK).body(input);
     }
     
+    @PostMapping("/stores/update")
+    public ResponseEntity<Store> updateStore(@RequestBody Store StoreDetails) {
+        Store input = new Store();
+        input.setId(StoreDetails.getId());
+        input.setName(StoreDetails.getName());
+        input.setAddress(StoreDetails.getAddress());
+        input.setManager(StoreDetails.getManager());
+        input.setLatitude(StoreDetails.getLatitude());
+        input.setLongitude(StoreDetails.getLongitude());
+        input.setHours(StoreDetails.getHours());
+
+    	System.out.println("updating store: " + input);
+    	dao.update(input);
+    	return ResponseEntity.status(HttpStatus.OK).body(input);
+    }
+    
     @GetMapping("/stores/getByManager")
     public ResponseEntity<List<Store>> getByManager(@RequestParam(value = "managerID") int manager) {
         
