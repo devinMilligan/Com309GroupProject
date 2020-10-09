@@ -4,57 +4,37 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.VolleyError;
 import com.example.project309.R;
-import com.example.project309.net_utils.Const;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-
-    public static final String TAG = "LOGON";
-
-    private MessageBoxBuilder message;
-
-    private EditText email, password;
-    private Button loginButton, forgotPasswordButton, signUpButton;
-
-    private String emailText, passwordText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        message = new MessageBoxBuilder(LoginActivity.this);
+        EditText email = (EditText) findViewById(R.id.login_email);
+        EditText password = (EditText) findViewById(R.id.login_password);
 
-        email = (EditText) findViewById(R.id.login_email);
-        password = (EditText) findViewById(R.id.login_password);
-
-        loginButton = findViewById(R.id.login_continue_button);
+        Button loginButton = findViewById(R.id.login_continue_button);
         loginButton.setOnClickListener(this);
 
-        forgotPasswordButton = findViewById(R.id.login_forgot_password_button);
+        Button forgotPasswordButton = findViewById(R.id.login_forgot_password_button);
         forgotPasswordButton.setOnClickListener(this);
 
-        signUpButton = findViewById(R.id.login_create_account_button);
+        Button signUpButton = findViewById(R.id.login_create_account_button);
         signUpButton.setOnClickListener(this);
 
         Intent messageIntent = getIntent();
         if(!messageIntent.equals(null))
         {
-            emailText = messageIntent.getStringExtra("EMAIL");
-            passwordText = messageIntent.getStringExtra("PASSWORD");
+            String emailText = messageIntent.getStringExtra("EMAIL");
+            String passwordText = messageIntent.getStringExtra("PASSWORD");
 
             email.setText(emailText);
             password.setText(passwordText);
@@ -66,15 +46,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         switch(v.getId()){
             case R.id.login_continue_button:
+                EditText email = (EditText) findViewById(R.id.login_email);
+                EditText password = (EditText) findViewById(R.id.login_password);
                 if(!email.getText().toString().equals("") && !password.getText().toString().equals("")) {
-                    message.showMessage("Loading...", 3);
+                    if(email.getText().toString().trim().equals("Admin")){
+                        Intent loggedIn = new Intent(this, MainNavigationScreenAdmin.class);
+                        startActivity(loggedIn);
 
-                    ArrayList<JSONVariable> list = new ArrayList<>();
+                    }else if(email.getText().toString().trim().equals("Store")) {
+                        Intent loggedIn = new Intent(this, MainNavigationScreenStore.class);
+                        startActivity(loggedIn);
 
-                    list.add(new JSONVariable("email",email.getText().toString()));
-                    list.add(new JSONVariable("password", password.getText().toString()));
+                    }else {
+                        Intent loggedIn = new Intent(this, MainNavigationScreen.class);
+                        startActivity(loggedIn);
 
-                    jsonRe.makeJsonArryReq(Const.URL_JSON_LOGIN, list);
+                    }
                 }
                 else {
                     Toast myToast;
