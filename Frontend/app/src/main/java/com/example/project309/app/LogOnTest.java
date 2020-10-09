@@ -110,7 +110,7 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
 
                 message.showMessage("Updating...", 3);
 
-                //jsonRe.makeJsonArryReq(Const.URL_JSON_ARRAY_ALL_USERS);
+                jsonRe.makeJsonArryReq(Const.URL_JSON_ARRAY_ALL_USERS);
 
                 break;
 
