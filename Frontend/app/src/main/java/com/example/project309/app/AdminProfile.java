@@ -11,6 +11,7 @@ public class AdminProfile extends Profile {
 
         firstName = first;
         lastName = last;
+
     }
 
     public AdminProfile(int mId) {
