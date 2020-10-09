@@ -1,6 +1,5 @@
 package com.example.project309.app;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.project309.R;
@@ -37,7 +36,7 @@ public class MainNavigationScreen extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "This Will Bring you to Past and Current Orders\nAlso where you can start new order", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "This is able to do something", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -53,7 +52,6 @@ public class MainNavigationScreen extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
     }
 
     @Override
@@ -69,5 +67,4 @@ public class MainNavigationScreen extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
 }

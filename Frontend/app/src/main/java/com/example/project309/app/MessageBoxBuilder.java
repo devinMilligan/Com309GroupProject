@@ -11,7 +11,7 @@ public class MessageBoxBuilder {
     public static final String TAG = "MessageBoxBuilder";
 
     //Context of the class using this class
-    protected Context context;
+    private Context context;
     //Dialog box that will be displayed
     private AlertDialog dialog;
 
@@ -44,7 +44,6 @@ public class MessageBoxBuilder {
             builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     dismissMessage();
-                    neutralButtonPressed();
                 }
             });
         }
@@ -52,14 +51,14 @@ public class MessageBoxBuilder {
             builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     dismissMessage();
-                    negativeButtonPressed();
+
                 }
             });
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dismissMessage();
-                    positiveButtonPressed();
+
                 }
             });
         }
@@ -86,22 +85,6 @@ public class MessageBoxBuilder {
             dialog.dismiss();
             dialog = null;
         }
-
-        onDismiss();
-
-    }
-
-
-    protected void onDismiss(){
-
-    }
-    protected void neutralButtonPressed(){
-
-    }
-    protected void positiveButtonPressed(){
-
-    }
-    protected void negativeButtonPressed(){
 
     }
 
