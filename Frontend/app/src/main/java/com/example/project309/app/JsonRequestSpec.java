@@ -42,9 +42,9 @@ public class JsonRequestSpec extends JSONAbstract {
      * @param list this is the list of JSONVariables to be used as parameters passed with
      *             request
      * */
-    public void makeJsonObjReqParams(ArrayList<JSONVariable> list) {
+    public void makeJsonObjReqParams(String url, ArrayList<JSONVariable> list) {
 
-        String url = Const.URL_JSON_CREATE_USER +"?";
+        url += "?";
 
         for(int i = 0; i < list.size(); i++){  //Creation of link with parameters
 
@@ -58,7 +58,7 @@ public class JsonRequestSpec extends JSONAbstract {
         }
 
         //Create JSONObjectRequest to send as POST
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,
                 new Response.Listener<JSONObject>() {
 
@@ -100,7 +100,20 @@ public class JsonRequestSpec extends JSONAbstract {
     /**
      * Making json array request
      * */
-    public void makeJsonArryReq(String url) {
+    public void makeJsonArryReq(String url, ArrayList<JSONVariable> list) {
+
+        url += "?";
+
+        for(int i = 0; i < list.size(); i++){  //Creation of link with parameters
+
+            url+=list.get(i).getId() + "=";
+            url+=list.get(i).getValue();
+
+            if(i<list.size()-1){
+                url+="&";
+            }
+
+        }
 
         //Make JSON array request
         JsonArrayRequest req = new JsonArrayRequest(url,
