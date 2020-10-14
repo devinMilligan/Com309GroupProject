@@ -1,7 +1,5 @@
 package com.example.project309.app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,20 +8,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.VolleyError;
 import com.example.project309.R;
 import com.example.project309.net_utils.Const;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class LoginActivity extends ViewAbstractListener  implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, ViewListenerInter{
 
     public static final String TAG = "LOGON";
 
-    private MessageBoxBuilder message;
+    private MessageBoxInter message;
 
     private EditText email, password;
     private Button loginButton, forgotPasswordButton, signUpButton;
@@ -37,7 +38,8 @@ public class LoginActivity extends ViewAbstractListener  implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        message = new MessageBoxBuilder(LoginActivity.this);
+        message = AppController.getInstance().getMessageBoxBuilderInstance();
+        message.setContext(LoginActivity.this);
 
         jsonHandler = AppController.getInstance().getJSONHandlerInstance();
         jsonHandler.setListener(this);
@@ -105,6 +107,11 @@ public class LoginActivity extends ViewAbstractListener  implements View.OnClick
     }
 
     @Override
+    public void onSuccess(JSONObject response) {
+
+    }
+
+    @Override
     public void onSuccess(JSONArray response) {
 
         Log.d(TAG,response.toString());
@@ -137,6 +144,11 @@ public class LoginActivity extends ViewAbstractListener  implements View.OnClick
     }
 
     @Override
+    public void onSuccess(String response) {
+
+    }
+
+    @Override
     public void onError(VolleyError error) {
 
         Log.d(TAG,error.toString());
@@ -144,6 +156,7 @@ public class LoginActivity extends ViewAbstractListener  implements View.OnClick
         message.showMessage(error.toString(),1);
 
     }
+
 
     /**
      * JSON Request Object, used for arrays, bodies, and parms

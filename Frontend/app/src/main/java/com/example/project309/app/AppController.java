@@ -63,4 +63,22 @@ public class AppController extends Application {
 
     }
 
+    public StringRequestInter getStringRequestInstance(){
+
+        return new StringRequestSpec();
+
+    }
+
+    public StringHandler getStringHandlerInstance(){
+
+        return new StringHandler();
+
+    }
+
+    public MessageBoxInter getMessageBoxBuilderInstance(){
+
+        return new MessageBoxBuilder();
+
+    }
+
 }

@@ -47,8 +47,6 @@
         </activity>
 
         <activity android:name=".app.uiDelivery.map.MapsActivityDelivery"></activity>
-        <activity android:name=".app.uiAdmin.map.MapsActivityAdmin"></activity>
-        <activity android:name=".app.uiStore.map.MapsActivityStore"></activity>
 
     </application>
 

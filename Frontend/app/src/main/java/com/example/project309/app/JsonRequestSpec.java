@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JsonRequestSpec implements JSONRequestInter {
+public class JsonRequestSpec implements JSONRequestInter{
 
     private String TAG = this.getClass().toString();
 
@@ -176,6 +176,8 @@ public class JsonRequestSpec implements JSONRequestInter {
         // Cancelling request
         // ApplicationController.getInstance().getRequestQueue().cancelAll(tag_json_arry);
     }
+
+
 
     /**
      *  Making of JSONObjectREquest with a body and option of params

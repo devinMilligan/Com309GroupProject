@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface JSONHandlerInter {
 
-    void setListener(ViewAbstractListener view);
+    void setListener(ViewListenerInter view);
 
     void makeJsonObjReq(String url, RequestMethod rm);
     void makeJsonObjReqParams(String url, ArrayList<JSONVariable> paramList, RequestMethod rm);

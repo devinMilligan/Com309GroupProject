@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class JSONHandler extends JSONAbstractListener implements JSONHandlerInter {
 
     JSONRequestInter jR;
-    ViewAbstractListener vR;
+    ViewListenerInter vR;
 
     public JSONHandler(){
 
@@ -20,7 +20,7 @@ public class JSONHandler extends JSONAbstractListener implements JSONHandlerInte
 
     }
 
-    public void setListener(ViewAbstractListener view){
+    public void setListener(ViewListenerInter view){
 
         vR = view;
 
