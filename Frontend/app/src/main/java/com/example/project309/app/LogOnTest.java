@@ -37,7 +37,7 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);/*
         setContentView(R.layout.activity_log_on_test);
 
         btnLogOn = (Button)findViewById(R.id.btnLogOn);
@@ -59,9 +59,14 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
         edUser.setText("");
 
         message = new MessageBoxBuilder(LogOnTest.this);
-
+*/
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+/*
 
     @Override
     public void onClick(View v) {
@@ -124,7 +129,7 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
      * @param user
      * @param pass
      * @return
-     */
+
     private boolean checkIfComplete(String user, String pass){
 
 
@@ -137,7 +142,7 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
 
     /**
      * JSON Request Object, used for arrays, bodies, and parms
-     */
+
     JsonRequestSpec jsonRe = new JsonRequestSpec(TAG){
 
         //Overridden methods to specify how to handle responses and errors
@@ -214,7 +219,7 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
 
     /**
      * String request, used to request a string from the database based off a certain URL
-     */
+
     StringRequestSpec stringRe = new StringRequestSpec(TAG){
 
         @Override
@@ -236,5 +241,5 @@ public class LogOnTest extends AppCompatActivity implements View.OnClickListener
         }
 
     };
-
+*/
 }

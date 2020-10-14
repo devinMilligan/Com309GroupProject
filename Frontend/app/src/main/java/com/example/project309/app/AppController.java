@@ -50,4 +50,17 @@ public class AppController extends Application {
             mRequestQueue.cancelAll(tag);
         }
     }
+
+    public JSONRequestInter getJSONRequestInstance(){
+
+        return new JsonRequestSpec();
+
+    }
+
+    public JSONHandler getJSONHandlerInstance(){
+
+        return new JSONHandler();
+
+    }
+
 }

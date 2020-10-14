@@ -16,11 +16,10 @@ import com.example.project309.net_utils.Const;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends ViewAbstractListener  implements View.OnClickListener{
 
     public static final String TAG = "LOGON";
 
@@ -31,12 +30,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private String emailText, passwordText;
 
+    private JSONHandlerInter jsonHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         message = new MessageBoxBuilder(LoginActivity.this);
+
+        jsonHandler = AppController.getInstance().getJSONHandlerInstance();
+        jsonHandler.setListener(this);
 
         email = (EditText) findViewById(R.id.login_email);
         password = (EditText) findViewById(R.id.login_password);
@@ -74,7 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     list.add(new JSONVariable("email",email.getText().toString()));
                     list.add(new JSONVariable("password", password.getText().toString()));
 
-                    jsonRe.makeJsonArryReq(Const.URL_JSON_LOGIN, list);
+                    jsonHandler.makeJsonArryReqParams(Const.URL_JSON_LOGIN, list, RequestMethod.GET);
                 }
                 else {
                     Toast myToast;
@@ -100,9 +104,50 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    @Override
+    public void onSuccess(JSONArray response) {
+
+        Log.d(TAG,response.toString());
+        message.dismissMessage();
+
+        String s;
+        for(int i = 0; i < response.length(); i++) {
+            try {
+                s = response.get(i).toString();
+                Intent loggedIn = new Intent(LoginActivity.this, MainNavigationScreen.class);
+                startActivity(loggedIn);
+                return;
+            }
+            catch(JSONException e) {
+                if(email.getText().toString().trim().equals("Admin")){
+                    Intent loggedIn = new Intent(LoginActivity.this, MainNavigationScreenAdmin.class);
+                    startActivity(loggedIn);
+                    return;
+                }
+                else if(email.getText().toString().trim().equals("Store")) {
+                    Intent loggedIn = new Intent(LoginActivity.this, MainNavigationScreenStore.class);
+                    startActivity(loggedIn);
+                    return;
+                }
+                s = " ";
+            }
+        }
+        message.showMessage("Login Failed", 1);
+
+    }
+
+    @Override
+    public void onError(VolleyError error) {
+
+        Log.d(TAG,error.toString());
+        message.dismissMessage();
+        message.showMessage(error.toString(),1);
+
+    }
+
     /**
      * JSON Request Object, used for arrays, bodies, and parms
-     */
+
     JsonRequestSpec jsonRe = new JsonRequestSpec(TAG){
 
         //Overridden methods to specify how to handle responses and errors
@@ -142,6 +187,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             message.dismissMessage();
             message.showMessage(error.toString(),1);
         }
-    };
+    };*/
 }
 
