@@ -87,16 +87,28 @@ public class User {
                 ", image='" + image + '\'' +
                 '}';
     }
-
-    public static User create(String email, String password, String firstName, String lastName, String address, String acctType, String imagePath) {
-        User user = new User();
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setAddress(address);
-        user.setType(acctType);
-        user.setImagePath(imagePath);
-        return user;
+    
+    public User()
+    {
+    	this.id = (0);
+    	this.email = (null);
+    	this.password = (null);
+    	this.firstName = (null);
+    	this.lastName = (null);
+    	this.address = (null);
+    	this.account = (null);
+    	this.image = (null);
+    }
+    
+    public User(long id, String email, String password, String address, String firstName, String lastName, String acctType, String imagePath)
+    {
+    	this.id = (id);
+    	this.email = (email);
+    	this.password = (password);
+    	this.firstName = (firstName);
+    	this.lastName = (lastName);
+    	this.address = (address);
+    	this.account = (acctType);
+    	this.image = (imagePath);
     }
 }

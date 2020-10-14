@@ -26,7 +26,7 @@ class UserController {
     		@RequestParam(value = "type") String type, @RequestParam(value = "image") String image) 
     				throws IOException
     {
-    	User user = new User();	
+    	User user = new User();
     	user.setId(id);
     	user.setEmail(email);
     	user.setPassword(password);
