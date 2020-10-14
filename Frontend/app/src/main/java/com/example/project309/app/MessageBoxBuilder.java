@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.example.project309.R;
 
-public class MessageBoxBuilder {
+public class MessageBoxBuilder implements MessageBoxInter, MessageBoxListenerInter{
     public static final String TAG = "MessageBoxBuilder";
 
     //Context of the class using this class
@@ -15,11 +15,24 @@ public class MessageBoxBuilder {
     //Dialog box that will be displayed
     private AlertDialog dialog;
 
+    private String mesStr;
+
+    private MessageBoxListenerInter mB;
+
     /**
-     * Constructor that collects the context to display this message
-     * @param c     the context
+     * Constructor
      */
-    public MessageBoxBuilder(Context c){
+    public MessageBoxBuilder(){
+
+        mB = this;
+
+    }
+
+    public void setListener(MessageBoxListenerInter messageBoxListenerInter){
+        mB = messageBoxListenerInter;
+    }
+
+    public void setContext(Context c){
 
         context = c;
 
@@ -32,47 +45,51 @@ public class MessageBoxBuilder {
      * @param str  This is the message that will be displayed
      * @param style This is the check to determine which of the set layouts made below you want
      */
-    public void showMessage(String str, int style){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.PositiveButtonStyle);
+    public boolean showMessage(String str, int style){
 
-        builder.setMessage(str);
+        if(context != null) {
 
-        Log.d(TAG,"Showing AlertBox with this str: "+str);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.PositiveButtonStyle);
 
-        //OK Button with dismissal
-        if(style == 1){
-            builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dismissMessage();
-                    neutralButtonPressed();
-                }
-            });
+            mesStr = str;
+            builder.setMessage(mesStr);
+
+            Log.d(TAG, "Showing AlertBox with this str: " + str);
+
+            //OK Button with dismissal
+            if (style == 1) {
+                final String message = mesStr;
+
+                builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dismissMessage();
+                        mB.neutralButtonPressed(message);
+                    }
+                });
+            } else if (style == 2) {
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dismissMessage();
+                        mB.negativeButtonPressed(mesStr);
+                    }
+                });
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dismissMessage();
+                        mB.positiveButtonPressed(mesStr);
+                    }
+                });
+            } else if (style == 3) {
+
+
+            }
+
+            dialog = builder.create();
+            dialog.show();
+            return true;
         }
-        else if(style == 2){
-            builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dismissMessage();
-                    negativeButtonPressed();
-                }
-            });
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dismissMessage();
-                    positiveButtonPressed();
-                }
-            });
-        }
-        else if(style == 3){
-
-
-
-        }
-
-
-        dialog = builder.create();
-        dialog.show();
-
+        return false;
     }
 
 
@@ -87,22 +104,29 @@ public class MessageBoxBuilder {
             dialog = null;
         }
 
-        onDismiss();
+        mB.onDismiss(mesStr);
 
     }
 
 
-    protected void onDismiss(){
-
+    @Override
+    public void onDismiss(String message) {
+        Log.d(TAG, message + ": The AlertDialog was dismissed");
     }
-    protected void neutralButtonPressed(){
 
+    @Override
+    public void neutralButtonPressed(String message) {
+        Log.d(TAG, message + ": The AlertDialog was dismissed");
     }
-    protected void positiveButtonPressed(){
 
+    @Override
+    public void positiveButtonPressed(String message) {
+        Log.d(TAG, message + ": The AlertDialog was dismissed");
     }
-    protected void negativeButtonPressed(){
 
+    @Override
+    public void negativeButtonPressed(String message) {
+        Log.d(TAG, message + ": The AlertDialog was dismissed");
     }
 
 }

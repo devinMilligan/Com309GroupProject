@@ -1,7 +1,5 @@
 package com.example.project309.app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.VolleyError;
 import com.example.project309.R;
@@ -20,23 +20,29 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, ViewListenerInter{
 
     public static final String TAG = "LOGON";
 
-    private MessageBoxBuilder message;
+    private MessageBoxInter message;
 
     private EditText email, password;
     private Button loginButton, forgotPasswordButton, signUpButton;
 
     private String emailText, passwordText;
 
+    private JSONHandlerInter jsonHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        message = new MessageBoxBuilder(LoginActivity.this);
+        message = AppController.getInstance().getMessageBoxBuilderInstance();
+        message.setContext(LoginActivity.this);
+
+        jsonHandler = AppController.getInstance().getJSONHandlerInstance();
+        jsonHandler.setListener(this);
 
         email = (EditText) findViewById(R.id.login_email);
         password = (EditText) findViewById(R.id.login_password);
@@ -74,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     list.add(new JSONVariable("email",email.getText().toString()));
                     list.add(new JSONVariable("password", password.getText().toString()));
 
-                    jsonRe.makeJsonArryReq(Const.URL_JSON_LOGIN, list);
+                    jsonHandler.makeJsonArryReqParams(Const.URL_JSON_LOGIN, list, RequestMethod.GET);
                 }
                 else {
                     Toast myToast;
@@ -100,9 +106,61 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    @Override
+    public void onSuccess(JSONObject response) {
+
+    }
+
+    @Override
+    public void onSuccess(JSONArray response) {
+
+        Log.d(TAG,response.toString());
+        message.dismissMessage();
+
+        String s;
+        for(int i = 0; i < response.length(); i++) {
+            try {
+                s = response.get(i).toString();
+                Intent loggedIn = new Intent(LoginActivity.this, MainNavigationScreen.class);
+                startActivity(loggedIn);
+                return;
+            }
+            catch(JSONException e) {
+                if(email.getText().toString().trim().equals("Admin")){
+                    Intent loggedIn = new Intent(LoginActivity.this, MainNavigationScreenAdmin.class);
+                    startActivity(loggedIn);
+                    return;
+                }
+                else if(email.getText().toString().trim().equals("Store")) {
+                    Intent loggedIn = new Intent(LoginActivity.this, MainNavigationScreenStore.class);
+                    startActivity(loggedIn);
+                    return;
+                }
+                s = " ";
+            }
+        }
+        message.showMessage("Login Failed", 1);
+
+    }
+
+    @Override
+    public void onSuccess(String response) {
+
+    }
+
+    @Override
+    public void onError(VolleyError error) {
+
+        Log.d(TAG,error.toString());
+        message.dismissMessage();
+        message.showMessage(error.toString(),1);
+
+    }
+
+
     /**
      * JSON Request Object, used for arrays, bodies, and parms
-     */
+
     JsonRequestSpec jsonRe = new JsonRequestSpec(TAG){
 
         //Overridden methods to specify how to handle responses and errors
@@ -142,6 +200,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             message.dismissMessage();
             message.showMessage(error.toString(),1);
         }
-    };
+    };*/
 }
 

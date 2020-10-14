@@ -1,5 +1,6 @@
 package com.example.project309.app.uiStore.logout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,15 +16,20 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.project309.R;
+import com.example.project309.app.AppController;
 import com.example.project309.app.LoginActivity;
 import com.example.project309.app.MessageBoxBuilder;
+import com.example.project309.app.MessageBoxInter;
+import com.example.project309.app.MessageBoxListenerInter;
 
-public class LogOutFragmentStore extends Fragment implements View.OnClickListener {
+public class LogOutFragmentStore extends Fragment implements View.OnClickListener, MessageBoxListenerInter {
 
     private LogOutViewModelStore logOutViewModelStore;
-    private MessageBoxBuilder message;
+    private MessageBoxInter message;
 
     private Button btnLogOut;
+
+    private Context context;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,20 +48,12 @@ public class LogOutFragmentStore extends Fragment implements View.OnClickListene
             }
         });
 
-        message = new MessageBoxBuilder(root.getContext()){
+        context = root.getContext();
+        message = AppController.getInstance().getMessageBoxBuilderInstance();
+        message.setContext(context);
+        message.setListener(this);
 
-            @Override
-            protected void negativeButtonPressed(){
-
-            }
-            @Override
-            protected void positiveButtonPressed(){
-                Intent loggedIn = new Intent(this.context, LoginActivity.class);
-                startActivity(loggedIn);
-                getActivity().finish();
-            }
-
-        };
+        message.showMessage("Logging Out?", 2);
 
         message.showMessage("Logging Out?", 2);
 
@@ -73,6 +71,28 @@ public class LogOutFragmentStore extends Fragment implements View.OnClickListene
 
 
         }
+
+    }
+
+    @Override
+    public void onDismiss(String message) {
+
+    }
+
+    @Override
+    public void neutralButtonPressed(String message) {
+
+    }
+
+    @Override
+    public void positiveButtonPressed(String message) {
+        Intent loggedIn = new Intent(this.context, LoginActivity.class);
+        startActivity(loggedIn);
+        getActivity().finish();
+    }
+
+    @Override
+    public void negativeButtonPressed(String message) {
 
     }
 }

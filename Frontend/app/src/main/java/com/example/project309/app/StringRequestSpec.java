@@ -10,22 +10,22 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.example.project309.net_utils.Const;
 
+import java.util.ArrayList;
 
-public class StringRequestSpec extends StringRequestAbstract {
+
+public class StringRequestSpec implements StringRequestInter {
 
     private String TAG = this.getClass().toString();
 
     // This tag will be used to cancel the request
     private String tag_string_req = "string_req";
 
+    private StringAbstractListener sA;
 
     /**
      * Constructor
-     * @param tag this is the TAG from the class the instance was created in for Log calls
      */
-    public StringRequestSpec(String tag) {
-
-        TAG = TAG + "," + tag;
+    public StringRequestSpec() {
 
     }
 
@@ -33,23 +33,41 @@ public class StringRequestSpec extends StringRequestAbstract {
      * Makes a string GET request
      * @param urlM the URL to request from
      */
-    public void makeStringReq(String urlM) {
+    public void makeStringReqInner(String urlM, ArrayList<JSONVariable> paramList, RequestMethod rm) {
 
+        int method = Request.Method.GET;
+
+        if(rm == RequestMethod.POST){
+            method = Request.Method.POST;
+        }
+
+        if(paramList != null) {
+            for (int i = 0; i < paramList.size(); i++) {  //Creation of link with parameters
+
+                urlM += paramList.get(i).getId() + "=";
+                urlM += paramList.get(i).getValue();
+
+                if (i < paramList.size() - 1) {
+                    urlM += "&";
+                }
+
+            }
+        }
 
         Log.d(TAG, "Made Request");
 
         //Create String request as GET
-        StringRequest strReq = new StringRequest(Request.Method.GET, urlM, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(method, urlM, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {  //Handling of response
                 Log.d(TAG, response.toString());
-                responseListString(response);
+                sA.responseListString(response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {   //Handling of Error
                 VolleyLog.d(TAG, "Error " + error.toString());
-                responseListString(error);
+                sA.responseListString(error);
             }
         });
 
@@ -58,16 +76,9 @@ public class StringRequestSpec extends StringRequestAbstract {
 
     }
 
-
-    //Response and Error Handlers meant to be overridden by instance for more functionality
-
     @Override
-    protected void responseListString(String response) {
-        Log.d(TAG, "Dont Go Here");
+    public void setListener(StringAbstractListener stringAbstractListener) {
+        sA = stringAbstractListener;
     }
 
-    @Override
-    protected void responseListString(VolleyError error) {
-
-    }
 }
