@@ -42,12 +42,12 @@ public class JSONHandler extends JSONAbstractListener implements JSONHandlerInte
         jR.makeJsonObjReqInner(url, bodyList, paramList, rm);
     }
 
-    public void makeJsonArryReq(String url, RequestMethod rm){
-        jR.makeJsonArryReqInner(url, null, rm);
+    public void makeJsonArryReq(String url){
+        jR.makeJsonArryReqInner(url, null);
     }
 
-    public void makeJsonArryReqParams(String url, ArrayList<JSONVariable> paramList, RequestMethod rm){
-        jR.makeJsonArryReqInner(url, paramList, rm);
+    public void makeJsonArryReqParams(String url, ArrayList<JSONVariable> paramList){
+        jR.makeJsonArryReqInner(url, paramList);
     }
 
     @Override
