@@ -97,28 +97,4 @@ public class User {
                 ", image='" + image + '\'' +
                 '}';
     }
-    
-    public User()
-    {
-    	this.id = (0);
-    	this.email = (null);
-    	this.password = (null);
-    	this.firstName = (null);
-    	this.lastName = (null);
-    	this.address = (null);
-    	this.account = (null);
-    	this.image = (null);
-    }
-    
-    public User(int id, String email, String password, String address, String firstName, String lastName, String acctType, String imagePath)
-    {
-    	this.id = (id);
-    	this.email = (email);
-    	this.password = (password);
-    	this.firstName = (firstName);
-    	this.lastName = (lastName);
-    	this.address = (address);
-    	this.account = (acctType);
-    	this.image = (imagePath);
-    }
 }
