@@ -13,10 +13,6 @@ public class UserDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     
-    public JdbcTemplate getJDBC() {
-    	return jdbcTemplate;
-    }
-    
     public void update(User user) {
         String sql = "UPDATE Users SET Email=?, Password=?, First_Name=?, Last_Name=?, Address=?, Account=?, Image=? WHERE id=?";
         jdbcTemplate.update(sql, user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getAddress(), user.getType(), user.getImagePath(), user.getId());

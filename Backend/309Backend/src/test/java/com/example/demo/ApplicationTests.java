@@ -11,8 +11,6 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-
 import com.project.backend.User;
 import com.project.backend.UserDao;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -26,6 +24,8 @@ public class ApplicationTests {
     
 	@Mock
 	UserDao dao;
+
+	String sql;
 	
 	@Test
 	public void getUserInfo() {
@@ -67,7 +67,7 @@ public class ApplicationTests {
 	}
 	
 	@Test
-	public void loadAll() {
+	public void loadAllUsers() {
 		List<User> list = new ArrayList<User>();
 		User acctOne = new User();
 		User acctTwo = new User();
@@ -83,18 +83,6 @@ public class ApplicationTests {
 
 		assertEquals(3, users.size());
 		verify(dao, times(1)).loadAll();
-	}
-	
-	@Test
-	public void save() {
-		List<User> list = new ArrayList<User>();
-		User acctOne = new User();
-
-		list.add(acctOne);
-		
-		dao.save(acctOne);
-		
-		verify(dao.getJDBC(), times(1)).update();
 	}
 	
 	
