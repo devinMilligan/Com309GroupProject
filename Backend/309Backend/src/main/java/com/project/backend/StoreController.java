@@ -30,7 +30,7 @@ class StoreController {
         input.setManager(StoreDetails.getManager());
         input.setLatitude(StoreDetails.getLatitude());
         input.setLongitude(StoreDetails.getLongitude());
-        input.setHours(StoreDetails.getHours());
+        //input.setHours(StoreDetails.getHours());
 
     	System.out.println("saving store: " + input);
     	storeRepository.save(input);
