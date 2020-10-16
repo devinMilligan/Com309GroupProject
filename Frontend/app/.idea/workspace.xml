@@ -9,9 +9,13 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8d580ab-6c2d-483a-8f0c-5dd362581f3b" name="Default Changelist" comment="">
+    <list default="true" id="5973e8a9-a0bb-4b46-bd8d-4e0798ba2256" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/navEditor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/navEditor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/TestStoreActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/TestStoreActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/net_utils/Const.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/net_utils/Const.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/navigation/mobile_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/navigation/mobile_navigation.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,9 +187,10 @@
     <state width="532" height="207" key="GridCell.Tab.0.right/0.23.1440.816@0.23.1440.816" timestamp="1601829457678" />
     <state width="683" height="265" key="GridCell.Tab.0.right/0.23.1440.826@0.23.1440.826" timestamp="1600870338814" />
     <state width="682" height="213" key="GridCell.Tab.0.right/0.23.1440.827@0.23.1440.827" timestamp="1600870126159" />
-    <state x="229" y="68" key="SettingsEditor" timestamp="1601829287842">
-      <screen x="0" y="23" width="1440" height="816" />
+    <state x="229" y="50" key="SettingsEditor" timestamp="1602882774563">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="229" y="50" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1602882774563" />
     <state x="229" y="68" key="SettingsEditor/0.23.1440.816@0.23.1440.816" timestamp="1601829287842" />
     <state x="229" y="68" key="SettingsEditor/0.23.1440.822@0.23.1440.822" timestamp="1600870736932" />
     <state x="229" y="68" key="SettingsEditor/0.23.1440.823@0.23.1440.823" timestamp="1600849467694" />
@@ -193,9 +198,10 @@
       <screen x="0" y="23" width="1440" height="822" />
     </state>
     <state x="515" y="214" key="chooseDestDirectoryDialog/0.23.1440.822@0.23.1440.822" timestamp="1600847732745" />
-    <state x="132" y="123" width="1208" height="607" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1600871754924">
-      <screen x="0" y="23" width="1440" height="814" />
+    <state x="0" y="29" width="1208" height="672" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1602882787393">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="0" y="29" width="1208" height="672" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1440.900@0.0.1440.900" timestamp="1602882787393" />
     <state x="132" y="123" width="1208" height="607" key="com.android.tools.idea.avdmanager.AvdListDialog/0.23.1440.814@0.23.1440.814" timestamp="1600871754924" />
     <state x="551" y="70" width="665" height="732" key="find.popup" timestamp="1600853709141">
       <screen x="0" y="23" width="1440" height="827" />

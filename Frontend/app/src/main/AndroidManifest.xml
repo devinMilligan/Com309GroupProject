@@ -17,7 +17,13 @@
         <activity
             android:name=".app.TestStoreActivity"
             android:label="@string/title_activity_test_store"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -42,13 +48,13 @@
             android:name=".app.MainNavigationScreenDelivery"
             android:label="@string/title_activity_main_navigation_screen"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".app.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".app.MainActivity">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>-->
         <activity android:name=".app.ui.map.MapsActivity" />
         <activity android:name=".app.uiDelivery.map.MapsActivityDelivery" />
         <activity android:name=".app.uiAdmin.map.MapsActivityAdmin" />

@@ -60,19 +60,23 @@ public class TestStoreActivity extends AppCompatActivity implements View.OnClick
         protected void responseListArray(JSONArray response){
             Log.d(TAG,response.toString());
             message.dismissMessage();
-
             String s;
+            message.showMessage(response.toString(), 1);
             for(int i = 0; i < response.length(); i++) {
                 try {
                     s = response.get(i).toString();
+                    message.showMessage(s, 1);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Intent loggedIn = new Intent(com.example.project309.app.TestStoreActivity.this, MainNavigationScreen.class);
-                startActivity(loggedIn);
+                //Intent intent1 = new Intent(com.example.project309.app.TestStoreActivity.this, MainNavigationScreen.class);
+                //startActivity(intent1);
+                //message.showMessage("Button Failed", 1);
                 return;
             }
-            message.showMessage("Login Failed", 1);
+            Intent intent1 = new Intent(com.example.project309.app.TestStoreActivity.this, MainNavigationScreen.class);
+            startActivity(intent1);
+            //message.showMessage("F", 1);
         }
 
         @Override

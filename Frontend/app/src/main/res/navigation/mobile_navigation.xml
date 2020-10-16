@@ -17,6 +17,12 @@
         android:label="@string/menu_map"
         tools:layout="@layout/fragment_map" />
 
+<!--    <activity-->
+<!--        android:id="@+id/nav_test_stores"-->
+<!--        android:name="com.example.project309.app.TestStoreActivity"-->
+<!--        android:label="Test Stores"-->
+<!--        tools:layout="@layout/activity_test_store" />-->
+
     <fragment
         android:id="@+id/nav_log_out"
         android:name="com.example.project309.app.ui.logout.LogOutFragment"
