@@ -54,7 +54,7 @@ public class StoreDao {
 
     private Store toStore(ResultSet resultSet) throws SQLException {
         Store store = new Store();
-        store.setId(resultSet.getLong("ID"));
+        store.setId(resultSet.getInt("ID"));
         store.setName(resultSet.getString("NAME"));
         store.setAddress(resultSet.getString("ADDRESS"));
         store.setManager(resultSet.getInt("MANAGER"));

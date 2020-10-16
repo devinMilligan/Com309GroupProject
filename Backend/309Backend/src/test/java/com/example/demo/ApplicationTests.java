@@ -30,7 +30,7 @@ public class ApplicationTests {
 	@Test
 	public void getUserInfo() {
 		
-		User exampleUser = new User(123, "email", "password", "address", "first", "last", "delivery", "image_path");
+		User exampleUser = new User();
 
 		assertEquals(123, exampleUser.getId());
 		assertEquals("email", exampleUser.getEmail());

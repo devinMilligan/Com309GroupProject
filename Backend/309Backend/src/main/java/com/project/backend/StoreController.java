@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -15,13 +17,14 @@ import com.project.backend.Store;
 
 
 @Controller
+@RequestMapping("/stores")
 class StoreController {
-
-    @Autowired
-    private StoreDao dao;
+	
+	@Autowired
+	private StoreRepository storeRepository;
     
-    @PostMapping("/stores/new")
-    public ResponseEntity<Store> createStore(@RequestBody Store StoreDetails) {
+    @PostMapping("/new")
+    public @ResponseBody Store createStore(@RequestBody Store StoreDetails) {
         Store input = new Store();
         input.setName(StoreDetails.getName());
         input.setAddress(StoreDetails.getAddress());
@@ -31,11 +34,11 @@ class StoreController {
         input.setHours(StoreDetails.getHours());
 
     	System.out.println("saving store: " + input);
-    	dao.save(input);
-    	return ResponseEntity.status(HttpStatus.OK).body(input);
+    	storeRepository.save(input);
+    	return input;
     }
     
-    @PostMapping("/stores/update")
+    @PostMapping("/update")
     public ResponseEntity<Store> updateStore(@RequestBody Store StoreDetails) {
         Store input = new Store();
         input.setId(StoreDetails.getId());
@@ -47,25 +50,20 @@ class StoreController {
         input.setHours(StoreDetails.getHours());
 
     	System.out.println("updating store: " + input);
-    	dao.update(input);
     	return ResponseEntity.status(HttpStatus.OK).body(input);
     }
     
-    @GetMapping("/stores/getByManager")
+    @GetMapping("/getByManager")
     public ResponseEntity<List<Store>> getByManager(@RequestParam(value = "managerID") int manager) {
         
     	System.out.println("-- searching --");
-        List<Store> stores = dao.search(manager);
-        stores.forEach(System.out::println);
-        return ResponseEntity.status(HttpStatus.OK).body(stores);
+		return null;
     }
     
-    @GetMapping("/stores/all")
+    @GetMapping("/all")
     public ResponseEntity<List<Store>> getAllStores() {
 
     	System.out.println("-- loading all --");
-        List<Store> stores = dao.loadAll();
-        stores.forEach(System.out::println);
-        return ResponseEntity.status(HttpStatus.OK).body(stores);
+		return null;
     }
 }
