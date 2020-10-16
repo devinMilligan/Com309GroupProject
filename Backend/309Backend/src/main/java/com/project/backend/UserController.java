@@ -1,27 +1,30 @@
 package com.project.backend;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.project.backend.User;
 
 
 @Controller
+@RequestMapping("/users")
 class UserController {
-
-    @Autowired
-    private UserDao dao;
-    @PostMapping("/users/updateUser")
-    public ResponseEntity<User> UpdateUser(@RequestParam(value = "id") long id, @RequestParam(value = "email") String email, @RequestParam(value = "password") String password,
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+    @PostMapping("/updateUser")
+    public @ResponseBody User UpdateUser(@RequestParam(value = "id") int id, @RequestParam(value = "email") String email, @RequestParam(value = "password") String password,
     		@RequestParam(value = "firstname") String firstname, @RequestParam(value = "lastname") String lastname, @RequestParam(value = "address") String address, 
     		@RequestParam(value = "type") String type, @RequestParam(value = "image") String image) 
     				throws IOException
@@ -38,12 +41,12 @@ class UserController {
     	
     	
     	System.out.println("updating user: " + user.getId());
-    	dao.update(user);
-    	return ResponseEntity.status(HttpStatus.OK).body(user);
+    	userRepository.save(user);
+    	return user;
     }
     
-    @PostMapping("/users/update")
-    public ResponseEntity<User> Update(@RequestBody User UserDetails) {
+    @PostMapping("/update")
+    public @ResponseBody User Update(@RequestBody User UserDetails) {
         User input = new User();
         input.setId(UserDetails.getId());
         input.setEmail(UserDetails.getEmail());
@@ -55,12 +58,12 @@ class UserController {
         input.setImagePath(UserDetails.getImagePath());
 
     	System.out.println("updating user: " + input.getId());
-    	dao.update(input);
-    	return ResponseEntity.status(HttpStatus.OK).body(input);
+    	userRepository.save(input);
+    	return input;
     }
 
-    @PostMapping("/users/newUser")
-    public ResponseEntity<User> NewUser(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password,
+    @PostMapping("/newUser")
+    public @ResponseBody User NewUser(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password,
     		@RequestParam(value = "firstname") String firstname, @RequestParam(value = "lastname") String lastname, @RequestParam(value = "address") String address, 
     		@RequestParam(value = "type") String type, @RequestParam(value = "image") String image) 
     				throws IOException
@@ -73,15 +76,22 @@ class UserController {
     	user.setAddress(address);
     	user.setType(type);
     	user.setImagePath(image);
-    	
-    	
-    	System.out.println("saving user: " + user);
-    	dao.save(user);
-    	return ResponseEntity.status(HttpStatus.OK).body(user);
+
+    	if (checkEmail(user.getEmail()))
+    	{
+        	System.out.println("Email already exists in database");
+        	return null;
+    	}
+    	else
+    	{
+        	System.out.println("saving user: " + user);
+        	userRepository.save(user);
+        	return user;
+    	}
     }
     
-    @PostMapping("/users/new")
-    public ResponseEntity<User> createUser(@RequestBody User UserDetails) {
+    @PostMapping("/new")
+    public @ResponseBody User createUser(@RequestBody User UserDetails) {
         User input = new User();
         input.setEmail(UserDetails.getEmail());
         input.setPassword(UserDetails.getPassword());
@@ -91,34 +101,51 @@ class UserController {
         input.setType(UserDetails.getType());
         input.setImagePath(UserDetails.getImagePath());
 
-    	System.out.println("saving user: " + input);
-    	dao.save(input);
-    	return ResponseEntity.status(HttpStatus.OK).body(input);
+    	if (checkEmail(input.getEmail()))
+    	{
+        	System.out.println("Email already exists in database");
+        	return null;
+    	}
+    	else
+    	{
+        	System.out.println("saving user: " + input);
+        	userRepository.save(input);
+        	return input;
+    	}
     }
     
-    @GetMapping("/users/all")
-    public ResponseEntity<List<User>> getAllUsers() {
+    @GetMapping("/all")
+    public @ResponseBody List<User> getAllUsers() {
 
     	System.out.println("-- loading all --");
-        List<User> users = dao.loadAll();
+    	List<User> users = new ArrayList<User>();
+    	for (User user : userRepository.findAll()) {
+            users.add(user);
+        }
         users.forEach(System.out::println);
-        return ResponseEntity.status(HttpStatus.OK).body(users);
+        return users;
     }
     
-    @GetMapping("/users/search")
-    public ResponseEntity<List<User>> searchUsers(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password) {
+    @GetMapping("/search")
+    public @ResponseBody List<User> searchUsers(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password) {
     	
     	System.out.println("-- searching users --");
-        List<User> result = dao.search(email, password);
+        List<User> result = new ArrayList<User>();
+   	 	for (User user : userRepository.findByEmailAndPassword(email, password)) {
+   	 		result.add(user);
+   	 	}
         result.forEach(System.out::println);
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+        return result;
     }
     
-    @GetMapping("/users/checkEmail")
-    public ResponseEntity<Boolean> checkEmail(@RequestParam(value = "email") String email) {
+    @GetMapping("/checkEmail")
+    public @ResponseBody Boolean checkEmail(@RequestParam(value = "email") String email) {
     	
-    	System.out.println("-- searching users --");
-        Boolean result = dao.checkEmail(email);
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+    	System.out.println("checking email: " + email);
+    	
+    	if (userRepository.findByEmail(email).size() > 0)
+    		return true;
+    	else
+    		return false;
     }
 }

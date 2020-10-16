@@ -52,7 +52,7 @@ public class UserDao {
 
     private User toUser(ResultSet resultSet) throws SQLException {
         User user = new User();
-        user.setId(resultSet.getLong("ID"));
+        user.setId(resultSet.getInt("ID"));
         user.setEmail(resultSet.getString("EMAIL"));
         user.setPassword(resultSet.getString("PASSWORD"));
         user.setFirstName(resultSet.getString("FIRST_NAME"));
