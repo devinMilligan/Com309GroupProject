@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StoreRepository extends CrudRepository<Store, Integer> {
 
-	List<User> findByManager(Integer manager);
+	List<Store> findByManager(Integer manager);
 	
 }
