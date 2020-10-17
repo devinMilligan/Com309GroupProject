@@ -28,6 +28,53 @@ public class ApplicationTests {
 	StoreRepository StoreRepo;
 	
 	@Test
+	public void setUserInfo() {
+		
+		User exampleUser = new User();
+		
+		exampleUser.setId(101);
+		exampleUser.setEmail("example@gmail.com");
+		exampleUser.setPassword("abc123");
+		exampleUser.setAddress("123 Main St.");
+		exampleUser.setFirstName("Joe");
+		exampleUser.setLastName("Smith");
+		exampleUser.setType("delivery");
+		exampleUser.setImagePath("C://Pictures//image.png");
+
+		assertEquals(101, exampleUser.getId());
+		assertEquals("example@gmail.com", exampleUser.getEmail());
+		assertEquals("abc123", exampleUser.getPassword());
+		assertEquals("123 Main St.", exampleUser.getAddress());
+		assertEquals("Joe", exampleUser.getFirstName());
+		assertEquals("Smith", exampleUser.getLastName());
+		assertEquals("delivery", exampleUser.getType());
+		assertEquals("C://Pictures//image.png", exampleUser.getImagePath());
+	}
+	
+	@Test
+	public void getUserInfo() {
+		
+		User exampleUser = new User();
+		exampleUser.setId(123);
+		exampleUser.setEmail("email");
+		exampleUser.setPassword("password");
+		exampleUser.setAddress("address");
+		exampleUser.setFirstName("first");
+		exampleUser.setLastName("last");
+		exampleUser.setType("delivery");
+		exampleUser.setImagePath("image_path");
+
+		assertEquals(123, exampleUser.getId());
+		assertEquals("email", exampleUser.getEmail());
+		assertEquals("password", exampleUser.getPassword());
+		assertEquals("address", exampleUser.getAddress());
+		assertEquals("first", exampleUser.getFirstName());
+		assertEquals("last", exampleUser.getLastName());
+		assertEquals("delivery", exampleUser.getType());
+		assertEquals("image_path", exampleUser.getImagePath());
+	}
+	
+	@Test
 	public void findUserByEmail() {
 		
 		List<User> users = new ArrayList<User>();
