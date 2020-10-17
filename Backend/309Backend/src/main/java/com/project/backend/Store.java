@@ -1,23 +1,43 @@
 package com.project.backend;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.sql.Time;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "Stores")
 public class Store {
-    private long id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+    private int id;
     private String name;
     private String address;
-    private int managerID;
+    private int manager;
     private double latitude;
     private double longitude;
-    private LinkedList<List<Integer>> hours;
+    private Time opens_sunday;
+    private Time opens_monday;
+    private Time opens_tuesday;
+    private Time opens_wednesday;
+    private Time opens_thursday;
+    private Time opens_friday;
+    private Time opens_saturday;
+    private Time closes_sunday;
+    private Time closes_monday;
+    private Time closes_tuesday;
+    private Time closes_wednesday;
+    private Time closes_thursday;
+    private Time closes_friday;
+    private Time closes_saturday;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
     
@@ -38,11 +58,11 @@ public class Store {
     }
 
     public int getManager() {
-        return managerID;
+        return manager;
     }
 
     public void setManager(int managerID) {
-        this.managerID = managerID;
+        this.manager = managerID;
     }
 
     public double getLatitude() {
@@ -61,13 +81,35 @@ public class Store {
         this.longitude = longitude;
     }
 
-    public LinkedList<List<Integer>> getHours() {
-    	return hours;
-    }
+    public Time getopens_sunday() {return opens_sunday;}
+    public void setopens_sunday(Time hours) {this.opens_sunday = hours;}
+    public Time getopens_monday() {return opens_monday;}
+    public void setopens_monday(Time hours) {this.opens_monday = hours;}
+    public Time getopens_tuesday() {return opens_tuesday;}
+    public void setopens_tuesday(Time hours) {this.opens_tuesday = hours;}
+    public Time getopens_wednesday() {return opens_wednesday;}
+    public void setopens_wednesday(Time hours) {this.opens_wednesday = hours;}
+    public Time getopens_thursday() {return opens_thursday;}
+    public void setopens_thursday(Time hours) {this.opens_thursday = hours;}
+    public Time getopens_friday() {return opens_friday;}
+    public void setopens_friday(Time hours) {this.opens_friday = hours;}
+    public Time getopens_saturday() {return opens_saturday;}
+    public void setopens_saturday(Time hours) {this.opens_saturday = hours;}
 
-    public void setHours(LinkedList<List<Integer>> hours) {
-        this.hours = hours;
-    }
+    public Time getcloses_sunday() {return closes_sunday;}
+    public void setcloses_sunday(Time hours) {this.closes_sunday = hours;}
+    public Time getcloses_monday() {return closes_monday;}
+    public void setcloses_monday(Time hours) {this.closes_monday = hours;}
+    public Time getcloses_tuesday() {return closes_tuesday;}
+    public void setcloses_tuesday(Time hours) {this.closes_tuesday = hours;}
+    public Time getcloses_wednesday() {return closes_wednesday;}
+    public void setcloses_wednesday(Time hours) {this.closes_wednesday = hours;}
+    public Time getcloses_thursday() {return closes_thursday;}
+    public void setcloses_thursday(Time hours) {this.closes_thursday = hours;}
+    public Time getcloses_friday() {return closes_friday;}
+    public void setcloses_friday(Time hours) {this.closes_friday = hours;}
+    public Time getcloses_saturday() {return closes_saturday;}
+    public void setcloses_saturday(Time hours) {this.closes_saturday = hours;}
 
     @Override
     public String toString() {
@@ -75,52 +117,22 @@ public class Store {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", manager id='" + managerID + '\'' +
+                ", manager id='" + manager + '\'' +
                 ", lat/long=('" + latitude + "','" + longitude + "')" +
-                ", hours='" + hours + '\'' +
+                ", opens_sunday='" + opens_sunday + '\'' +
+                ", opens_monday='" + opens_monday + '\'' +
+                ", opens_tuesday='" + opens_tuesday + '\'' +
+                ", opens_wednesday='" + opens_wednesday + '\'' +
+                ", opens_thursday='" + opens_thursday + '\'' +
+                ", opens_friday='" + opens_friday + '\'' +
+                ", opens_saturday='" + opens_saturday + '\'' +
+                ", closes_sunday='" + closes_sunday + '\'' +
+                ", closes_monday='" + closes_monday + '\'' +
+                ", closes_tuesday='" + closes_tuesday + '\'' +
+                ", closes_wednesday='" + closes_wednesday + '\'' +
+                ", closes_thursday='" + closes_thursday + '\'' +
+                ", closes_friday='" + closes_friday + '\'' +
+                ", closes_saturday='" + closes_saturday + '\'' +
                 '}';
-    }
-
-    public static Store create(String name, String address, int managerID, double latitude, double longitude, int sunOpen, int sunClose,
-    		int monOpen, int monClose, int tuesOpen, int tuesClose, int wedOpen, int wedClose, int thursOpen, int thursClose,
-    		int friOpen, int friClose, int satOpen, int satClose) {
-        Store store = new Store();
-        store.setName(name);
-        store.setAddress(address);
-        store.setManager(managerID);
-        store.setLatitude(latitude);
-        store.setLongitude(longitude);
-
-        LinkedList<List<Integer>> hours = new LinkedList<List<Integer>>();
-        List<Integer> sunHours = new ArrayList<Integer>();
-        sunHours.add(sunOpen);
-        sunHours.add(sunClose);
-        List<Integer> monHours = new ArrayList<Integer>();
-        monHours.add(monOpen);
-        monHours.add(monClose);
-        List<Integer> tuesHours = new ArrayList<Integer>();
-        tuesHours.add(tuesOpen);
-        tuesHours.add(tuesClose);
-        List<Integer> wedHours = new ArrayList<Integer>();
-        wedHours.add(wedOpen);
-        wedHours.add(wedClose);
-        List<Integer> thursHours = new ArrayList<Integer>();
-        thursHours.add(thursOpen);
-        thursHours.add(thursClose);
-        List<Integer> friHours = new ArrayList<Integer>();
-        friHours.add(friOpen);
-        friHours.add(friClose);
-        List<Integer> satHours = new ArrayList<Integer>();
-        satHours.add(satOpen);
-        satHours.add(satClose);
-        hours.add(sunHours);
-        hours.add(monHours);
-        hours.add(tuesHours);
-        hours.add(thursHours);
-        hours.add(friHours);
-        hours.add(satHours);        
-        store.setHours(hours);
-        
-        return store;
     }
 }

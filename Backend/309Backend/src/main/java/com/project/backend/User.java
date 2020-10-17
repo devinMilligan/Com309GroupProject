@@ -1,20 +1,30 @@
 package com.project.backend;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Users")
 public class User {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id;
     private String email;
     private String password;
-    private long id;
     private String firstName;
     private String lastName;
     private String address;
     private String account;
     private String image;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
     
@@ -86,17 +96,5 @@ public class User {
                 ", account='" + account + '\'' +
                 ", image='" + image + '\'' +
                 '}';
-    }
-
-    public static User create(String email, String password, String firstName, String lastName, String address, String acctType, String imagePath) {
-        User user = new User();
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setAddress(address);
-        user.setType(acctType);
-        user.setImagePath(imagePath);
-        return user;
     }
 }
