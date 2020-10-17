@@ -24,33 +24,18 @@ class StoreController {
     
     @PostMapping("/new")
     public @ResponseBody Store createStore(@RequestBody Store StoreDetails) {
-        Store input = new Store();
-        input.setName(StoreDetails.getName());
-        input.setAddress(StoreDetails.getAddress());
-        input.setManager(StoreDetails.getManager());
-        input.setLatitude(StoreDetails.getLatitude());
-        input.setLongitude(StoreDetails.getLongitude());
-        //input.setHours(StoreDetails.getHours());
 
-    	System.out.println("saving store: " + input);
-    	storeRepository.save(input);
-    	return input;
+    	System.out.println("saving store: " + StoreDetails);
+    	storeRepository.save(StoreDetails);
+    	return StoreDetails;
     }
     
     @PostMapping("/update")
     public @ResponseBody Store updateStore(@RequestBody Store StoreDetails) {
-        Store input = new Store();
-        input.setId(StoreDetails.getId());
-        input.setName(StoreDetails.getName());
-        input.setAddress(StoreDetails.getAddress());
-        input.setManager(StoreDetails.getManager());
-        input.setLatitude(StoreDetails.getLatitude());
-        input.setLongitude(StoreDetails.getLongitude());
-        input.setHours(StoreDetails.getHours());
 
-    	System.out.println("updating store: " + input);
-    	storeRepository.save(input);
-    	return input;
+    	System.out.println("updating store: " + StoreDetails);
+    	storeRepository.save(StoreDetails);
+    	return StoreDetails;
     }
     
     @GetMapping("/getByManager")
