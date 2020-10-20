@@ -22,6 +22,56 @@ class UserController {
 	
 	@Autowired
 	private UserRepository userRepository;
+
+    @PostMapping("/newUser")
+    public @ResponseBody User createUser(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password,
+    		@RequestParam(value = "firstname") String firstname, @RequestParam(value = "lastname") String lastname, @RequestParam(value = "address") String address, 
+    		@RequestParam(value = "type") String type, @RequestParam(value = "image") String image) 
+    				throws IOException
+    {
+    	User user = new User();   
+    	user.setEmail(email);
+    	user.setPassword(password);
+    	user.setFirstName(firstname);
+    	user.setLastName(lastname);
+    	user.setAddress(address);
+    	user.setType(type);
+    	user.setImagePath(image);
+
+    	if (checkEmail(user.getEmail()))
+    	{
+        	System.out.println("Email already exists in database");
+        	return null;
+    	}
+    	else
+    	{
+        	System.out.println("saving user: " + user);
+        	userRepository.save(user);
+        	return user;
+    	}
+    }
+	
+    @PostMapping("/updateUser")
+    public @ResponseBody User updateUser(@RequestParam(value = "id") int id, @RequestParam(value = "email") String email, @RequestParam(value = "password") String password,
+    		@RequestParam(value = "firstname") String firstname, @RequestParam(value = "lastname") String lastname, @RequestParam(value = "address") String address, 
+    		@RequestParam(value = "type") String type, @RequestParam(value = "image") String image) 
+    				throws IOException
+    {
+    	User user = new User();
+    	user.setId(id);
+    	user.setEmail(email);
+    	user.setPassword(password);
+    	user.setFirstName(firstname);
+    	user.setLastName(lastname);
+    	user.setAddress(address);
+    	user.setType(type);
+    	user.setImagePath(image);
+    	
+    	
+    	System.out.println("updating user: " + user.getId());
+    	userRepository.save(user);
+    	return user;
+    }
     
     @PostMapping("/new")
     //Accept a User object via JSON Body, and save it to the database
