@@ -10,14 +10,24 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Stores")
 public class Store {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	//ID property is unique and automatically generated
     private int id;
+	
     private String name;
     private String address;
+    
+    //Manager ID property is used to tie stores to a user object
+    //Users whose ID is assigned to a store will have extra screens available in the app
     private int manager;
+    
+    //Lat/Long are used to show stores locations on an integrated Google Map screen
     private double latitude;
     private double longitude;
+    
+    //Store hours will be displayed to the users, and will be used to regulate when delivery orders can be placed for a location
     private Time opens_sunday;
     private Time opens_monday;
     private Time opens_tuesday;
@@ -33,54 +43,55 @@ public class Store {
     private Time closes_friday;
     private Time closes_saturday;
 
+    //Getter and setter for Store ID property
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
     
+    //Getter and setter for Store Name property
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
     
+    //Getter and setter for Store Address property
     public String getAddress() {
         return address;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
 
+    //Getter and setter for Store Manager property
     public int getManager() {
         return manager;
     }
-
     public void setManager(int managerID) {
         this.manager = managerID;
     }
 
+    //Getter and setter for Store Latitude property
     public double getLatitude() {
         return latitude;
     }
-
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
+    //Getter and setter for Store Longitude property
     public double getLongitude() {
         return longitude;
     }
-
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
+    //Getters and setters for opening hours
     public Time getopens_sunday() {return opens_sunday;}
     public void setopens_sunday(Time hours) {this.opens_sunday = hours;}
     public Time getopens_monday() {return opens_monday;}
@@ -96,6 +107,7 @@ public class Store {
     public Time getopens_saturday() {return opens_saturday;}
     public void setopens_saturday(Time hours) {this.opens_saturday = hours;}
 
+    //Getters and setters for closing hours
     public Time getcloses_sunday() {return closes_sunday;}
     public void setcloses_sunday(Time hours) {this.closes_sunday = hours;}
     public Time getcloses_monday() {return closes_monday;}
@@ -110,29 +122,4 @@ public class Store {
     public void setcloses_friday(Time hours) {this.closes_friday = hours;}
     public Time getcloses_saturday() {return closes_saturday;}
     public void setcloses_saturday(Time hours) {this.closes_saturday = hours;}
-
-    @Override
-    public String toString() {
-        return "Store{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", manager id='" + manager + '\'' +
-                ", lat/long=('" + latitude + "','" + longitude + "')" +
-                ", opens_sunday='" + opens_sunday + '\'' +
-                ", opens_monday='" + opens_monday + '\'' +
-                ", opens_tuesday='" + opens_tuesday + '\'' +
-                ", opens_wednesday='" + opens_wednesday + '\'' +
-                ", opens_thursday='" + opens_thursday + '\'' +
-                ", opens_friday='" + opens_friday + '\'' +
-                ", opens_saturday='" + opens_saturday + '\'' +
-                ", closes_sunday='" + closes_sunday + '\'' +
-                ", closes_monday='" + closes_monday + '\'' +
-                ", closes_tuesday='" + closes_tuesday + '\'' +
-                ", closes_wednesday='" + closes_wednesday + '\'' +
-                ", closes_thursday='" + closes_thursday + '\'' +
-                ", closes_friday='" + closes_friday + '\'' +
-                ", closes_saturday='" + closes_saturday + '\'' +
-                '}';
-    }
 }

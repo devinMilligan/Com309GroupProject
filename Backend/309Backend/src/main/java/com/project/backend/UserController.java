@@ -22,127 +22,81 @@ class UserController {
 	
 	@Autowired
 	private UserRepository userRepository;
-	
-    @PostMapping("/updateUser")
-    public @ResponseBody User UpdateUser(@RequestParam(value = "id") int id, @RequestParam(value = "email") String email, @RequestParam(value = "password") String password,
-    		@RequestParam(value = "firstname") String firstname, @RequestParam(value = "lastname") String lastname, @RequestParam(value = "address") String address, 
-    		@RequestParam(value = "type") String type, @RequestParam(value = "image") String image) 
-    				throws IOException
-    {
-    	User user = new User();
-    	user.setId(id);
-    	user.setEmail(email);
-    	user.setPassword(password);
-    	user.setFirstName(firstname);
-    	user.setLastName(lastname);
-    	user.setAddress(address);
-    	user.setType(type);
-    	user.setImagePath(image);
-    	
-    	
-    	System.out.println("updating user: " + user.getId());
-    	userRepository.save(user);
-    	return user;
+    
+    @PostMapping("/new")
+    //Accept a User object via JSON Body, and save it to the database
+    //Returns the user that was stored if successful
+    public @ResponseBody User newUser(@RequestBody User UserDetails) {
+
+    	//Before creating a new user, check if the email is already registered to an existing user
+    	if (checkEmail(UserDetails.getEmail()))
+    	{
+    		//If email is already registered to an existing account, return a null user
+        	System.out.println("Email already exists in database");
+        	return null;
+    	}
+    	else
+    	{
+    		//if email is not registered, continue adding new user to the database
+        	System.out.println("saving user: " + UserDetails);
+        	userRepository.save(UserDetails);
+        	return UserDetails;
+    	}
     }
     
     @PostMapping("/update")
-    public @ResponseBody User Update(@RequestBody User UserDetails) {
-        User input = new User();
-        input.setId(UserDetails.getId());
-        input.setEmail(UserDetails.getEmail());
-        input.setPassword(UserDetails.getPassword());
-        input.setFirstName(UserDetails.getFirstName());
-        input.setLastName(UserDetails.getLastName());
-        input.setAddress(UserDetails.getAddress());
-        input.setType(UserDetails.getType());
-        input.setImagePath(UserDetails.getImagePath());
+    //Update a User's details and save it to the database
+    //A User's ID value cannot be updated/changed
+    //The updated User object is returned if successful
+    public @ResponseBody User updateUserInfo(@RequestBody User UserDetails) {
 
-    	System.out.println("updating user: " + input.getId());
-    	userRepository.save(input);
-    	return input;
-    }
-
-    @PostMapping("/newUser")
-    public @ResponseBody User NewUser(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password,
-    		@RequestParam(value = "firstname") String firstname, @RequestParam(value = "lastname") String lastname, @RequestParam(value = "address") String address, 
-    		@RequestParam(value = "type") String type, @RequestParam(value = "image") String image) 
-    				throws IOException
-    {
-    	User user = new User();   
-    	user.setEmail(email);
-    	user.setPassword(password);
-    	user.setFirstName(firstname);
-    	user.setLastName(lastname);
-    	user.setAddress(address);
-    	user.setType(type);
-    	user.setImagePath(image);
-
-    	if (checkEmail(user.getEmail()))
-    	{
-        	System.out.println("Email already exists in database");
-        	return null;
-    	}
-    	else
-    	{
-        	System.out.println("saving user: " + user);
-        	userRepository.save(user);
-        	return user;
-    	}
-    }
-    
-    @PostMapping("/new")
-    public @ResponseBody User createUser(@RequestBody User UserDetails) {
-        User input = new User();
-        input.setEmail(UserDetails.getEmail());
-        input.setPassword(UserDetails.getPassword());
-        input.setFirstName(UserDetails.getFirstName());
-        input.setLastName(UserDetails.getLastName());
-        input.setAddress(UserDetails.getAddress());
-        input.setType(UserDetails.getType());
-        input.setImagePath(UserDetails.getImagePath());
-
-    	if (checkEmail(input.getEmail()))
-    	{
-        	System.out.println("Email already exists in database");
-        	return null;
-    	}
-    	else
-    	{
-        	System.out.println("saving user: " + input);
-        	userRepository.save(input);
-        	return input;
-    	}
+    	System.out.println("updating user: " + UserDetails.getId());
+    	userRepository.save(UserDetails);
+    	return UserDetails;
     }
     
     @GetMapping("/all")
+    //Returns all User entries in the database in List form
     public @ResponseBody List<User> getAllUsers() {
 
     	System.out.println("-- loading all --");
+
+    	//Convert Iterable result to returnable List
     	List<User> users = new ArrayList<User>();
     	for (User user : userRepository.findAll()) {
             users.add(user);
         }
-        users.forEach(System.out::println);
+
         return users;
     }
     
     @GetMapping("/search")
+    //Searches for users with the given email and password combination
+    //Uses the automatically generated findByEmailAndPassword function from UserRepository class
+    //Returns a list of all stores owned by the user with the provided ID
     public @ResponseBody List<User> searchUsers(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password) {
     	
     	System.out.println("-- searching users --");
+
+    	//Convert Iterable result to returnable List
         List<User> result = new ArrayList<User>();
    	 	for (User user : userRepository.findByEmailAndPassword(email, password)) {
    	 		result.add(user);
    	 	}
-        result.forEach(System.out::println);
+   	 	
         return result;
     }
     
     @GetMapping("/checkEmail")
+    //Searches for users registered with the given email
+    //Uses the automatically generated findByEmail function from UserRepository class
+    //If there are more than 0 users registered with the email, returns TRUE, informing the client that the given email is already in use
+    //If there are no users registered with the email, returns FALSE, informing the client that the given email able to be registered
     public @ResponseBody Boolean checkEmail(@RequestParam(value = "email") String email) {
     	
     	System.out.println("checking email: " + email);
-    	
+
+    	//Check if there are any users with the given email
     	if (userRepository.findByEmail(email).size() > 0)
     		return true;
     	else
