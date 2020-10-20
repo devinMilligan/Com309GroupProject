@@ -136,7 +136,7 @@ public class JsonRequestSpec implements JSONRequestInter{
     /**
      * Making json array request
      * */
-    public void makeJsonArryReqInner(String url, ArrayList<JSONVariable> list, RequestMethod rm) {
+    public void makeJsonArryReqInner(String url, ArrayList<JSONVariable> list) {
 
         url += "?";
 

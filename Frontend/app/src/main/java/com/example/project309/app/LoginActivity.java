@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     list.add(new JSONVariable("email",email.getText().toString()));
                     list.add(new JSONVariable("password", password.getText().toString()));
 
-                    jsonHandler.makeJsonArryReqParams(Const.URL_JSON_LOGIN, list, RequestMethod.GET);
+                    jsonHandler.makeJsonArryReqParams(Const.URL_JSON_LOGIN, list);
                 }
                 else {
                     Toast myToast;

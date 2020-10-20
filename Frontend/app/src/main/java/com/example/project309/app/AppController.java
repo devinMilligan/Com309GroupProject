@@ -14,6 +14,11 @@ public class AppController extends Application {
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
     private static AppController mInstance;
+    private JSONRequestInter jsonR;
+    private JSONHandlerInter jsonH;
+    private MessageBoxInter messageI;
+    private StringRequestInter stringR;
+    private StringHandlerInter stringH;
 
     @Override
     public void onCreate() {
@@ -53,31 +58,78 @@ public class AppController extends Application {
 
     public JSONRequestInter getJSONRequestInstance(){
 
+        if(jsonR != null){
+            return jsonR;
+        }
         return new JsonRequestSpec();
 
     }
 
-    public JSONHandler getJSONHandlerInstance(){
+    public JSONHandlerInter getJSONHandlerInstance(){
 
+        if(jsonH != null){
+            return jsonH;
+        }
         return new JSONHandler();
 
     }
 
     public StringRequestInter getStringRequestInstance(){
 
+        if(stringR != null){
+            return stringR;
+        }
         return new StringRequestSpec();
 
     }
 
-    public StringHandler getStringHandlerInstance(){
+    public StringHandlerInter getStringHandlerInstance(){
 
+        if(stringH != null){
+            return stringH;
+        }
         return new StringHandler();
 
     }
 
     public MessageBoxInter getMessageBoxBuilderInstance(){
 
+        if(messageI != null){
+            return messageI;
+        }
         return new MessageBoxBuilder();
+
+    }
+
+    //Methods used for testing
+
+    public void setJSONRequestInstance(JSONRequestInter jR){
+
+        jsonR = jR;
+
+    }
+
+    public void setJSONHandlerInstance(JSONHandlerInter jH){
+
+        jsonH = jH;
+
+    }
+
+    public void setStringRequestInstance(StringRequestInter sR){
+
+        stringR = sR;
+
+    }
+
+    public void setStringHandlerInstance(StringHandlerInter sH){
+
+        stringH = sH;
+
+    }
+
+    public void setMessageBoxBuilderInstance(MessageBoxInter mB){
+
+        messageI = mB;
 
     }
 
