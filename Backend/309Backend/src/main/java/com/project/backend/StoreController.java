@@ -22,8 +22,11 @@ class StoreController {
 	@Autowired
 	private StoreRepository storeRepository;
     
+	
     @PostMapping("/new")
-    public @ResponseBody Store createStore(@RequestBody Store StoreDetails) {
+    //Accept a Store object via JSON Body, and save it to the database
+    //Returns the object that was stored if successful
+    public @ResponseBody Store newStore(@RequestBody Store StoreDetails) {
 
     	System.out.println("saving store: " + StoreDetails);
     	storeRepository.save(StoreDetails);
@@ -31,6 +34,9 @@ class StoreController {
     }
     
     @PostMapping("/update")
+    //Update a Store's details and save it to the database
+    //A Store's ID value cannot be updated/changed
+    //The updated Store object is returned if successful
     public @ResponseBody Store updateStore(@RequestBody Store StoreDetails) {
 
     	System.out.println("updating store: " + StoreDetails);
@@ -39,26 +45,34 @@ class StoreController {
     }
     
     @GetMapping("/getByManager")
-    public @ResponseBody List<Store> getByManager(@RequestParam(value = "managerID") int manager) {
+    //Searches for all stores owned/managed by a particular user
+    //Uses the automatically generated findByManager function from StoreRepository class
+    //Returns a list of all stores owned by the user with the provided ID
+    public @ResponseBody List<Store> getStoreByManager(@RequestParam(value = "managerID") int manager) {
 
-        List<Store> result = new ArrayList<Store>();
     	System.out.println("searching stores by manager: " + manager);
+    	
+    	//Convert Iterable result to returnable List
+        List<Store> result = new ArrayList<Store>();    	
    	 	for (Store store : storeRepository.findByManager(manager)) {
    	 		result.add(store);
    	 	}
-        result.forEach(System.out::println);
+   	 	
         return result;
     }
     
     @GetMapping("/all")
+    //Returns all Store entries in the database in List form
     public @ResponseBody List<Store> getAllStores() {
 
     	System.out.println("-- loading all --");
+    	
+    	//Convert Iterable result to returnable List
     	List<Store> stores = new ArrayList<Store>();
     	for (Store store : storeRepository.findAll()) {
     		stores.add(store);
         }
-    	stores.forEach(System.out::println);
+
         return stores;
     }
 }
