@@ -51,7 +51,7 @@ public class AccountsListAdapter extends ArrayAdapter<Profile> {
                 accountName.setText(profile.getName());
             }
             if (accountEmail != null) {     //set the values to the display
-                accountEmail.setText(profile.getUserName());
+                accountEmail.setText(profile.getEmail());
             }
 
             return convertView;

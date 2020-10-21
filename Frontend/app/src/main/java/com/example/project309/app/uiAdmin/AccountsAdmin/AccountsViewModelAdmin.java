@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.project309.app.AccountType;
 import com.example.project309.app.Profile;
 
 import java.util.ArrayList;
@@ -38,8 +39,8 @@ public class AccountsViewModelAdmin extends ViewModel {
     private void loadAdminAccounts(){
 
         ArrayList<Profile> aProfile = new ArrayList<>();
-        aProfile.add(new Profile(1, "username", "password", 1, "Devin"));
-        aProfile.add(new Profile(1, "username", "password", 1, "Ryan"));
+        aProfile.add(new Profile(1, "username", "password", AccountType.CUSTOMER_DELIVERER_ACCOUNT, "Devin"));
+        aProfile.add(new Profile(1, "username", "password", AccountType.CUSTOMER_DELIVERER_ACCOUNT, "Ryan"));
 
         adminAccts.setValue(aProfile);
 

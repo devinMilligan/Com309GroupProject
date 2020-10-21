@@ -121,6 +121,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         for(int i = 0; i < response.length(); i++) {
             try {
                 s = response.get(i).toString();
+                Profile.currentLogin = Profile.getProfileInfo(response.getJSONObject(i));
                 Intent loggedIn = new Intent(LoginActivity.this, MainNavigationScreen.class);
                 startActivity(loggedIn);
                 return;

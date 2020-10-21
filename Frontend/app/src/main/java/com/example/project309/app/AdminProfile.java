@@ -2,12 +2,22 @@ package com.example.project309.app;
 
 import com.example.project309.app.Profile;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class AdminProfile extends Profile {
     protected String firstName;
     protected String lastName;
 
+    public AdminProfile() {
+        super();
+
+        firstName = "";
+        lastName = "";
+    }
+
     public AdminProfile(int mId, String userName, String pass, String first, String last) {
-        super(mId, userName, pass, 3, first + " " + last);
+        super(mId, userName, pass, AccountType.ADMIN_ACCOUNT, first + " " + last);
 
         firstName = first;
         lastName = last;
@@ -42,21 +52,39 @@ public class AdminProfile extends Profile {
 
 
 
-    public void addAccount(int mId, String user, String pass, int acctType, String n) {
-        if(this.accountType == 3)
+    public void addAccount(int mId, String user, String pass, AccountType acctType, String n) {
+        if(this.accountType == AccountType.ADMIN_ACCOUNT)
         {
             Profile p = new Profile(mId, user, pass, acctType, n);
         }
     }
     public void addAccount(int mId) {
-        if(this.accountType == 3)
+        if(this.accountType == AccountType.ADMIN_ACCOUNT)
         {
             Profile p = new Profile(mId);
         }
     }
 
-    public void removeAccount(int mId) {
-        if(this.accountType == 3)
+    public static AdminProfile getProfileInfo(JSONObject info) {
+        AdminProfile p = new AdminProfile();
+
+        try {
+            p.setEmail(info.get("email").toString());
+            p.setFirstName(info.get("firstName").toString());
+            p.setLastName(info.get("lastName").toString());
+            p.setId(Integer.parseInt(info.get("id").toString()));
+            p.setPassword(info.get("password").toString());
+            p.setAccountType(info.get("type").toString());
+        }
+        catch (JSONException e) {
+            return null;
+        }
+
+        return p;
+    }
+
+    /*public void removeAccount(int mId) {
+        if(this.accountType == AccountType.ADMIN_ACCOUNT)
         {
             for(int i = 0; i < allProfiles.size(); i++)
             {
@@ -67,8 +95,8 @@ public class AdminProfile extends Profile {
             }
         }
     }
-    public void setAccountTypeAdmin(int mId, int acctType) {
-        if(this.accountType == 3)
+    public void setAccountTypeAdmin(int mId, AccountType acctType) {
+        if(this.accountType == AccountType.ADMIN_ACCOUNT)
         {
             for(int i = 0; i < allProfiles.size(); i++)
             {
@@ -85,12 +113,12 @@ public class AdminProfile extends Profile {
         {
             if(allProfiles.get(i).getId() == mId)
             {
-                if(allProfiles.get(i).getAccountType() == 2)
+                if(allProfiles.get(i).getAccountType() == AccountType.DINING_ACCOUNT)
                 {
                     ((DiningProfile)(allProfiles.get(i))).setStore(name, location);
                 }
                 break;
             }
         }
-    }
+    }*/
 }
