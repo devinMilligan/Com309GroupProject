@@ -13,5 +13,8 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	
 	//Auto-generated function to query Users table in database by email column
 	List<User> findByEmail(String email);
+	
+	//Auto-generated function to query Users table in database by email column
+	List<User> findByid(int id);
 
 }

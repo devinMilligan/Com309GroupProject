@@ -104,6 +104,18 @@ class UserController {
     	userRepository.save(UserDetails);
     	return UserDetails;
     }
+	
+    @PostMapping("/changePassword")
+    public @ResponseBody User changePassword(@RequestParam(value = "id") int id, @RequestParam(value = "newPassword") String password) throws IOException
+    {
+    	User user = userRepository.findByid(id).get(0);
+    	user.setPassword(password);    	
+    	
+    	System.out.println("changing password: " + user.getPassword());
+    	userRepository.save(user);
+    	return user;
+    }
+    
     
     @GetMapping("/all")
     //Returns all User entries in the database in List form
