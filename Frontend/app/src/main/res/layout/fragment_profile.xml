@@ -32,6 +32,7 @@
             android:fontFamily="@font/fresca"
             android:text="Email"
             android:textAlignment="center"
+            android:textColor="@color/colorTextSecond"
             android:textSize="24sp" />
 
         <TextView
@@ -45,6 +46,7 @@
             android:fontFamily="@font/fresca"
             android:text="First Name"
             android:textAlignment="center"
+            android:textColor="@color/colorTextSecond"
             android:textSize="24sp" />
 
         <TextView
@@ -58,6 +60,7 @@
             android:fontFamily="@font/fresca"
             android:text="Last Name"
             android:textAlignment="center"
+            android:textColor="@color/colorTextSecond"
             android:textSize="24sp" />
 
         <TextView
@@ -73,7 +76,7 @@
             android:visibility="invisible" />
 
         <TextView
-            android:id="@+id/txtPass"
+            android:id="@+id/txtAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/txtEmail"
@@ -81,7 +84,21 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="83dp"
             android:fontFamily="@font/fresca"
+            android:text="Address"
+            android:textColor="@color/colorTextSecond"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/txtPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/txtAddress"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="83dp"
+            android:fontFamily="@font/fresca"
             android:text="Password"
+            android:textColor="@color/colorTextSecond"
             android:textSize="24sp" />
 
         <TextView
@@ -94,6 +111,7 @@
             android:layout_marginTop="83dp"
             android:fontFamily="@font/fresca"
             android:text="Re-Enter Password"
+            android:textColor="@color/colorTextSecond"
             android:textSize="24sp" />
 
         <Button
@@ -110,7 +128,7 @@
             android:textColor="@color/colorAccent" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/editEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/txtEmail"
@@ -149,7 +167,20 @@
             android:text="milligan" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/editAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/txtAddress"
+            android:layout_alignTop="@id/txtAddress"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="36dp"
+            android:ems="10"
+            android:hint="Address"
+            android:inputType="textPostalAddress"
+            android:text="fdasfsasda" />
+
+        <EditText
+            android:id="@+id/editPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/txtPass"
@@ -162,7 +193,7 @@
             android:text="fdasfsasda" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/editPasswordRe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/txtPassRe"
@@ -195,6 +226,18 @@
             android:layout_marginStart="143dp"
             android:layout_marginTop="22dp"
             app:srcCompat="@drawable/profile" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/txtFirst"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="-70dp"
+            android:background="@drawable/gen_button_style"
+            android:text="Save"
+            android:textColor="@color/colorAccent" />
 
     </RelativeLayout>
 

@@ -9,4 +9,6 @@ public class Const {
     public static final String URL_JSON_CREATE_USER = "http://coms-309-mc-08.cs.iastate.edu:8080/users/newUser";
     public static final String URL_IMAGE = "";
     public static final String URL_JSON_LOGIN = "http://coms-309-mc-08.cs.iastate.edu:8080/users/search";
+    public static final String URL_JSON_UPDATE_USER = "http://coms-309-mc-08.cs.iastate.edu:8080/users/updateUser";
+    public static final String URL_STRING_CHECK_EMAIL = "http://coms-309-mc-08.cs.iastate.edu:8080/users/checkEmail";
 }
