@@ -45,7 +45,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
     private Button changePass, btnSave;
 
     int emailAvailable = 1;
-    private EditText edFirstN, edLastN, edEmail, edPass, edPassRe;
+    private EditText edFirstN, edLastN, edEmail, edPass, edPassRe, edAddress;
     private TextView txtPass, txtPassRe, txtEmail;
 
     private MessageBoxInter message;
@@ -93,7 +93,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
             }
         });
 
-
+        edAddress = (EditText)root.findViewById(R.id.edAddress);
         edFirstN = (EditText)root.findViewById(R.id.editFirst);
         edLastN = (EditText)root.findViewById(R.id.editLast);
         edPass = (EditText)root.findViewById(R.id.editPassword) ;
@@ -123,6 +123,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
                     edFirstN.setText(temp.getFirstName());
                     edLastN.setText(temp.getLastName());
                     edPass.setText(temp.getPassword());
+                    edAddress.setText(temp.getAddress());
                     edPassRe.setText("");
 
                     prof = temp;
@@ -264,6 +265,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
             paramsList.add(new JSONVariable("firstName", edFirstN.getText().toString().trim()));
             paramsList.add(new JSONVariable("lastName", edLastN.getText().toString().trim()));
             paramsList.add(new JSONVariable("password", edPass.getText().toString().trim()));
+            paramsList.add(new JSONVariable("password", edAddress.getText().toString().trim()));
             jsonH.makeJsonObjReqParams(Const.URL_JSON_UPDATE_USER, paramsList, RequestMethod.POST);
         }
 
@@ -277,6 +279,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
             edFirstN.setText(prof.getFirstName());
             edLastN.setText(prof.getLastName());
             edPass.setText(prof.getPassword());
+            edAddress.setText(prof.getAddress());
             edPassRe.setText("");
         }
 
