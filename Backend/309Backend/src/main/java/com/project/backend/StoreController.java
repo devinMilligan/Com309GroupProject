@@ -21,8 +21,7 @@ class StoreController {
 	
 	@Autowired
 	private StoreRepository storeRepository;
-    
-	
+    	
     @PostMapping("/new")
     //Accept a Store object via JSON Body, and save it to the database
     //Returns the object that was stored if successful
