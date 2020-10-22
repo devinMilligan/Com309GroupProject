@@ -4,18 +4,37 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.android.volley.VolleyError;
+import com.example.project309.app.AppController;
+import com.example.project309.app.JSONHandler;
+import com.example.project309.app.JSONHandlerInter;
+import com.example.project309.app.JSONRequestInter;
+import com.example.project309.app.RequestMethod;
 import com.example.project309.app.Store;
+import com.example.project309.app.ViewListenerInter;
+import com.example.project309.net_utils.Const;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class HomeViewModel extends ViewModel {
+public class HomeViewModel extends ViewModel implements ViewListenerInter {
 
     private MutableLiveData<String> mText;
     private MutableLiveData<ArrayList<Store>> stores;
+    private JSONHandlerInter jsonH;
 
     public HomeViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("Dining Centers");
+
+        jsonH = AppController.getInstance().getJSONHandlerInstance();
+        jsonH.setListener(this);
+
+        stores = new MutableLiveData<>();
+
     }
 
     public LiveData<String> getText() {
@@ -26,9 +45,11 @@ public class HomeViewModel extends ViewModel {
 
         if(stores == null){
 
-            stores = new MutableLiveData<ArrayList<Store>>();
-
-            loadStores();
+            if(Store.allStores.isEmpty()) {
+                    loadStores();
+            }else{
+                stores.setValue(Store.allStores);
+            }
 
         }
         return stores;
@@ -37,12 +58,47 @@ public class HomeViewModel extends ViewModel {
 
     private void loadStores(){
 
-        ArrayList<Store> aStore = new ArrayList<>();
-        aStore.add(new Store("Seasons Dining Center", "224 Beach Rd, Ames, IA 50011"));
-        aStore.add(new Store("Conversations", "1215 Richardson Ct, Ames, IA 50012"));
-
-        stores.setValue(aStore);
+        jsonH.makeJsonArryReq(Const.URL_JSON_GET_ALL_STORES);
 
     }
 
+    @Override
+    public void onSuccess(JSONObject response) {
+
+        /*
+
+        Store s = Store.getProfile(response);
+        Store.addStoreToList(s);
+
+         */
+
+    }
+
+    @Override
+    public void onSuccess(JSONArray response) {
+
+        for(int i = 0; i<response.length();i++){
+
+            try {
+                onSuccess(response.getJSONObject(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        stores.setValue(Store.allStores);
+
+
+    }
+
+    @Override
+    public void onSuccess(String response) {
+
+    }
+
+    @Override
+    public void onError(VolleyError error) {
+
+    }
 }

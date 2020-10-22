@@ -70,4 +70,5 @@ public class MainNavigationScreen extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+
 }

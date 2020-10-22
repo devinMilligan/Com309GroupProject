@@ -2,7 +2,12 @@ package com.example.project309.app;
 
 import android.media.Image;
 
+import java.util.ArrayList;
+
 public class Store {
+
+    public static ArrayList<Store> allStores = new ArrayList<>();
+    public static Store currentStore;
 
     private Image imStore;
     private String name;
@@ -29,5 +34,9 @@ public class Store {
     }
     public void setLocation(String loc) {
         location = loc;
+    }
+
+    public static void addStoreToList(Store s){
+        allStores.add(s);
     }
 }

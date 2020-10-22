@@ -165,7 +165,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
                     ArrayList<JSONVariable> paramsList = new ArrayList<>();
                     paramsList.add(new JSONVariable("id", Integer.toString(prof.getId())));
                     paramsList.add(new JSONVariable("password",passFirst));
-                    jsonH.makeJsonObjReqParams(Const.URL_JSON_UPDATE_USER,paramsList, RequestMethod.POST);
+                    jsonH.makeJsonObjReqParams(Const.URL_JSON_UPDATE_USER_PASSWORD,paramsList, RequestMethod.POST);
+                    message.showMessage("Updating...",3);
+
 
                 }else{
                     message.showMessage("Please fill the required fields", 1);
@@ -205,9 +207,20 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
             message.showMessage("An Error Occurred", 1);
         }
 
-         */
+        set all fields to the values of the current profile
 
-        message.showMessage("Success",1);
+         */
+        if(prof != null) {
+            edEmail.setText(prof.getUserName());
+            edFirstN.setText(prof.getFirstName());
+            edLastN.setText(prof.getLastName());
+            edPass.setText(prof.getPassword());
+            edAddress.setText(prof.getAddress());
+            edPassRe.setText("");
+        }
+
+        message.dismissMessage();
+
 
     }
 
@@ -267,6 +280,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
             paramsList.add(new JSONVariable("password", edPass.getText().toString().trim()));
             paramsList.add(new JSONVariable("password", edAddress.getText().toString().trim()));
             jsonH.makeJsonObjReqParams(Const.URL_JSON_UPDATE_USER, paramsList, RequestMethod.POST);
+            this.message.showMessage("Updating...",3);
         }
 
     }

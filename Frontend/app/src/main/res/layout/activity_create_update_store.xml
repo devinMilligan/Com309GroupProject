@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/text_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/txtPic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="162dp"
+            android:layout_marginTop="59dp"
+            android:foregroundGravity="clip_horizontal|center"
+            android:gravity="center"
+            android:text="Profile Picture" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="130dp"
+            android:layout_height="98dp"
+            android:layout_alignTop="@id/txtPic"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="143dp"
+            android:layout_marginTop="22dp"
+            app:srcCompat="@drawable/profile" />
+
+        <TextView
+            android:id="@+id/txtStoreName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/btnSaveStoreProf"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="60dp"
+            android:text="Store Name"
+            android:textColorLink="@color/colorTextSecond" />
+
+        <TextView
+            android:id="@+id/txtAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/editStoreName"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:text="Address"
+            android:textColorLink="@color/colorTextSecond"/>
+
+        <TextView
+            android:id="@+id/txtManager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/editAddress"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:text="Manager"
+            android:textColorLink="@color/colorTextSecond"/>
+        <TextView
+            android:id="@+id/txtSundayOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/editManager"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:text="Sunday Open Time"
+            android:textColorLink="@color/colorTextSecond"/>
+        <TextView
+            android:id="@+id/txtSundayClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/editSundayOpen"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:text="Sunday Close Time"
+            android:textColorLink="@color/colorTextSecond"/>
+        <TextView
+            android:id="@+id/txtMondayOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/editSundayClose"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:text="Monday Open Time"
+            android:textColorLink="@color/colorTextSecond"/>
+        <TextView
+            android:id="@+id/txtMondayClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/editMondayOpen"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:text="Monday Close Time"
+            android:textColorLink="@color/colorTextSecond"/>
+        <TextView
+            android:id="@+id/txtTuesdayOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/editMondayClose"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:text="Tuesday Open Time"
+            android:textColorLink="@color/colorTextSecond"/>
+        <TextView
+            android:id="@+id/txtTuesdayClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/editTuesdayOpen"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:text="Tuesday Close Time"
+            android:textColorLink="@color/colorTextSecond"/>
+        <TextView
+            android:id="@+id/txtWednesdayOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/editTuesdayClose"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:text="Wednesday Open Time"
+            android:textColorLink="@color/colorTextSecond"/>
+        <TextView
+            android:id="@+id/txtWednesdayClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/editWednesdayOpen"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:text="Wednesday Close Time"
+            android:textColorLink="@color/colorTextSecond"/>
+        <TextView
+            android:id="@+id/txtThursdayOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/editWednesdayClose"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:text="Thursday Open Time"
+            android:textColorLink="@color/colorTextSecond"/>
+        <TextView
+            android:id="@+id/txtThursdayClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/editThursdayOpen"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:text="Thursday Close Time"
+            android:textColorLink="@color/colorTextSecond"/>
+        <TextView
+            android:id="@+id/txtFridayOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/editThursdayClose"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:text="Friday Open Time"
+            android:textColorLink="@color/colorTextSecond"/>
+        <TextView
+            android:id="@+id/txtFridayClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/editFridayOpen"
+            android:layout_marginTop="50dp"
+            android:layout_alignParentStart="true"
+            android:text="Friday Close Time"
+            android:textColorLink="@color/colorTextSecond"/>
+        <TextView
+            android:id="@+id/txtSaturdayOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/editFridayClose"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:text="Saturday Open Time"
+            android:textColorLink="@color/colorTextSecond"/>
+        <TextView
+            android:id="@+id/txtSaturdayClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/editSaturdayOpen"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:text="Saturday Close Time"
+            android:textColorLink="@color/colorTextSecond"/>
+
+        <EditText
+            android:id="@+id/editStoreName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtStoreName"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Store Name" />
+        <EditText
+            android:id="@+id/editAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtAddress"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Address" />
+        <EditText
+            android:id="@+id/editManager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtManager"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Manager" />
+        <EditText
+            android:id="@+id/editSundayOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtSundayOpen"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Sunday Open" />
+        <EditText
+            android:id="@+id/editSundayClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtSundayClose"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Sunday Close"/>
+        <EditText
+            android:id="@+id/editMondayOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtMondayOpen"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Monday Open" />
+        <EditText
+            android:id="@+id/editMondayClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtMondayClose"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Monday Close" />
+        <EditText
+            android:id="@+id/editTuesdayOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtTuesdayOpen"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Tuesday Open" />
+        <EditText
+            android:id="@+id/editTuesdayClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtTuesdayClose"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Tuesday Close" />
+        <EditText
+            android:id="@+id/editWednesdayOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtWednesdayOpen"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Wednesday Open" />
+        <EditText
+            android:id="@+id/editWednesdayClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtWednesdayClose"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Wednesday Close" />
+        <EditText
+            android:id="@+id/editThursdayOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtThursdayOpen"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Thursday Open" />
+        <EditText
+            android:id="@+id/editThursdayClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtThursdayClose"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Thursday Close" />
+        <EditText
+            android:id="@+id/editFridayOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtFridayOpen"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Friday Open" />
+        <EditText
+            android:id="@+id/editFridayClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtFridayClose"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Friday Close" />
+        <EditText
+            android:id="@+id/editSaturdayOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtSaturdayOpen"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Saturday Open" />
+        <EditText
+            android:id="@+id/editSaturdayClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_alignTop="@id/txtSaturdayOpen"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_alignParentStart="true"
+            android:hint="Saturday Close" />
+
+        <Button
+            android:id="@+id/btnSaveStoreProf"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:layout_alignTop="@id/imageView3"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="104dp"
+            android:background="@drawable/gen_button_style"
+            android:text="Save"
+            android:textColor="@color/colorAccent" />
+
+    </RelativeLayout>
+
+</ScrollView>
+
+
