@@ -17,18 +17,18 @@ public class DiningProfile extends Profile {
     public String getName() {
         return store.getName();
     }
-    public String getLocation() {
-        return store.getLocation();
+    public String getAddress() {
+        return store.getAddress();
     }
 
     public void setName(String name) {
         store.setName(name);
     }
     public void setLocation(String loc) {
-        store.setLocation(loc);
+        store.setAddress(loc);
     }
     public void setStore(String n, String loc) {
         store.setName(n);
-        store.setLocation(loc);
+        store.setAddress(loc);
     }
 }

@@ -51,7 +51,7 @@ public class StoreListAdapter extends ArrayAdapter<Store> {
                 storeName.setText(store.getName());
             }
             if (storeDistance != null) {     //set the values to the display
-                storeDistance.setText(store.getLocation());
+                storeDistance.setText(store.getAddress());
             }
 
             return convertView;

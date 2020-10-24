@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.project309.app.Store.getLocationFromAddress;
+
 public class Create_Update_Store extends AppCompatActivity implements View.OnClickListener, ViewListenerInter {
 
     EditText edStoreName, edAddress, edManager, edSundayOpen, edSundayClose, edMondayOpen, edMondayClose,
@@ -39,7 +41,7 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
 
     MessageBoxInter message;
 
-    double longi, lat;
+    PointLocation pointLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +95,24 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
         txtSaturdayOpen = findViewById(R.id.txtSaturdayOpen);
         txtSaturdayClose = findViewById(R.id.txtSaturdayClose);
 
+        edSaturdayClose.setText(Store.currentStore.getSaturdayClose());
+        edSaturdayOpen.setText(Store.currentStore.getSaturdayOpen());
+        edSundayOpen.setText(Store.currentStore.getSundayOpen());
+        edSundayClose.setText(Store.currentStore.getSundayClose());
+        edMondayClose.setText(Store.currentStore.getMondayClose());
+        edMondayOpen.setText(Store.currentStore.getMondayOpen());
+        edTuesdayOpen.setText(Store.currentStore.getTuesdayOpen());
+        edTuesdayClose.setText(Store.currentStore.getTuesdayClose());
+        edWednesdayClose.setText(Store.currentStore.getWednesdayClose());
+        edWednesdayOpen.setText(Store.currentStore.getWednesdayOpen());
+        edThursdayClose.setText(Store.currentStore.getThursdayClose());
+        edThursdayOpen.setText(Store.currentStore.getThursdayOpen());
+        edFridayClose.setText(Store.currentStore.getFridayClose());
+        edFridayOpen.setText(Store.currentStore.getFridayOpen());
+        edManager.setText(Store.currentStore.getManager());
+        edStoreName.setText(Store.currentStore.getName());
+        edAddress.setText(Store.currentStore.getAddress());
+
     }
 
 
@@ -107,24 +127,24 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
 
                     ArrayList<JSONVariable> bodyList = new ArrayList<>();
                     bodyList.add(new JSONVariable("name", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("address", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("manager", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("latitude", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("longitude", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("opens_sunday", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("closes_sunday", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("opens_monday", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("closes_monday", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("opens_tuesday", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("closes_tuesday", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("opens_wednesday", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("closes_wednesday", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("opens_thursday", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("closes_thursday", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("opens_friday", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("closes_friday", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("opens_saturday", edStoreName.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("closes_saturday", edStoreName.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("address", edAddress.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("manager", edManager.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("latitude", Double.toString(pointLocation.getLatitude())));
+                    bodyList.add(new JSONVariable("longitude",Double.toString(pointLocation.getLongitude())));
+                    bodyList.add(new JSONVariable("opens_sunday", edSundayOpen.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("closes_sunday", edSundayClose.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("opens_monday", edMondayOpen.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("closes_monday", edMondayClose.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("opens_tuesday", edTuesdayOpen.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("closes_tuesday", edThursdayClose.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("opens_wednesday", edWednesdayOpen.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("closes_wednesday", edWednesdayClose.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("opens_thursday", edThursdayOpen.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("closes_thursday", edThursdayClose.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("opens_friday", edFridayOpen.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("closes_friday", edFridayClose.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("opens_saturday", edSaturdayOpen.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("closes_saturday", edSaturdayClose.getText().toString().trim()));
 
 
                     if (createUpdateUser.equals("Create")) {
@@ -149,6 +169,7 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
     @Override
     public void onSuccess(JSONObject response) {
 
+        Store.currentStore = Store.getStore(response);
         message.dismissMessage();
         finish();
 
@@ -181,7 +202,8 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
             edAddress.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         }else{
             edAddress.setTextColor(getResources().getColor(R.color.colorTextSecond));
-            if(!getLocationFromAddress(edAddress.getText().toString().trim())){
+            pointLocation = Store.getLocationFromAddress(edAddress.getText().toString().trim(), Create_Update_Store.this);
+            if(pointLocation != null){
                 check = false;
                 edAddress.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             }
@@ -287,28 +309,6 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
 
     }
 
-    public boolean getLocationFromAddress(String strAddress){
 
-        Geocoder coder = new Geocoder(this);
-        List<Address> address;
-
-
-        try {
-            address = coder.getFromLocationName(strAddress,5);
-
-            if (address==null) {
-                return false;
-            }
-            Address location=address.get(0);
-            longi = location.getLatitude();
-            lat = location.getLongitude();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return true;
-
-    }
 
 }

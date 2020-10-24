@@ -65,12 +65,8 @@ public class HomeViewModel extends ViewModel implements ViewListenerInter {
     @Override
     public void onSuccess(JSONObject response) {
 
-        /*
-
-        Store s = Store.getProfile(response);
+        Store s = Store.getStore(response);
         Store.addStoreToList(s);
-
-         */
 
     }
 
