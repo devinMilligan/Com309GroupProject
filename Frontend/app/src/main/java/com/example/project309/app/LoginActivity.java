@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     list.add(new JSONVariable("email",email.getText().toString()));
                     list.add(new JSONVariable("password", password.getText().toString()));
 
-                    jsonHandler.makeJsonArryReqParams(Const.URL_JSON_LOGIN, list);
+                    jsonHandler.makeJsonObjReqParams(Const.URL_JSON_LOGIN, list, RequestMethod.GET);
                 }
                 else {
                     Toast myToast;
@@ -108,39 +108,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onSuccess(JSONObject response) {
+        Log.d(TAG,response.toString());
+        message.dismissMessage();
 
+            try {
+                if(!response.get("email").toString().equals(null)) {
+                    Profile.currentLogin = Profile.getProfileInfo(response);
+                    Intent loggedIn = new Intent(LoginActivity.this, MainNavigationScreen.class);
+                    startActivity(loggedIn);
+                    return;
+                }
+                else {
+                    if(email.getText().toString().trim().equals("Admin")){
+                        Intent loggedIn = new Intent(LoginActivity.this, MainNavigationScreenAdmin.class);
+                        startActivity(loggedIn);
+                        return;
+                    }
+                    else if(email.getText().toString().trim().equals("Store")) {
+                        Intent loggedIn = new Intent(LoginActivity.this, MainNavigationScreenStore.class);
+                        startActivity(loggedIn);
+                        return;
+                    }
+                }
+            }
+            catch(JSONException e) {
+                return;
+            }
+        message.showMessage("Login Failed", 1);
     }
 
     @Override
     public void onSuccess(JSONArray response) {
-
-        Log.d(TAG,response.toString());
-        message.dismissMessage();
-
-        String s;
-        for(int i = 0; i < response.length(); i++) {
-            try {
-                s = response.get(i).toString();
-                Profile.currentLogin = Profile.getProfileInfo(response.getJSONObject(i));
-                Intent loggedIn = new Intent(LoginActivity.this, MainNavigationScreen.class);
-                startActivity(loggedIn);
-                return;
-            }
-            catch(JSONException e) {
-                if(email.getText().toString().trim().equals("Admin")){
-                    Intent loggedIn = new Intent(LoginActivity.this, MainNavigationScreenAdmin.class);
-                    startActivity(loggedIn);
-                    return;
-                }
-                else if(email.getText().toString().trim().equals("Store")) {
-                    Intent loggedIn = new Intent(LoginActivity.this, MainNavigationScreenStore.class);
-                    startActivity(loggedIn);
-                    return;
-                }
-                s = " ";
-            }
-        }
-        message.showMessage("Login Failed", 1);
 
     }
 
@@ -154,7 +152,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         Log.d(TAG,error.toString());
         message.dismissMessage();
-        message.showMessage(error.toString(),1);
+
+        if(error.toString().contains("End of input")) {
+            message.showMessage("User does not exist", 1);
+        }
+        else {
+            message.showMessage(error.toString(),1);
+        }
 
     }
 

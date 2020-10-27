@@ -30,21 +30,21 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private Button createAccountButton;
 
     private JSONHandlerInter jsonHandler;
-
-    private boolean signedUp;
+    private StringHandlerInter stringHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        signedUp = false;
-
         message = AppController.getInstance().getMessageBoxBuilderInstance();
         message.setContext(SignUpActivity.this);
 
         jsonHandler = AppController.getInstance().getJSONHandlerInstance();
         jsonHandler.setListener(this);
+
+        stringHandler = AppController.getInstance().getStringHandlerInstance();
+        stringHandler.setListener(this);
 
         email = (EditText) findViewById(R.id.signup_email);
         password = (EditText) findViewById(R.id.signup_password);
@@ -68,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                     list.add(new JSONVariable("email",email.getText().toString()));
 
-                    jsonHandler.makeJsonArryReqParams(Const.URL_JSON_CHECK_EMAIL, list);
+                    stringHandler.makeStringParams(Const.URL_JSON_CHECK_EMAIL, list, RequestMethod.GET);
                 }
                 else {
                     Toast myToast;
@@ -126,10 +126,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
             list.add(new JSONVariable("email", email.getText().toString()));
             list.add(new JSONVariable("password", password.getText().toString()));
-            list.add(new JSONVariable("firstName", firstName.getText().toString()));
-            list.add(new JSONVariable("lastName", lastName.getText().toString()));
+            list.add(new JSONVariable("firstname", firstName.getText().toString()));
+            list.add(new JSONVariable("lastname", lastName.getText().toString()));
+            list.add(new JSONVariable("address", "n/a"));
+            list.add(new JSONVariable("type", AccountType.CUSTOMER_DELIVERER_ACCOUNT.getAccountType()));
+            list.add(new JSONVariable("image", "n/a"));
 
-            jsonHandler.makeJsonArryReqParams(Const.URL_JSON_CREATE_USER, list);
+            jsonHandler.makeJsonObjReqBody(Const.URL_JSON_CREATE_USER, list, RequestMethod.POST);
         }
     }
 
@@ -139,7 +142,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         Log.d(TAG,error.toString());
         message.dismissMessage();
         message.showMessage(error.toString(),1);
-
+        error.printStackTrace();
     }
 
 
