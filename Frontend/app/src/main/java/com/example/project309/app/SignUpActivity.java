@@ -31,10 +31,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private JSONHandlerInter jsonHandler;
 
+    private boolean signedUp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        signedUp = false;
 
         message = AppController.getInstance().getMessageBoxBuilderInstance();
         message.setContext(SignUpActivity.this);
@@ -63,11 +67,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     ArrayList<JSONVariable> list = new ArrayList<>();
 
                     list.add(new JSONVariable("email",email.getText().toString()));
-                    list.add(new JSONVariable("password", password.getText().toString()));
-                    list.add(new JSONVariable("firstName",firstName.getText().toString()));
-                    list.add(new JSONVariable("lastName",lastName.getText().toString()));
 
-                    jsonHandler.makeJsonArryReqParams(Const.URL_JSON_LOGIN, list);
+                    jsonHandler.makeJsonArryReqParams(Const.URL_JSON_CHECK_EMAIL, list);
                 }
                 else {
                     Toast myToast;
@@ -95,38 +96,41 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onSuccess(JSONObject response) {
-
-    }
-
-    @Override
-    public void onSuccess(JSONArray response) {
-
         Log.d(TAG,response.toString());
         message.dismissMessage();
 
-        String s;
-        for(int i = 0; i < response.length(); i++) {
-            try {
-                s = response.get(i).toString();
-                message.showMessage("An account with that email already exists. Please enter a different email.", 1);
-                return;
-            }
-            catch(JSONException e) {
-                s = " ";
-            }
-        }
         Intent accountCreated = new Intent(this, LoginActivity.class);
 
         accountCreated.putExtra("EMAIL", email.getText().toString());
         accountCreated.putExtra("PASSWORD", password.getText().toString());
 
         startActivity(accountCreated);
+    }
+
+    @Override
+    public void onSuccess(JSONArray response) {
 
     }
 
     @Override
     public void onSuccess(String response) {
+        Log.d(TAG,response);
+        message.dismissMessage();
 
+        if (response.equalsIgnoreCase("true")) {
+            message.showMessage("An account with that email already exists. Please enter a different email.", 1);
+            return;
+        }
+        else if (response.equalsIgnoreCase("false")) {
+            ArrayList<JSONVariable> list = new ArrayList<>();
+
+            list.add(new JSONVariable("email", email.getText().toString()));
+            list.add(new JSONVariable("password", password.getText().toString()));
+            list.add(new JSONVariable("firstName", firstName.getText().toString()));
+            list.add(new JSONVariable("lastName", lastName.getText().toString()));
+
+            jsonHandler.makeJsonArryReqParams(Const.URL_JSON_CREATE_USER, list);
+        }
     }
 
     @Override
