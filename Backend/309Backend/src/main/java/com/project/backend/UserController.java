@@ -29,7 +29,7 @@ class UserController {
     		@RequestParam(value = "type") String type, @RequestParam(value = "image") String image) 
     				throws IOException
     {
-    	User user = new User();   
+    	User user = new User();
     	user.setEmail(email);
     	user.setPassword(password);
     	user.setFirstName(firstname);
@@ -38,7 +38,7 @@ class UserController {
     	user.setType(type);
     	user.setImagePath(image);
 
-    	if (checkEmail(user.getEmail()))
+    	if (checkEmail(user.getEmail()) == "true")
     	{
         	System.out.println("Email already exists in database");
         	return null;
@@ -79,7 +79,7 @@ class UserController {
     public @ResponseBody User newUser(@RequestBody User UserDetails) {
 
     	//Before creating a new user, check if the email is already registered to an existing user
-    	if (checkEmail(UserDetails.getEmail()))
+    	if (checkEmail(UserDetails.getEmail()) == "true")
     	{
     		//If email is already registered to an existing account, return a null user
         	System.out.println("Email already exists in database");
@@ -104,6 +104,18 @@ class UserController {
     	userRepository.save(UserDetails);
     	return UserDetails;
     }
+	
+    @PostMapping("/changePassword")
+    public @ResponseBody User changePassword(@RequestParam(value = "id") int id, @RequestParam(value = "newPassword") String password) throws IOException
+    {
+    	User user = userRepository.findByid(id).get(0);
+    	user.setPassword(password);    	
+    	
+    	System.out.println("changing password: " + user.getPassword());
+    	userRepository.save(user);
+    	return user;
+    }
+    
     
     @GetMapping("/all")
     //Returns all User entries in the database in List form
@@ -124,17 +136,14 @@ class UserController {
     //Searches for users with the given email and password combination
     //Uses the automatically generated findByEmailAndPassword function from UserRepository class
     //Returns a list of all stores owned by the user with the provided ID
-    public @ResponseBody List<User> searchUsers(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password) {
+    public @ResponseBody User searchUsers(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password) {
     	
     	System.out.println("-- searching users --");
-
-    	//Convert Iterable result to returnable List
-        List<User> result = new ArrayList<User>();
-   	 	for (User user : userRepository.findByEmailAndPassword(email, password)) {
-   	 		result.add(user);
-   	 	}
-   	 	
-        return result;
+    	
+    	if (userRepository.findByEmailAndPassword(email, password).size() > 0)   	 	
+    		return userRepository.findByEmailAndPassword(email, password).get(0);
+    	else
+    		return null;
     }
     
     @GetMapping("/checkEmail")
@@ -142,14 +151,14 @@ class UserController {
     //Uses the automatically generated findByEmail function from UserRepository class
     //If there are more than 0 users registered with the email, returns TRUE, informing the client that the given email is already in use
     //If there are no users registered with the email, returns FALSE, informing the client that the given email able to be registered
-    public @ResponseBody Boolean checkEmail(@RequestParam(value = "email") String email) {
+    public @ResponseBody String checkEmail(@RequestParam(value = "email") String email) {
     	
     	System.out.println("checking email: " + email);
 
     	//Check if there are any users with the given email
     	if (userRepository.findByEmail(email).size() > 0)
-    		return true;
+    		return "true";
     	else
-    		return false;
+    		return "false";
     }
 }
