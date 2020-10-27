@@ -87,6 +87,7 @@ class UserController {
     	}
     	else
     	{
+    		UserDetails.setId(0);
     		//if email is not registered, continue adding new user to the database
         	System.out.println("saving user: " + UserDetails);
         	userRepository.save(UserDetails);
