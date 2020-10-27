@@ -178,7 +178,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
 
             case R.id.btnSave:
 
-
                 while(emailAvailable == 0);
                 if(emailAvailable == 1) {
                     message.showMessage("Save Changes?", 2);

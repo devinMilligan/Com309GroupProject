@@ -49,7 +49,11 @@ public class ManagerPickStore extends AppCompatActivity implements ViewListenerI
     }
 
     public void loadStores(){
-        jsonH.makeJsonArryReq(Const.URL_JSON_GET_ALL_STORES);
+
+        ArrayList<JSONVariable> paramsList = new ArrayList<>();
+        paramsList.add(new JSONVariable("managerID", Integer.toString(Profile.currentLogin.getId())));
+        jsonH.makeJsonArryReqParams(Const.URL_JSON_MANAGER_STORES, paramsList);
+
     }
 
     @Override
