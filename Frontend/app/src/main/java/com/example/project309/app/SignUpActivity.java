@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -28,6 +29,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private EditText email, password, firstName, lastName;
     private Button createAccountButton;
+    private Switch deliveryStatus;
 
     private JSONHandlerInter jsonHandler;
     private StringHandlerInter stringHandler;
@@ -50,6 +52,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         password = (EditText) findViewById(R.id.signup_password);
         firstName = (EditText) findViewById(R.id.signup_firstName);
         lastName = (EditText) findViewById(R.id.signup_lastName);
+        deliveryStatus = (Switch) findViewById(R.id.account_type);
 
         createAccountButton = findViewById(R.id.signup_create_account_button);
         createAccountButton.setOnClickListener(this);
@@ -126,11 +129,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
             list.add(new JSONVariable("email", email.getText().toString()));
             list.add(new JSONVariable("password", password.getText().toString()));
-            list.add(new JSONVariable("firstname", firstName.getText().toString()));
-            list.add(new JSONVariable("lastname", lastName.getText().toString()));
+            list.add(new JSONVariable("firstName", firstName.getText().toString()));
+            list.add(new JSONVariable("lastName", lastName.getText().toString()));
             list.add(new JSONVariable("address", "n/a"));
             list.add(new JSONVariable("type", AccountType.CUSTOMER_DELIVERER_ACCOUNT.getAccountType()));
-            list.add(new JSONVariable("image", "n/a"));
+            list.add(new JSONVariable("imagePath", "n/a"));
 
             jsonHandler.makeJsonObjReqBody(Const.URL_JSON_CREATE_USER, list, RequestMethod.POST);
         }

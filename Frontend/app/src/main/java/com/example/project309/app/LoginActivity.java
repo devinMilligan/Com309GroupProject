@@ -111,21 +111,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Log.d(TAG,response.toString());
         message.dismissMessage();
 
+        Intent loggedIn;
+
             try {
-                if(!response.get("email").toString().equals(null)) {
+                if(response.get("type").toString().equalsIgnoreCase(AccountType.ADMIN_ACCOUNT.getAccountType())) {
                     Profile.currentLogin = Profile.getProfileInfo(response);
-                    Intent loggedIn = new Intent(LoginActivity.this, MainNavigationScreen.class);
+                    loggedIn = new Intent(LoginActivity.this, MainNavigationScreenAdmin.class);
+                    startActivity(loggedIn);
+                    return;
+                }
+                else if(response.get("type").toString().equalsIgnoreCase(AccountType.CUSTOMER_DELIVERER_ACCOUNT.getAccountType()))
+                {
+                    Profile.currentLogin = Profile.getProfileInfo(response);
+                    loggedIn = new Intent(LoginActivity.this, MainNavigationScreen.class);
+                    startActivity(loggedIn);
+                    return;
+                }
+                else if(response.get("type").toString().equalsIgnoreCase(AccountType.DINING_ACCOUNT.getAccountType()))
+                {
+                    Profile.currentLogin = Profile.getProfileInfo(response);
+                    loggedIn = new Intent(LoginActivity.this, MainNavigationScreenStore.class);
                     startActivity(loggedIn);
                     return;
                 }
                 else {
                     if(email.getText().toString().trim().equals("Admin")){
-                        Intent loggedIn = new Intent(LoginActivity.this, MainNavigationScreenAdmin.class);
+                        loggedIn = new Intent(LoginActivity.this, MainNavigationScreenAdmin.class);
                         startActivity(loggedIn);
                         return;
                     }
                     else if(email.getText().toString().trim().equals("Store")) {
-                        Intent loggedIn = new Intent(LoginActivity.this, MainNavigationScreenStore.class);
+                        loggedIn = new Intent(LoginActivity.this, MainNavigationScreenStore.class);
                         startActivity(loggedIn);
                         return;
                     }
