@@ -230,20 +230,20 @@ public class Store {
         try {
 
             temp.setAddress(json.getString("address"));
-            temp.setFridayClose(json.getString("close_friday"));
-            temp.setFridayOpen(json.getString("open_friday"));
-            temp.setSaturdayClose(json.getString("close_saturday"));
-            temp.setSaturdayOpen(json.getString("open_saturday:"));
-            temp.setSundayClose(json.getString("close_sunday"));
-            temp.setSundayOpen(json.getString("open_sunday"));
-            temp.setMondayClose(json.getString("close_monday"));
-            temp.setMondayOpen(json.getString("open_monday"));
-            temp.setTuesdayClose(json.getString("close_tuesday"));
-            temp.setTuesdayOpen(json.getString("open_tuesday"));
-            temp.setWednesdayClose(json.getString("close_wednesday"));
-            temp.setWednesdayOpen(json.getString("open_wednesday"));
-            temp.setThursdayClose(json.getString("close_thursday"));
-            temp.setThursdayOpen(json.getString("open_thursday"));
+            temp.setFridayClose(json.getString("closes_friday"));
+            temp.setFridayOpen(json.getString("opens_friday"));
+            temp.setSaturdayClose(json.getString("closes_saturday"));
+            temp.setSaturdayOpen(json.getString("opens_saturday:"));
+            temp.setSundayClose(json.getString("closes_sunday"));
+            temp.setSundayOpen(json.getString("opens_sunday"));
+            temp.setMondayClose(json.getString("closes_monday"));
+            temp.setMondayOpen(json.getString("opens_monday"));
+            temp.setTuesdayClose(json.getString("closes_tuesday"));
+            temp.setTuesdayOpen(json.getString("opens_tuesday"));
+            temp.setWednesdayClose(json.getString("closes_wednesday"));
+            temp.setWednesdayOpen(json.getString("opens_wednesday"));
+            temp.setThursdayClose(json.getString("closes_thursday"));
+            temp.setThursdayOpen(json.getString("opens_thursday"));
             temp.setManager(json.getInt("manager"));
             temp.setName(json.getString("name"));
 
