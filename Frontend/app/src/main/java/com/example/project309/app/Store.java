@@ -18,6 +18,7 @@ public class Store {
     public static Store currentStore;
 
     private Image imStore;
+    private int id;
     private String name;
     private String address;
     private int manager;
@@ -53,6 +54,9 @@ public class Store {
 
     public String getName(){
         return name;
+    }
+    public int getID(){
+        return id;
     }
     public String getAddress(){
         return address;
@@ -117,6 +121,10 @@ public class Store {
         return thursdayOpen;
     }
 
+
+    public void setID(int id){
+        this.id = id;
+    }
     public void setFridayOpen(String fridayOpen) {
         this.fridayOpen = fridayOpen;
     }
@@ -229,11 +237,12 @@ public class Store {
 
         try {
 
+            temp.setID(Integer.parseInt(json.getString("id")));
             temp.setAddress(json.getString("address"));
             temp.setFridayClose(json.getString("closes_friday"));
             temp.setFridayOpen(json.getString("opens_friday"));
             temp.setSaturdayClose(json.getString("closes_saturday"));
-            temp.setSaturdayOpen(json.getString("opens_saturday:"));
+            temp.setSaturdayOpen(json.getString("opens_saturday"));
             temp.setSundayClose(json.getString("closes_sunday"));
             temp.setSundayOpen(json.getString("opens_sunday"));
             temp.setMondayClose(json.getString("closes_monday"));

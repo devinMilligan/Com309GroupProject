@@ -127,10 +127,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     startActivity(loggedIn);
                     return;
                 }
-                else if(response.get("type").toString().equalsIgnoreCase(AccountType.DINING_ACCOUNT.getAccountType()))
+                else if(response.get("type").toString().equalsIgnoreCase(AccountType.MANAGER_ACCOUNT.getAccountType()))
                 {
                     Profile.currentLogin = Profile.getProfileInfo(response);
-                    loggedIn = new Intent(LoginActivity.this, MainNavigationScreenStore.class);
+                    loggedIn = new Intent(LoginActivity.this, ManagerPickStore.class);
                     startActivity(loggedIn);
                     return;
                 }

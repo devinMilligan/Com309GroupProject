@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -34,9 +35,9 @@ public class ManagerPickStore extends AppCompatActivity implements ViewListenerI
         jsonH.setListener(this);
 
         aStores = new ArrayList<>();
-        lvStores = (ListView) findViewById(R.id.lvStores);
+        lvStores = (ListView) findViewById(R.id.storeLvManager);
 
-        if(Store.allStores == null){
+        if(Store.allStores.isEmpty()){
             loadStores();
         }else{
             aStores = Store.allStores;
@@ -79,6 +80,9 @@ public class ManagerPickStore extends AppCompatActivity implements ViewListenerI
         }
 
        aStores = Store.allStores;
+        sAdapter.clear();
+        sAdapter.addAll(aStores);
+        sAdapter.notifyDataSetChanged();
 
     }
 
@@ -89,6 +93,8 @@ public class ManagerPickStore extends AppCompatActivity implements ViewListenerI
 
     @Override
     public void onError(VolleyError error) {
+
+        Log.d("MANAGER", error.toString());
 
     }
 

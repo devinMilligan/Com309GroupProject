@@ -7,6 +7,7 @@
     tools:context=".app.ManagerPickStore">
 
     <ListView
+        android:id="@+id/storeLvManager"
         android:layout_width="409dp"
         android:layout_height="650dp"
         android:layout_marginStart="1dp"

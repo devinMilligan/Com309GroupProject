@@ -23,6 +23,7 @@ import com.example.project309.app.JSONHandlerInter;
 import com.example.project309.app.JSONVariable;
 import com.example.project309.app.MessageBoxInter;
 import com.example.project309.app.PointLocation;
+import com.example.project309.app.Profile;
 import com.example.project309.app.RequestMethod;
 import com.example.project309.app.Store;
 import com.example.project309.app.ViewListenerInter;
@@ -137,7 +138,7 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
         edThursdayOpen.setText(Store.currentStore.getThursdayOpen());
         edFridayClose.setText(Store.currentStore.getFridayClose());
         edFridayOpen.setText(Store.currentStore.getFridayOpen());
-        edManager.setText(Store.currentStore.getManager());
+        edManager.setText(Profile.currentLogin.getName());
         edStoreName.setText(Store.currentStore.getName());
         edAddress.setText(Store.currentStore.getAddress());
         
@@ -164,7 +165,7 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
         edThursdayOpen.setText(Store.currentStore.getThursdayOpen());
         edFridayClose.setText(Store.currentStore.getFridayClose());
         edFridayOpen.setText(Store.currentStore.getFridayOpen());
-        edManager.setText(Store.currentStore.getManager());
+        edManager.setText(Profile.currentLogin.getName());
         edStoreName.setText(Store.currentStore.getName());
         edAddress.setText(Store.currentStore.getAddress());
 
@@ -198,9 +199,10 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
                 if(!areFieldsEmpty()) {
 
                     ArrayList<JSONVariable> bodyList = new ArrayList<>();
+                    bodyList.add(new JSONVariable("id", Integer.toString(Store.currentStore.getID())));
                     bodyList.add(new JSONVariable("name", edStoreName.getText().toString().trim()));
                     bodyList.add(new JSONVariable("address", edAddress.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("manager", edManager.getText().toString().trim()));
+                    bodyList.add(new JSONVariable("manager", Integer.toString(Profile.currentLogin.getId())));
                     bodyList.add(new JSONVariable("latitude", Double.toString(pointLocation.getLatitude())));
                     bodyList.add(new JSONVariable("longitude",Double.toString(pointLocation.getLongitude())));
                     bodyList.add(new JSONVariable("opens_sunday", edSundayOpen.getText().toString().trim()));
@@ -243,7 +245,7 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
         }else{
             edAddress.setTextColor(getResources().getColor(R.color.colorTextSecond));
             pointLocation = Store.getLocationFromAddress(edAddress.getText().toString().trim(), context);
-            if(pointLocation != null){
+            if(pointLocation == null){
                 check = false;
                 edAddress.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             }
@@ -345,7 +347,7 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
             edSaturdayOpen.setTextColor(getResources().getColor(R.color.colorTextSecond));
         }
 
-        return check;
+        return !check;
 
     }
 }

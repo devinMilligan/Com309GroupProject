@@ -1,7 +1,5 @@
 package com.example.project309.app;
 
-import com.example.project309.app.Profile;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,7 +13,7 @@ public class DiningProfile extends Profile {
     }
 
     public DiningProfile(int mId, String userName, String pass, String location, String name) {
-        super(mId, userName, pass, AccountType.DINING_ACCOUNT, name);
+        super(mId, userName, pass, AccountType.MANAGER_ACCOUNT, name);
         store = new Store(name, location);
     }
 

@@ -119,7 +119,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
 
                     CustomerDelivererProfile temp = (CustomerDelivererProfile) profile;
 
-                    edEmail.setText(temp.getUserName());
+                    edEmail.setText(temp.getEmail());
                     edFirstN.setText(temp.getFirstName());
                     edLastN.setText(temp.getLastName());
                     edPass.setText(temp.getPassword());
@@ -194,11 +194,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
 
     @Override
     public void onSuccess(JSONObject response) {
-        /*
+
         CustomerDelivererProfile temp;
 
         //This will resturn a Profile object from response
-        //temp = CustomerDelivererProfile.getProfile(response);
+        temp = CustomerDelivererProfile.getProfileInfo(response);
 
         if(temp.getPassword().equals(edPass.getText().toString().trim())){
             message.showMessage("Password Changed", 1);
@@ -206,11 +206,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
             message.showMessage("An Error Occurred", 1);
         }
 
-        set all fields to the values of the current profile
 
-         */
         if(prof != null) {
-            edEmail.setText(prof.getUserName());
+            edEmail.setText(prof.getEmail());
             edFirstN.setText(prof.getFirstName());
             edLastN.setText(prof.getLastName());
             edPass.setText(prof.getPassword());
@@ -288,14 +286,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
     public void negativeButtonPressed(String message) {
 
         if(prof != null) {
-            edEmail.setText(prof.getUserName());
+            edEmail.setText(prof.getEmail());
             edFirstN.setText(prof.getFirstName());
             edLastN.setText(prof.getLastName());
             edPass.setText(prof.getPassword());
             edAddress.setText(prof.getAddress());
             edPassRe.setText("");
         }
-
 
     }
 }
