@@ -25,7 +25,7 @@ public class Profile {
         name = n;
 
         if(!alreadyContains()) {
-            allProfiles.add(this);
+            //allProfiles.add(this);
         }
 
     }

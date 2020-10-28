@@ -27,13 +27,14 @@ public class MarkerInfoWindowAdapterDelivery implements GoogleMap.InfoWindowAdap
         View v =  inflater.inflate(R.layout.map_marker_info_window_delivery, null);
 
         LatLng latLng = arg0.getPosition();
-        TextView tvLat = (TextView) v.findViewById(R.id.tv_lat_delivery);
-        TextView tvLng = (TextView) v.findViewById(R.id.tv_lng_delivery);
+        String restaurantName = arg0.getTitle();
+//        TextView tvLat = (TextView) v.findViewById(R.id.tv_lat_delivery);
+//        TextView tvLng = (TextView) v.findViewById(R.id.tv_lng_delivery);
         TextView restName = (TextView) v.findViewById(R.id.rest_name_delivery);
         TextView restHours = (TextView) v.findViewById(R.id.rest_hours_delivery);
-        tvLat.setText("Latitude:" + latLng.latitude);
-        tvLng.setText("Longitude:"+ latLng.longitude);
-        restName.setText("Dining Center: Conversations");
+//        tvLat.setText("Latitude:" + latLng.latitude);
+//        tvLng.setText("Longitude:"+ latLng.longitude);
+        restName.setText(restaurantName);
         restHours.setText("Hours of Operation: 8am - 5pm");
         return v;
     }

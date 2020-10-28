@@ -37,16 +37,19 @@
             android:label="@string/title_activity_main_navigation_screen"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".app.MainActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity android:name=".app.uiDelivery.map.MapsActivityDelivery">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.ui.map.MapsActivity">
-        </activity>
-
-        <activity android:name=".app.uiDelivery.map.MapsActivityDelivery"></activity>
 
     </application>
 

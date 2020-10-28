@@ -4,17 +4,17 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="#fff" >
-    <TextView
-        android:id="@+id/tv_lat_delivery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#000"/>
+<!--    <TextView-->
+<!--        android:id="@+id/tv_lat_delivery"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="#000"/>-->
 
-    <TextView
-        android:id="@+id/tv_lng_delivery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#000"/>
+<!--    <TextView-->
+<!--        android:id="@+id/tv_lng_delivery"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="#000"/>-->
 
     <TextView
         android:id="@+id/rest_name_delivery"
@@ -28,10 +28,10 @@
         android:layout_height="wrap_content"
         android:textColor="#000"/>
 
-    <Button
-        android:id="@+id/button_delivery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Place an order!" />
+<!--    <Button-->
+<!--        android:id="@+id/button_delivery"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Place an order!" />-->
 
 </LinearLayout>
