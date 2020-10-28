@@ -53,7 +53,7 @@ public class JsonRequestSpec implements JSONRequestInter{
      * */
     public void makeJsonObjReqInner(String url, ArrayList<JSONVariable> bodyList, ArrayList<JSONVariable> paramList, RequestMethod rm) {
 
-        url += "?";
+
 
         int method = Request.Method.GET;
 
@@ -62,6 +62,7 @@ public class JsonRequestSpec implements JSONRequestInter{
         }
 
         if(paramList != null) {
+            url += "?";
             for (int i = 0; i < paramList.size(); i++) {  //Creation of link with parameters
 
                 url += paramList.get(i).getId() + "=";

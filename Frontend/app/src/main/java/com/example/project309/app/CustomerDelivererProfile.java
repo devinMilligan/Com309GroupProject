@@ -2,14 +2,26 @@ package com.example.project309.app;
 
 import com.example.project309.app.Profile;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class CustomerDelivererProfile extends Profile {
     protected String address;
     protected String firstName;
     protected String lastName;
     protected boolean deliveryStatus;
 
+    public CustomerDelivererProfile() {
+        super();
+
+        address = "";
+        firstName = "";
+        lastName = "";
+        deliveryStatus = false;
+    }
+
     public CustomerDelivererProfile(int mId, String userName, String first, String last, String pass, String add, boolean delivery) {
-        super(mId, userName, pass, 1, first + " " + last);
+        super(mId, userName, pass, AccountType.CUSTOMER_DELIVERER_ACCOUNT, first + " " + last);
 
         address = add;
         firstName = first;
@@ -55,5 +67,24 @@ public class CustomerDelivererProfile extends Profile {
     }
     public void setDeliveryStatus(boolean delivery) {
         deliveryStatus = delivery;
+    }
+
+    public static CustomerDelivererProfile getProfileInfo(JSONObject info) {
+        CustomerDelivererProfile p = new CustomerDelivererProfile();
+
+        try {
+            p.setEmail(info.get("email").toString());
+            p.setAddress(info.get("address").toString());
+            p.setFirstName(info.get("firstName").toString());
+            p.setLastName(info.get("lastName").toString());
+            p.setId(Integer.parseInt(info.get("id").toString()));
+            p.setPassword(info.get("password").toString());
+            p.setAccountType(info.get("type").toString());
+        }
+        catch (JSONException e) {
+            return null;
+        }
+
+        return p;
     }
 }

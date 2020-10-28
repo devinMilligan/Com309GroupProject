@@ -42,6 +42,7 @@ public class StringRequestSpec implements StringRequestInter {
         }
 
         if(paramList != null) {
+            urlM += "?";
             for (int i = 0; i < paramList.size(); i++) {  //Creation of link with parameters
 
                 urlM += paramList.get(i).getId() + "=";
