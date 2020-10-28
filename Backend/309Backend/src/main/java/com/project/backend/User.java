@@ -13,7 +13,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	//ID property is unique and automatically generated
-    private Integer id;
+    private int id;
 	
 	//email and password values will be used to log the user into the app
     private String email;
