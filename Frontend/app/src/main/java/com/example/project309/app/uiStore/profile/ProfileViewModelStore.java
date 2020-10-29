@@ -1,5 +1,6 @@
 package com.example.project309.app.uiStore.profile;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -28,6 +29,7 @@ public class ProfileViewModelStore extends ViewModel implements ViewListenerInte
     private MutableLiveData<Store> store;
     private MutableLiveData<ArrayList<ManagerProfile>> managers;
     private JSONHandlerInter jsonH;
+    private ProfileFragmentStore storeFrag;
 
     public ProfileViewModelStore() {
         mText = new MutableLiveData<>();
@@ -36,6 +38,10 @@ public class ProfileViewModelStore extends ViewModel implements ViewListenerInte
         jsonH = AppController.getInstance().getJSONHandlerInstance();
         jsonH.setListener(this);
 
+    }
+
+    public void setFragment(ProfileFragmentStore sF){
+        storeFrag = sF;
     }
 
     public LiveData<String> getText() {
@@ -74,7 +80,7 @@ public class ProfileViewModelStore extends ViewModel implements ViewListenerInte
     @Override
     public void onSuccess(JSONObject response) {
         ManagerProfile m = ManagerProfile.getProfileInfo(response);
-        if(m.getAccountType() == AccountType.MANAGER_ACCOUNT){
+        if(m.getAccountType() == AccountType.MANAGER_ACCOUNT || m.getAccountType() == AccountType.ADMIN_ACCOUNT){
             ManagerProfile.addManagerToList(m);
         }
     }
@@ -92,7 +98,7 @@ public class ProfileViewModelStore extends ViewModel implements ViewListenerInte
         }
 
         managers.setValue(ManagerProfile.managers);
-        ProfileFragmentStore.updateList();
+        storeFrag.updateList();
     }
 
     @Override

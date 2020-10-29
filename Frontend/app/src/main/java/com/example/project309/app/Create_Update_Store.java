@@ -6,8 +6,10 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -27,9 +29,11 @@ import static com.example.project309.app.Store.getLocationFromAddress;
 
 public class Create_Update_Store extends AppCompatActivity implements View.OnClickListener, ViewListenerInter {
 
-    EditText edStoreName, edAddress, edManager, edSundayOpen, edSundayClose, edMondayOpen, edMondayClose,
+    EditText edStoreName, edAddress, edSundayOpen, edSundayClose, edMondayOpen, edMondayClose,
         edTuesdayOpen, edTuesdayClose, edWednesdayOpen, edWednesdayClose, edThursdayOpen, edThursdayClose,
         edFridayOpen, edFridayClose, edSaturdayOpen, edSaturdayClose;
+
+    MultiAutoCompleteTextView edManager;
 
     TextView txtStoreName, txtAddress, txtManager, txtSundayOpen, txtSundayClose, txtMondayOpen, txtMondayClose,
             txtTuesdayOpen, txtTuesdayClose, txtWednesdayOpen, txtWednesdayClose, txtThursdayOpen, txtThursdayClose,
@@ -46,6 +50,7 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
     PointLocation pointLocation;
 
     ArrayList<ManagerProfile> managers;
+    ManagerListAdapter managerListAdapter;
     ManagerProfile newManager;
     ManagerProfile currentManager;
 
@@ -67,7 +72,7 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
 
         edStoreName = findViewById(R.id.editStoreName);
         edAddress = findViewById(R.id.editAddress);
-        edManager = findViewById(R.id.editManager);
+        edManager = (MultiAutoCompleteTextView) findViewById(R.id.editManager);
         edSundayOpen = findViewById(R.id.editSundayOpen);
         edSundayClose = findViewById(R.id.editSundayClose);
         edMondayOpen = findViewById(R.id.editMondayOpen);
@@ -124,9 +129,31 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
         managers = new ArrayList<>();
         if(ManagerProfile.managers.isEmpty()) {
             jsonH.makeJsonArryReq(Const.URL_JSON_ARRAY_ALL_USERS);
+        }else{
+            managers.addAll(ManagerProfile.managers);
+            for(int i = 0; i<managers.size(); i++){
+                if(managers.get(i).getId() == Store.currentStore.getManager()){
+                    edManager.setText(managers.get(i).getName());
+                    currentManager = managers.get(i);
+                }
+            }
+
         }
 
+        edManager.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                newManager = (ManagerProfile)parent.getItemAtPosition(position);
+                edManager.setText(newManager.getName());
+                edManager.clearFocus();
+            }
+
+        });
+
+        managerListAdapter = new ManagerListAdapter(Create_Update_Store.this, android.R.layout.simple_expandable_list_item_1,managers);
+        edManager.setAdapter(managerListAdapter);
+        edManager.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
     }
 
@@ -233,7 +260,7 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
 
             try {
                 ManagerProfile m = ManagerProfile.getProfileInfo(response.getJSONObject(i));
-                if(m.getAccountType() == AccountType.MANAGER_ACCOUNT){
+                if(m.getAccountType() == AccountType.MANAGER_ACCOUNT || m.getAccountType() == AccountType.ADMIN_ACCOUNT){
                     ManagerProfile.addManagerToList(m);
                     if(m.getId() == Store.currentStore.getManager()){
                         edManager.setText(m.getName());
@@ -245,6 +272,11 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
             }
 
         }
+
+        managers.clear();
+        managers.addAll(ManagerProfile.managers);
+        managerListAdapter.clear();
+        managerListAdapter.notifyDataSetChanged();
 
     }
 

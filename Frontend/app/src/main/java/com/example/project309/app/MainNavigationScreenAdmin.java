@@ -91,26 +91,29 @@ public class MainNavigationScreenAdmin extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        switch (item.getTitle().toString()) {
-            case "Add_Store":
+        try {
+            switch (item.getTitle().toString()) {
+                case "Add_Store":
 
-                if(currentType == SpecialFucntionType.ADD_STORE){
-                    Store temp = new Store();
+                    if (currentType == SpecialFucntionType.ADD_STORE) {
+                        Store temp = new Store();
 
-                    Store.currentStore = temp;
+                        Store.currentStore = temp;
 
-                    Log.d("THIS", "Add_store");
-                    Intent startAddCreateStore = new Intent(MainNavigationScreenAdmin.this, Create_Update_Store.class);
-                    startAddCreateStore.putExtra("Create/Update","Create");
-                    startActivity(startAddCreateStore);
-                }
-                else if(currentType == MainNavigationScreenAdmin.SpecialFucntionType.EDIT_MENU){
-                    Log.d("THIS", "edut menu");
-                }
+                        Log.d("THIS", "Add_store");
+                        Intent startAddCreateStore = new Intent(MainNavigationScreenAdmin.this, Create_Update_Store.class);
+                        startAddCreateStore.putExtra("Create/Update", "Create");
+                        startActivity(startAddCreateStore);
+                    } else if (currentType == MainNavigationScreenAdmin.SpecialFucntionType.EDIT_MENU) {
+                        Log.d("THIS", "edut menu");
+                    }
 
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+        }catch (Exception e){
+            return false;
         }
     }
 

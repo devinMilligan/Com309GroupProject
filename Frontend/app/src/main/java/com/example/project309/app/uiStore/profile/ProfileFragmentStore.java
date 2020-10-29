@@ -2,7 +2,9 @@ package com.example.project309.app.uiStore.profile;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -40,7 +42,7 @@ import java.util.ArrayList;
 
 public class ProfileFragmentStore extends Fragment implements ViewListenerInter, View.OnClickListener {
 
-    private ProfileViewModelStore profileViewModelStore;
+    private static ProfileViewModelStore profileViewModelStore;
     private Store storeM;
     private ManagerProfile newManager;
 
@@ -54,7 +56,7 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
             txtTuesdayOpen, txtTuesdayClose, txtWednesdayOpen, txtWednesdayClose, txtThursdayOpen, txtThursdayClose,
             txtFridayOpen, txtFridayClose, txtSaturdayOpen, txtSaturdayClose;
 
-    MultiAutoCompleteTextView edManager;
+    static MultiAutoCompleteTextView edManager;
     static ManagerListAdapter managerListAdapter;
 
     Button btnSave;
@@ -65,7 +67,7 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
 
     PointLocation pointLocation;
 
-    Context context;
+    static Context context;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -73,6 +75,8 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
 
         profileViewModelStore =
                 ViewModelProviders.of(this).get(ProfileViewModelStore.class);
+        profileViewModelStore.setFragment(this);
+
         View root = inflater.inflate(R.layout.fragment_profile_store, container, false);
         final TextView textView = root.findViewById(R.id.text_profile_store);
         profileViewModelStore.getText().observe(this, new Observer<String>() {
@@ -94,10 +98,9 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
             public void onChanged(ArrayList<ManagerProfile> m) {
                 allManagers.addAll(ManagerProfile.managers);
                 if(managerListAdapter != null){
-                    managerListAdapter.clear();
-                    managerListAdapter.addAll(m);
-                    managerListAdapter.notifyDataSetChanged();
+                    managerListAdapter = new ManagerListAdapter(context, android.R.layout.simple_expandable_list_item_1,allManagers);
                     edManager.setAdapter(managerListAdapter);
+                    edManager.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
                 }
             }
         });
@@ -115,7 +118,7 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
 
         edStoreName =root.findViewById(R.id.editStoreName);
         edAddress =root.findViewById(R.id.editAddress);
-        edManager =root.findViewById(R.id.editManager);
+        edManager =(MultiAutoCompleteTextView)root.findViewById(R.id.editManager);
         edSundayOpen =root.findViewById(R.id.editSundayOpen);
         edSundayClose =root.findViewById(R.id.editSundayClose);
         edMondayOpen =root.findViewById(R.id.editMondayOpen);
@@ -167,9 +170,7 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
         edStoreName.setText(Store.currentStore.getName());
         edAddress.setText(Store.currentStore.getAddress());
 
-        managerListAdapter = new ManagerListAdapter(context, android.R.layout.simple_expandable_list_item_1,allManagers);
-        edManager.setAdapter(managerListAdapter);
-        edManager.setThreshold(0);
+
 
         edManager.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
@@ -177,7 +178,8 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 newManager = (ManagerProfile)parent.getItemAtPosition(position);
-
+                edManager.setText(newManager.getName());
+                edManager.clearFocus();
             }
 
         });
@@ -302,7 +304,7 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
         if(edManager.getText().toString().trim().isEmpty() || (!edManager.getText().toString().trim().equals(Profile.currentLogin.getName()) && newManager == null)){
             check = false;
             edManager.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-        }else if(newManager != null && !newManager.getName().equals(edManager.getText().toString().trim().isEmpty())){
+        }else if(newManager != null && !newManager.getName().equals(edManager.getText().toString().trim())){
             check = false;
             edManager.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         }
@@ -404,11 +406,21 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
 
     }
 
-    public static void updateList(){
-        managerListAdapter.clear();
-        allManagers.addAll(ManagerProfile.managers);
-        managerListAdapter.addAll(allManagers);
-        managerListAdapter.notifyDataSetChanged();
+    public void updateList(){
+
+        profileViewModelStore.getManagers().observe(ProfileFragmentStore.this, new Observer<ArrayList<ManagerProfile>>() {
+            @Override
+            public void onChanged(ArrayList<ManagerProfile> m) {
+                allManagers.addAll(ManagerProfile.managers);
+                managerListAdapter = new ManagerListAdapter(context, android.R.layout.simple_expandable_list_item_1,allManagers);
+                if(managerListAdapter != null){
+                    edManager.setAdapter(managerListAdapter);
+                    edManager.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+                }
+
+                edManager.showDropDown();
+            }
+        });
 
     }
 }
