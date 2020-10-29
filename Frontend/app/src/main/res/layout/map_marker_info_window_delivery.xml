@@ -20,18 +20,55 @@
         android:id="@+id/rest_name_delivery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000"/>
+        android:textColor="#F00"/>
 
     <TextView
-        android:id="@+id/rest_hours_delivery"
+        android:id="@+id/sunday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000"/>
 
-<!--    <Button-->
-<!--        android:id="@+id/button_delivery"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Place an order!" />-->
+    <TextView
+        android:id="@+id/monday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"/>
+
+    <TextView
+        android:id="@+id/tuesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"/>
+
+    <TextView
+        android:id="@+id/wednesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"/>
+
+    <TextView
+        android:id="@+id/thursday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"/>
+
+    <TextView
+        android:id="@+id/friday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"/>
+
+    <TextView
+        android:id="@+id/saturday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"/>
+
+    <Button
+        android:id="@+id/button_delivery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#F00"
+        android:text="Place an order!" />
 
 </LinearLayout>

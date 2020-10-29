@@ -1,7 +1,11 @@
 package com.example.project309.app.uiDelivery.map;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -14,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.example.project309.R;
 import com.example.project309.app.AppController;
 import com.example.project309.app.JSONHandlerInter;
+import com.example.project309.app.MainNavigationScreenDelivery;
 import com.example.project309.app.Store;
 import com.example.project309.app.ViewListenerInter;
 import com.example.project309.net_utils.Const;
@@ -23,6 +28,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.StreetViewPanoramaOptions;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.SupportStreetViewPanoramaFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -65,11 +71,13 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        float zoom = 17;
+        float zoom = 16;
+
+        mMap.clear();
 
         // Add a marker at the campanile and move the camera
         LatLng campanile = new LatLng(42.025408, -93.646074);
-        mMap.addMarker(new MarkerOptions().position(campanile).title("Campanile"));
+//        mMap.addMarker(new MarkerOptions().position(campanile).title("Campanile"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campanile, zoom));
 
         for (int i =0; i<aStores.size(); i++){
@@ -86,22 +94,22 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
         enableMyLocation(mMap); // Enable location tracking.
 
         // Setting a custom info window adapter for the google map
-        MarkerInfoWindowAdapterDelivery markerInfoWindowAdapterDelivery = new MarkerInfoWindowAdapterDelivery(getApplicationContext());
+        MarkerInfoWindowAdapterDelivery markerInfoWindowAdapterDelivery = new MarkerInfoWindowAdapterDelivery(getApplicationContext(), aStores);
         googleMap.setInfoWindowAdapter(markerInfoWindowAdapterDelivery);
 
         // Adding and showing marker when the map is touched
-        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng arg0) {
-                text = "map click";
-                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(arg0);
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(arg0));
-                Marker marker = mMap.addMarker(markerOptions);
-                marker.showInfoWindow();
-            }
-        });
+//        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+//            @Override
+//            public void onMapClick(LatLng arg0) {
+//                text = "map click";
+//                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+//                MarkerOptions markerOptions = new MarkerOptions();
+//                markerOptions.position(arg0);
+//                mMap.animateCamera(CameraUpdateFactory.newLatLng(arg0));
+//                Marker marker = mMap.addMarker(markerOptions);
+//                marker.showInfoWindow();
+//            }
+//        });
 
         setInfoWindowClickToPanorama(mMap);
     }
@@ -110,22 +118,24 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
         map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                if (marker.getTag() == "poi") {
-                    // Set the position to the position of the marker
-                    StreetViewPanoramaOptions options =
-                            new StreetViewPanoramaOptions().position(
-                                    marker.getPosition());
-
-                    SupportStreetViewPanoramaFragment streetViewFragment
-                            = SupportStreetViewPanoramaFragment
-                            .newInstance(options);
-
-                    // Replace the fragment and add it to the backstack
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.nav_map_delivery,
-                                    streetViewFragment)
-                            .addToBackStack(null).commit();
-                }
+//                if (marker.getTag() == "poi") {
+//                    // Set the position to the position of the marker
+//                    StreetViewPanoramaOptions options =
+//                            new StreetViewPanoramaOptions().position(
+//                                    marker.getPosition());
+//
+//                    SupportStreetViewPanoramaFragment streetViewFragment
+//                            = SupportStreetViewPanoramaFragment
+//                            .newInstance(options);
+//
+//                    // Replace the fragment and add it to the backstack
+//                    getSupportFragmentManager().beginTransaction()
+//                            .replace(R.id.nav_map_delivery,
+//                                    streetViewFragment)
+//                            .addToBackStack(null).commit();
+//                }
+                Intent intent = new Intent(MapsActivityDelivery.this, MainNavigationScreenDelivery.class);
+                startActivity(intent);
             }
         });
     }
@@ -155,10 +165,16 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
             @Override
             public void onPoiClick(PointOfInterest poi) {
                 text = "poi click";
-                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-                Marker poiMarker = mMap.addMarker(new MarkerOptions().position(poi.latLng).title(poi.name));
-                poiMarker.showInfoWindow();
-                poiMarker.setTag("poi");
+                //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+                for (int i=0; i<aStores.size(); i++){
+                    if (poi.name.equals(aStores.get(i).getName())){
+                        Marker poiMarker = mMap.addMarker(new MarkerOptions().position(poi.latLng).title(poi.name));
+                        poiMarker.showInfoWindow();
+                        poiMarker.setTag("poi");
+                        text = "poi click";
+                        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+                    }
+                }
             }
         });
     }
