@@ -80,6 +80,10 @@ public class Profile {
         {
             accountType = AccountType.ADMIN_ACCOUNT;
         }
+        else
+        {
+            accountType = null;
+        }
     }
 
     @Override
@@ -108,6 +112,9 @@ public class Profile {
             p.setAccountType(info.get("type").toString());
         }
         catch (JSONException e) {
+            return null;
+        }
+        catch (NullPointerException n) {
             return null;
         }
 

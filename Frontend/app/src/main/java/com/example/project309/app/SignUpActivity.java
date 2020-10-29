@@ -25,6 +25,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     public static final String TAG = "SIGNUP";
 
+    public int signedUp;
+
     private MessageBoxInter message;
 
     private EditText email, password, firstName, lastName;
@@ -102,6 +104,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         Log.d(TAG,response.toString());
         message.dismissMessage();
 
+        Profile.currentLogin = Profile.getProfileInfo(response);
+
         Intent accountCreated = new Intent(this, LoginActivity.class);
 
         accountCreated.putExtra("EMAIL", email.getText().toString());
@@ -122,9 +126,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         if (response.equalsIgnoreCase("true")) {
             message.showMessage("An account with that email already exists. Please enter a different email.", 1);
+            signedUp = 0;
             return;
         }
         else if (response.equalsIgnoreCase("false")) {
+            signedUp = 1;
             ArrayList<JSONVariable> list = new ArrayList<>();
 
             list.add(new JSONVariable("email", email.getText().toString()));
