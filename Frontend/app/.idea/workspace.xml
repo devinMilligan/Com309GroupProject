@@ -7,17 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29bbb436-4bb4-455e-a9a4-ff1aa4d7981d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/PointLocation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/DiningProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/DiningProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/Profile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/Store.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/StoreListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/StoreListAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/ui/home/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/ui/home/HomeFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/ui/map/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/ui/map/MapsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/uiDelivery/map/MapsActivityDelivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/uiDelivery/map/MapsActivityDelivery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/uiDelivery/map/MarkerInfoWindowAdapterDelivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/uiDelivery/map/MarkerInfoWindowAdapterDelivery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/net_utils/Const.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/net_utils/Const.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/map_marker_info_window_delivery.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/map_marker_info_window_delivery.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_sign_up.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_sign_up.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
