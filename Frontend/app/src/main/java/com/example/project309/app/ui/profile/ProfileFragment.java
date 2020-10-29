@@ -93,7 +93,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
             }
         });
 
-        edAddress = (EditText)root.findViewById(R.id.edAddress);
+        edAddress = (EditText)root.findViewById(R.id.editAddress);
         edFirstN = (EditText)root.findViewById(R.id.editFirst);
         edLastN = (EditText)root.findViewById(R.id.editLast);
         edPass = (EditText)root.findViewById(R.id.editPassword) ;
@@ -115,18 +115,16 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
             @Override
             public void onChanged(Profile profile) {
 
-                if(profile != null && profile instanceof CustomerDelivererProfile) {
+                if(profile != null) {
 
-                    CustomerDelivererProfile temp = (CustomerDelivererProfile) profile;
-
-                    edEmail.setText(temp.getEmail());
-                    edFirstN.setText(temp.getFirstName());
-                    edLastN.setText(temp.getLastName());
-                    edPass.setText(temp.getPassword());
-                    edAddress.setText(temp.getAddress());
+                    edEmail.setText(((CustomerDelivererProfile)profile).getEmail());
+                    edFirstN.setText(((CustomerDelivererProfile)profile).getFirstName());
+                    edLastN.setText(((CustomerDelivererProfile)profile).getLastName());
+                    edPass.setText(((CustomerDelivererProfile)profile).getPassword());
+                    edAddress.setText(((CustomerDelivererProfile)profile).getAddress());
                     edPassRe.setText("");
 
-                    prof = temp;
+                    prof = ((CustomerDelivererProfile)profile);
 
                 }
 
@@ -164,7 +162,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
 
                     ArrayList<JSONVariable> paramsList = new ArrayList<>();
                     paramsList.add(new JSONVariable("id", Integer.toString(prof.getId())));
-                    paramsList.add(new JSONVariable("password",passFirst));
+                    paramsList.add(new JSONVariable("newPassword",passFirst));
                     jsonH.makeJsonObjReqParams(Const.URL_JSON_UPDATE_USER_PASSWORD,paramsList, RequestMethod.POST);
                     message.showMessage("Updating...",3);
 
@@ -199,9 +197,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
 
         //This will resturn a Profile object from response
         temp = CustomerDelivererProfile.getProfileInfo(response);
+        prof = temp;
+        message.dismissMessage();
 
         if(temp.getPassword().equals(edPass.getText().toString().trim())){
-            message.showMessage("Password Changed", 1);
+            message.showMessage("Updated!", 1);
         }else{
             message.showMessage("An Error Occurred", 1);
         }
@@ -216,7 +216,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
             edPassRe.setText("");
         }
 
-        message.dismissMessage();
+
 
 
     }
@@ -251,6 +251,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
     @Override
     public void onError(VolleyError error) {
 
+        message.dismissMessage();
         message.showMessage("Request Error: " + error.toString(), 1);
 
     }
@@ -272,10 +273,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
             ArrayList<JSONVariable> paramsList = new ArrayList<>();
             paramsList.add(new JSONVariable("id", Integer.toString(prof.getId())));
             paramsList.add(new JSONVariable("email", edEmail.getText().toString().trim()));
-            paramsList.add(new JSONVariable("firstName", edFirstN.getText().toString().trim()));
-            paramsList.add(new JSONVariable("lastName", edLastN.getText().toString().trim()));
+            paramsList.add(new JSONVariable("firstname", edFirstN.getText().toString().trim()));
+            paramsList.add(new JSONVariable("lastname", edLastN.getText().toString().trim()));
             paramsList.add(new JSONVariable("password", edPass.getText().toString().trim()));
-            paramsList.add(new JSONVariable("password", edAddress.getText().toString().trim()));
+            paramsList.add(new JSONVariable("address", edAddress.getText().toString().trim()));
+            paramsList.add(new JSONVariable("type",prof.getAccountType().getAccountType()));
+            paramsList.add(new JSONVariable("image", "na"));
             jsonH.makeJsonObjReqParams(Const.URL_JSON_UPDATE_USER, paramsList, RequestMethod.POST);
             this.message.showMessage("Updating...",3);
         }

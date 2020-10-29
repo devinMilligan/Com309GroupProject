@@ -12,9 +12,11 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.project309.R;
+import com.example.project309.app.uiStore.profile.ProfileFragmentStore;
 import com.example.project309.net_utils.Const;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -42,6 +44,10 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
     MessageBoxInter message;
 
     PointLocation pointLocation;
+
+    ArrayList<ManagerProfile> managers;
+    ManagerProfile newManager;
+    ManagerProfile currentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,23 +101,32 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
         txtSaturdayOpen = findViewById(R.id.txtSaturdayOpen);
         txtSaturdayClose = findViewById(R.id.txtSaturdayClose);
 
-        edSaturdayClose.setText(Store.currentStore.getSaturdayClose());
-        edSaturdayOpen.setText(Store.currentStore.getSaturdayOpen());
-        edSundayOpen.setText(Store.currentStore.getSundayOpen());
-        edSundayClose.setText(Store.currentStore.getSundayClose());
-        edMondayClose.setText(Store.currentStore.getMondayClose());
-        edMondayOpen.setText(Store.currentStore.getMondayOpen());
-        edTuesdayOpen.setText(Store.currentStore.getTuesdayOpen());
-        edTuesdayClose.setText(Store.currentStore.getTuesdayClose());
-        edWednesdayClose.setText(Store.currentStore.getWednesdayClose());
-        edWednesdayOpen.setText(Store.currentStore.getWednesdayOpen());
-        edThursdayClose.setText(Store.currentStore.getThursdayClose());
-        edThursdayOpen.setText(Store.currentStore.getThursdayOpen());
-        edFridayClose.setText(Store.currentStore.getFridayClose());
-        edFridayOpen.setText(Store.currentStore.getFridayOpen());
-        edManager.setText(Store.currentStore.getManager());
-        edStoreName.setText(Store.currentStore.getName());
-        edAddress.setText(Store.currentStore.getAddress());
+        if(createUpdateUser.equals("Update")) {
+            edSaturdayClose.setText(Store.currentStore.getSaturdayClose());
+            edSaturdayOpen.setText(Store.currentStore.getSaturdayOpen());
+            edSundayOpen.setText(Store.currentStore.getSundayOpen());
+            edSundayClose.setText(Store.currentStore.getSundayClose());
+            edMondayClose.setText(Store.currentStore.getMondayClose());
+            edMondayOpen.setText(Store.currentStore.getMondayOpen());
+            edTuesdayOpen.setText(Store.currentStore.getTuesdayOpen());
+            edTuesdayClose.setText(Store.currentStore.getTuesdayClose());
+            edWednesdayClose.setText(Store.currentStore.getWednesdayClose());
+            edWednesdayOpen.setText(Store.currentStore.getWednesdayOpen());
+            edThursdayClose.setText(Store.currentStore.getThursdayClose());
+            edThursdayOpen.setText(Store.currentStore.getThursdayOpen());
+            edFridayClose.setText(Store.currentStore.getFridayClose());
+            edFridayOpen.setText(Store.currentStore.getFridayOpen());
+            //edManager.setText(Integer.toString(Store.currentStore.getManager()));
+            edStoreName.setText(Store.currentStore.getName());
+            edAddress.setText(Store.currentStore.getAddress());
+        }
+
+        managers = new ArrayList<>();
+        if(ManagerProfile.managers.isEmpty()) {
+            jsonH.makeJsonArryReq(Const.URL_JSON_ARRAY_ALL_USERS);
+        }
+
+
 
     }
 
@@ -126,9 +141,18 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
                 if(!areFieldsEmpty()) {
 
                     ArrayList<JSONVariable> bodyList = new ArrayList<>();
+                    if(createUpdateUser.equals("Update")) {
+                        bodyList.add(new JSONVariable("id", Integer.toString(Store.currentStore.getID())));
+                    }
                     bodyList.add(new JSONVariable("name", edStoreName.getText().toString().trim()));
                     bodyList.add(new JSONVariable("address", edAddress.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("manager", edManager.getText().toString().trim()));
+                    if(newManager == null && currentManager == null) {
+                        bodyList.add(new JSONVariable("manager", Integer.toString(Profile.currentLogin.getId())));
+                    }else if(newManager== null){
+                        bodyList.add(new JSONVariable("manager", Integer.toString(currentManager.getId())));
+                    }else{
+                        bodyList.add(new JSONVariable("manager", Integer.toString(newManager.getId())));
+                    }
                     bodyList.add(new JSONVariable("latitude", Double.toString(pointLocation.getLatitude())));
                     bodyList.add(new JSONVariable("longitude",Double.toString(pointLocation.getLongitude())));
                     bodyList.add(new JSONVariable("opens_sunday", edSundayOpen.getText().toString().trim()));
@@ -169,7 +193,34 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
     @Override
     public void onSuccess(JSONObject response) {
 
-        Store.currentStore = Store.getStore(response);
+        Store.copyStore(Store.currentStore, Store.getStore(response));
+
+        for(int i = 0; i<ManagerProfile.managers.size(); i++){
+            if(ManagerProfile.managers.get(i).getId() == Store.currentStore.getManager()){
+                currentManager = ManagerProfile.managers.get(i);
+            }
+        }
+
+        edSaturdayClose.setText(Store.currentStore.getSaturdayClose());
+        edSaturdayOpen.setText(Store.currentStore.getSaturdayOpen());
+        edSundayOpen.setText(Store.currentStore.getSundayOpen());
+        edSundayClose.setText(Store.currentStore.getSundayClose());
+        edMondayClose.setText(Store.currentStore.getMondayClose());
+        edMondayOpen.setText(Store.currentStore.getMondayOpen());
+        edTuesdayOpen.setText(Store.currentStore.getTuesdayOpen());
+        edTuesdayClose.setText(Store.currentStore.getTuesdayClose());
+        edWednesdayClose.setText(Store.currentStore.getWednesdayClose());
+        edWednesdayOpen.setText(Store.currentStore.getWednesdayOpen());
+        edThursdayClose.setText(Store.currentStore.getThursdayClose());
+        edThursdayOpen.setText(Store.currentStore.getThursdayOpen());
+        edFridayClose.setText(Store.currentStore.getFridayClose());
+        edFridayOpen.setText(Store.currentStore.getFridayOpen());
+        if(currentManager != null) {
+            edManager.setText(currentManager.getName());
+        }
+        edStoreName.setText(Store.currentStore.getName());
+        edAddress.setText(Store.currentStore.getAddress());
+
         message.dismissMessage();
         finish();
 
@@ -177,6 +228,23 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onSuccess(JSONArray response) {
+
+        for(int i = 0; i<response.length();i++){
+
+            try {
+                ManagerProfile m = ManagerProfile.getProfileInfo(response.getJSONObject(i));
+                if(m.getAccountType() == AccountType.MANAGER_ACCOUNT){
+                    ManagerProfile.addManagerToList(m);
+                    if(m.getId() == Store.currentStore.getManager()){
+                        edManager.setText(m.getName());
+                        currentManager = m;
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
 
     }
 
@@ -208,10 +276,14 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
                 edAddress.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             }
         }
-        if(edManager.getText().toString().trim().isEmpty()){
+        if(edManager.getText().toString().trim().isEmpty() || (!edManager.getText().toString().trim().equals(Profile.currentLogin.getName()) && newManager == null)){
             check = false;
             edManager.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-        }else{
+        }else if(newManager != null && !newManager.getName().equals(edManager.getText().toString().trim().isEmpty())){
+            check = false;
+            edManager.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
+        else {
             edManager.setTextColor(getResources().getColor(R.color.colorTextSecond));
         }
         if(edStoreName.getText().toString().trim().isEmpty()){

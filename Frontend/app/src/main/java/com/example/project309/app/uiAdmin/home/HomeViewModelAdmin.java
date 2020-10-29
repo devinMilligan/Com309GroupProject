@@ -1,5 +1,7 @@
 package com.example.project309.app.uiAdmin.home;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -31,7 +33,7 @@ public class HomeViewModelAdmin extends ViewModel implements ViewListenerInter {
         jsonH = AppController.getInstance().getJSONHandlerInstance();
         jsonH.setListener(this);
 
-        stores = new MutableLiveData<>();
+
 
     }
 
@@ -42,7 +44,7 @@ public class HomeViewModelAdmin extends ViewModel implements ViewListenerInter {
     public LiveData<ArrayList<Store>> getStores(){
 
         if(stores == null){
-
+            stores = new MutableLiveData<>();
             if(Store.allStores.isEmpty()) {
                 loadStores();
             }else{
@@ -93,6 +95,8 @@ public class HomeViewModelAdmin extends ViewModel implements ViewListenerInter {
 
     @Override
     public void onError(VolleyError error) {
+
+        Log.d("HOMEVIEWADMIN", error.toString());
 
     }
 

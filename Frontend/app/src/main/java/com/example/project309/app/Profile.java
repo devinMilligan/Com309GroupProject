@@ -69,7 +69,7 @@ public class Profile {
         {
             accountType = AccountType.CUSTOMER_DELIVERER_ACCOUNT;
         }
-        else if(s.equalsIgnoreCase("Dining"))
+        else if(s.equalsIgnoreCase("Manager"))
         {
             accountType = AccountType.MANAGER_ACCOUNT;
         }

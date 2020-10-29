@@ -91,10 +91,14 @@ public class MainNavigationScreenAdmin extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.action_edit_store:
+        switch (item.getTitle().toString()) {
+            case "Add_Store":
 
                 if(currentType == SpecialFucntionType.ADD_STORE){
+                    Store temp = new Store();
+
+                    Store.currentStore = temp;
+
                     Log.d("THIS", "Add_store");
                     Intent startAddCreateStore = new Intent(MainNavigationScreenAdmin.this, Create_Update_Store.class);
                     startAddCreateStore.putExtra("Create/Update","Create");

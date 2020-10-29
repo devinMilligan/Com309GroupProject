@@ -238,17 +238,18 @@
             android:layout_marginStart="50dp"
             android:layout_alignParentStart="true"
             android:hint="Address" />
-        <EditText
+
+        <MultiAutoCompleteTextView
             android:id="@+id/editManager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
             android:layout_alignTop="@id/txtManager"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="50dp"
             android:layout_alignParentStart="true"
-            android:hint="Manager" />
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="Manager"
+            android:inputType="textPersonName" />
         <EditText
             android:id="@+id/editSundayOpen"
             android:layout_width="wrap_content"

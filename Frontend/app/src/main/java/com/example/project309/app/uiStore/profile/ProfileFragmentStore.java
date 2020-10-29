@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,8 @@ import com.example.project309.app.AppController;
 import com.example.project309.app.Create_Update_Store;
 import com.example.project309.app.JSONHandlerInter;
 import com.example.project309.app.JSONVariable;
+import com.example.project309.app.ManagerListAdapter;
+import com.example.project309.app.ManagerProfile;
 import com.example.project309.app.MessageBoxInter;
 import com.example.project309.app.PointLocation;
 import com.example.project309.app.Profile;
@@ -38,14 +42,20 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
 
     private ProfileViewModelStore profileViewModelStore;
     private Store storeM;
+    private ManagerProfile newManager;
 
-    EditText edStoreName, edAddress, edManager, edSundayOpen, edSundayClose, edMondayOpen, edMondayClose,
+    static ArrayList<ManagerProfile> allManagers = new ArrayList<>();
+
+    EditText edStoreName, edAddress, edSundayOpen, edSundayClose, edMondayOpen, edMondayClose,
             edTuesdayOpen, edTuesdayClose, edWednesdayOpen, edWednesdayClose, edThursdayOpen, edThursdayClose,
             edFridayOpen, edFridayClose, edSaturdayOpen, edSaturdayClose;
 
     TextView txtStoreName, txtAddress, txtManager, txtSundayOpen, txtSundayClose, txtMondayOpen, txtMondayClose,
             txtTuesdayOpen, txtTuesdayClose, txtWednesdayOpen, txtWednesdayClose, txtThursdayOpen, txtThursdayClose,
             txtFridayOpen, txtFridayClose, txtSaturdayOpen, txtSaturdayClose;
+
+    MultiAutoCompleteTextView edManager;
+    static ManagerListAdapter managerListAdapter;
 
     Button btnSave;
 
@@ -59,6 +69,8 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        newManager = null;
+
         profileViewModelStore =
                 ViewModelProviders.of(this).get(ProfileViewModelStore.class);
         View root = inflater.inflate(R.layout.fragment_profile_store, container, false);
@@ -74,6 +86,19 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
             @Override
             public void onChanged(Store store) {
                 storeM = store;
+            }
+        });
+
+        profileViewModelStore.getManagers().observe(this, new Observer<ArrayList<ManagerProfile>>() {
+            @Override
+            public void onChanged(ArrayList<ManagerProfile> m) {
+                allManagers.addAll(ManagerProfile.managers);
+                if(managerListAdapter != null){
+                    managerListAdapter.clear();
+                    managerListAdapter.addAll(m);
+                    managerListAdapter.notifyDataSetChanged();
+                    edManager.setAdapter(managerListAdapter);
+                }
             }
         });
 
@@ -141,7 +166,22 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
         edManager.setText(Profile.currentLogin.getName());
         edStoreName.setText(Store.currentStore.getName());
         edAddress.setText(Store.currentStore.getAddress());
-        
+
+        managerListAdapter = new ManagerListAdapter(context, android.R.layout.simple_expandable_list_item_1,allManagers);
+        edManager.setAdapter(managerListAdapter);
+        edManager.setThreshold(0);
+
+        edManager.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                newManager = (ManagerProfile)parent.getItemAtPosition(position);
+
+            }
+
+        });
+
         return root;
     }
 
@@ -165,7 +205,12 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
         edThursdayOpen.setText(Store.currentStore.getThursdayOpen());
         edFridayClose.setText(Store.currentStore.getFridayClose());
         edFridayOpen.setText(Store.currentStore.getFridayOpen());
-        edManager.setText(Profile.currentLogin.getName());
+
+        if(newManager == null) {
+            edManager.setText(Profile.currentLogin.getName());
+        }else{
+            edManager.setText(newManager.getName());
+        }
         edStoreName.setText(Store.currentStore.getName());
         edAddress.setText(Store.currentStore.getAddress());
 
@@ -202,7 +247,11 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
                     bodyList.add(new JSONVariable("id", Integer.toString(Store.currentStore.getID())));
                     bodyList.add(new JSONVariable("name", edStoreName.getText().toString().trim()));
                     bodyList.add(new JSONVariable("address", edAddress.getText().toString().trim()));
-                    bodyList.add(new JSONVariable("manager", Integer.toString(Profile.currentLogin.getId())));
+                    if(newManager == null) {
+                        bodyList.add(new JSONVariable("manager", Integer.toString(Profile.currentLogin.getId())));
+                    }else{
+                        bodyList.add(new JSONVariable("manager", Integer.toString(newManager.getId())));
+                    }
                     bodyList.add(new JSONVariable("latitude", Double.toString(pointLocation.getLatitude())));
                     bodyList.add(new JSONVariable("longitude",Double.toString(pointLocation.getLongitude())));
                     bodyList.add(new JSONVariable("opens_sunday", edSundayOpen.getText().toString().trim()));
@@ -250,10 +299,14 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
                 edAddress.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             }
         }
-        if(edManager.getText().toString().trim().isEmpty()){
+        if(edManager.getText().toString().trim().isEmpty() || (!edManager.getText().toString().trim().equals(Profile.currentLogin.getName()) && newManager == null)){
             check = false;
             edManager.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-        }else{
+        }else if(newManager != null && !newManager.getName().equals(edManager.getText().toString().trim().isEmpty())){
+            check = false;
+            edManager.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
+        else {
             edManager.setTextColor(getResources().getColor(R.color.colorTextSecond));
         }
         if(edStoreName.getText().toString().trim().isEmpty()){
@@ -348,6 +401,14 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
         }
 
         return !check;
+
+    }
+
+    public static void updateList(){
+        managerListAdapter.clear();
+        allManagers.addAll(ManagerProfile.managers);
+        managerListAdapter.addAll(allManagers);
+        managerListAdapter.notifyDataSetChanged();
 
     }
 }

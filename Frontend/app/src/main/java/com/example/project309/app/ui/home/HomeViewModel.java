@@ -33,7 +33,7 @@ public class HomeViewModel extends ViewModel implements ViewListenerInter {
         jsonH = AppController.getInstance().getJSONHandlerInstance();
         jsonH.setListener(this);
 
-        stores = new MutableLiveData<>();
+
 
     }
 
@@ -44,7 +44,7 @@ public class HomeViewModel extends ViewModel implements ViewListenerInter {
     public LiveData<ArrayList<Store>> getStores(){
 
         if(stores == null){
-
+            stores = new MutableLiveData<>();
             if(Store.allStores.isEmpty()) {
                     loadStores();
             }else{

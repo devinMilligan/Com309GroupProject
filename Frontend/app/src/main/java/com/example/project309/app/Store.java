@@ -216,7 +216,7 @@ public class Store {
         try {
             address = coder.getFromLocationName(strAddress,5);
 
-            if (address==null) {
+            if (address==null || address.isEmpty()) {
                 return null;
             }
             Address location=address.get(0);
@@ -225,9 +225,36 @@ public class Store {
 
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
+        }catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+            return null;
         }
 
         return new PointLocation(longi, lat);
+
+    }
+
+    public static void copyStore(Store copyInto, Store copyFrom){
+
+        copyInto.setAddress(copyFrom.getAddress());
+        copyInto.setManager(copyFrom.getManager());
+        copyInto.setName(copyFrom.getName());
+        copyInto.setID(copyFrom.getID());
+        copyInto.setSundayOpen(copyFrom.getSundayOpen());
+        copyInto.setSundayClose(copyFrom.getSundayClose());
+        copyInto.setMondayOpen(copyFrom.getMondayOpen());
+        copyInto.setMondayClose(copyFrom.getMondayClose());
+        copyInto.setTuesdayOpen(copyFrom.getTuesdayOpen());
+        copyInto.setTuesdayClose(copyFrom.getTuesdayClose());
+        copyInto.setWednesdayOpen(copyFrom.getWednesdayOpen());
+        copyInto.setWednesdayClose(copyFrom.getWednesdayClose());
+        copyInto.setThursdayOpen(copyFrom.getThursdayOpen());
+        copyInto.setThursdayClose(copyFrom.getThursdayClose());
+        copyInto.setFridayOpen(copyFrom.getFridayOpen());
+        copyInto.setFridayClose(copyFrom.getFridayClose());
+        copyInto.setSaturdayClose(copyFrom.getSaturdayClose());
+        copyInto.setSaturdayOpen(copyFrom.getSaturdayOpen());
 
     }
 
