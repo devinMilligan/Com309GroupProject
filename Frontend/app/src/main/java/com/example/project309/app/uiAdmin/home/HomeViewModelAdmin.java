@@ -1,21 +1,40 @@
 package com.example.project309.app.uiAdmin.home;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.android.volley.VolleyError;
+import com.example.project309.app.AppController;
+import com.example.project309.app.JSONHandler;
+import com.example.project309.app.JSONHandlerInter;
 import com.example.project309.app.Store;
+import com.example.project309.app.ViewListenerInter;
+import com.example.project309.net_utils.Const;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class HomeViewModelAdmin extends ViewModel {
+public class HomeViewModelAdmin extends ViewModel implements ViewListenerInter {
 
     private MutableLiveData<String> mText;
     private MutableLiveData<ArrayList<Store>> stores;
+    private static JSONHandlerInter jsonH;
 
     public HomeViewModelAdmin() {
         mText = new MutableLiveData<>();
         mText.setValue("Dining Centers");
+
+        jsonH = AppController.getInstance().getJSONHandlerInstance();
+        jsonH.setListener(this);
+
+
+
     }
 
     public LiveData<String> getText() {
@@ -25,23 +44,59 @@ public class HomeViewModelAdmin extends ViewModel {
     public LiveData<ArrayList<Store>> getStores(){
 
         if(stores == null){
-
-            stores = new MutableLiveData<ArrayList<Store>>();
-
-            loadStores();
+            stores = new MutableLiveData<>();
+            if(Store.allStores.isEmpty()) {
+                loadStores();
+            }else{
+                stores.setValue(Store.allStores);
+            }
 
         }
         return stores;
 
     }
 
-    private void loadStores(){
+    public static void loadStores(){
 
-        ArrayList<Store> aStore = new ArrayList<>();
-        aStore.add(new Store("Seasons Dining Center", "224 Beach Rd, Ames, IA 50011"));
-        aStore.add(new Store("Conversations", "1215 Richardson Ct, Ames, IA 50012"));
+        jsonH.makeJsonArryReq(Const.URL_JSON_GET_ALL_STORES);
 
-        stores.setValue(aStore);
+    }
+
+    @Override
+    public void onSuccess(JSONObject response) {
+
+        Store s = Store.getStore(response);
+        Store.addStoreToList(s);
+
+    }
+
+    @Override
+    public void onSuccess(JSONArray response) {
+
+        for(int i = 0; i<response.length();i++){
+
+            try {
+                onSuccess(response.getJSONObject(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        stores.setValue(Store.allStores);
+
+
+    }
+
+    @Override
+    public void onSuccess(String response) {
+
+    }
+
+    @Override
+    public void onError(VolleyError error) {
+
+        Log.d("HOMEVIEWADMIN", error.toString());
 
     }
 

@@ -5,7 +5,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.media.Image;
 
-import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,6 +19,7 @@ public class Store {
     public static Store currentStore;
 
     private Image imStore;
+    private int id;
     private String name;
     private String address;
     private int manager;
@@ -53,9 +53,14 @@ public class Store {
     public Store (){
 
     }
+
     public String getName(){
         return name;
     }
+    public int getID(){
+        return id;
+    }
+
     public String getAddress(){
         return address;
     }
@@ -118,6 +123,13 @@ public class Store {
     public String getThursdayOpen() {
         return thursdayOpen;
     }
+
+
+
+    public void setID(int id){
+        this.id = id;
+    }
+
     public double getLatitude(){
         return latitude;
     }
@@ -186,6 +198,9 @@ public class Store {
     }
 
     public void setMenu(Menu menu) {
+
+        this.menu = menu;
+
         //this.menu = menu;
     }
     public void setLongitude(double longitude){
@@ -193,6 +208,7 @@ public class Store {
     }
     private void setLatitude(double lat) {
         latitude = lat;
+
     }
 
     public int getManager() {
@@ -222,7 +238,7 @@ public class Store {
         try {
             address = coder.getFromLocationName(strAddress,5);
 
-            if (address==null) {
+            if (address==null || address.isEmpty()) {
                 return null;
             }
             Address location=address.get(0);
@@ -231,9 +247,36 @@ public class Store {
 
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
+        }catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+            return null;
         }
 
         return new PointLocation(longi, lat);
+
+    }
+
+    public static void copyStore(Store copyInto, Store copyFrom){
+
+        copyInto.setAddress(copyFrom.getAddress());
+        copyInto.setManager(copyFrom.getManager());
+        copyInto.setName(copyFrom.getName());
+        copyInto.setID(copyFrom.getID());
+        copyInto.setSundayOpen(copyFrom.getSundayOpen());
+        copyInto.setSundayClose(copyFrom.getSundayClose());
+        copyInto.setMondayOpen(copyFrom.getMondayOpen());
+        copyInto.setMondayClose(copyFrom.getMondayClose());
+        copyInto.setTuesdayOpen(copyFrom.getTuesdayOpen());
+        copyInto.setTuesdayClose(copyFrom.getTuesdayClose());
+        copyInto.setWednesdayOpen(copyFrom.getWednesdayOpen());
+        copyInto.setWednesdayClose(copyFrom.getWednesdayClose());
+        copyInto.setThursdayOpen(copyFrom.getThursdayOpen());
+        copyInto.setThursdayClose(copyFrom.getThursdayClose());
+        copyInto.setFridayOpen(copyFrom.getFridayOpen());
+        copyInto.setFridayClose(copyFrom.getFridayClose());
+        copyInto.setSaturdayClose(copyFrom.getSaturdayClose());
+        copyInto.setSaturdayOpen(copyFrom.getSaturdayOpen());
 
     }
 
@@ -243,6 +286,7 @@ public class Store {
 
         try {
 
+            temp.setID(Integer.parseInt(json.getString("id")));
             temp.setAddress(json.getString("address"));
             temp.setFridayClose(json.getString("closes_friday"));
             temp.setFridayOpen(json.getString("opens_friday"));
@@ -258,8 +302,6 @@ public class Store {
             temp.setWednesdayOpen(json.getString("opens_wednesday"));
             temp.setThursdayClose(json.getString("closes_thursday"));
             temp.setThursdayOpen(json.getString("opens_thursday"));
-            temp.setLatitude(json.getDouble("latitude"));
-            temp.setLongitude(json.getDouble("longitude"));
             temp.setManager(json.getInt("manager"));
             temp.setName(json.getString("name"));
 
@@ -269,4 +311,5 @@ public class Store {
         return temp;
 
     }
+
 }

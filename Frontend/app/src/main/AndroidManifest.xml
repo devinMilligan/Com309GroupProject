@@ -14,11 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".app.ManagerPickStore"></activity>
+        <activity android:name=".app.Create_Update_Store" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <activity android:name=".app.LogOnTest"></activity>
-        <activity android:name=".app.SignUpActivity"></activity>
+
+        <activity android:name=".app.LogOnTest" />
+        <activity android:name=".app.SignUpActivity" />
         <activity android:name=".app.LoginActivity" />
         <activity
             android:name=".app.MainNavigationScreen"
@@ -43,11 +47,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.ui.map.MapsActivity">
-        </activity>
-
-        <activity android:name=".app.uiDelivery.map.MapsActivityDelivery"></activity>
-
+        <activity android:name=".app.ui.map.MapsActivity" />
+        <activity android:name=".app.uiDelivery.map.MapsActivityDelivery" />
     </application>
 
 </manifest>

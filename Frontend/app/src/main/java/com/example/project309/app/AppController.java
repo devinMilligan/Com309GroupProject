@@ -14,11 +14,11 @@ public class AppController extends Application {
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
     private static AppController mInstance;
-    private JSONRequestInter jsonR;
-    private JSONHandlerInter jsonH;
-    private MessageBoxInter messageI;
-    private StringRequestInter stringR;
-    private StringHandlerInter stringH;
+    private static JSONRequestInter jsonR;
+    private static JSONHandlerInter jsonH;
+    private static MessageBoxInter messageI;
+    private static StringRequestInter stringR;
+    private static StringHandlerInter stringH;
 
     @Override
     public void onCreate() {
@@ -26,6 +26,10 @@ public class AppController extends Application {
         mInstance = this;
     }
     public static synchronized AppController getInstance() {
+
+        if (mInstance == null) {
+            return new AppController();
+        }
         return mInstance;
     }
     public RequestQueue getRequestQueue() {
@@ -103,31 +107,31 @@ public class AppController extends Application {
 
     //Methods used for testing
 
-    public void setJSONRequestInstance(JSONRequestInter jR){
+    public static void setJSONRequestInstance(JSONRequestInter jR){
 
         jsonR = jR;
 
     }
 
-    public void setJSONHandlerInstance(JSONHandlerInter jH){
+    public static void setJSONHandlerInstance(JSONHandlerInter jH){
 
         jsonH = jH;
 
     }
 
-    public void setStringRequestInstance(StringRequestInter sR){
+    public static void setStringRequestInstance(StringRequestInter sR){
 
         stringR = sR;
 
     }
 
-    public void setStringHandlerInstance(StringHandlerInter sH){
+    public static void setStringHandlerInstance(StringHandlerInter sH){
 
         stringH = sH;
 
     }
 
-    public void setMessageBoxBuilderInstance(MessageBoxInter mB){
+    public static void setMessageBoxBuilderInstance(MessageBoxInter mB){
 
         messageI = mB;
 

@@ -2,11 +2,8 @@ package com.example.project309.app;
 
 import android.media.Image;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class Profile {
 
@@ -72,9 +69,9 @@ public class Profile {
         {
             accountType = AccountType.CUSTOMER_DELIVERER_ACCOUNT;
         }
-        else if(s.equalsIgnoreCase("Dining"))
+        else if(s.equalsIgnoreCase("Manager"))
         {
-            accountType = AccountType.DINING_ACCOUNT;
+            accountType = AccountType.MANAGER_ACCOUNT;
         }
         else if(s.equalsIgnoreCase("Admin"))
         {

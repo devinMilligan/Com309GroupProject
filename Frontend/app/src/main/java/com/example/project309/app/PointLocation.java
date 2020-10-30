@@ -6,7 +6,7 @@ public class PointLocation {
     double latit;
 
 
-    public PointLocation(double longitude, double latitude){
+    public PointLocation(double longitude, double latitude) {
 
         longi = longitude;
         latit = latitude;

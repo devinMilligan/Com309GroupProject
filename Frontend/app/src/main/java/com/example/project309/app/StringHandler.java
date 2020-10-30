@@ -33,10 +33,10 @@ public class StringHandler extends StringAbstractListener implements StringHandl
         sR.makeStringReqInner(url,paramList,rm);
     }
 
-    void responseListString(String response){
+    public void responseListString(String response){
         vR.onSuccess(response);
     }
-    void responseListString(VolleyError error){
+    public void responseListString(VolleyError error){
         vR.onError(error);
     }
 

@@ -40,6 +40,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        Store.allStores.clear();
+        ManagerProfile.managers.clear();
+
         message = AppController.getInstance().getMessageBoxBuilderInstance();
         message.setContext(LoginActivity.this);
 
@@ -67,6 +70,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             email.setText(emailText);
             password.setText(passwordText);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Store.allStores.clear();
+        ManagerProfile.managers.clear();
+
     }
 
     @Override
@@ -126,15 +138,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 else if(response.get("type").toString().equalsIgnoreCase(AccountType.CUSTOMER_DELIVERER_ACCOUNT.getAccountType()))
                 {
-                    Profile.currentLogin = Profile.getProfileInfo(response);
+                    Profile.currentLogin = CustomerDelivererProfile.getProfileInfo(response);
                     loggedIn = new Intent(LoginActivity.this, MainNavigationScreen.class);
                     startActivity(loggedIn);
                     return;
                 }
-                else if(response.get("type").toString().equalsIgnoreCase(AccountType.DINING_ACCOUNT.getAccountType()))
+                else if(response.get("type").toString().equalsIgnoreCase(AccountType.MANAGER_ACCOUNT.getAccountType()))
                 {
                     Profile.currentLogin = Profile.getProfileInfo(response);
-                    loggedIn = new Intent(LoginActivity.this, MainNavigationScreenStore.class);
+                    loggedIn = new Intent(LoginActivity.this, ManagerPickStore.class);
                     startActivity(loggedIn);
                     return;
                 }

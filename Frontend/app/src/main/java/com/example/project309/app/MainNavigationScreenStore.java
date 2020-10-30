@@ -33,13 +33,6 @@ public class MainNavigationScreenStore extends AppCompatActivity {
             value = val;
         }
 
-
-
-
-
-
-
-
         public String getValue(){
             return value;
         }
@@ -55,6 +48,11 @@ public class MainNavigationScreenStore extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /*
+        Will need to get store values right here
+         */
+
         setContentView(R.layout.activity_main_navigation_screen_store);
         Toolbar toolbar = findViewById(R.id.toolbar_store);
         setSupportActionBar(toolbar);
