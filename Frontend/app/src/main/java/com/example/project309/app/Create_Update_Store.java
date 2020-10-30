@@ -165,7 +165,7 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
 
             case R.id.btnSaveStoreProf:
 
-                if(!areFieldsEmpty()) {
+                if(areFieldsEmpty()) {
 
                     ArrayList<JSONVariable> bodyList = new ArrayList<>();
                     if(createUpdateUser.equals("Update")) {
@@ -301,17 +301,18 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
             check = false;
             edAddress.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         }else{
-            edAddress.setTextColor(getResources().getColor(R.color.colorTextSecond));
             pointLocation = Store.getLocationFromAddress(edAddress.getText().toString().trim(), Create_Update_Store.this);
-            if(pointLocation != null){
+            if(pointLocation == null){
                 check = false;
                 edAddress.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            }else{
+                edAddress.setTextColor(getResources().getColor(R.color.colorTextSecond));
             }
         }
-        if(edManager.getText().toString().trim().isEmpty() || (!edManager.getText().toString().trim().equals(Profile.currentLogin.getName()) && newManager == null)){
+        if(edManager.getText().toString().trim().isEmpty() || (!edManager.getText().toString().trim().equals(Profile.currentLogin.getName()) && newManager == null && !edManager.getText().toString().trim().equals(currentManager.getName()))){
             check = false;
             edManager.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-        }else if(newManager != null && !newManager.getName().equals(edManager.getText().toString().trim().isEmpty())){
+        }else if(newManager != null && !newManager.getName().equals(edManager.getText().toString().trim())){
             check = false;
             edManager.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         }
@@ -340,13 +341,13 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
             check = false;
             edMondayClose.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         }else{
-            edAddress.setTextColor(getResources().getColor(R.color.colorTextSecond));
+            edMondayClose.setTextColor(getResources().getColor(R.color.colorTextSecond));
         }
         if(edMondayOpen.getText().toString().trim().isEmpty()){
             check = false;
             edMondayOpen.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         }else{
-            edAddress.setTextColor(getResources().getColor(R.color.colorTextSecond));
+            edMondayOpen.setTextColor(getResources().getColor(R.color.colorTextSecond));
         }
         if(edTuesdayClose.getText().toString().trim().isEmpty()){
             check = false;

@@ -333,13 +333,13 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
             check = false;
             edMondayClose.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         }else{
-            edAddress.setTextColor(getResources().getColor(R.color.colorTextSecond));
+            edMondayClose.setTextColor(getResources().getColor(R.color.colorTextSecond));
         }
         if(edMondayOpen.getText().toString().trim().isEmpty()){
             check = false;
             edMondayOpen.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         }else{
-            edAddress.setTextColor(getResources().getColor(R.color.colorTextSecond));
+            edMondayOpen.setTextColor(getResources().getColor(R.color.colorTextSecond));
         }
         if(edTuesdayClose.getText().toString().trim().isEmpty()){
             check = false;
@@ -418,7 +418,6 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
                     edManager.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
                 }
 
-                edManager.showDropDown();
             }
         });
 
