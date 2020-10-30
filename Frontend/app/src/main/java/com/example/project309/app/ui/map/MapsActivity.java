@@ -70,7 +70,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void getListOfStores() {
-        //aStores.clear();
         this.jsonH.makeJsonArryReq(Const.URL_JSON_GET_ALL_STORES);
         aStores = Store.allStores;
         Store s = new Store();
@@ -161,8 +160,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         (BitmapDescriptorFactory.HUE_RED)));
             }
         }
-        cs = (CharSequence) "done";
-        Toast.makeText(getApplicationContext(), cs, Toast.LENGTH_LONG).show();
     }
 
     private void setInfoWindowClickToPanorama(GoogleMap map) {
@@ -241,8 +238,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         }
         aStores = Store.allStores;
-        text = "success";
-        //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
     }
 
     @Override
