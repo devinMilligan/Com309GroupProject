@@ -6,7 +6,7 @@ public class Menu {
 
     protected ArrayList<MenuItem> menuItems = new ArrayList<>();
 
-    protected boolean addMenuItem(MenuItem mItem){
+    public boolean addMenuItem(MenuItem mItem){
 
         if(!menuItems.contains(mItem)){
             menuItems.add(mItem);
@@ -14,6 +14,15 @@ public class Menu {
         }
         return false;
 
+    }
+
+    protected boolean contains(MenuItem item){
+        for (int i =0; i<menuItems.size(); i++){
+            if (menuItems.get(i).equals(item)){
+                return true;
+            }
+        }
+        return false;
     }
 
     protected boolean removeMenuItem(MenuItem mItem) {

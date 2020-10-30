@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Store {
 
@@ -39,6 +40,9 @@ public class Store {
     private String saturdayClose;
     private double latitude;
     private double longitude;
+    private int waitTimeMin;
+    private int numOrders;
+    private int avgTimePerOrder;
 
     private Menu menu;
 
@@ -67,6 +71,14 @@ public class Store {
 
     public Menu getMenu() {
         return menu;
+    }
+
+    public int getWaitTimeMin(){
+        return numOrders;
+    }
+
+    public void setWaitTimeMin(){
+        this.waitTimeMin = numOrders * 2;
     }
 
     public String getFridayClose() {
@@ -206,7 +218,7 @@ public class Store {
     public void setLongitude(double longitude){
         this.longitude = longitude;
     }
-    private void setLatitude(double lat) {
+    public void setLatitude(double lat) {
         latitude = lat;
 
     }
@@ -304,6 +316,11 @@ public class Store {
             temp.setThursdayOpen(json.getString("opens_thursday"));
             temp.setManager(json.getInt("manager"));
             temp.setName(json.getString("name"));
+            Random rand = new Random(); //instance of random class
+            int upperbound = 25;
+            //generate random values from 0-24
+            int orders = rand.nextInt(upperbound);
+            temp.setOrders(orders);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -312,4 +329,24 @@ public class Store {
 
     }
 
+    public void setOrders(int orders) {
+        this.numOrders = orders;
+    }
+    public int getOrders(){
+        return numOrders;
+    }
+
+    //store can get list of people picking up orders
+    // based on name of deliverer for an order
+    public ArrayList<Profile> getListPickup(ArrayList<Order> orders){
+        ArrayList<Profile> pickupList = new ArrayList<>();
+        for (int i=0; i < orders.size(); i++){
+            pickupList.add(orders.get(i).getDeliverer());
+        }
+        return pickupList;
+    }
+
+    public Double getDistanceFromCurrentLocation() {//to do
+        return 5.0;
+    }
 }

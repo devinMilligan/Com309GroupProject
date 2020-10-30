@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.project309">
+    package="com.example.project309" >
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,6 +16,10 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".app.ManagerPickStore"></activity>
         <activity android:name=".app.Create_Update_Store" />
+        <activity
+            android:name=".app.PlaceOrder"
+            android:label="@string/title_activity_place_order" >
+        </activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -40,14 +44,21 @@
             android:name=".app.MainNavigationScreenDelivery"
             android:label="@string/title_activity_main_navigation_screen"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".app.MainActivity">
+        <activity android:name=".app.MainActivity" >
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
+
+
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
+        </activity>
+        <activity android:name=".app.ui.map.MapsActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.ui.map.MapsActivity" />
         <activity android:name=".app.uiDelivery.map.MapsActivityDelivery" />
     </application>
 
