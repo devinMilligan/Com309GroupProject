@@ -137,7 +137,6 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
                     currentManager = managers.get(i);
                 }
             }
-
         }
 
         edManager.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -309,7 +308,7 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
                 edAddress.setTextColor(getResources().getColor(R.color.colorTextSecond));
             }
         }
-        if(edManager.getText().toString().trim().isEmpty() || (!edManager.getText().toString().trim().equals(Profile.currentLogin.getName()) && newManager == null && !edManager.getText().toString().trim().equals(currentManager.getName()))){
+        if(edManager.getText().toString().trim().isEmpty() || (!edManager.getText().toString().trim().equals(Profile.currentLogin.getName()) && newManager == null && currentManager != null &&!edManager.getText().toString().trim().equals(currentManager.getName()))){
             check = false;
             edManager.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         }else if(newManager != null && !newManager.getName().equals(edManager.getText().toString().trim())){
