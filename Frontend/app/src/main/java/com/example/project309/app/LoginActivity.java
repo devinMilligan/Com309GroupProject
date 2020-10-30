@@ -24,6 +24,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public static final String TAG = "LOGON";
 
+    public int success;
+
     private MessageBoxInter message;
 
     private EditText email, password;
@@ -123,6 +125,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Log.d(TAG,response.toString());
         message.dismissMessage();
 
+        success = 1;
+
         Intent loggedIn;
 
             try {
@@ -163,6 +167,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 return;
             }
         message.showMessage("Login Failed", 1);
+            success = 0;
     }
 
     @Override
@@ -180,6 +185,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         Log.d(TAG,error.toString());
         message.dismissMessage();
+
+        success = 0;
 
         if(error.toString().contains("End of input")) {
             message.showMessage("User does not exist", 1);

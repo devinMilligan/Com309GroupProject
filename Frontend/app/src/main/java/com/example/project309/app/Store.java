@@ -5,6 +5,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.media.Image;
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,7 +37,8 @@ public class Store {
     private String fridayClose;
     private String saturdayOpen;
     private String saturdayClose;
-
+    private double latitude;
+    private double longitude;
 
     private Menu menu;
 
@@ -58,6 +60,7 @@ public class Store {
     public int getID(){
         return id;
     }
+
     public String getAddress(){
         return address;
     }
@@ -122,9 +125,18 @@ public class Store {
     }
 
 
+
     public void setID(int id){
         this.id = id;
     }
+
+    public double getLatitude(){
+        return latitude;
+    }
+    public double getLongitude(){
+        return longitude;
+    }
+
     public void setFridayOpen(String fridayOpen) {
         this.fridayOpen = fridayOpen;
     }
@@ -186,7 +198,17 @@ public class Store {
     }
 
     public void setMenu(Menu menu) {
+
         this.menu = menu;
+
+        //this.menu = menu;
+    }
+    public void setLongitude(double longitude){
+        this.longitude = longitude;
+    }
+    private void setLatitude(double lat) {
+        latitude = lat;
+
     }
 
     public int getManager() {

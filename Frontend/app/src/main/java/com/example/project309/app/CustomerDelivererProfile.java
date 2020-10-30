@@ -84,6 +84,9 @@ public class CustomerDelivererProfile extends Profile {
         catch (JSONException e) {
             return null;
         }
+        catch (NullPointerException n) {
+            return null;
+        }
 
         return p;
     }

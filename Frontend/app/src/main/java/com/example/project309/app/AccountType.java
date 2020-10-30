@@ -2,7 +2,7 @@ package com.example.project309.app;
 
 public enum AccountType {
 
-    CUSTOMER_DELIVERER_ACCOUNT("CustomerDeliverer"), MANAGER_ACCOUNT("Manager"), ADMIN_ACCOUNT("Admin");
+    CUSTOMER_DELIVERER_ACCOUNT("CustomerDeliverer"), MANAGER_ACCOUNT("Manager"), ADMIN_ACCOUNT("Admin"), DINING_ACCOUNT("Dining");
 
     public final String accountType;
 
