@@ -7,7 +7,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29bbb436-4bb4-455e-a9a4-ff1aa4d7981d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_sign_up.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_sign_up.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_wear_wear_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_wearable_wearable_2_7_0_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_mockito_mockito_core_1_10_19_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/PlaceOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/layout/activity_place_order.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/values-round/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/project309/TestAlly.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/Store.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/ui/map/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/ui/map/MapsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/uiDelivery/map/MarkerInfoWindowAdapterDelivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/uiDelivery/map/MarkerInfoWindowAdapterDelivery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/net_utils/Const.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/net_utils/Const.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/dimens.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,10 +75,98 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_28" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-10-30T09:08:47.826Z" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="android.template.396961840">
+      <recent name="com.example.project309.app" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Android App.app">
+    <configuration name="TestAlly (1)" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.project309.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.project309" />
+      <option name="MAIN_CLASS_NAME" value="com.example.project309.TestAlly" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestAlly (2)" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.project309.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.project309" />
+      <option name="MAIN_CLASS_NAME" value="com.example.project309.TestAlly" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestAlly (3)" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.project309.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.project309" />
+      <option name="MAIN_CLASS_NAME" value="com.example.project309.TestAlly" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestAlly (4)" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.project309.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.project309" />
+      <option name="MAIN_CLASS_NAME" value="com.example.project309.TestAlly" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestAlly" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.project309.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.project309" />
+      <option name="MAIN_CLASS_NAME" value="com.example.project309.TestAlly" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -119,6 +225,15 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Android JUnit.TestAlly (4)" />
+        <item itemvalue="Android JUnit.TestAlly (3)" />
+        <item itemvalue="Android JUnit.TestAlly (2)" />
+        <item itemvalue="Android JUnit.TestAlly (1)" />
+        <item itemvalue="Android JUnit.TestAlly" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -138,9 +253,53 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="440" y="88" key="#app/0.0.1440.900@0.0.1440.900" timestamp="1603988793972" />
-    <state x="100" y="100" width="1240" height="700" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1603989169136">
+    <state x="100" y="100" width="1240" height="700" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1604019717346">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="100" y="100" width="1240" height="700" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1440.900@0.0.1440.900" timestamp="1603989169136" />
+    <state x="100" y="100" width="1240" height="700" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1440.900@0.0.1440.900" timestamp="1604019717346" />
+    <state width="1398" height="121" key="GridCell.Tab.0.bottom" timestamp="1604049229939">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="121" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1604049229939" />
+    <state width="1398" height="121" key="GridCell.Tab.0.bottom/0.23.1440.807@0.23.1440.807" timestamp="1604048258676" />
+    <state width="1398" height="121" key="GridCell.Tab.0.center" timestamp="1604049229938">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="121" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1604049229938" />
+    <state width="1398" height="121" key="GridCell.Tab.0.center/0.23.1440.807@0.23.1440.807" timestamp="1604048258674" />
+    <state width="1398" height="121" key="GridCell.Tab.0.left" timestamp="1604049229938">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="121" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1604049229938" />
+    <state width="1398" height="121" key="GridCell.Tab.0.left/0.23.1440.807@0.23.1440.807" timestamp="1604048258673" />
+    <state width="1398" height="121" key="GridCell.Tab.0.right" timestamp="1604049229939">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="121" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1604049229939" />
+    <state width="1398" height="121" key="GridCell.Tab.0.right/0.23.1440.807@0.23.1440.807" timestamp="1604048258675" />
+    <state width="1398" height="118" key="GridCell.Tab.1.bottom" timestamp="1604048845286">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="118" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1604048845286" />
+    <state width="1398" height="118" key="GridCell.Tab.1.center" timestamp="1604048845285">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="118" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1604048845285" />
+    <state width="1398" height="118" key="GridCell.Tab.1.left" timestamp="1604048845285">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="118" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1604048845285" />
+    <state width="1398" height="118" key="GridCell.Tab.1.right" timestamp="1604048845286">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="118" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1604048845286" />
+    <state x="100" y="100" width="1240" height="700" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1604048231449">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="100" y="100" width="1240" height="700" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1440.900@0.0.1440.900" timestamp="1604048231449" />
+    <state x="289" y="193" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1604045303443">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="289" y="193" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1440.900@0.0.1440.900" timestamp="1604045303443" />
   </component>
 </project>

@@ -19,6 +19,7 @@ import com.example.project309.R;
 import com.example.project309.app.AppController;
 import com.example.project309.app.JSONHandlerInter;
 import com.example.project309.app.MainNavigationScreenDelivery;
+import com.example.project309.app.PlaceOrder;
 import com.example.project309.app.Store;
 import com.example.project309.app.ViewListenerInter;
 import com.example.project309.app.uiDelivery.map.MarkerInfoWindowAdapterDelivery;
@@ -40,6 +41,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import static com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_GREEN;
+import static com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_RED;
+import static com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_YELLOW;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, ViewListenerInter {
 
@@ -67,12 +72,53 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void getListOfStores() {
         this.jsonH.makeJsonArryReq(Const.URL_JSON_GET_ALL_STORES);
         aStores = Store.allStores;
+        Store s = new Store();
+        s.setName("Season's");
+        s.setLatitude(42.023858);
+        s.setLongitude(-93.638253);
+        s.setSundayOpen("03:45:00");
+        s.setSundayClose("03:45:00");
+        s.setMondayOpen("03:45:00");
+        s.setMondayClose("03:45:00");
+        s.setTuesdayOpen("03:45:00");
+        s.setTuesdayClose("03:45:00");
+        s.setWednesdayOpen("03:45:00");
+        s.setWednesdayClose("03:45:00");
+        s.setThursdayOpen("03:45:00");
+        s.setThursdayClose("03:45:00");
+        s.setFridayOpen("03:45:00");
+        s.setFridayClose("03:45:00");
+        s.setSaturdayOpen("03:45:00");
+        s.setSaturdayClose("03:45:00");
+        s.setOrders(2);
+        aStores.add(s);
+
+        Store st = new Store();
+        st.setName("Convos");
+        st.setLatitude(42.025289);
+        st.setLongitude(-93.640330);
+        st.setSundayOpen("03:45:00");
+        st.setSundayClose("03:45:00");
+        st.setMondayOpen("03:45:00");
+        st.setMondayClose("03:45:00");
+        st.setTuesdayOpen("03:45:00");
+        st.setTuesdayClose("03:45:00");
+        st.setWednesdayOpen("03:45:00");
+        st.setWednesdayClose("03:45:00");
+        st.setThursdayOpen("03:45:00");
+        st.setThursdayClose("03:45:00");
+        st.setFridayOpen("03:45:00");
+        st.setFridayClose("03:45:00");
+        st.setSaturdayOpen("03:45:00");
+        st.setSaturdayClose("03:45:00");
+        st.setOrders(27);
+        aStores.add(st);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        float zoom = 16;
+        float zoom = 15;
 
         mMap.clear();
 
@@ -81,14 +127,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        mMap.addMarker(new MarkerOptions().position(campanile).title("Campanile"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campanile, zoom));
 
-        for (int i =0; i<aStores.size(); i++){
-            LatLng store_temp = new LatLng(aStores.get(i).getLatitude(), aStores.get(i).getLongitude());
-            mMap.addMarker(new MarkerOptions().position(store_temp).title(aStores.get(i).getName()));
-        }
-//        double d = aStores.get(0).getLatitude();
-//        String c = Double.toString(d);
-//        text = "lat: " + ((CharSequence) c);
-//        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+        addMarkersToMap();
 
         //setMapLongClick(mMap); // Set a long click listener for the map;
         setPoiClick(mMap); // Set a click listener for points of interest.
@@ -98,44 +137,36 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         MarkerInfoWindowAdapterDelivery markerInfoWindowAdapterDelivery = new MarkerInfoWindowAdapterDelivery(getApplicationContext(), aStores);
         googleMap.setInfoWindowAdapter(markerInfoWindowAdapterDelivery);
 
-        // Adding and showing marker when the map is touched
-//        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-//            @Override
-//            public void onMapClick(LatLng arg0) {
-//                text = "map click";
-//                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-//                MarkerOptions markerOptions = new MarkerOptions();
-//                markerOptions.position(arg0);
-//                mMap.animateCamera(CameraUpdateFactory.newLatLng(arg0));
-//                Marker marker = mMap.addMarker(markerOptions);
-//                marker.showInfoWindow();
-//            }
-//        });
-
         setInfoWindowClickToPanorama(mMap);
+    }
+
+    public void addMarkersToMap() {
+        CharSequence cs = (CharSequence) Integer.toString(aStores.size());
+        //Toast.makeText(getApplicationContext(), cs, Toast.LENGTH_LONG).show();
+
+        for (int i =0; i<aStores.size(); i++){
+            LatLng store_temp = new LatLng(aStores.get(i).getLatitude(), aStores.get(i).getLongitude());
+            int a = aStores.get(i).getWaitTimeMin();
+            if (a <= 5){
+                mMap.addMarker(new MarkerOptions().position(store_temp).title(aStores.get(i).getName()).icon(BitmapDescriptorFactory.defaultMarker
+                        (BitmapDescriptorFactory.HUE_GREEN)));
+            }
+            else if (a <= 30){
+                mMap.addMarker(new MarkerOptions().position(store_temp).title(aStores.get(i).getName()).icon(BitmapDescriptorFactory.defaultMarker
+                        (BitmapDescriptorFactory.HUE_YELLOW)));
+            }
+            else{
+                mMap.addMarker(new MarkerOptions().position(store_temp).title(aStores.get(i).getName()).icon(BitmapDescriptorFactory.defaultMarker
+                        (BitmapDescriptorFactory.HUE_RED)));
+            }
+        }
     }
 
     private void setInfoWindowClickToPanorama(GoogleMap map) {
         map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-//                if (marker.getTag() == "poi") {
-//                    // Set the position to the position of the marker
-//                    StreetViewPanoramaOptions options =
-//                            new StreetViewPanoramaOptions().position(
-//                                    marker.getPosition());
-//
-//                    SupportStreetViewPanoramaFragment streetViewFragment
-//                            = SupportStreetViewPanoramaFragment
-//                            .newInstance(options);
-//
-//                    // Replace the fragment and add it to the backstack
-//                    getSupportFragmentManager().beginTransaction()
-//                            .replace(R.id.nav_map_delivery,
-//                                    streetViewFragment)
-//                            .addToBackStack(null).commit();
-//                }
-                Intent intent = new Intent(MapsActivity.this, MainNavigationScreenDelivery.class);
+                Intent intent = new Intent(MapsActivity.this, PlaceOrder.class);
                 startActivity(intent);
             }
         });
@@ -220,162 +251,3 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
     }
 }
-
-//package com.example.project309.app.ui.map;
-//
-//import android.Manifest;
-//import android.content.Intent;
-//import android.content.pm.PackageManager;
-//import android.os.Bundle;
-//import android.view.View;
-//import android.widget.Button;
-//import android.widget.Toast;
-//
-//import androidx.annotation.NonNull;
-//import androidx.appcompat.app.AppCompatActivity;
-//import androidx.core.app.ActivityCompat;
-//import androidx.core.content.ContextCompat;
-//
-//import com.example.project309.R;
-//import com.google.android.gms.maps.GoogleMap;
-//import com.google.android.gms.maps.OnMapReadyCallback;
-//import com.google.android.gms.maps.StreetViewPanoramaOptions;
-//import com.google.android.gms.maps.SupportMapFragment;
-//import com.google.android.gms.maps.CameraUpdateFactory;
-//import com.google.android.gms.maps.SupportStreetViewPanoramaFragment;
-//import com.google.android.gms.maps.model.LatLng;
-//import com.google.android.gms.maps.model.Marker;
-//import com.google.android.gms.maps.model.MarkerOptions;
-//import com.google.android.gms.maps.model.PointOfInterest;
-//
-//public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
-//
-//    private GoogleMap mMap;
-//    private static final int REQUEST_LOCATION_PERMISSION = 1;
-//
-//    private Button infoButton;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.fragment_map);
-//        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-//        //SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.nav_map);
-//        SupportMapFragment mapFragment = SupportMapFragment.newInstance();
-//        getSupportFragmentManager().beginTransaction().add(R.id.nav_map, mapFragment).commit();
-//        mapFragment.getMapAsync(this);
-//    }
-//
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//        mMap = googleMap;
-//        // Add a marker at the campanile and move the camera
-//        LatLng campanile = new LatLng(42.025408, -93.646074);
-//        float zoom = 17;
-//
-//        //Toast.makeText(getApplicationContext(), "YES!!!", Toast.LENGTH_LONG).show();
-//
-//        mMap.addMarker(new MarkerOptions().position(campanile).title("Campanile"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campanile, zoom));
-//
-//        setMapLongClick(mMap); // Set a long click listener for the map;
-//        setPoiClick(mMap); // Set a click listener for points of interest.
-//        enableMyLocation(mMap); // Enable location tracking.
-//        // Enable going into StreetView by clicking on an InfoWindow from a
-//        // point of interest.
-//        //setInfoWindowClickToHome(mMap);
-//
-//        // Setting a custom info window adapter for the google map
-//        MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
-//        googleMap.setInfoWindowAdapter(markerInfoWindowAdapter);
-//
-//        // Adding and showing marker when the map is touched
-//        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-//            @Override
-//            public void onMapClick(LatLng arg0) {
-//                MarkerOptions markerOptions = new MarkerOptions();
-//                markerOptions.position(arg0);
-//                mMap.animateCamera(CameraUpdateFactory.newLatLng(arg0));
-//                Marker marker = mMap.addMarker(markerOptions);
-//                marker.showInfoWindow();
-//            }
-//        });
-//
-//        setInfoWindowClickToPanorama(mMap);
-//    }
-//
-//    private void setInfoWindowClickToPanorama(GoogleMap map) {
-//        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-//                    @Override
-//                    public void onInfoWindowClick(Marker marker) {
-//                        if (marker.getTag() == "poi") {
-//                            // Set the position to the position of the marker
-//                            StreetViewPanoramaOptions options =
-//                                    new StreetViewPanoramaOptions().position(
-//                                            marker.getPosition());
-//
-//                            SupportStreetViewPanoramaFragment streetViewFragment
-//                                    = SupportStreetViewPanoramaFragment
-//                                    .newInstance(options);
-//
-//                            // Replace the fragment and add it to the backstack
-//                            getSupportFragmentManager().beginTransaction()
-//                                    .replace(R.id.nav_map,
-//                                            streetViewFragment)
-//                                    .addToBackStack(null).commit();
-//                        }
-//                    }
-//                });
-//    }
-//
-//    private void enableMyLocation(GoogleMap map) {
-//        if (ContextCompat.checkSelfPermission(this,
-//                Manifest.permission.ACCESS_FINE_LOCATION)
-//                == PackageManager.PERMISSION_GRANTED) {
-//            map.setMyLocationEnabled(true);
-//        } else {
-//            ActivityCompat.requestPermissions(this, new String[]
-//                            {Manifest.permission.ACCESS_FINE_LOCATION},
-//                    REQUEST_LOCATION_PERMISSION);
-//        }
-//    }
-//
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode,
-//                                           @NonNull String[] permissions,
-//                                           @NonNull int[] grantResults) {
-//        // Check if location permissions are granted and if so enable the
-//        // location data layer.
-//        switch (requestCode) {
-//            case REQUEST_LOCATION_PERMISSION:
-//                if (grantResults.length > 0
-//                        && grantResults[0]
-//                        == PackageManager.PERMISSION_GRANTED) {
-//                    enableMyLocation(mMap);
-//                    break;
-//                }
-//        }
-//    }
-//
-//    private void setPoiClick(GoogleMap map) {
-//            map.setOnPoiClickListener(new GoogleMap.OnPoiClickListener() {
-//                @Override
-//                public void onPoiClick(PointOfInterest poi) {
-//                    Marker poiMarker = mMap.addMarker(new MarkerOptions()
-//                            .position(poi.latLng)
-//                            .title(poi.name));
-//                    poiMarker.showInfoWindow();
-//                    poiMarker.setTag("poi");
-//                }
-//            });
-//        }
-//
-//        private void setMapLongClick(final GoogleMap map) {
-//            map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-//                @Override
-//                public void onMapLongClick(LatLng latLng) {
-//                    map.addMarker(new MarkerOptions().position(latLng));
-//                }
-//            });
-//        }
-//}
