@@ -160,4 +160,19 @@ class UserController {
     	else
     		return "false";
     }
+    
+    @PostMapping("/remove")
+    public @ResponseBody String removeUser(@RequestParam(value = "id") int userID) {
+
+    	System.out.println("removing user: " + userID);
+    	
+    	if (userRepository.findById(userID) != null) {
+    		
+    		userRepository.deleteById(userID);            
+            return "true";    		
+    	}
+    	else
+    		return "false";
+    	
+    }
 }
