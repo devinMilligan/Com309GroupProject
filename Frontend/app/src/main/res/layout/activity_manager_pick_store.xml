@@ -24,7 +24,7 @@
         android:text="Your Stores"
         android:textColor="@color/colorTextSecond"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/_dynamic"
+        app:layout_constraintBottom_toTopOf="@+id/storeLvManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
