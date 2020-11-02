@@ -55,7 +55,7 @@ public class MarkerInfoWindowAdapterDelivery implements GoogleMap.InfoWindowAdap
         }
 
         if (i!=allStores.size()) {
-            restName.setText(restaurantName + "     (" + allStores.get(i).getOrders() + ")");
+            restName.setText(restaurantName + " (" + allStores.get(i).getOrders() + ")");
             sun.setText("S  " + allStores.get(i).getSundayOpen().substring(0, 5) + " - " + allStores.get(i).getSundayClose().substring(0, 5));
             mon.setText("M  " + allStores.get(i).getMondayOpen().substring(0, 5) + " - " + allStores.get(i).getMondayClose().substring(0, 5));
             tue.setText("T  " + allStores.get(i).getTuesdayOpen().substring(0, 5) + " - " + allStores.get(i).getTuesdayClose().substring(0, 5));

@@ -72,6 +72,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void getListOfStores() {
         this.jsonH.makeJsonArryReq(Const.URL_JSON_GET_ALL_STORES);
         aStores = Store.allStores;
+
         Store s = new Store();
         s.setName("Season's");
         s.setLatitude(42.023858);
@@ -141,8 +142,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void addMarkersToMap() {
-        CharSequence cs = (CharSequence) Integer.toString(aStores.size());
-        //Toast.makeText(getApplicationContext(), cs, Toast.LENGTH_LONG).show();
+//        CharSequence cs = (CharSequence) Integer.toString(aStores.size());
+//        Toast.makeText(getApplicationContext(), cs, Toast.LENGTH_LONG).show();
 
         for (int i =0; i<aStores.size(); i++){
             LatLng store_temp = new LatLng(aStores.get(i).getLatitude(), aStores.get(i).getLongitude());
