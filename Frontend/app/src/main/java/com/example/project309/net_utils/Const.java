@@ -9,7 +9,6 @@ public class Const {
     public static final String URL_JSON_CREATE_USER = "http://coms-309-mc-08.cs.iastate.edu:8080/users/new";
     public static final String URL_IMAGE = "";
     public static final String URL_JSON_LOGIN = "http://coms-309-mc-08.cs.iastate.edu:8080/users/search";
-
     public static final String URL_JSON_UPDATE_USER = "http://coms-309-mc-08.cs.iastate.edu:8080/users/updateUser";
     public static final String URL_STRING_CHECK_EMAIL = "http://coms-309-mc-08.cs.iastate.edu:8080/users/checkEmail";
     public static final String URL_JSON_UPDATE_USER_PASSWORD = "http://coms-309-mc-08.cs.iastate.edu:8080/users/changePassword";
@@ -17,7 +16,5 @@ public class Const {
     public static final String URL_JSON_ADD_STORE = "http://coms-309-mc-08.cs.iastate.edu:8080/stores/new";
     public static final String URL_JSON_UPDATE_STORE = "http://coms-309-mc-08.cs.iastate.edu:8080/stores/update";
     public static final String URL_JSON_MANAGER_STORES = "http://coms-309-mc-08.cs.iastate.edu:8080/stores/getByManager";
-
-
     public static final String URL_JSON_CHECK_EMAIL = " http://coms-309-mc-08.cs.iastate.edu:8080/users/checkEmail";
 }
