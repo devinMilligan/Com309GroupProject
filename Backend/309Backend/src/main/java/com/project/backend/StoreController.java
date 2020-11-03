@@ -74,4 +74,19 @@ class StoreController {
 
         return stores;
     }
+    
+    @PostMapping("/remove")
+    public @ResponseBody String removeStore(@RequestParam(value = "id") int storeID) {
+
+    	System.out.println("removing store: " + storeID);
+    	
+    	if (storeRepository.findById(storeID) != null) {
+    		
+            storeRepository.deleteById(storeID);            
+            return "true";    		
+    	}
+    	else
+    		return "false";
+    	
+    }
 }
