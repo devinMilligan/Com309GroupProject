@@ -54,5 +54,4 @@ public class MenuItem {
     public void setStore(int store) {
         this.store = store;
     }
-    
 }
