@@ -57,12 +57,20 @@ public class MenuListAdapter extends ArrayAdapter<MenuItem> {
             //Gets the textviews in the storelistadapter
             TextView menuTitle = (TextView) convertView.findViewById(R.id.txtMenuItem);
             TextView menuItemPrice = (TextView) convertView.findViewById(R.id.txtItemPrice);
+            TextView menuDescription = (TextView) convertView.findViewById(R.id.txtDescriptionList);
 
             if (menuTitle != null) {
                 menuTitle.setText(menuItem.getTitle());
             }
             if (menuItemPrice != null) {     //set the values to the display
                 menuItemPrice.setText(Double.toString(menuItem.getPrice()));
+            }
+            if(menuDescription != null){
+                if(menuItem.getDescription().length() > 50){
+                    menuDescription.setText(menuItem.getDescription().substring(0,50) + "...");
+                }else {
+                    menuDescription.setText(menuItem.getDescription());
+                }
             }
 
             return convertView;

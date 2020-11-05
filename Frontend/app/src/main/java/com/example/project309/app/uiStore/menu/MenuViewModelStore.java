@@ -39,8 +39,8 @@ public class MenuViewModelStore extends ViewModel {
     private void loadMenu(){
 
         ArrayList<MenuItem> aMenuItems = new ArrayList<>();
-        aMenuItems.add(new MenuItem("Menu Item 1", 9.99));
-        aMenuItems.add(new MenuItem("Menu Item 2", 9.99));
+        aMenuItems.add(new MenuItem("Menu Item 1","Description", 9.99));
+        aMenuItems.add(new MenuItem("Menu Item 2", "Description",9.99));
 
         menuItems.setValue(aMenuItems);
 

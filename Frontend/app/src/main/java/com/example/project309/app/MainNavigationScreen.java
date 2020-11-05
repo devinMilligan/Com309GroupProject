@@ -37,8 +37,10 @@ public class MainNavigationScreen extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "This Will Bring you to Past and Current Orders\nAlso where you can start new order", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                Intent startOrder = new Intent(MainNavigationScreen.this, OrderPickStore.class);
+                startActivity(startOrder);
+
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

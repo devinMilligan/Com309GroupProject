@@ -17,4 +17,5 @@ public class Const {
     public static final String URL_JSON_UPDATE_STORE = "http://coms-309-mc-08.cs.iastate.edu:8080/stores/update";
     public static final String URL_JSON_MANAGER_STORES = "http://coms-309-mc-08.cs.iastate.edu:8080/stores/getByManager";
     public static final String URL_JSON_CHECK_EMAIL = " http://coms-309-mc-08.cs.iastate.edu:8080/users/checkEmail";
+    public static final String URL_JSON_GET_STORE_MENU = "http://coms-309-mc-08.cs.iastate.edu:8080/menu/byStore";
 }

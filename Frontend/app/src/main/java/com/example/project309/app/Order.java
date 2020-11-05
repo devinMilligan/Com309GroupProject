@@ -4,16 +4,68 @@ import java.util.ArrayList;
 
 public class Order {
 
-    public Profile deliverer;
+    public static Order currentOrder;
+    private Profile deliverer;
     private double oPrice;
     private int oNum;
-    public ArrayList<MenuItem> items;
+    private ArrayList<MenuItem> items;
 
     public Order(int orderNumber, double orderPrice){
 
         oPrice = orderPrice;
         oNum = orderNumber;
         items = new ArrayList<>();
+
+    }
+
+    public Order(){
+
+        items = new ArrayList<>();
+
+    }
+
+    public void setDeliverer(Profile deliverer){
+        this.deliverer = deliverer;
+    }
+    public void setPrice(double price){
+        this.oPrice = price;
+    }
+    public void setOrderNumber(int orderNumber){
+        oNum = orderNumber;
+    }
+    public void setOrderedItems(ArrayList<MenuItem> items){
+        if(items != null) {
+            this.items = items;
+        }
+    }
+    public void addMenuItem(MenuItem item, int quantity){
+        if(item!= null) {
+            if(!items.contains(item)) {
+                items.add(item);
+            }
+            oPrice += item.getPrice()*quantity;
+        }
+    }
+    public void addMenuItem(MenuItem item){
+        if(item!= null) {
+            if(!items.contains(item)) {
+                items.add(item);
+            }
+            oPrice += item.getPrice()*item.getQuantity();
+        }
+    }
+    public void removeMenuItem(MenuItem item, int quantity){
+
+        if(item!= null) {
+            oPrice -= item.getPrice()*quantity;
+        }
+
+    }
+    public void removeMenuItem(MenuItem item){
+
+        if(item!= null) {
+            items.remove(item);
+        }
 
     }
 
@@ -26,9 +78,14 @@ public class Order {
     public Profile getDeliverer(){
         return deliverer;
     }
-    public void addMenuItem(MenuItem item){
-        items.add(item);
+
+    public int getNumItems(){
+        if(items != null) {
+            return items.size();
+        }
+        return 0;
     }
+
 
     //order can recommend stores to order from based on their menus
     //and their locations

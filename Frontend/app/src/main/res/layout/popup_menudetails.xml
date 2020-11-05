@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#528F8D82"
+    android:gravity="center"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_layout"
+        app:cardCornerRadius="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtItemTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:text="Menu Title"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/txtDescription"
+                android:layout_width="391dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/txtItemTitle"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="38dp"
+                android:gravity="center"
+                android:text="This is the long description of the menu item, and this is a really long description that i am talking very much that is completely useless except to show the size" />
+
+            <EditText
+                android:id="@+id/editNumberQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/txtDescription"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="63dp"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="number"
+                android:text="13" />
+
+            <Button
+                android:id="@+id/btnUp"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/editNumberQuantity"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="317dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/gen_button_circle"
+                android:text="+"
+                android:textColor="@color/colorAccent"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/btnDown"
+                android:layout_width="47dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/editNumberQuantity"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/gen_button_circle"
+                android:text="-"
+                android:textColor="@color/colorAccent"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/btnUpdateCart"
+                android:layout_width="214dp"
+                android:layout_height="32dp"
+                android:layout_alignTop="@id/editNumberQuantity"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="61dp"
+                android:background="@drawable/gen_button_style"
+                android:text="Update Cart"
+                android:textColor="@color/colorAccent" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
