@@ -118,19 +118,19 @@ public class MenuItemPopUp implements View.OnClickListener {
             case R.id.btnUpdateCart:
 
                 if(currentItem.getQuantity() == 0){
-                    currentOrder.removeMenuItem(currentItem);
+                    currentOrder.removeMenuItem(currentItem, initialQ);
                 }else {
 
                     int diff = currentItem.getQuantity() - initialQ;
 
                     if(diff > 0) {
                         currentOrder.addMenuItem(currentItem, diff);
-                    }else if(diff>0) {
-                        currentOrder.removeMenuItem(currentItem, diff);
+                    }else if(diff<0) {
+                        currentOrder.removeMenuItem(currentItem, -diff);
                     }
-                    popupWindow.dismiss();
-                }
 
+                }
+                popupWindow.dismiss();
                 break;
 
         }

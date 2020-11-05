@@ -58,13 +58,9 @@ public class Order {
 
         if(item!= null) {
             oPrice -= item.getPrice()*quantity;
-        }
-
-    }
-    public void removeMenuItem(MenuItem item){
-
-        if(item!= null) {
-            items.remove(item);
+            if(item.getQuantity() == 0){
+                items.remove(item);
+            }
         }
 
     }
