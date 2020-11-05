@@ -26,11 +26,6 @@ public class Order {
 	private int store;
 	private String status;
 	
-	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
-    @JoinTable(name = "OrderItems", joinColumns = { @JoinColumn(name = "id") }, inverseJoinColumns = {
-            @JoinColumn(name = "orderID") })
-    private Set<MenuItem> order = new HashSet<>();
-	
     public int getId() {
         return id;
     }    

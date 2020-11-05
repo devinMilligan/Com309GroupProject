@@ -24,14 +24,6 @@ public class MenuItem {
 	private double price;
 	private String description;
 	private int store;
-	
-	@ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-            },
-            mappedBy = "order")
-    private Set<Order> food = new HashSet<>();
 
 
     public int getId() {
