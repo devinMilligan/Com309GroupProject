@@ -6,11 +6,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "OrderItems")
-public class OrderItems {
+public class OrderItem {
 
-	@Id
 	private int orderID;
-	@Id	
 	private int foodID;
 	
 	private int quantity;

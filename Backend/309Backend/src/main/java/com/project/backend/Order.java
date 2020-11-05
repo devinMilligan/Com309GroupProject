@@ -1,5 +1,6 @@
 package com.project.backend;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -26,9 +27,9 @@ public class Order {
 	private String status;
 	
 	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
-    @JoinTable(name = "STUDENT_COURSE", joinColumns = { @JoinColumn(name = "STUDENT_ID") }, inverseJoinColumns = {
-            @JoinColumn(name = "COURSE_ID") })
-    private Set<OrderItems> OrderItems;
+    @JoinTable(name = "OrderItems", joinColumns = { @JoinColumn(name = "id") }, inverseJoinColumns = {
+            @JoinColumn(name = "orderID") })
+    private Set<MenuItem> order = new HashSet<>();
 	
     public int getId() {
         return id;
