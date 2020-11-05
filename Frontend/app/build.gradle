@@ -40,6 +40,7 @@ dependencies {
     implementation 'org.slf4j:slf4j-nop:1.7.25'
 
     implementation 'androidx.wear:wear:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.6.3'
 

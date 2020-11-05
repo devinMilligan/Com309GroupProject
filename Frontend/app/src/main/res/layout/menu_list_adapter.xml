@@ -24,12 +24,27 @@
 
     <TextView
         android:id="@+id/txtItemPrice"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
         android:gravity="right"
         android:text="Price: $19.99"
+        android:textColor="@color/colorTextSecond"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtDescriptionList"
+        app:layout_constraintStart_toStartOf="@+id/txtDescriptionList"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescriptionList" />
+
+    <TextView
+        android:id="@+id/txtDescriptionList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:gravity="center"
+        android:text="LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL..."
+        android:textColor="@color/colorTextSecond"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/txtMenuItem"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/txtMenuItem"
         app:layout_constraintTop_toBottomOf="@+id/txtMenuItem" />
 

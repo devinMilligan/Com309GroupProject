@@ -1,5 +1,9 @@
 package com.example.project309.app;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class Menu {
@@ -55,6 +59,35 @@ public class Menu {
     protected ArrayList<MenuItem> getMenuItems(){
 
         return menuItems;
+
+    }
+
+    public static Menu getMenuJSON(JSONArray arrJ){
+
+        Menu temp = new Menu();
+        JSONObject jObj;
+
+        try {
+
+            for (int i = 0; i < arrJ.length(); i++) {
+
+                jObj = arrJ.getJSONObject(i);
+                MenuItem item = new MenuItem();
+
+                item.setTitle(jObj.getString("name"));
+                item.setDescription(jObj.getString("description"));
+                item.setPrice(jObj.getDouble("price"));
+
+                temp.addMenuItem(item);
+
+            }
+
+        }
+        catch (JSONException e){
+            return null;
+        }
+
+        return temp;
 
     }
 
