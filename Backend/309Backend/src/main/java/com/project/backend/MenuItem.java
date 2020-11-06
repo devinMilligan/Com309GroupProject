@@ -18,7 +18,7 @@ public class MenuItem {
 	private double price;
 	private String description;
 	private int store;
-	
+
 
     public int getId() {
         return id;
@@ -54,5 +54,4 @@ public class MenuItem {
     public void setStore(int store) {
         this.store = store;
     }
-    
 }

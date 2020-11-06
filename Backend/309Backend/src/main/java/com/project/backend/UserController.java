@@ -107,7 +107,7 @@ class UserController {
     @PostMapping("/changePassword")
     public @ResponseBody User changePassword(@RequestParam(value = "id") int id, @RequestParam(value = "newPassword") String password) throws IOException
     {
-    	User user = userRepository.findByid(id).get(0);
+    	User user = userRepository.findById(id);
     	user.setPassword(password);    	
     	
     	System.out.println("changing password: " + user.getPassword());

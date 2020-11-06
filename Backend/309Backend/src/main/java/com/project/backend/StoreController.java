@@ -14,7 +14,6 @@ import java.util.List;
 
 import com.project.backend.Store;
 
-
 @Controller
 @RequestMapping("/stores")
 class StoreController {

@@ -6,9 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MenuItemRepository extends CrudRepository<MenuItem, Integer> {
+public interface OrderItemRepository extends CrudRepository<OrderItem, Integer> {
 	
-	MenuItem findById(int id);
-	List<MenuItem> findByStore(int store);
+	List<OrderItem> findByOrderID(int orderID);
 
 }
