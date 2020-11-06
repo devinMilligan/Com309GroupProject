@@ -78,6 +78,21 @@ public class OrderController {
     	
     }
 	
+	@PostMapping("/advance")
+    public @ResponseBody void advanceStatus(@RequestParam(value = "orderID") int order) {
+
+		Order thisOrder = orderRepository.findByid(order);
+		
+		if (thisOrder.getStatus() == "Active")
+			thisOrder.setStatus("Submitted");
+		else if (thisOrder.getStatus() == "Submitted")
+			thisOrder.setStatus("InTransit");
+		else if (thisOrder.getStatus() == "InTransit")
+			thisOrder.setStatus("Delivered");
+		
+        orderRepository.save(thisOrder);
+    }
+	
 	@PostMapping("/update")
     public @ResponseBody void updateStatus(@RequestParam(value = "orderID") int order, @RequestParam(value = "status") String status) {
 
