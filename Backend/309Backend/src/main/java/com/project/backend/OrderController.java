@@ -28,17 +28,25 @@ public class OrderController {
 	
 	@Autowired
 	private StoreRepository storeRepository;
-	
+
+    
+    public class UserAlreadyHasActiveOrderException extends Exception {
+		private static final long serialVersionUID = 1L;
+    }
 	
 	@PostMapping("/new")
-    public @ResponseBody Order newOrder(@RequestParam(value = "userID") int userID, @RequestParam(value = "storeID") int storeID) {
+    public @ResponseBody Order newOrder(@RequestParam(value = "userID") int userID, @RequestParam(value = "storeID") int storeID) throws UserAlreadyHasActiveOrderException {
 
-		Order order = new Order(userID, storeID, "Active");
-		
-        System.out.println("adding order: " + order.getId());
-        orderRepository.save(order);
-        
-        return order;
+		if (orderRepository.findByOrderingUserAndStatus(userID, "Active") != null)
+			throw new UserAlreadyHasActiveOrderException();
+		else {
+			Order order = new Order(userID, storeID, "Active");
+			
+	        System.out.println("adding order: " + order.getId());
+	        orderRepository.save(order);
+	        
+	        return order;
+		}
     }
 	
 	@PostMapping("/addItem")
