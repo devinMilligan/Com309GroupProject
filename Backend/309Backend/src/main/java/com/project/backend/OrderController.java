@@ -157,4 +157,26 @@ public class OrderController {
     	
 		return orders;
     }
+    
+    @GetMapping("/byUser")
+    public @ResponseBody List<Order> getUserOrders(@RequestParam(value = "user") int userID) {
+    	
+    	List<Order> orders = new ArrayList<Order>();
+    	for (Order order : orderRepository.findByOrderingUser(userID)) {
+    		orders.add(order);
+        }
+    	
+		return orders;
+    }
+    
+    @GetMapping("/byDeliverer")
+    public @ResponseBody List<Order> getDelivererOrders(@RequestParam(value = "deliverer") int userID) {
+    	
+    	List<Order> orders = new ArrayList<Order>();
+    	for (Order order : orderRepository.findByDeliveringUser(userID)) {
+    		orders.add(order);
+        }
+    	
+		return orders;
+    }
 }
