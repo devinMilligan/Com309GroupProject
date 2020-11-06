@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderItemRepository extends CrudRepository<OrderItem, Integer> {
 	
-	List<OrderItem> findByorderID(int orderID);
+	List<OrderItem> findByOrderID(int orderID);
 
 }

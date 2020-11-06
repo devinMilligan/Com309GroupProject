@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.backend.Store.NotEnoughOrdersExeption;
+
 @Controller
 @RequestMapping("/orders")
 public class OrderController {
@@ -47,8 +49,8 @@ public class OrderController {
         System.out.println("adding item: " + item.getId());
         orderItemRepository.save(item);
         
-        Order thisOrder = orderRepository.findByID(order);
-        MenuItem thisItem = menuItemRepository.findByID(foodID);
+        Order thisOrder = orderRepository.findById(order);
+        MenuItem thisItem = menuItemRepository.findById(foodID);
         
         double currTotal = thisOrder.getTotal();
         double price = thisItem.getPrice();
@@ -67,7 +69,7 @@ public class OrderController {
     	if (orderRepository.findById(orderID) != null) {
     		
     		orderRepository.deleteById(orderID);
-    		Iterable<OrderItem> foodList = orderItemRepository.findByorderID(orderID);
+    		Iterable<OrderItem> foodList = orderItemRepository.findByOrderID(orderID);
     		orderItemRepository.deleteAll(foodList);
     		
             return "true";    		
@@ -77,24 +79,33 @@ public class OrderController {
     }
 	
 	@PostMapping("/advance")
-    public @ResponseBody String advanceStatus(@RequestParam(value = "orderID") int order) {
+    public @ResponseBody String advanceStatus(@RequestParam(value = "orderID") int order) throws NotEnoughOrdersExeption {
 
-		Order thisOrder = orderRepository.findByID(order);
+		Order thisOrder = orderRepository.findById(order);
 		
-		if (thisOrder.getStatus() == "Active")
+		if (thisOrder.getStatus().equals("Active"))
 		{
 			thisOrder.setStatus("Submitted");
 	        
 			int storeID = thisOrder.getStore();
-	        Store thisStore = storeRepository.findByID(storeID);
+	        Store thisStore = storeRepository.findById(storeID);
 	        
 	        thisStore.addOrders(1);
 	        
 	        storeRepository.save(thisStore);
 		}
-		else if (thisOrder.getStatus() == "Submitted")
+		else if (thisOrder.getStatus().equals("Submitted"))
+		{
 			thisOrder.setStatus("InTransit");
-		else if (thisOrder.getStatus() == "InTransit")
+			
+			int storeID = thisOrder.getStore();
+	        Store thisStore = storeRepository.findById(storeID);
+	        
+	        thisStore.removeOrders(1);
+	        
+	        storeRepository.save(thisStore);
+		}
+		else if (thisOrder.getStatus().equals("InTransit"))
 			thisOrder.setStatus("Delivered");
 		
         orderRepository.save(thisOrder);
@@ -103,22 +114,34 @@ public class OrderController {
     } 
 	
 	@PostMapping("/update")
-    public @ResponseBody String updateStatus(@RequestParam(value = "orderID") int order, @RequestParam(value = "status") String status) {
+    public @ResponseBody String updateStatus(@RequestParam(value = "orderID") int order, @RequestParam(value = "status") String status) throws NotEnoughOrdersExeption {
 
-		Order thisOrder = orderRepository.findByID(order);
-		
-		thisOrder.setStatus(status);
-		
-        orderRepository.save(thisOrder);
-        
-        if (thisOrder.getStatus() == "Submitted")
-		{	        
-			int storeID = thisOrder.getStore();
-	        Store thisStore = storeRepository.findByID(storeID);
+		Order thisOrder = orderRepository.findById(order);
+
+		if (!(thisOrder.getStatus().equals(status)))
+		{
+			thisOrder.setStatus(status);
+			
+	        orderRepository.save(thisOrder);
 	        
-	        thisStore.addOrders(1);
-	        
-	        storeRepository.save(thisStore);
+	        if (thisOrder.getStatus().equals("Submitted"))
+			{	        
+				int storeID = thisOrder.getStore();
+		        Store thisStore = storeRepository.findById(storeID);
+		        
+		        thisStore.addOrders(1);
+		        
+		        storeRepository.save(thisStore);
+			}
+	        else if (thisOrder.getStatus().equals("InTransit"))
+			{	        
+				int storeID = thisOrder.getStore();
+		        Store thisStore = storeRepository.findById(storeID);
+		        
+		        thisStore.removeOrders(1);
+		        
+		        storeRepository.save(thisStore);
+			}
 		}
         
         return thisOrder.getStatus();

@@ -141,7 +141,7 @@ public class Store {
     public Time getcloses_saturday() {return closes_saturday;}
     public void setcloses_saturday(Time hours) {this.closes_saturday = hours;}
     
-    private class NotEnoughOrdersExeption extends Exception {
+    public class NotEnoughOrdersExeption extends Exception {
 		private static final long serialVersionUID = 1L;
     }
 }

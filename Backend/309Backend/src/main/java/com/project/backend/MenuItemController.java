@@ -45,8 +45,8 @@ public class MenuItemController {
     	
     	System.out.println("-- searching users --");
     	
-    	if (menuRepository.findByID(foodID) != null)
-    		return menuRepository.findByID(foodID);
+    	if (menuRepository.findById(foodID) != null)
+    		return menuRepository.findById(foodID);
     	else
     		return null;
     }
