@@ -77,4 +77,14 @@ public class OrderController {
     		return "false";
     	
     }
+	
+	@PostMapping("/update")
+    public @ResponseBody void updateStatus(@RequestParam(value = "orderID") int order, @RequestParam(value = "status") String status) {
+
+		Order thisOrder = orderRepository.findByid(order);
+		
+		thisOrder.setStatus(status);
+		
+        orderRepository.save(thisOrder);
+    }
 }
