@@ -27,6 +27,8 @@ public class Store {
     private double latitude;
     private double longitude;
     
+    private int numOrders;
+    
     //Store hours will be displayed to the users, and will be used to regulate when delivery orders can be placed for a location
     private Time opens_sunday;
     private Time opens_monday;
@@ -90,6 +92,22 @@ public class Store {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+    
+    public int getNumOrders() {
+        return numOrders;
+    }
+    public void setNumOrders(int numorders) {
+        this.numOrders = numorders;
+    }
+    public void addOrders(int numorders) {
+        this.numOrders += numorders;
+    }
+    public void removeOrders(int numorders) throws NotEnoughOrdersExeption {
+    	if (this.numOrders >= numorders)
+    		this.numOrders -= numorders;
+    	else
+    		throw new NotEnoughOrdersExeption();
+    }
 
     //Getters and setters for opening hours
     public Time getopens_sunday() {return opens_sunday;}
@@ -122,4 +140,8 @@ public class Store {
     public void setcloses_friday(Time hours) {this.closes_friday = hours;}
     public Time getcloses_saturday() {return closes_saturday;}
     public void setcloses_saturday(Time hours) {this.closes_saturday = hours;}
+    
+    private class NotEnoughOrdersExeption extends Exception {
+		private static final long serialVersionUID = 1L;
+    }
 }

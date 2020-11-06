@@ -18,6 +18,7 @@ public class Order {
 	private int deliveringUser;
 	private int store;
 	private String status;
+	private double total;
 	
 	public Order(){ }	
 
@@ -26,6 +27,7 @@ public class Order {
 		deliveringUser = 0;
 		this.store = store;
 		this.status = status;
+		total = 0.00;
 	}
 	
     public int getId() {
@@ -61,5 +63,12 @@ public class Order {
     }
     public void setStatus(String status) {
     	this.status = status;
-    }    
+    }
+	
+    public double getTotal() {
+    	return this.total;
+    }
+    public void setTotal(double total) {
+    	this.total = total;
+    }
 }

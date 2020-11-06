@@ -10,5 +10,6 @@ public interface StoreRepository extends CrudRepository<Store, Integer> {
 
 	//Create an auto-generated method to query Stores table by manager ID
 	List<Store> findByManager(Integer manager);
+	Store findByid(int id);
 	
 }

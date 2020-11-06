@@ -13,8 +13,15 @@ public class OrderController {
 
 	@Autowired
 	private OrderRepository orderRepository;
+	
 	@Autowired
 	private OrderItemRepository orderItemRepository;
+	
+	@Autowired
+	private MenuItemRepository menuItemRepository;
+	
+	@Autowired
+	private StoreRepository storeRepository;
 	
 	
 	@PostMapping("/new")
@@ -24,6 +31,12 @@ public class OrderController {
 		
         System.out.println("adding order: " + order.getId());
         orderRepository.save(order);
+        
+        Store thisStore = storeRepository.findByid(storeID);
+        thisStore.addOrders(1);
+        
+        storeRepository.save(thisStore);
+        
         return order;
     }
 	
@@ -34,6 +47,34 @@ public class OrderController {
 		
         System.out.println("adding item: " + item.getId());
         orderItemRepository.save(item);
+        
+        Order thisOrder = orderRepository.findByid(order);
+        MenuItem thisItem = menuItemRepository.findByid(foodID);
+        
+        double currTotal = thisOrder.getTotal();
+        double price = thisItem.getPrice();
+        
+        thisOrder.setTotal(currTotal + (price * quantity));
+        orderRepository.save(thisOrder);
+        
         return item;
+    }
+	    
+    @PostMapping("/cancel")
+    public @ResponseBody String cancelOrder(@RequestParam(value = "orderID") int orderID) {
+
+    	System.out.println("removing order: " + orderID);
+    	
+    	if (orderRepository.findById(orderID) != null) {
+    		
+    		orderRepository.deleteById(orderID);
+    		Iterable<OrderItem> foodList = orderItemRepository.findByorderID(orderID);
+    		orderItemRepository.deleteAll(foodList);
+    		
+            return "true";    		
+    	}
+    	else
+    		return "false";
+    	
     }
 }
