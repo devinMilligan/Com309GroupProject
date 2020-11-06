@@ -1,16 +1,9 @@
 package com.project.backend;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +18,15 @@ public class Order {
 	private int deliveringUser;
 	private int store;
 	private String status;
+	
+	public Order(){ }	
+
+	public Order(int user, int store, String status){ 
+		orderingUser = user;
+		deliveringUser = 0;
+		this.store = store;
+		this.status = status;
+	}
 	
     public int getId() {
         return id;
@@ -59,6 +61,5 @@ public class Order {
     }
     public void setStatus(String status) {
     	this.status = status;
-    }
-    
+    }    
 }

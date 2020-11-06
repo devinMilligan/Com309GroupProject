@@ -14,10 +14,18 @@ public class OrderItem {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	private int orderID;
+	private int orderID;	
 	private int foodID;
 	
 	private int quantity;
+	
+	public OrderItem(){ }	
+
+	public OrderItem(int order, int food, int quantity){ 
+		orderID = order;
+		foodID = food;
+		this.quantity = quantity;
+	}
 	
     public int getId() {
         return id;
@@ -26,10 +34,10 @@ public class OrderItem {
         this.id = id;
     }
 
-    public int getOrderId() {
+    public int getOrderID() {
         return orderID;
     }    
-    public void setOrderId(int orderID) {
+    public void setOrderID(int orderID) {
         this.orderID = orderID;
     }
     
