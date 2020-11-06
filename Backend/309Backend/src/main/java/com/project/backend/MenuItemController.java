@@ -33,7 +33,7 @@ public class MenuItemController {
     	System.out.println("-- searching menus --");
     	
     	List<MenuItem> menu = new ArrayList<MenuItem>();
-    	for (MenuItem food : menuRepository.findBystore(storeID)) {
+    	for (MenuItem food : menuRepository.findByStore(storeID)) {
             menu.add(food);
         }
     	
@@ -45,8 +45,8 @@ public class MenuItemController {
     	
     	System.out.println("-- searching users --");
     	
-    	if (menuRepository.findByid(foodID) != null)
-    		return menuRepository.findByid(foodID);
+    	if (menuRepository.findByID(foodID) != null)
+    		return menuRepository.findByID(foodID);
     	else
     		return null;
     }

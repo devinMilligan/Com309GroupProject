@@ -1,7 +1,11 @@
 package com.project.backend;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,11 +36,6 @@ public class OrderController {
         System.out.println("adding order: " + order.getId());
         orderRepository.save(order);
         
-        Store thisStore = storeRepository.findByid(storeID);
-        thisStore.addOrders(1);
-        
-        storeRepository.save(thisStore);
-        
         return order;
     }
 	
@@ -48,8 +47,8 @@ public class OrderController {
         System.out.println("adding item: " + item.getId());
         orderItemRepository.save(item);
         
-        Order thisOrder = orderRepository.findByid(order);
-        MenuItem thisItem = menuItemRepository.findByid(foodID);
+        Order thisOrder = orderRepository.findByID(order);
+        MenuItem thisItem = menuItemRepository.findByID(foodID);
         
         double currTotal = thisOrder.getTotal();
         double price = thisItem.getPrice();
@@ -74,32 +73,65 @@ public class OrderController {
             return "true";    		
     	}
     	else
-    		return "false";
-    	
+    		return "false";    	
     }
 	
 	@PostMapping("/advance")
-    public @ResponseBody void advanceStatus(@RequestParam(value = "orderID") int order) {
+    public @ResponseBody String advanceStatus(@RequestParam(value = "orderID") int order) {
 
-		Order thisOrder = orderRepository.findByid(order);
+		Order thisOrder = orderRepository.findByID(order);
 		
 		if (thisOrder.getStatus() == "Active")
+		{
 			thisOrder.setStatus("Submitted");
+	        
+			int storeID = thisOrder.getStore();
+	        Store thisStore = storeRepository.findByID(storeID);
+	        
+	        thisStore.addOrders(1);
+	        
+	        storeRepository.save(thisStore);
+		}
 		else if (thisOrder.getStatus() == "Submitted")
 			thisOrder.setStatus("InTransit");
 		else if (thisOrder.getStatus() == "InTransit")
 			thisOrder.setStatus("Delivered");
 		
         orderRepository.save(thisOrder);
-    }
+        
+        return thisOrder.getStatus();
+    } 
 	
 	@PostMapping("/update")
-    public @ResponseBody void updateStatus(@RequestParam(value = "orderID") int order, @RequestParam(value = "status") String status) {
+    public @ResponseBody String updateStatus(@RequestParam(value = "orderID") int order, @RequestParam(value = "status") String status) {
 
-		Order thisOrder = orderRepository.findByid(order);
+		Order thisOrder = orderRepository.findByID(order);
 		
 		thisOrder.setStatus(status);
 		
         orderRepository.save(thisOrder);
+        
+        if (thisOrder.getStatus() == "Submitted")
+		{	        
+			int storeID = thisOrder.getStore();
+	        Store thisStore = storeRepository.findByID(storeID);
+	        
+	        thisStore.addOrders(1);
+	        
+	        storeRepository.save(thisStore);
+		}
+        
+        return thisOrder.getStatus();
+    }
+    
+    @GetMapping("/byStore")
+    public @ResponseBody List<Order> getOrders(@RequestParam(value = "store") int storeID) {
+    	
+    	List<Order> orders = new ArrayList<Order>();
+    	for (Order order : orderRepository.findByStoreAndStatus(storeID, "Submitted")) {
+    		orders.add(order);
+        }
+    	
+		return orders;
     }
 }

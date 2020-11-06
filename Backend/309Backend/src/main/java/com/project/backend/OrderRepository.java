@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderRepository extends CrudRepository<Order, Integer> {
 	
-	Order findByid(int id);
-	List<Order> findByorderingUser(int orderingUser);
-	List<Order> findBydeliveringUser(int deliveringUser);
-	List<Order> findBystore(int store);
-	List<Order> findBystatus(String status);
+	Order findByID(int id);
+	List<Order> findByOrderingUser(int orderingUser);
+	List<Order> findByDeliveringUser(int deliveringUser);
+	List<Order> findByStoreAndStatus(int store, String status);
+	List<Order> findByStatus(String status);
 
 }
