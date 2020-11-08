@@ -1,4 +1,4 @@
-package com.project.backend;
+package controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.backend.Store.NotEnoughOrdersExeption;
+import ObjectClasses.MenuItem;
+import ObjectClasses.Order;
+import ObjectClasses.OrderItem;
+import ObjectClasses.Store;
+import ObjectClasses.Store.NotEnoughOrdersExeption;
+import Repositories.MenuItemRepository;
+import Repositories.OrderItemRepository;
+import Repositories.OrderRepository;
+import Repositories.StoreRepository;
 
 @Controller
 @RequestMapping("/orders")
