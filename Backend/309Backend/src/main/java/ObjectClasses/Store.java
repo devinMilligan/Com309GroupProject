@@ -1,4 +1,4 @@
-package com.project.backend;
+package ObjectClasses;
 
 import java.sql.Time;
 import javax.persistence.Entity;
