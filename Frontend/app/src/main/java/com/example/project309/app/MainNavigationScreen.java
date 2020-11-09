@@ -23,10 +23,22 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 
+/**
+ * This sets up and controls the structure for the fragments in the MainNavigation Screen
+ *
+ * @author Devin Milligan
+ */
 public class MainNavigationScreen extends AppCompatActivity {
+
 
     private AppBarConfiguration mAppBarConfiguration;
 
+    /**
+     * Runs on the creation of this activity and sets up the structure for the fragments and intializes it
+     * then opens up the home fragment
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +70,12 @@ public class MainNavigationScreen extends AppCompatActivity {
 
     }
 
+    /**
+     * Runs on the creation of the 3 dot menu
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

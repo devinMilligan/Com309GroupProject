@@ -19,13 +19,35 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * This Activity allows for the manager to pick the store of the stores whose information they want to see and edit
+ *
+ * @author Devin Milligan
+ */
 public class ManagerPickStore extends AppCompatActivity implements ViewListenerInter, AdapterView.OnItemClickListener {
 
+    /**
+     * List view that will display the {@link Store} instances
+     */
     private ListView lvStores;
+    /**
+     * Adapter to help display the stores on the ListView
+     */
     private StoreListAdapter sAdapter;
+    /**
+     * Array list of all the stores to be displayed
+     */
     private ArrayList<Store> aStores;
+    /**
+     * {@link JSONHandler} instance used to make request to the server
+     */
     private JSONHandlerInter jsonH;
 
+    /**
+     * Runs when the activity is created and displays the stores on the screens and collects the stores if not gotten already
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +71,9 @@ public class ManagerPickStore extends AppCompatActivity implements ViewListenerI
 
     }
 
+    /**
+     * Makes a request to the server to get all the manager's stores
+     */
     public void loadStores(){
 
         ArrayList<JSONVariable> paramsList = new ArrayList<>();
@@ -57,6 +82,11 @@ public class ManagerPickStore extends AppCompatActivity implements ViewListenerI
 
     }
 
+    /**
+     * Takes the response of the server and gets a {@link Store} instance from the JSON object
+     *
+     * @param response
+     */
     @Override
     public void onSuccess(JSONObject response) {
 
@@ -66,6 +96,11 @@ public class ManagerPickStore extends AppCompatActivity implements ViewListenerI
 
     }
 
+    /**
+     * Takes the response from the server of JSONArray and creates the list of {@link Store} intances and updates the display
+     *
+     * @param response
+     */
     @Override
     public void onSuccess(JSONArray response) {
 
@@ -91,6 +126,11 @@ public class ManagerPickStore extends AppCompatActivity implements ViewListenerI
 
     }
 
+    /**
+     * Error handling of the request error received
+     *
+     * @param error the error returned from the request
+     */
     @Override
     public void onError(VolleyError error) {
 
@@ -98,6 +138,14 @@ public class ManagerPickStore extends AppCompatActivity implements ViewListenerI
 
     }
 
+    /**
+     * Determines what to do on the item click of the listview based on the item clicked
+     *
+     * @param parent
+     * @param view
+     * @param position the position of the item clicked
+     * @param id
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 

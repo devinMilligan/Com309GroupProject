@@ -19,13 +19,35 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * This allows the user to pick a store that you want to order from
+ *
+ * @author Devin Milligan
+ */
 public class OrderPickStore extends AppCompatActivity implements ViewListenerInter, AdapterView.OnItemClickListener {
 
+    /**
+     * ListView that is used to display the stores
+     */
     private ListView lvStores;
+    /**
+     * List Adapter that helps display the stores on the list view
+     */
     private StoreListAdapter sAdapter;
+    /**
+     * ArrayList that contains the stores that are to be displayed
+     */
     private ArrayList<Store> aStores;
+    /**
+     * {@link JSONHandler} instance used to make requests to the server
+     */
     private JSONHandlerInter jsonH;
 
+    /**
+     * Runs whe the activity creates and displays the stores on the listview and gets them from the server if they havnt already
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +71,20 @@ public class OrderPickStore extends AppCompatActivity implements ViewListenerInt
 
     }
 
+    /**
+     * Makes the request to the server for the list of stores
+     */
     public void loadStores(){
 
         jsonH.makeJsonArryReq(Const.URL_JSON_GET_ALL_STORES);
 
     }
 
+    /**
+     * Recieves the response from the server of JSON Object and gets a {@link Store} object from it
+     *
+     * @param response the JSONObject response that is {@link Store} insatnce in json form
+     */
     @Override
     public void onSuccess(JSONObject response) {
 
@@ -64,6 +94,12 @@ public class OrderPickStore extends AppCompatActivity implements ViewListenerInt
 
     }
 
+    /**
+     * Gets the JSONArray response from the server and turns this into a list of {@link Store} instances
+     * that is set to the current list of stores
+     *
+     * @param response
+     */
     @Override
     public void onSuccess(JSONArray response) {
 
@@ -89,6 +125,11 @@ public class OrderPickStore extends AppCompatActivity implements ViewListenerInt
 
     }
 
+    /**
+     * Error handling if the request returns an error
+     *
+     * @param error the error returned by the request
+     */
     @Override
     public void onError(VolleyError error) {
 
@@ -96,6 +137,15 @@ public class OrderPickStore extends AppCompatActivity implements ViewListenerInt
 
     }
 
+    /**
+     * Handles a click on a store and sets that to the store to make an order from and send the user
+     * to the ordering screen to make an order form that store
+     *
+     * @param parent
+     * @param view
+     * @param position the position of the item clicked
+     * @param id
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 

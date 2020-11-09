@@ -13,12 +13,27 @@ import com.example.project309.R;
 
 import java.util.ArrayList;
 
+/**
+ * This class Allows for the easy display in a list of Accounts in order to display the correct fields of an account
+ *
+ * @author Devin Milligan
+ */
 public class AccountsListAdapter extends ArrayAdapter<Profile> {
 
+    /**
+     * The complete list of {@link Profile} intances that need to be displayed
+     */
     private ArrayList<Profile> profiles;
     private LayoutInflater layoutInflater;
     private int viewResourceId;
 
+    /**
+     * Constructor that sets the array that needs to be displayed and where to display it
+     *
+     * @param context the Context on where this will be displayed
+     * @param resource
+     * @param p the Arraylist of the Profiles to be displayed
+     */
     public AccountsListAdapter(@NonNull Context context, int resource, ArrayList<Profile> p) {
         super(context, resource, p);
 
@@ -29,11 +44,25 @@ public class AccountsListAdapter extends ArrayAdapter<Profile> {
     }
 
 
+    /**
+     * Gets a certain instance from the complete list of Profiles
+     *
+     * @param position the position of the instnace to get from the arrayList
+     * @return
+     */
     @Override
     public Profile getItem(int position) {
         return profiles.get(position);
     }
 
+    /**
+     * Gets the view with the correct fields to be displayed on the contatiner
+     *
+     * @param position position of the instance to be displayed
+     * @param convertView
+     * @param parent
+     * @return
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
 
         convertView = layoutInflater.inflate(viewResourceId, null);

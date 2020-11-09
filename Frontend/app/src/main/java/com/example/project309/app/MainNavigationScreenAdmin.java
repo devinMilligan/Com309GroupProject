@@ -20,8 +20,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+/**
+ * This sets up and controls the structure for the fragments in the MainNavigation Screen Admin
+ *
+ * @author Devin Milligan
+ */
 public class MainNavigationScreenAdmin extends AppCompatActivity {
 
+    /**
+     * Enum to descibe and idenity different option available in the option menu
+     */
     public enum SpecialFucntionType{
 
         ADD_STORE("Add_Store"),
@@ -33,22 +41,24 @@ public class MainNavigationScreenAdmin extends AppCompatActivity {
             value = val;
         }
 
-
-
-
-
-
-
-
         public String getValue(){
             return value;
         }
 
     }
 
+    /**
+     * Current option menu configuration
+     */
     public SpecialFucntionType currentType = SpecialFucntionType.ADD_STORE;
     private AppBarConfiguration mAppBarConfiguration;
 
+    /**
+     * Runs on the creation of this activity and sets up the structure for the fragments and intializes it
+     * then opens up the home fragment
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +79,12 @@ public class MainNavigationScreenAdmin extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    /**
+     * Runs on the creation of the 3 dot menu, and sets it to the current configuration
+     *
+     * @param menu the menu that is being created
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -88,6 +104,12 @@ public class MainNavigationScreenAdmin extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    /**
+     * Determines what to do when a MenuItem is clicked in the Option Menu based off the item
+     *
+     * @param item the MenuItem Cliked
+     * @return returns if this succeeds
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
@@ -117,6 +139,11 @@ public class MainNavigationScreenAdmin extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method that can be colled by fragments to changed the configuration of the options menu
+     *
+     * @param e The configration of the options menu
+     */
     public void changeThreeDotFunction(MainNavigationScreenAdmin.SpecialFucntionType e){
 
         currentType = e;

@@ -27,33 +27,82 @@ import java.util.List;
 
 import static com.example.project309.app.Store.getLocationFromAddress;
 
+/**
+ * This class allows for the updating and creation of a store on the server through this activity that
+ * displays all the fields of the store
+ *
+ * @author Devin Milligan
+ */
 public class Create_Update_Store extends AppCompatActivity implements View.OnClickListener, ViewListenerInter {
 
+    /**
+     * EditTexts on the activity
+     */
     EditText edStoreName, edAddress, edSundayOpen, edSundayClose, edMondayOpen, edMondayClose,
         edTuesdayOpen, edTuesdayClose, edWednesdayOpen, edWednesdayClose, edThursdayOpen, edThursdayClose,
         edFridayOpen, edFridayClose, edSaturdayOpen, edSaturdayClose;
 
+    /**
+     * TextView of the managers to be autocompleted during text
+     */
     MultiAutoCompleteTextView edManager;
 
+    /**
+     * TextViews on the Activity
+     */
     TextView txtStoreName, txtAddress, txtManager, txtSundayOpen, txtSundayClose, txtMondayOpen, txtMondayClose,
             txtTuesdayOpen, txtTuesdayClose, txtWednesdayOpen, txtWednesdayClose, txtThursdayOpen, txtThursdayClose,
             txtFridayOpen, txtFridayClose, txtSaturdayOpen, txtSaturdayClose;
 
+    /**
+     * Button used to save edits
+     */
     Button btnSave;
 
+    /**
+     * {@link JSONHandler} instance used to make requests to the server
+     */
     JSONHandlerInter jsonH;
 
+    /**
+     * String that used to determine if the user is creating or updating a store
+     */
     String createUpdateUser;
 
+    /**
+     * {@link MessageBoxBuilder} instance used to display messages to the user
+     */
     MessageBoxInter message;
 
+    /**
+     * {@link PointLocation} instance to store the coordinates of the store
+     */
     PointLocation pointLocation;
 
+    /**
+     * ArrayList of {@link ManagerProfile} instances used to autocomplete the field
+     */
     ArrayList<ManagerProfile> managers;
+    /**
+     * {@link ManagerListAdapter} instance used to help display the instance on the view
+     */
     ManagerListAdapter managerListAdapter;
+    /**
+     * This instance holds the new Managers if the manaeger was edited
+     */
     ManagerProfile newManager;
+    /**
+     * instance to store the current Manager of the store
+     */
     ManagerProfile currentManager;
 
+
+    /**
+     * Runs on the creation of the Activity and initializes all thes fields to the current value of
+     * the fields contatined in the current store
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -157,6 +206,11 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
     }
 
 
+    /**
+     * Recieves all teh buttons clicks and determines what to do based off the button
+     *
+     * @param v View of the button that contatins the id
+     */
     @Override
     public void onClick(View v) {
 
@@ -216,6 +270,13 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
 
     }
 
+    /**
+     * Receives the response from the server in JSONObject form that contatins the new store object
+     * with the update fields and of the new store object if applicable, and fills the fields on the
+     * screen with the new values
+     *
+     * @param response JSONObject response holding a {@link Store} instance in JSON form
+     */
     @Override
     public void onSuccess(JSONObject response) {
 
@@ -252,6 +313,12 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
 
     }
 
+    /**
+     * Receives the response from the Sever in from of JSON Array and takes this array and makes it into a list
+     * of {@link ManagerProfile} instances
+     *
+     * @param response JSONArray response holding managers
+     */
     @Override
     public void onSuccess(JSONArray response) {
 
@@ -284,6 +351,11 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
 
     }
 
+    /**
+     * Error Handler of an error returned from the request
+     *
+     * @param error the error returned
+     */
     @Override
     public void onError(VolleyError error) {
 
@@ -292,6 +364,11 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
 
     }
 
+    /**
+     * Checks to see if the fields hold good data to be submitted to the server
+     *
+     * @return boolean returns true if the fields are good, false if there is an issue
+     */
     private boolean areFieldsEmpty(){
 
         boolean check = true;

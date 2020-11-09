@@ -16,20 +16,53 @@ import com.example.project309.app.MenuItem;
 
 import org.w3c.dom.Text;
 
+/**
+ * This class is an a Pop up on top of another activity to pick a quanitity of food items that you want
+ *
+ * @author Devin Milligan
+ */
 public class MenuItemPopUp implements View.OnClickListener {
 
+    /**
+     * TextViews on this popup
+     */
     TextView txtTitle, txtDescription;
+    /**
+     * Edit text on the pop up for quanitity of items
+     */
     EditText editNumberQuanity;
+    /**
+     * Buttons on the pop up
+     */
     Button btnUp,btnDown, btnUpdate;
+    /**
+     * Current MenuItem being altered
+     */
     MenuItem currentItem;
+    /**
+     * Current Order being altered
+     */
     Order currentOrder;
 
     PopupWindow popupWindow;
 
+    /**
+     * Listener for the pop up to call when it is dismissed
+     */
     PopUpViewListener popUpViewListener;
 
+    /**
+     * initial value for the quanitity before changing
+     */
     int initialQ = 0;
 
+    /**
+     * This displays the pop up window to the user of the menu item's information
+     *
+     * @param view
+     * @param item Menu Item that is being changed
+     * @param order Order that this menu Item is being changed on
+     */
     public void showPopupWindow(final View view, MenuItem item, Order order) {
 
         currentItem = item;
@@ -87,12 +120,22 @@ public class MenuItemPopUp implements View.OnClickListener {
 
     }
 
+    /**
+     * Sets the listener for the dismissing of the pop up
+     *
+     * @param popUpViewListener the listener to be called
+     */
     public void setListener(PopUpViewListener popUpViewListener){
 
         this.popUpViewListener = popUpViewListener;
 
     }
 
+    /**
+     * Recieves button clicks from all the buttons and determines what to do from the button that was clicked
+     *
+     * @param v the View of the button that was clicked that contains the id
+     */
     @Override
     public void onClick(View v) {
 

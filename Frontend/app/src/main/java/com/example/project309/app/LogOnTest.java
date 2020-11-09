@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+@Deprecated
 public class LogOnTest extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = "LOGON";

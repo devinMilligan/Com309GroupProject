@@ -5,8 +5,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * This class is the Profile of a manager
+ *
+ * @author Devin Milligan
+ */
 public class ManagerProfile extends Profile {
 
+    /**
+     * List of all managers from the server
+     */
     public static ArrayList<ManagerProfile> managers = new ArrayList<>();
 
     protected String address;
@@ -60,6 +68,12 @@ public class ManagerProfile extends Profile {
             name = lastName;
     }
 
+    /**
+     * Used to get a ManagerProfile instance from a JSONObject
+     *
+     * @param info JSONObject that holds a ManagerProfile in json format
+     * @return
+     */
     public static ManagerProfile getProfileInfo(JSONObject info) {
         ManagerProfile p = new ManagerProfile();
 

@@ -13,13 +13,31 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class Allows for the easy display in a list of Manager in order to display the correct fields of a manager
+ *
+ * @author Devin Milligan
+ */
 public class ManagerListAdapter extends ArrayAdapter<ManagerProfile> {
 
+    /**
+     * Total list of managers that can be displayed
+     */
     private ArrayList<ManagerProfile> managersAll;
+    /**
+     * Filtered list of managers that is displayed
+     */
     private ArrayList<ManagerProfile> managers;
     private LayoutInflater layoutInflater;
     private int viewResourceId;
 
+    /**
+     * Constructor that sets the array that needs to be displayed and where to display it
+     *
+     * @param context the Context on where this will be displayed
+     * @param resource
+     * @param s the Arraylist of the Profiles to be displayed
+     */
     public ManagerListAdapter(@NonNull Context context, int resource, ArrayList<ManagerProfile> s) {
         super(context, resource, s);
 
@@ -30,16 +48,36 @@ public class ManagerListAdapter extends ArrayAdapter<ManagerProfile> {
 
     }
 
+
+    /**
+     * Reuturns the size of the displayed managers, the filtered one
+     *
+     * @return size of filtered list
+     */
     public int getCount() {
         return managers.size();
     }
 
+    /**
+     * Gets a certain instance from the complete list of Profiles
+     *
+     * @param position the position of the instnace to get from the arrayList
+     * @return
+     */
     @Override
     public ManagerProfile getItem(int position) {
 
         return managers.get(position);
     }
 
+    /**
+     * Gets the view with the correct fields to be displayed on the contatiner
+     *
+     * @param position position of the instance to be displayed
+     * @param convertView
+     * @param parent
+     * @return
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
 
         convertView = layoutInflater.inflate(viewResourceId, null);
@@ -61,6 +99,11 @@ public class ManagerListAdapter extends ArrayAdapter<ManagerProfile> {
         return null;
     }
 
+    /**
+     * Gets the filtered results for the managers based pn what is entered in the text field
+     *
+     * @return current filter to be used
+     */
     @Override
     public Filter getFilter() {
         return new Filter() {

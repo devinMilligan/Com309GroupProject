@@ -12,18 +12,30 @@ import com.example.project309.net_utils.Const;
 
 import java.util.ArrayList;
 
-
+/**
+ * Class makes request to the server and reiceives the responses from the server
+ *
+ * @author Devin Milligan
+ */
 public class StringRequestSpec implements StringRequestInter {
 
+    /**
+     * Tag used in log statements used in log statements
+     */
     private String TAG = this.getClass().toString();
 
-    // This tag will be used to cancel the request
+    /**
+     * USed to cancel the request
+     */
     private String tag_string_req = "string_req";
 
+    /**
+     * The listener to send the responses to
+     */
     private StringAbstractListener sA;
 
     /**
-     * Constructor
+     * Default Constructor
      */
     public StringRequestSpec() {
 
@@ -31,7 +43,10 @@ public class StringRequestSpec implements StringRequestInter {
 
     /**
      * Makes a string GET request
+     *
      * @param urlM the URL to request from
+     * @param paramList the params to send with the request
+     * @param rm the type of Request POST or GET
      */
     public void makeStringReqInner(String urlM, ArrayList<JSONVariable> paramList, RequestMethod rm) {
 
@@ -77,6 +92,11 @@ public class StringRequestSpec implements StringRequestInter {
 
     }
 
+    /**
+     * Sets the listener to send the responses to
+     *
+     * @param stringAbstractListener the listener to receive the responses
+     */
     @Override
     public void setListener(StringAbstractListener stringAbstractListener) {
         sA = stringAbstractListener;

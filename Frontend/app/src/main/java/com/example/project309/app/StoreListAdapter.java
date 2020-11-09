@@ -13,12 +13,27 @@ import com.example.project309.R;
 
 import java.util.ArrayList;
 
+/**
+ * This class Allows for the easy display in a list of Stores in order to display the correct fields of a Stores
+ *
+ * @author Devin Milligan
+ */
 public class StoreListAdapter extends ArrayAdapter<Store> {
 
+    /**
+     * List of all stores to be displayed
+     */
     private ArrayList<Store> stores;
     private LayoutInflater layoutInflater;
     private int viewResourceId;
 
+    /**
+     * Constructor that takes in the list of Stores and Context where this is going to be displayed
+     *
+     * @param context Context where this is going to be displayed
+     * @param resource
+     * @param s the list of stores to be displayed
+     */
     public StoreListAdapter(@NonNull Context context, int resource, ArrayList<Store> s) {
         super(context, resource, s);
 
@@ -29,11 +44,25 @@ public class StoreListAdapter extends ArrayAdapter<Store> {
     }
 
 
+    /**
+     * Gets an item from the list of stores
+     *
+     * @param position position of the item from the list to get
+     * @return Store intance from list
+     */
     @Override
     public Store getItem(int position) {
         return stores.get(position);
     }
 
+    /**
+     * Creates a view to be used in a container and returns this view to be displayed
+     *
+     * @param position the position where this is displayed in a list
+     * @param convertView
+     * @param parent
+     * @return
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
 
         convertView = layoutInflater.inflate(viewResourceId, null);

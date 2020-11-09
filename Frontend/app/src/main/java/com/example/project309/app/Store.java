@@ -14,9 +14,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Store class that contains all the fields of a store
+ *
+ * @author Devin Milligan
+ */
+
 public class Store {
 
+    /**
+     * ArrayList of all stores pulled from the database
+     */
     public static ArrayList<Store> allStores = new ArrayList<>();
+    /**
+     * The current Store in the database
+     */
     public static Store currentStore;
 
     private Image imStore;
@@ -269,6 +281,12 @@ public class Store {
 
     }
 
+    /**
+     * Copys a store object into another store object
+     *
+     * @param copyInto Store to copy info into
+     * @param copyFrom Store to copy info from
+     */
     public static void copyStore(Store copyInto, Store copyFrom){
 
         copyInto.setAddress(copyFrom.getAddress());
@@ -292,6 +310,12 @@ public class Store {
 
     }
 
+    /**
+     * Gets a store object from a JSONObject in json format
+     *
+     * @param json JSONObject with a store in json format
+     * @return Store instance from the JSONObject
+     */
     public static Store getStore(JSONObject json){
 
         Store temp = new Store();

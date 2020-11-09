@@ -7,20 +7,37 @@ import android.util.Log;
 
 import com.example.project309.R;
 
+/**
+ * This class is used to display messages to the user in an interactive way
+ *
+ * @author Devin Milligan
+ */
 public class MessageBoxBuilder implements MessageBoxInter, MessageBoxListenerInter{
+    /**
+     * Tag to be used in log statements to be unique to this class
+     */
     public static final String TAG = "MessageBoxBuilder";
 
-    //Context of the class using this class
+    /**
+     * The Conext where this box will be displayed
+     */
     protected Context context;
-    //Dialog box that will be displayed
+    /**
+     * The dialog that will host this message
+     */
     private AlertDialog dialog;
-
+    /**
+     * The message to be displayed
+     */
     private String mesStr;
 
+    /**
+     * The class to send the responses to
+     */
     private MessageBoxListenerInter mB;
 
     /**
-     * Constructor
+     * Constructor initializing a default listener
      */
     public MessageBoxBuilder(){
 
@@ -28,10 +45,20 @@ public class MessageBoxBuilder implements MessageBoxInter, MessageBoxListenerInt
 
     }
 
+    /**
+     * This sets the listener for all the responses to sent to
+     *
+     * @param messageBoxListenerInter The listener to send all of the messages to
+     */
     public void setListener(MessageBoxListenerInter messageBoxListenerInter){
         mB = messageBoxListenerInter;
     }
 
+    /**
+     * Sets the context where this box will be displayed
+     *
+     * @param c Context where it is being displayed
+     */
     public void setContext(Context c){
 
         context = c;
@@ -109,21 +136,41 @@ public class MessageBoxBuilder implements MessageBoxInter, MessageBoxListenerInt
     }
 
 
+    /**
+     * Default listener for the dissmissal
+     *
+     * @param message the message of the box that is being utilized
+     */
     @Override
     public void onDismiss(String message) {
         Log.d(TAG, message + ": The AlertDialog was dismissed");
     }
 
+    /**
+     * Default Listner for the ok button press
+     *
+     * @param message the message of the box that is being utilized
+     */
     @Override
     public void neutralButtonPressed(String message) {
         Log.d(TAG, message + ": The AlertDialog was dismissed");
     }
 
+    /**
+     * Defult listener for the yes button press
+     *
+     * @param message the message of the box that is being utilized
+     */
     @Override
     public void positiveButtonPressed(String message) {
         Log.d(TAG, message + ": The AlertDialog was dismissed");
     }
 
+    /**
+     * Default listener for the no button press
+     *
+     * @param message the message of the box that is being utilized
+     */
     @Override
     public void negativeButtonPressed(String message) {
         Log.d(TAG, message + ": The AlertDialog was dismissed");

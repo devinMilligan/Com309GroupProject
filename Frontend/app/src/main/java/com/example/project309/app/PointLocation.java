@@ -1,5 +1,10 @@
 package com.example.project309.app;
 
+/**
+ * This is a contatiner class to hold coordinates
+ *
+ * @author Devin Miligan
+ */
 public class PointLocation {
 
     double longi;

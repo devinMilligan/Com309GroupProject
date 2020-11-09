@@ -13,12 +13,27 @@ import com.example.project309.R;
 
 import java.util.ArrayList;
 
+/**
+ * This class Allows for the easy display in a list of Orders in order to display the correct fields of a Order
+ *
+ * @author Devin Milligan
+ */
 public class OrdersListAdapter extends ArrayAdapter<Order> {
 
+    /**
+     * List of all orders that will be displayed
+     */
     private ArrayList<Order> orders;
     private LayoutInflater layoutInflater;
     private int viewResourceId;
 
+    /**
+     * Constructor that takes in the list of all of the items to be displayed and where to be displayed
+     *
+     * @param context Context where to be displayed
+     * @param resource
+     * @param o The list of all the orders that will be displayed
+     */
     public OrdersListAdapter(@NonNull Context context, int resource, ArrayList<Order> o) {
         super(context, resource, o);
 
@@ -28,12 +43,25 @@ public class OrdersListAdapter extends ArrayAdapter<Order> {
 
     }
 
-
+    /**
+     * This gets the item in the position on the display
+     *
+     * @param position the position of the item to be displayed
+     * @return
+     */
     @Override
     public Order getItem(int position) {
         return orders.get(position);
     }
 
+    /**
+     * Sets up a display with the correct fields to be displayed and returnes this View to be displayed
+     *
+     * @param position the position of the item to be displayed
+     * @param convertView
+     * @param parent
+     * @return
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
 
         convertView = layoutInflater.inflate(viewResourceId, null);

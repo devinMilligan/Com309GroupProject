@@ -13,12 +13,27 @@ import com.example.project309.R;
 
 import java.util.ArrayList;
 
+/**
+ * This class Allows for the easy display in a list of menu and menu items in order to display the correct fields of a menu items
+ *
+ * @author Devin Milligan
+ */
 public class MenuListAdapter extends ArrayAdapter<MenuItem> {
 
+    /**
+     * The total list of menu items to be displayed
+     */
     private ArrayList<MenuItem> menuItems;
     private LayoutInflater layoutInflater;
     private int viewResourceId;
 
+    /**
+     * Constructor that sets the total list of things to be displayed
+     *
+     * @param context the context on where this is to be displayed
+     * @param resource
+     * @param m the list of Menu Items
+     */
     public MenuListAdapter(@NonNull Context context, int resource, ArrayList<MenuItem> m) {
         super(context, resource, m);
 
@@ -27,6 +42,14 @@ public class MenuListAdapter extends ArrayAdapter<MenuItem> {
         viewResourceId = resource;
 
     }
+
+    /**
+     * Constructor that takes a Menu object and turn that into a list of items to be displayed
+     *
+     * @param context the context on where this is to be displayed
+     * @param resource
+     * @param m the lsit of Menu Items
+     */
     public MenuListAdapter(@NonNull Context context, int resource, Menu m) {
 
         super(context, resource, m.menuItems);
@@ -39,12 +62,25 @@ public class MenuListAdapter extends ArrayAdapter<MenuItem> {
 
     }
 
-
+    /**
+     * Gets the item from the array of total menu items
+     *
+     * @param position the position of the item to get
+     * @return
+     */
     @Override
     public MenuItem getItem(int position) {
         return menuItems.get(position);
     }
 
+    /**
+     * This sets the fields to be displayed and then returns this view to be used in the display
+     *
+     * @param position position of the item to be displayed
+     * @param convertView
+     * @param parent
+     * @return
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
 
         convertView = layoutInflater.inflate(viewResourceId, null);
