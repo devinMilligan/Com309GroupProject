@@ -23,15 +23,39 @@ import com.example.project309.app.OrdersListAdapter;
 
 import java.util.ArrayList;
 
+/**
+ * This class gets and displays the menu for the store on the fragment
+ *
+ * @author Devin Milligan
+ */
 public class MenuFragmentStore extends Fragment {
 
+    /**
+     * {@link MenuViewModelStore} instance that holds the menu for the store
+     */
     private MenuViewModelStore menuViewModelStore;
 
+    /**
+     * ListView used to display the menu
+     */
     private ListView lvMenuItems;
+    /**
+     * {@link MenuListAdapter} instance that helps display the menu on the ListView
+     */
     private MenuListAdapter mAdapter;
+    /**
+     * Array list of {@link MenuItem} that is the local list and it what is displayed on the screen
+     */
     private ArrayList<MenuItem> aMenuItem;
 
-
+    /**
+     * Runs on fragment creation and gets and displays the menu on the screen
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 

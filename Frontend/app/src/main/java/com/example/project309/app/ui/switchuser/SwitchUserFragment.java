@@ -17,10 +17,26 @@ import com.example.project309.R;
 import com.example.project309.app.MainNavigationScreenAdmin;
 import com.example.project309.app.MainNavigationScreenDelivery;
 
+/**
+ * This class handles the switching of view from the customer view to the view of a deliverer
+ *
+ * @author Devin Milligan
+ */
 public class SwitchUserFragment extends Fragment {
 
+    /**
+     * {@link SwitchUserViewModel} that holds the live value of the describing text
+     */
     private SwitchUserViewModel switchUserViewModel;
 
+    /**
+     * Runs on the fragment creation and puts the user into delivery view
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         switchUserViewModel =

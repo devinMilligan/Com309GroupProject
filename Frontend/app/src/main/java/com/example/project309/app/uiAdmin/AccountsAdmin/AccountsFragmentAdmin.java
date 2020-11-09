@@ -19,16 +19,40 @@ import com.example.project309.app.Profile;
 
 import java.util.ArrayList;
 
+/**
+ * This class displays the Admin Accounts on the fragment
+ *
+ * @author Devin Milligan
+ */
 public class AccountsFragmentAdmin extends Fragment {
 
+    /**
+     * {@link AccountsViewModelAdmin} instance used to get the admin accounts
+     */
     private AccountsViewModelAdmin accountsViewModelAdmin;
 
+    /**
+     * ListView used to display the admin accounts
+     */
     private ListView lvAdminAccts;
+    /**
+     * {@link AccountsListAdapter} used to help display the admin accounts in a ListView
+     */
     private AccountsListAdapter aAdapter;
+    /**
+     * ArrayList of all the Admin Accounts
+     */
     private ArrayList<Profile> aAdminAccts;
 
 
-
+    /**
+     * Runs on fragment creation and displays the initial admin accounts after getting them from the AccountsViewModelAdmin
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 

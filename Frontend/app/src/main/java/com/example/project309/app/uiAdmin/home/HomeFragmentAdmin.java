@@ -25,17 +25,43 @@ import com.example.project309.app.StoreListAdapter;
 
 import java.util.ArrayList;
 
+/**
+ * This class displays all the current stores to the Admin and allows them to click on them and go to edit
+ *
+ * @author Devin Milligan
+ */
 public class HomeFragmentAdmin extends Fragment implements AdapterView.OnItemClickListener {
 
+    /**
+     * {@link com.example.project309.app.uiAdmin.home.HomeViewModelAdmin} instance that holds the current list of stores
+     */
     private HomeViewModelAdmin homeViewModelAdmin;
 
+    /**
+     * ListView used to display and interact with the stores
+     */
     private ListView lvStores;
+    /**
+     * {@link StoreListAdapter} used to help display the stores on the ListView
+     */
     private StoreListAdapter sAdapter;
+    /**
+     * Holds the local list of all the stores to be displayed
+     */
     private ArrayList<Store> aStores;
-
+    /**
+     * Context used to reference this fragment
+     */
     private Context context;
 
-
+    /**
+     * Runs on fragment creation to display the initial list of all the stores and initialize the local instances
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -73,6 +99,14 @@ public class HomeFragmentAdmin extends Fragment implements AdapterView.OnItemCli
         return root;
     }
 
+    /**
+     * Navigates the user to the {@link Create_Update_Store} activity to update the store
+     *
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 

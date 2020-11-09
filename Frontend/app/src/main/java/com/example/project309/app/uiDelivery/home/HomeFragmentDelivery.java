@@ -20,15 +20,40 @@ import com.example.project309.app.StoreListAdapter;
 
 import java.util.ArrayList;
 
+/**
+ * This class displays the current orders available for the Deliverer to pick up
+ *
+ * @author Devin Milligan
+ */
 public class HomeFragmentDelivery extends Fragment {
 
+    /**
+     * {@link HomeViewModelDelivery} instance holding the current orders and the describing text
+     */
     private HomeViewModelDelivery homeViewModelDelivery;
 
+    /**
+     * ListView used to display the current orders to the user
+     */
     private ListView lvOrders;
+    /**
+     * {@link OrdersListAdapter} instance used to help display the orders on the ListView
+     */
     private OrdersListAdapter oAdapter;
+    /**
+     * ArrayList instance of {@link Order}s that is the local list of orders being displayed
+     */
     private ArrayList<Order> aOrders;
 
 
+    /**
+     * Runs on fragment creation and displays all the current orders on the screen and gets the current ones
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 

@@ -14,10 +14,25 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.project309.R;
 
+/**
+ * Displays the profile information of the admin and allows edits to the information
+ *
+ * @author Devin Milligan
+ */
 public class ProfileFragmentAdmin extends Fragment {
-
+    /**
+     * {@link ProfileViewModelAdmin} instance that holds the current admin account information
+     */
     private ProfileViewModelAdmin profileViewModelAdmin;
 
+    /**
+     * Runs on the creation of the fragment and fills the fields on the screen
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         profileViewModelAdmin =

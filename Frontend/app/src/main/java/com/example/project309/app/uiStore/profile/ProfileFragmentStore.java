@@ -40,35 +40,88 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+
+/**
+ * This class allows the editing and display of all the fields pertaining to the current Store
+ *
+ * @author Devin Milligan
+ */
 public class ProfileFragmentStore extends Fragment implements ViewListenerInter, View.OnClickListener {
 
+    /**
+     * {@link ProfileViewModelStore} instance that holds the current store information
+     */
     private static ProfileViewModelStore profileViewModelStore;
+    /**
+     * {@link Store} local instance of the current store
+     */
     private Store storeM;
+    /**
+     * {@link ManagerProfile} instance that holds the new Manager if changed
+     */
     private ManagerProfile newManager;
 
+    /**
+     * ArraList that holds all the current managers in the data base as {@link ManagerProfile}
+     */
     static ArrayList<ManagerProfile> allManagers = new ArrayList<>();
 
+    /**
+     * EditTexts on the fragment
+     */
     EditText edStoreName, edAddress, edSundayOpen, edSundayClose, edMondayOpen, edMondayClose,
             edTuesdayOpen, edTuesdayClose, edWednesdayOpen, edWednesdayClose, edThursdayOpen, edThursdayClose,
             edFridayOpen, edFridayClose, edSaturdayOpen, edSaturdayClose;
 
+    /**
+     * TextViews on the fragment
+     */
     TextView txtStoreName, txtAddress, txtManager, txtSundayOpen, txtSundayClose, txtMondayOpen, txtMondayClose,
             txtTuesdayOpen, txtTuesdayClose, txtWednesdayOpen, txtWednesdayClose, txtThursdayOpen, txtThursdayClose,
             txtFridayOpen, txtFridayClose, txtSaturdayOpen, txtSaturdayClose;
 
+    /**
+     * MultipAutoCompleteTExtView used to autocomplete the managers if changing the manager
+     */
     static MultiAutoCompleteTextView edManager;
+    /**
+     * {@link ManagerListAdapter} instance used to help display the managers list in the MultiAutoCompleteTExtView
+     */
     static ManagerListAdapter managerListAdapter;
 
+    /**
+     * Button used to save the current settings
+     */
     Button btnSave;
 
+    /**
+     * {@link com.example.project309.app.JSONHandler} instance used to make a request from the server
+     */
     JSONHandlerInter jsonH;
 
+    /**
+     * {@link com.example.project309.app.MessageBoxBuilder} instance used to display messages to the user
+     */
     MessageBoxInter message;
 
+    /**
+     * {@link PointLocation} instance used to store the coordinated for the store
+     */
     PointLocation pointLocation;
 
+    /**
+     * Context used to reference this fragment
+     */
     static Context context;
 
+    /**
+     * Runs on fragment creation and gets and displays all the current store information and intializes objects for later use
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         newManager = null;
@@ -187,6 +240,12 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
         return root;
     }
 
+    /**
+     * Receives the JSONObject response from the server and displays the new store information on the screen
+     * and updates the current {@link Store} object to reflect and update it
+     *
+     * @param response JSONObject response from the server that is the {@link Store} in JSON format
+     */
     @Override
     public void onSuccess(JSONObject response) {
 
@@ -228,6 +287,11 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
 
     }
 
+    /**
+     * Handles an error from the request of the server
+     *
+     * @param error the error returned from the request
+     */
     @Override
     public void onError(VolleyError error) {
 
@@ -236,6 +300,11 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
 
     }
 
+    /**
+     * Receives all Button click and determines what to do based off the button
+     *
+     * @param v View containing the button id
+     */
     @Override
     public void onClick(View v) {
 
@@ -286,6 +355,11 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
 
     }
 
+    /**
+     * Checks to make sure that all the fields on the screen are filled out properly
+     *
+     * @return boolean, true if the fields are good to go, and false if there is an issue
+     */
     private boolean areFieldsEmpty(){
 
         boolean check = true;
@@ -406,6 +480,9 @@ public class ProfileFragmentStore extends Fragment implements ViewListenerInter,
 
     }
 
+    /**
+     * Called to update the manager list that is recieved
+     */
     public void updateList(){
 
         profileViewModelStore.getManagers().observe(ProfileFragmentStore.this, new Observer<ArrayList<ManagerProfile>>() {

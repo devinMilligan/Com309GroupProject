@@ -38,24 +38,66 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+/**
+ * This class is used to show and update the values of the user's account and object
+ *
+ * @author Devin Milligan
+ */
 public class ProfileFragment extends Fragment implements View.OnClickListener, ViewListenerInter, MessageBoxListenerInter {
 
+    /**
+     * ProfileViewModel instance used to get the current user account information
+     */
     private ProfileViewModel profileViewModel;
 
+    /**
+     * Buttons on the fragment
+     */
     private Button changePass, btnSave;
 
-    int emailAvailable = 1;
+    /**
+     * Keeps track of the status of email availability
+     */
+    private int emailAvailable = 1;
+
+    /**
+     * EditTexts on the fragment
+     */
     private EditText edFirstN, edLastN, edEmail, edPass, edPassRe, edAddress;
+    /**
+     * TextViews on the fragment
+     */
     private TextView txtPass, txtPassRe, txtEmail;
 
+    /**
+     * {@link com.example.project309.app.MessageBoxBuilder} Instance used to display the messages to the user
+     */
     private MessageBoxInter message;
 
+    /**
+     * {@link CustomerDelivererProfile} Instance that is the current logged in person who is viewing their info
+     */
     private CustomerDelivererProfile prof;
 
+    /**
+     * {@link JSONHandler} instance used to create requests to the server
+     */
     private JSONHandlerInter jsonH;
 
+    /**
+     * {@link com.example.project309.app.StringHandler} instance used to create string requests to the server
+     */
     private StringHandlerInter stringH;
 
+    /**
+     * This is ran when the fragment is created and opened, sets the initial values to the on screen
+     * fields and initializes all the variables
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         profileViewModel =
@@ -134,6 +176,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
         return root;
     }
 
+    /**
+     * Recieves all the buttons clicks and determines what to do based on the button
+     *
+     * @param v the view of the button that was clicked
+     */
     @Override
     public void onClick(View v) {
 
@@ -190,6 +237,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
 
     }
 
+    /**
+     * Receives the JSONObject response from the server of the user object and updates the fields on the screen
+     * and the current user object
+     *
+     * @param response the current user that was just updated in JSONObject form
+     */
     @Override
     public void onSuccess(JSONObject response) {
 
@@ -221,6 +274,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
 
     }
 
+    /**
+     * If the server returns a JSON Array with the user contatined in it this will send it to the correct
+     * method handler to be sure to update the fields
+     *
+     * @param response JSONArray contatining the user JSONObject
+     */
     @Override
     public void onSuccess(JSONArray response){
 
@@ -233,6 +292,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
 
     }
 
+    /**
+     * Receives the servers resoponse of the string determining if the user's email is valid
+     *
+     * @param response string saying the the user's email is valid
+     */
     @Override
     public void onSuccess(String response) {
 
@@ -248,6 +312,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
 
     }
 
+    /**
+     * Handles an error if the server request goes bad
+     *
+     * @param error the error that was thrown
+     */
     @Override
     public void onError(VolleyError error) {
 
@@ -256,16 +325,32 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
 
     }
 
+    /**
+     * What to do if the user dismissed the message box
+     *
+     * @param message the message that was dismissed
+     */
     @Override
     public void onDismiss(String message) {
 
     }
 
+    /**
+     * What to do if the user pressed the ok button on the message box
+     *
+     * @param message the message on the box that was utilized
+     */
     @Override
     public void neutralButtonPressed(String message) {
 
     }
 
+    /**
+     * What to do if the user pressed the yes button on the message box, it will make a request to udpate
+     * the user in the server
+     *
+     * @param message the message of the box that was utilized
+     */
     @Override
     public void positiveButtonPressed(String message) {
 
@@ -285,6 +370,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, V
 
     }
 
+    /**
+     * What to do if the no button is pressed on the message box
+     *
+     * @param message the message of the box that was utilized
+     */
     @Override
     public void negativeButtonPressed(String message) {
 

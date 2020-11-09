@@ -20,15 +20,44 @@ import com.example.project309.app.StoreListAdapter;
 
 import java.util.ArrayList;
 
+
+/**
+ *  HomeFragment controls the Home fragment of the normal user's main screen in order to display
+ *  all the stores that they are able to order from.
+ *
+ * @author Devin Milligan
+ */
 public class HomeFragment extends Fragment {
 
+    /**
+     * Contains the {@link HomeViewModel} object that returns the store list
+     */
     private HomeViewModel homeViewModel;
 
+    /**
+     * The ListView that will display all the stores
+     */
     private ListView lvStores;
+
+    /**
+     * The {@link StoreListAdapter} object that helps display the {@link Store} objects on the ListView
+     */
     private StoreListAdapter sAdapter;
+
+    /**
+     * The complete list of stores to be displayed
+     */
     private ArrayList<Store> aStores;
 
-
+    /**
+     *  onCreateView runs when the fragment view is created and pulls the most recent list of
+     *  stores from the database, never has to be directly called by a user
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 

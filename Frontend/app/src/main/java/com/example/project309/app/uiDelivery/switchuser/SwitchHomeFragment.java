@@ -17,10 +17,26 @@ import com.example.project309.R;
 import com.example.project309.app.MainNavigationScreen;
 import com.example.project309.app.MainNavigationScreenDelivery;
 
+/**
+ * This class allows the user as a Deliverer to switch back to the customer view
+ *
+ * @author Devin Milligan
+ */
 public class SwitchHomeFragment extends Fragment {
 
+    /**
+     * {@link SwitchHomeViewModel} instance that holds the describing text for the fragment
+     */
     private SwitchHomeViewModel switchHomeViewModel;
 
+    /**
+     * Runs on fragment creation and moves the user back to the customer view
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         switchHomeViewModel =

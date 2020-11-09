@@ -22,15 +22,40 @@ import com.example.project309.app.MessageBoxBuilder;
 import com.example.project309.app.MessageBoxInter;
 import com.example.project309.app.MessageBoxListenerInter;
 
+/**
+ * This class allows the user to logout and move back to the login screen
+ *
+ * @author Devin Milligan
+ */
 public class LogOutFragmentStore extends Fragment implements View.OnClickListener, MessageBoxListenerInter {
 
+    /**
+     * {@link LogOutFragmentStore} instance that holds the describing text for the fragment
+     */
     private LogOutViewModelStore logOutViewModelStore;
+    /**
+     * {@link MessageBoxBuilder} instance used to display messages to the user
+     */
     private MessageBoxInter message;
 
+    /**
+     * Button used to log out
+     */
     private Button btnLogOut;
 
+    /**
+     * Context used to reference this fragment
+     */
     private Context context;
 
+    /**
+     * Runs on fragment creation and asks the user if they want to log out
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         logOutViewModelStore =
@@ -60,6 +85,11 @@ public class LogOutFragmentStore extends Fragment implements View.OnClickListene
         return root;
     }
 
+    /**
+     * Recieves all the button clicks and determines what to do with each button
+     *
+     * @param v View containg the Button id
+     */
     @Override
     public void onClick(View v) {
 
@@ -74,16 +104,32 @@ public class LogOutFragmentStore extends Fragment implements View.OnClickListene
 
     }
 
+    /**
+     * What to do if the Message Box is dismissed
+     *
+     * @param message the message of the box that was dismissed
+     */
     @Override
     public void onDismiss(String message) {
 
     }
 
+    /**
+     * What to do if the ok button is pressed of the message box
+     *
+     * @param message the message of the box that was utilized
+     */
     @Override
     public void neutralButtonPressed(String message) {
 
     }
 
+    /**
+     * What to do if the yes button is pressed on the messages box, this logs the user out and
+     * moves them back to the user screen
+     *
+     * @param message the message of the box that was utlized
+     */
     @Override
     public void positiveButtonPressed(String message) {
         Intent loggedIn = new Intent(this.context, LoginActivity.class);
@@ -91,6 +137,11 @@ public class LogOutFragmentStore extends Fragment implements View.OnClickListene
         getActivity().finish();
     }
 
+    /**
+     * What to do if the no button is pressed on the message box
+     *
+     * @param message the message of the box that was utilized
+     */
     @Override
     public void negativeButtonPressed(String message) {
 
