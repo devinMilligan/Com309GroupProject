@@ -1,7 +1,10 @@
 package controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,7 @@ import Repositories.MenuItemRepository;
 import Repositories.OrderItemRepository;
 import Repositories.OrderRepository;
 import Repositories.StoreRepository;
+import WebSockets.WebSocketServer;
 
 @Controller
 @RequestMapping("/orders")
@@ -36,6 +40,9 @@ public class OrderController {
 	
 	@Autowired
 	private StoreRepository storeRepository;
+	
+	private WebSocketServer websocket;
+	private Session thisSession;
 
     
     public class UserAlreadyHasActiveOrderException extends Exception {
@@ -95,7 +102,7 @@ public class OrderController {
     }
 	
 	@PostMapping("/advance")
-    public @ResponseBody String advanceStatus(@RequestParam(value = "orderID") int order) throws NotEnoughOrdersExeption {
+    public @ResponseBody String advanceStatus(@RequestParam(value = "orderID") int order) throws NotEnoughOrdersExeption, IOException {
 
 		Order thisOrder = orderRepository.findById(order);
 		
@@ -125,12 +132,14 @@ public class OrderController {
 			thisOrder.setStatus("Delivered");
 		
         orderRepository.save(thisOrder);
+
+        websocket.onMessage(thisOrder.getOrderingUser(), thisOrder.getStatus());
         
         return thisOrder.getStatus();
     } 
 	
 	@PostMapping("/update")
-    public @ResponseBody String updateStatus(@RequestParam(value = "orderID") int order, @RequestParam(value = "status") String status) throws NotEnoughOrdersExeption {
+    public @ResponseBody String updateStatus(@RequestParam(value = "orderID") int order, @RequestParam(value = "status") String status) throws NotEnoughOrdersExeption, IOException {
 
 		Order thisOrder = orderRepository.findById(order);
 
@@ -159,6 +168,8 @@ public class OrderController {
 		        storeRepository.save(thisStore);
 			}
 		}
+		
+        websocket.onMessage(thisOrder.getOrderingUser(), thisOrder.getStatus());
         
         return thisOrder.getStatus();
     }
