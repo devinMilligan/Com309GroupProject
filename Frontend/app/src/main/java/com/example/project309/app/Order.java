@@ -1,5 +1,7 @@
 package com.example.project309.app;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class Order {
@@ -8,6 +10,8 @@ public class Order {
     private Profile deliverer;
     private double oPrice;
     private int oNum;
+    private String status;
+    private int storeID;
     private ArrayList<MenuItem> items;
 
     public Order(int orderNumber, double orderPrice){
@@ -24,6 +28,8 @@ public class Order {
 
     }
 
+    public void setStatus(String status){this.status = status;}
+    public void setStoreID(int storeID){this.storeID = storeID;}
     public void setDeliverer(Profile deliverer){
         this.deliverer = deliverer;
     }
@@ -65,6 +71,9 @@ public class Order {
 
     }
 
+    public MenuItem getItem(int position){
+        return items.get(position);
+    }
     public int getOrderNumber() {
         return oNum;
     }
@@ -74,6 +83,8 @@ public class Order {
     public Profile getDeliverer(){
         return deliverer;
     }
+    public String getStatus(){return status;}
+    public int getStoreID(){return storeID;}
 
     public int getNumItems(){
         if(items != null) {
@@ -82,6 +93,26 @@ public class Order {
         return 0;
     }
 
+    public void resetMenu(){
+        MenuItem temp;
+        ArrayList<MenuItem> arr = new ArrayList<>();
+        int size = items.size();
+        for(int i = size; i>-1; i--){
+            temp = MenuItem.getCopy(items.get(i));
+            items.get(i).setQuantity(0);
+            items.remove(i);
+            arr.add(temp);
+        }
+
+        items.addAll(arr);
+
+    }
+
+    public static Order getOrderFromJSON(JSONObject response){
+
+        return new Order();
+
+    }
 
     //order can recommend stores to order from based on their menus
     //and their locations

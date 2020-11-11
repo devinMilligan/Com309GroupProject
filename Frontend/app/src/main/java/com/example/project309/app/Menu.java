@@ -74,6 +74,7 @@ public class Menu {
                 jObj = arrJ.getJSONObject(i);
                 MenuItem item = new MenuItem();
 
+                item.setId(jObj.getInt("id"));
                 item.setTitle(jObj.getString("name"));
                 item.setDescription(jObj.getString("description"));
                 item.setPrice(jObj.getDouble("price"));
