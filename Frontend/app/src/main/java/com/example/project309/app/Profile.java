@@ -5,17 +5,45 @@ import android.media.Image;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Sets up and stores general information about a user profile
+ *
+ * @author Ryan Hickok
+ */
 public class Profile {
 
+    /**
+     * Profile of user that is currently logged in
+     */
     public static Profile currentLogin;
-
+    /**
+     * User email
+     */
     protected String email;
+    /**
+     * User full name
+     */
     protected String name;
+    /**
+     * User profile image
+     */
     protected Image imProf;
+    /**
+     * User id number
+     */
     protected int id;
+    /**
+     * User account type
+     */
     protected AccountType accountType;
+    /**
+     * User password
+     */
     protected String password;
 
+    /**
+     * Default Constructor
+     */
     public Profile(){
         id = -1;
         accountType = null;
@@ -24,6 +52,15 @@ public class Profile {
         name = "";
     }
 
+    /**
+     * Constructor to set up user profile
+     *
+     * @param mId
+     * @param user
+     * @param pass
+     * @param acctType
+     * @param n
+     */
     public Profile(int mId, String user, String pass, AccountType acctType, String n){
 
         id = mId;
@@ -32,6 +69,11 @@ public class Profile {
         password = pass;
         name = n;
     }
+
+    /**
+     * Constructor that utilizes a pre-made id number
+     * @param mId
+     */
     public Profile(int mId){
 
         id = mId;
@@ -53,17 +95,24 @@ public class Profile {
     public int getId(){
         return id;
     }
-    public AccountType getAccountType() { return accountType; }
-    public String getName() { return name; }
+    public AccountType getAccountType() {
+        return accountType;
+    }
+    public String getName() {
+        return name;
+    }
 
     public void setImage(Image im){ imProf = im; }
     public void setId(int i) { id = i;}
-    public void setEmail(String e){
-        email = e;
-    }
+    public void setEmail(String e){ email = e; }
     public void setPassword(String pass){ password = pass; }
     public void setName(String n) { name = n; }
     public void setAccountType(AccountType acctType) { accountType = acctType; }
+
+    /**
+     * Sets the account type based on a string input
+     * @param s New account type
+     */
     public void setAccountType(String s) {
         if(s.equalsIgnoreCase("CustomerDeliverer"))
         {
@@ -83,6 +132,12 @@ public class Profile {
         }
     }
 
+    /**
+     * Equals method for a profile object
+     *
+     * @param o Object to compare to
+     * @return true if objects are equal
+     */
     @Override
     public boolean equals(Object o){
 
@@ -98,6 +153,12 @@ public class Profile {
         return false;
     }
 
+    /**
+     * Returns a new Profile object containing the information provided
+     *
+     * @param info JSON Object with profile information to return
+     * @return Profile with information provided by JSON Object
+     */
     public static Profile getProfileInfo(JSONObject info) {
         Profile p = new Profile();
 

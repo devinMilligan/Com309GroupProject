@@ -170,7 +170,7 @@ public class OrderingScreen extends AppCompatActivity implements ViewListenerInt
                     ArrayList<JSONVariable> params = new ArrayList<>();
                     params.add(new JSONVariable("order",Integer.toString(currentOrder.getOrderNumber())));
 
-                   stringH.makeStringParams(Const.URL_STRING_ADVANCE_STATUS, params, RequestMethod.POST); 
+                   stringH.makeStringParams(Const.URL_STRING_ADVANCE_STATUS, params, RequestMethod.POST);
                 }
 
             }catch(JSONException e){

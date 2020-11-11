@@ -20,21 +20,48 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * This class allows a known user to log into the app
+ *
+ * @author Ryan Hickok
+ */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, ViewListenerInter{
+
 
     public static final String TAG = "LOGON";
 
     public int success;
 
+    /**
+     * Displays a message if a user is not able to log in
+     */
     private MessageBoxInter message;
 
+    /**
+     * EditTexts for email and password fields
+     */
     private EditText email, password;
+
+    /**
+     * Button objects for the screen's three buttons
+     */
     private Button loginButton, forgotPasswordButton, signUpButton;
 
+    /**
+     * Strings representing the email and password entered
+     */
     private String emailText, passwordText;
 
+    /**
+     * JSONHandler object that sends the request to the server
+     */
     private JSONHandlerInter jsonHandler;
 
+    /**
+     * Sets up the activity by assigning all variables in preparation for a button to be pressed
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +99,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /**
+     * Resumes the current activity when other activities are running in the background
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -81,6 +111,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    /**
+     * Navigates the app based on which button is pressed.
+     * Login button attempts to log the user in, forgot password shows a toast, and create account
+     * takes the user to a screen to create an account
+     *
+     * @param v
+     */
     @Override
     public void onClick(View v) {
 
@@ -120,6 +157,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    /**
+     * Upon a successful login, logs the user in based on their account type
+     *
+     * @param response JSONObject response from server
+     */
     @Override
     public void onSuccess(JSONObject response) {
         Log.d(TAG,response.toString());
@@ -180,6 +222,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    /**
+     * Prints a message box with an error if the login fails
+     *
+     * @param error Error sent back from request
+     */
     @Override
     public void onError(VolleyError error) {
 

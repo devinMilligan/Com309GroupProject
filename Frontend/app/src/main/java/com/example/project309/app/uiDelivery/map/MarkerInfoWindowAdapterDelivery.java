@@ -13,29 +13,44 @@ import com.google.android.gms.maps.model.Marker;
 
 import java.util.ArrayList;
 
+/**
+ * This class defines the app's map page's info window adapter
+ *
+ * @author Allison Finger
+ */
 public class MarkerInfoWindowAdapterDelivery implements GoogleMap.InfoWindowAdapter {
     private Context context;
     private ArrayList<Store> allStores;
+    /**
+     * A constructor for the adapter
+     *
+     * @param context the context of the map
+     * @param allS the list of all stores
+     */
     public MarkerInfoWindowAdapterDelivery(Context context, ArrayList<Store> allS) {
         this.context = context.getApplicationContext();
         allStores = allS;
     }
 
     @Override
+    /**
+     * The method which returns the view of the info window
+     *
+     * @param arg0 the marker which the info window belongs to
+     */
     public View getInfoWindow(Marker arg0) {
         return null;
     }
 
     @Override
+    /**
+     * The method which returns the view of the custom info window contents
+     *
+     * @param arg0 the marker which the info window belongs to
+     */
     public View getInfoContents(Marker arg0) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v =  inflater.inflate(R.layout.map_marker_info_window_delivery, null);
-
-//        LatLng latLng = arg0.getPosition();
-//        TextView tvLat = (TextView) v.findViewById(R.id.tv_lat_delivery);
-//        TextView tvLng = (TextView) v.findViewById(R.id.tv_lng_delivery);
-//        tvLat.setText("Latitude:" + latLng.latitude);
-//        tvLng.setText("Longitude:"+ latLng.longitude);
 
         String restaurantName = arg0.getTitle();
         TextView restName = v.findViewById(R.id.rest_name_delivery);

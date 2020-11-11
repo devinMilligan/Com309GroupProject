@@ -10,6 +10,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
+/**
+ * This class defines the app's map page's info window adapter
+ *
+ * @author Allison Finger
+ */
 public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     private Context context;
     public MarkerInfoWindowAdapter(Context context) {
