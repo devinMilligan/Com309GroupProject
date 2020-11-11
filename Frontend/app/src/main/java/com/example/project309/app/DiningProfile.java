@@ -5,6 +5,7 @@ import com.example.project309.app.Profile;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+@Deprecated
 public class DiningProfile extends Profile {
     protected Store store;
 

@@ -21,21 +21,49 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Allows users to create a new account
+ *
+ * @author Ryan Hickok
+ */
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener, ViewListenerInter {
+
 
     public static final String TAG = "SIGNUP";
 
     public int signedUp;
 
+    /**
+     * Message box to be displayed upon a failed login
+     */
     private MessageBoxInter message;
-
+    /**
+     * EditTexts to represent user input
+     */
     private EditText email, password, firstName, lastName;
+    /**
+     * Button object to represent the submit button
+     */
     private Button createAccountButton;
+    /**
+     * Switch object to hold the state of the delivery account status switch
+     */
     private Switch deliveryStatus;
 
+    /**
+     * JSONHandler object that sends a request to create the new account
+     */
     private JSONHandlerInter jsonHandler;
+    /**
+     * StringHandler object that sends a request to ensure that the email provided is not already linked to an account
+     */
     private StringHandlerInter stringHandler;
 
+    /**
+     * Sets up the activity by assigning all variables in preparation for a button to be pressed
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +88,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         createAccountButton.setOnClickListener(this);
     }
 
+    /**
+     * Attempts to create a new account by first searching the database for the provided email once the sign up button is pressed
+     *
+     * @param v
+     */
     @Override
     public void onClick(View v) {
 
@@ -98,7 +131,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-
+    /**
+     * Sets the currently logged in profile and returns to the login screen upon a successful account creation
+     *
+     * @param response JSONObject response from server
+     */
     @Override
     public void onSuccess(JSONObject response) {
         Log.d(TAG,response.toString());
@@ -119,6 +156,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    /**
+     * Attempts to create a new account upon an unsuccessful search for the inputted email
+     *
+     * @param response String response from server
+     */
     @Override
     public void onSuccess(String response) {
         Log.d(TAG,response);
@@ -145,6 +187,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    /**
+     * Returns an error if there is a problem searching or adding to the database
+     *
+     * @param error Error sent back from request
+     */
     @Override
     public void onError(VolleyError error) {
 

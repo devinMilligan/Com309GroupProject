@@ -1,12 +1,36 @@
 package com.example.project309.app;
 
+/**
+ * Sets up and stores information about a menu item
+ *
+ * @author Ryan Hickok
+ */
 public class MenuItem{
 
+    /**
+     * Title of item
+     */
     private String mTitle;
+    /**
+     * Price of item
+     */
     private double mPrice;
+    /**
+     * Description of item
+     */
     private String description;
+    /**
+     * Number of this item ordered
+     */
     private int quantity;
 
+    /**
+     * Constructor for menu item
+     *
+     * @param title title of item
+     * @param description description of item
+     * @param price price of item
+     */
     public MenuItem(String title, String description, double price){
 
         mTitle = title;
@@ -16,6 +40,9 @@ public class MenuItem{
 
     }
 
+    /**
+     * Default Constructor
+     */
     public MenuItem(){
 
     }
@@ -42,6 +69,12 @@ public class MenuItem{
         this.quantity = quantity;
     }
 
+    /**
+     * Equals method for menu items
+     *
+     * @param o object to compare to
+     * @return true if objects are equal
+     */
     public boolean equals(Object o){
 
         if(o.getClass().equals(MenuItem.class)){
