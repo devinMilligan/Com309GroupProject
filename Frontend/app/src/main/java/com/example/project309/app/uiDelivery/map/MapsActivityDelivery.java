@@ -42,10 +42,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_GREEN;
-import static com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_RED;
-import static com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_YELLOW;
-
+/**
+ * This class defines the app's map page's functionality
+ *
+ * @author Allison Finger
+ */
 public class MapsActivityDelivery extends AppCompatActivity implements OnMapReadyCallback, ViewListenerInter {
 
     private GoogleMap mMap;
@@ -54,12 +55,20 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
     CharSequence text;
     JSONHandlerInter jsonH;
 
+    /**
+     * A constructor for the class which sets the JSON handler variable
+     */
     public MapsActivityDelivery(){
         jsonH = AppController.getInstance().getJSONHandlerInstance();
         jsonH.setListener(this);
     }
 
     @Override
+    /**
+     * An overridden onCreate method which calls multiple methods to prepare the map's creation
+     *
+     * @param  savedInstanceState  the saved instance state used for onCreate
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_map_delivery);
@@ -69,6 +78,9 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
         getListOfStores();
     }
 
+    /**
+     * A void method which sets aStores using a JSON array request to the backend and some manual store additions
+     */
     public void getListOfStores() {
         this.jsonH.makeJsonArryReq(Const.URL_JSON_GET_ALL_STORES);
         aStores = Store.allStores;
@@ -117,6 +129,11 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
     }
 
     @Override
+    /**
+     * An overridden onMapReady method which calls multiple methods after the map is ready
+     *
+     * @param  googleMap the google map object used to edit the scene for the map activity
+     */
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         float zoom = 15;
@@ -141,6 +158,10 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
         setInfoWindowClickToPanorama(mMap);
     }
 
+    /**
+     * A void method which adds markers to the map based on the stores in the aStores list
+     * It does so based on the wait time of each individual store
+     */
     public void addMarkersToMap() {
 //        CharSequence cs = (CharSequence) Integer.toString(aStores.size());
 //        Toast.makeText(getApplicationContext(), cs, Toast.LENGTH_LONG).show();
@@ -163,6 +184,11 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
         }
     }
 
+    /**
+     * A method which opens the PlaceOrder activity on click of the info window
+     *
+     * @param  map the google map that the info window click is referring to
+     */
     private void setInfoWindowClickToPanorama(GoogleMap map) {
         map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
@@ -173,6 +199,11 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
         });
     }
 
+    /**
+     * A method which seeks to enable the user's location based on user permissions
+     *
+     * @param  map the google map for this activity
+     */
     private void enableMyLocation(GoogleMap map) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             map.setMyLocationEnabled(true);
@@ -182,8 +213,14 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
     }
 
     @Override
+    /**
+     * A method which checks if location permissions are granted and if so enables the location data layer
+     *
+     * @param requestCode the code for the request
+     * @param permissions the string array for the permissions
+     * @param grantResults the int array for granting the results
+     */
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        // Check if location permissions are granted and if so enable the location data layer.
         switch (requestCode) {
             case REQUEST_LOCATION_PERMISSION:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -193,6 +230,11 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
         }
     }
 
+    /**
+     * A method which shows the info window if the marker is a poi and a store in the list
+     *
+     * @param map the google map the method is using
+     */
     private void setPoiClick(GoogleMap map) {
         map.setOnPoiClickListener(new GoogleMap.OnPoiClickListener() {
             @Override
@@ -212,24 +254,23 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
         });
     }
 
-    private void setMapLongClick(final GoogleMap map) {
-        map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-            @Override
-            public void onMapLongClick(LatLng latLng) {
-                text = "long click";
-                //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-                map.addMarker(new MarkerOptions().position(latLng));
-            }
-        });
-    }
-
     @Override
+    /**
+     * A method which adds stores to the list of stores
+     *
+     * @param response the JSON object response for the store
+     */
     public void onSuccess(JSONObject response) {
         Store s = Store.getStore(response);
         Store.addStoreToList(s);
     }
 
     @Override
+    /**
+     * A method which tries to add stores to the list of stores
+     *
+     * @param response the JSON array of stores
+     */
     public void onSuccess(JSONArray response) {
         for(int i = 0; i<response.length();i++){
             try {
@@ -247,6 +288,11 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
     }
 
     @Override
+    /**
+     * A method which sends a toast with the error in case of a volley error
+     *
+     * @param error the volley error from the JSON request
+     */
     public void onError(VolleyError error) {
         text = "error: " + error.toString();
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();

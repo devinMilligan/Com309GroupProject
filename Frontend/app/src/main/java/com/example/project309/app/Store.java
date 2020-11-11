@@ -362,8 +362,12 @@ public class Store {
         return numOrders;
     }
 
-    //store can get list of people picking up orders
-    // based on name of deliverer for an order
+    /**
+     * The method which allows the store to get a list of people picking up orders
+     * based on name of deliverer for an order
+     *
+     * @param orders the list of orders at that store
+     */
     public ArrayList<Profile> getListPickup(ArrayList<Order> orders){
         ArrayList<Profile> pickupList = new ArrayList<>();
         for (int i=0; i < orders.size(); i++){
