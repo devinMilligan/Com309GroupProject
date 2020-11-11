@@ -7,12 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29bbb436-4bb4-455e-a9a4-ff1aa4d7981d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/Store.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/ui/map/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/ui/map/MapsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/ui/map/MarkerInfoWindowAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/ui/map/MarkerInfoWindowAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/uiDelivery/map/MapsActivityDelivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/uiDelivery/map/MapsActivityDelivery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/uiDelivery/map/MarkerInfoWindowAdapterDelivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/uiDelivery/map/MarkerInfoWindowAdapterDelivery.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,6 +239,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="100" y="100" width="1240" height="700" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1440.900@0.0.1440.900" timestamp="1604019717346" />
+    <state x="393" y="166" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1605064362795">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="393" y="166" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1605064362795" />
     <state width="1398" height="121" key="GridCell.Tab.0.bottom" timestamp="1604070886734">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
