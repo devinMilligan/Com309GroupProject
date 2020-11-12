@@ -12,13 +12,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
-import Repositories.StoreRepository;
-import Repositories.UserRepository;
-
 import org.mockito.junit.MockitoJUnitRunner;
 
-import ObjectClasses.Store;
-import ObjectClasses.User;
+import com.project.backend.Store;
+import com.project.backend.StoreRepository;
+import com.project.backend.User;
+import com.project.backend.UserRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ApplicationTests {
