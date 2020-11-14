@@ -7,7 +7,7 @@
     tools:context=".app.OrderConfirmation">
 
     <TextView
-        android:id="@+id/txtOrderNumber"
+        android:id="@+id/txtOrderNumberConf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -24,6 +24,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Order Confirmation"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="121dp" />
+        android:textColor="@color/colorTextSecond"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtOrderNumberConf"
+        app:layout_constraintStart_toStartOf="@+id/txtOrderNumberConf"
+        app:layout_constraintTop_toBottomOf="@+id/txtOrderNumberConf" />
+
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status: Active"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtConfirm"
+        app:layout_constraintVertical_bias="0.405" />
 </androidx.constraintlayout.widget.ConstraintLayout>

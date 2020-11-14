@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".app.OrderConfirmation"></activity>
+        <activity android:name=".app.OrderHistoryCustomer"></activity>
+        <activity android:name=".app.OrderConfirmation" />
         <activity android:name=".app.OrderingScreen" />
         <activity android:name=".app.OrderPickStore" />
         <activity android:name=".app.ManagerPickStore" />

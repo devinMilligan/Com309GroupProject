@@ -1,11 +1,24 @@
 package com.example.project309.app.uiStore.menu;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.android.volley.VolleyError;
+import com.example.project309.app.JSONHandler;
+import com.example.project309.app.JSONHandlerInter;
+import com.example.project309.app.JSONVariable;
+import com.example.project309.app.Menu;
 import com.example.project309.app.MenuItem;
 import com.example.project309.app.Order;
+import com.example.project309.app.Store;
+import com.example.project309.app.ViewListenerInter;
+import com.example.project309.net_utils.Const;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -14,7 +27,7 @@ import java.util.ArrayList;
  *
  * @author Devin Milligan
  */
-public class MenuViewModelStore extends ViewModel {
+public class MenuViewModelStore extends ViewModel implements ViewListenerInter {
 
     /**
      * Holds the describing text for the fragment
@@ -25,12 +38,20 @@ public class MenuViewModelStore extends ViewModel {
      */
     private MutableLiveData<ArrayList<MenuItem>> menuItems;
 
+    private JSONHandlerInter json;
+
+    private Menu currentMenu;
+
     /**
      * Default Constructor that sets the describing text for the fragment
      */
     public MenuViewModelStore() {
         mText = new MutableLiveData<>();
         mText.setValue("Menu");
+
+        json = new JSONHandler();
+        json.setListener(this);
+
     }
 
     /**
@@ -65,12 +86,37 @@ public class MenuViewModelStore extends ViewModel {
      */
     private void loadMenu(){
 
-        ArrayList<MenuItem> aMenuItems = new ArrayList<>();
-        aMenuItems.add(new MenuItem("Menu Item 1","Description", 9.99));
-        aMenuItems.add(new MenuItem("Menu Item 2", "Description",9.99));
+        ArrayList<JSONVariable> params = new ArrayList<>();
+        params.add(new JSONVariable("store",Integer.toString(Store.currentStore.getID())));
 
-        menuItems.setValue(aMenuItems);
+        json.makeJsonArryReqParams(Const.URL_JSON_GET_STORE_MENU,params);
 
     }
 
+    @Override
+    public void onSuccess(JSONObject response) {
+
+    }
+
+    @Override
+    public void onSuccess(JSONArray response) {
+
+        currentMenu = Menu.getMenuJSON(response);
+        Store.currentStore.setMenu(currentMenu);
+
+        menuItems.setValue(currentMenu.getMenuItems());
+
+    }
+
+    @Override
+    public void onSuccess(String response) {
+
+    }
+
+    @Override
+    public void onError(VolleyError error) {
+
+        Log.d("MENUSTORE", "Error: " + error.toString());
+
+    }
 }

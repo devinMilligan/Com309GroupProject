@@ -160,15 +160,16 @@ public class OrderingScreen extends AppCompatActivity implements ViewListenerInt
                 menuAddNUm++;
                 if(menuAddNUm < currentOrder.getNumItems()){
                     ArrayList<JSONVariable> params = new ArrayList<>();
-                    params.add(new JSONVariable("order",Integer.toString(currentOrder.getOrderNumber())));
-                    params.add(new JSONVariable("item", Integer.toString(currentOrder.getItem(menuAddNUm).getId())));
+                    params.add(new JSONVariable("Order",Integer.toString(currentOrder.getOrderNumber())));
+                    params.add(new JSONVariable("Item", Integer.toString(currentOrder.getItem(menuAddNUm).getId())));
+                    params.add(new JSONVariable("Quantity",Integer.toString(currentOrder.getItem(menuAddNUm).getQuantity())));
 
                     jsonH.makeJsonObjReqParams(Const.URL_JSON_ADD_ITEM_TO_ORDER,params,RequestMethod.POST);
                 }else {
                     Order.currentOrder = currentOrder;
 
                     ArrayList<JSONVariable> params = new ArrayList<>();
-                    params.add(new JSONVariable("order",Integer.toString(currentOrder.getOrderNumber())));
+                    params.add(new JSONVariable("orderID",Integer.toString(currentOrder.getOrderNumber())));
 
                    stringH.makeStringParams(Const.URL_STRING_ADVANCE_STATUS, params, RequestMethod.POST);
                 }
@@ -203,11 +204,17 @@ public class OrderingScreen extends AppCompatActivity implements ViewListenerInt
     @Override
     public void onSuccess(String response) {
 
-        message.dismissMessage();
-        currentOrder.resetMenu();
-        Intent startConfirmation = new Intent(OrderingScreen.this,OrderConfirmation.class);
-        startActivity(startConfirmation);
-        finish();
+        if(response.equals("true") || response.equals("false")){
+            currentOrder = null;
+            finish();
+        }else {
+            message.dismissMessage();
+            currentOrder.resetMenu();
+            currentOrder.setStatus(response);
+            Intent startConfirmation = new Intent(OrderingScreen.this, OrderConfirmation.class);
+            startActivity(startConfirmation);
+            finish();
+        }
 
 
     }
@@ -257,8 +264,9 @@ public class OrderingScreen extends AppCompatActivity implements ViewListenerInt
                 }else{
                     message.showMessage("Placing Order...",3);
                     ArrayList<JSONVariable> params = new ArrayList<>();
-                    params.add(new JSONVariable("order",Integer.toString(currentOrder.getOrderNumber())));
-                    params.add(new JSONVariable("item", Integer.toString(currentOrder.getItem(0).getId())));
+                    params.add(new JSONVariable("Order",Integer.toString(currentOrder.getOrderNumber())));
+                    params.add(new JSONVariable("Item", Integer.toString(currentOrder.getItem(0).getId())));
+                    params.add(new JSONVariable("Quantity",Integer.toString(currentOrder.getItem(0).getQuantity())));
 
                     jsonH.makeJsonObjReqParams(Const.URL_JSON_ADD_ITEM_TO_ORDER,params,RequestMethod.POST);
 
@@ -277,6 +285,16 @@ public class OrderingScreen extends AppCompatActivity implements ViewListenerInt
     public void onDismiss() {
 
         txtTotal.setText(String.format("Total: $%.2f",currentOrder.getOrderPrice()));
+
+    }
+
+    @Override
+    public void onBackPressed(){
+
+        ArrayList<JSONVariable> params = new ArrayList<>();
+        params.add(new JSONVariable("orderID",Integer.toString(currentOrder.getOrderNumber())));
+
+        stringH.makeStringParams(Const.URL_CANCEL_ORDER,params, RequestMethod.POST);
 
     }
 }

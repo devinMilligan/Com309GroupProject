@@ -74,12 +74,16 @@ public class OrdersListAdapter extends ArrayAdapter<Order> {
             //Gets the textviews in the storelistadapter
             TextView orderNum = (TextView) convertView.findViewById(R.id.txtOrderNum);
             TextView orderPrice = (TextView) convertView.findViewById(R.id.txtOrderPrice);
+            TextView storeName = (TextView)convertView.findViewById(R.id.txtStoreName);
 
             if (orderNum != null) {
                 orderNum.setText(Integer.toString(order.getOrderNumber()));
             }
             if (orderPrice != null) {     //set the values to the display
                 orderPrice.setText("Price: $" + Double.toString(order.getOrderPrice()));
+            }
+            if(storeName != null && order.getStore() != null){
+                storeName.setText(order.getStore().getName());
             }
 
             return convertView;

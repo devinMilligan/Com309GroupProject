@@ -1,5 +1,8 @@
 package com.example.project309.app;
 
+import android.util.Log;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -21,6 +24,9 @@ public class Order {
     private String status;
     private int storeID;
     private ArrayList<MenuItem> items;
+    private Store store;
+
+    private int userOrderID;
 
     /**
      * Sets up a new order object based on provided information
@@ -45,6 +51,11 @@ public class Order {
 
     }
 
+    public void setUserOrderID(int userOrderID) {
+        this.userOrderID = userOrderID;
+    }
+
+    public void setStore(Store s){this.store = s;}
     public void setStatus(String status){this.status = status;}
     public void setStoreID(int storeID){this.storeID = storeID;}
     public void setDeliverer(Profile deliverer){
@@ -108,6 +119,11 @@ public class Order {
 
     }
 
+    public Store getStore(){return store;}
+    public int getUserOrderID() {
+        return userOrderID;
+    }
+
     public MenuItem getItem(int position){
         return items.get(position);
     }
@@ -135,7 +151,7 @@ public class Order {
         MenuItem temp;
         ArrayList<MenuItem> arr = new ArrayList<>();
         int size = items.size();
-        for(int i = size; i>-1; i--){
+        for(int i = size-1; i>-1; i--){
             temp = MenuItem.getCopy(items.get(i));
             items.get(i).setQuantity(0);
             items.remove(i);
@@ -148,7 +164,35 @@ public class Order {
 
     public static Order getOrderFromJSON(JSONObject response){
 
-        return new Order();
+        Order temp = new Order();
+        try{
+
+            temp.setOrderNumber(response.getInt("id"));
+            temp.setUserOrderID(response.getInt("orderingUser"));
+            Profile deliver = new Profile();
+            deliver.setId(response.getInt("deliveringUser"));
+            temp.setDeliverer(deliver);
+            temp.setStoreID(response.getInt("store"));
+            temp.setStatus(response.getString("status"));
+            temp.setPrice(response.getDouble("total"));
+
+            if(Store.allStores != null && Store.allStores.size() != 0){
+
+                for(int i = 0; i<Store.allStores.size();i++){
+
+                    if(Store.allStores.get(i).getID() == temp.getStoreID()){
+                        temp.setStore(Store.allStores.get(i));
+                    }
+
+                }
+
+            }
+
+        }catch (JSONException e){
+            Log.d("ORDER", e.toString());
+        }
+
+        return temp;
 
     }
 

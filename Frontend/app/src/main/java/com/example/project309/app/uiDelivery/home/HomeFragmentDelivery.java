@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,7 +26,7 @@ import java.util.ArrayList;
  *
  * @author Devin Milligan
  */
-public class HomeFragmentDelivery extends Fragment {
+public class HomeFragmentDelivery extends Fragment implements AdapterView.OnItemClickListener {
 
     /**
      * {@link HomeViewModelDelivery} instance holding the current orders and the describing text
@@ -73,6 +74,7 @@ public class HomeFragmentDelivery extends Fragment {
         aOrders = new ArrayList<>();
 
         lvOrders = (ListView)root.findViewById(R.id.lvOrders_delivery);
+        lvOrders.setOnItemClickListener(this);
 
         homeViewModelDelivery.getOrders().observe(this, new Observer<ArrayList<Order>>() {
             @Override
@@ -88,4 +90,10 @@ public class HomeFragmentDelivery extends Fragment {
         return root;
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        Order.currentOrder = (Order)parent.getItemAtPosition(position);
+
+    }
 }

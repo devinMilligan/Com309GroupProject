@@ -18,7 +18,14 @@ public class Const {
     public static final String URL_JSON_MANAGER_STORES = "http://coms-309-mc-08.cs.iastate.edu:8080/stores/getByManager";
     public static final String URL_JSON_CHECK_EMAIL = " http://coms-309-mc-08.cs.iastate.edu:8080/users/checkEmail";
     public static final String URL_JSON_GET_STORE_MENU = "http://coms-309-mc-08.cs.iastate.edu:8080/menu/byStore";
-    public static final String URL_JSON_NEW_ORDER = "http://localhost:8080/orders/new";
+    public static final String URL_JSON_NEW_ORDER = "http://coms-309-mc-08.cs.iastate.edu:8080/orders/new";
     public static final String URL_JSON_ADD_ITEM_TO_ORDER = " http://coms-309-mc-08.cs.iastate.edu:8080/orders/addItem";
     public static final String URL_STRING_ADVANCE_STATUS = "http://coms-309-mc-08.cs.iastate.edu:8080/orders/advance";
+    public static final String URL_CHECK_ORDER_STATUS = "http://coms-309-mc-08.cs.iastate.edu:8080/orders/getStatus";
+    public static final String URL_CANCEL_ORDER = "http://coms-309-mc-08.cs.iastate.edu:8080/orders/cancel";
+    public static final String URL_GET_ORDERS_BY_STORE = "http://coms-309-mc-08.cs.iastate.edu:8080/orders/byStore";
+    public static final String URL_GET_USER_ORDER_HISTORY = " http://coms-309-mc-08.cs.iastate.edu:8080/orders/byUser";
+
+    public static final String URL_SOCKET = "ws://coms-309-mc-08.cs.iastate.edu:8080/";
+
 }

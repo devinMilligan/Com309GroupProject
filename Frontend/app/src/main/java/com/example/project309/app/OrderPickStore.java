@@ -152,6 +152,7 @@ public class OrderPickStore extends AppCompatActivity implements ViewListenerInt
         Store.currentStore = sAdapter.getItem(position);
         Intent startOrder = new Intent(OrderPickStore.this, OrderingScreen.class);
         startActivity(startOrder);
+        finish();
 
     }
 }

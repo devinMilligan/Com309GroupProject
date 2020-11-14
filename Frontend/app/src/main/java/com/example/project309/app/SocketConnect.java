@@ -66,12 +66,22 @@ public class SocketConnect {
         return true;
     }
 
+    public static boolean isSocketOpen(){
+
+        if(socket != null) {
+            return socket.isOpen();
+        }
+        return false;
+
+    }
+
     /**
      * Closes the socket
      */
     public static void closeSocket(){
 
         socket.close();
+        socket = null;
 
     }
 
@@ -142,7 +152,7 @@ public class SocketConnect {
                     SocketListener temp = arrListeners.get(i);
 
                     if(temp != null) {
-                        arrListeners.get(i).onMessage(message);
+                        temp.onMessage(message);
                     }
                 }
 

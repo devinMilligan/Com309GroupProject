@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,10 +12,14 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.project309.R;
+import com.example.project309.app.MainNavigationScreen;
+import com.example.project309.app.MenuFragment;
 import com.example.project309.app.Store;
 import com.example.project309.app.StoreListAdapter;
 
@@ -27,7 +32,7 @@ import java.util.ArrayList;
  *
  * @author Devin Milligan
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     /**
      * Contains the {@link HomeViewModel} object that returns the store list
@@ -75,6 +80,7 @@ public class HomeFragment extends Fragment {
         aStores = new ArrayList<>();
 
         lvStores = (ListView)root.findViewById(R.id.lvStores);
+        lvStores.setOnItemClickListener(this);
 
         homeViewModel.getStores().observe(this, new Observer<ArrayList<Store>>() {
             @Override
@@ -90,4 +96,12 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        Store.currentStore = (Store)parent.getItemAtPosition(position);
+        ((MainNavigationScreen)getActivity()).showMenuFragment();
+
+
+    }
 }

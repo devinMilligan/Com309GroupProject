@@ -1,5 +1,6 @@
 package com.example.project309.app.uiStore.home;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.project309.R;
+import com.example.project309.app.JSONHandler;
+import com.example.project309.app.JSONHandlerInter;
 import com.example.project309.app.MainNavigationScreenStore;
 import com.example.project309.app.Order;
 import com.example.project309.app.OrdersListAdapter;
@@ -47,6 +50,7 @@ public class HomeFragmentStore extends Fragment {
     private ArrayList<Order> aOrders;
 
 
+
     /**
      * Runs on fragment creation and gets and displays all the orders to the user
      *
@@ -70,6 +74,7 @@ public class HomeFragmentStore extends Fragment {
                 textView.setText(s);
             }
         });
+
 
         aOrders = new ArrayList<>();
 

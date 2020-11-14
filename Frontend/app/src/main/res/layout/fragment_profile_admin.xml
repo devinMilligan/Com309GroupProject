@@ -110,7 +110,7 @@
             android:textColor="@color/colorAccent" />
 
         <EditText
-            android:id="@+id/editText2_admin"
+            android:id="@+id/editEmail_admin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/txtEmail_admin"
@@ -149,7 +149,7 @@
             android:text="milligan" />
 
         <EditText
-            android:id="@+id/editText3_admin"
+            android:id="@+id/editPass_admin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/txtPass_admin"
@@ -162,7 +162,7 @@
             android:text="fdasfsasda" />
 
         <EditText
-            android:id="@+id/editText4_admin"
+            android:id="@+id/editRePass_Admin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/txtPassRe_admin"
