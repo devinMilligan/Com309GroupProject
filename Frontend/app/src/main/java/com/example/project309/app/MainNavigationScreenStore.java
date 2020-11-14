@@ -1,6 +1,7 @@
 package com.example.project309.app;
 
 import android.content.ClipData.Item;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -78,8 +79,8 @@ public class MainNavigationScreenStore extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "This should still be able to make a new order", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent startOrder = new Intent(MainNavigationScreenStore.this, OrderPickStore.class);
+                startActivity(startOrder);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout_store);

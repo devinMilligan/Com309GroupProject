@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.project309.R;
+import com.example.project309.app.AdminProfile;
+import com.example.project309.app.Profile;
 
 /**
  * Displays the profile information of the admin and allows edits to the information
@@ -25,6 +28,9 @@ public class ProfileFragmentAdmin extends Fragment {
      */
     private ProfileViewModelAdmin profileViewModelAdmin;
 
+    private EditText edFirst, edLast, edEmail, edPass, edRePass;
+
+    private AdminProfile adminProfile;
     /**
      * Runs on the creation of the fragment and fills the fields on the screen
      *
@@ -35,6 +41,8 @@ public class ProfileFragmentAdmin extends Fragment {
      */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        adminProfile = ((AdminProfile)Profile.currentLogin);
+
         profileViewModelAdmin =
                 ViewModelProviders.of(this).get(ProfileViewModelAdmin.class);
         View root = inflater.inflate(R.layout.fragment_profile_admin, container, false);
@@ -45,6 +53,18 @@ public class ProfileFragmentAdmin extends Fragment {
                 textView.setText(s);
             }
         });
+
+        edFirst = (EditText)root.findViewById(R.id.editFirst_admin);
+        edFirst.setText(adminProfile.getFirstName());
+        edLast = (EditText)root.findViewById(R.id.editLast_admin);
+        edLast.setText(adminProfile.getLastName());
+        edEmail = (EditText)root.findViewById(R.id.editEmail_admin);
+        edEmail.setText(adminProfile.getEmail());
+        edPass = (EditText)root.findViewById(R.id.editPass_admin);
+        edPass.setText(adminProfile.getPassword());
+        edRePass = (EditText)root.findViewById(R.id.editRePass_Admin);
+        edRePass.setText("");
+
         return root;
     }
 }

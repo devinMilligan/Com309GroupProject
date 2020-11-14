@@ -114,7 +114,7 @@ public class Profile {
      * @param s New account type
      */
     public void setAccountType(String s) {
-        if(s.equalsIgnoreCase("CustomerDeliverer"))
+        if(s.equalsIgnoreCase("CustomerDeliverer") || s.equalsIgnoreCase("Orderer"))
         {
             accountType = AccountType.CUSTOMER_DELIVERER_ACCOUNT;
         }

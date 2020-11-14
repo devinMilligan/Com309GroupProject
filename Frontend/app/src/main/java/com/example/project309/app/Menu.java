@@ -103,7 +103,7 @@ public class Menu {
      *
      * @return array of items in current menu
      */
-    protected ArrayList<MenuItem> getMenuItems(){
+    public ArrayList<MenuItem> getMenuItems(){
 
         return menuItems;
 
@@ -127,6 +127,7 @@ public class Menu {
                 jObj = arrJ.getJSONObject(i);
                 MenuItem item = new MenuItem();
 
+                item.setId(jObj.getInt("id"));
                 item.setTitle(jObj.getString("name"));
                 item.setDescription(jObj.getString("description"));
                 item.setPrice(jObj.getDouble("price"));

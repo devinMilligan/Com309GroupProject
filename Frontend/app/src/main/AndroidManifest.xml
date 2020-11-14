@@ -14,13 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".app.OrderingScreen"></activity>
-        <activity android:name=".app.OrderPickStore"></activity>
+        <activity android:name=".app.OrderHistoryCustomer"></activity>
+        <activity android:name=".app.OrderConfirmation" />
+        <activity android:name=".app.OrderingScreen" />
+        <activity android:name=".app.OrderPickStore" />
         <activity android:name=".app.ManagerPickStore" />
         <activity android:name=".app.Create_Update_Store" />
         <activity
             android:name=".app.PlaceOrder"
-            android:label="@string/title_activity_place_order"></activity>
+            android:label="@string/title_activity_place_order" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

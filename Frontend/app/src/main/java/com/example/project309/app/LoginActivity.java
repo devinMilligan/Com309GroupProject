@@ -173,12 +173,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             try {
                 if(response.get("type").toString().equalsIgnoreCase(AccountType.ADMIN_ACCOUNT.getAccountType())) {
-                    Profile.currentLogin = Profile.getProfileInfo(response);
+                    Profile.currentLogin = AdminProfile.getProfileInfo(response);
                     loggedIn = new Intent(LoginActivity.this, MainNavigationScreenAdmin.class);
                     startActivity(loggedIn);
                     return;
                 }
-                else if(response.get("type").toString().equalsIgnoreCase(AccountType.CUSTOMER_DELIVERER_ACCOUNT.getAccountType()))
+                else if(response.get("type").toString().equalsIgnoreCase(AccountType.CUSTOMER_DELIVERER_ACCOUNT.getAccountType()) ||
+                        response.get("type").toString().equalsIgnoreCase(AccountType.ORDER.getAccountType()))
                 {
                     Profile.currentLogin = CustomerDelivererProfile.getProfileInfo(response);
                     loggedIn = new Intent(LoginActivity.this, MainNavigationScreen.class);
@@ -187,7 +188,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 else if(response.get("type").toString().equalsIgnoreCase(AccountType.MANAGER_ACCOUNT.getAccountType()))
                 {
-                    Profile.currentLogin = Profile.getProfileInfo(response);
+                    Profile.currentLogin = ManagerProfile.getProfileInfo(response);
                     loggedIn = new Intent(LoginActivity.this, ManagerPickStore.class);
                     startActivity(loggedIn);
                     return;

@@ -7,8 +7,12 @@ import com.example.project309.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -22,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.view.ViewGroup;
 
 /**
  * This sets up and controls the structure for the fragments in the MainNavigation Screen
@@ -88,6 +93,33 @@ public class MainNavigationScreen extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void showMenuFragment(){
+
+        MenuFragment fragment2=new MenuFragment();
+        FragmentManager fragmentManager= getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frag_home,fragment2);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+    }
+
+    /**
+     * Determines what to do when a MenuItem is clicked in the Option Menu based off the item
+     *
+     * @param item the MenuItem Cliked
+     * @return returns if this succeeds
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+
+        Intent startHistory = new Intent(MainNavigationScreen.this, OrderHistoryCustomer.class);
+        startActivity(startHistory);
+
+        return true;
     }
 
 

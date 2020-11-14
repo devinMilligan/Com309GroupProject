@@ -7,6 +7,8 @@ package com.example.project309.app;
  */
 public class MenuItem{
 
+    private int id;
+
     /**
      * Title of item
      */
@@ -47,6 +49,7 @@ public class MenuItem{
 
     }
 
+    public int getId(){return id;}
     public int getQuantity() {
         return quantity;
     }
@@ -60,6 +63,7 @@ public class MenuItem{
         return description;
     }
 
+    public void setId(int id){ this.id = id;}
     public void setDescription(String description){
         this.description = description;
     }
@@ -86,5 +90,17 @@ public class MenuItem{
             return false;
         }
         return false;
+    }
+
+    public static MenuItem getCopy(MenuItem itemToCopy){
+
+        MenuItem temp = new MenuItem();
+
+        temp.mPrice = itemToCopy.mPrice;
+        temp.quantity = itemToCopy.quantity;
+        temp.description = itemToCopy.description;
+        temp.mTitle = temp.mTitle;
+
+        return temp;
     }
 }

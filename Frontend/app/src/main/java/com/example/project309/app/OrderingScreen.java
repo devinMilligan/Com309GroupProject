@@ -2,6 +2,7 @@ package com.example.project309.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +38,7 @@ public class OrderingScreen extends AppCompatActivity implements ViewListenerInt
      */
     private JSONHandlerInter jsonH;
 
+    private StringHandlerInter stringH;
     /**
      * current Menu that is being picked from
      */
@@ -71,6 +73,8 @@ public class OrderingScreen extends AppCompatActivity implements ViewListenerInt
      */
     private MessageBoxInter message;
 
+    private int menuAddNUm = 0;
+
     /**
      * Runs when the activity creates and it is making a new order and displaying the menu on the screen
      *
@@ -89,6 +93,9 @@ public class OrderingScreen extends AppCompatActivity implements ViewListenerInt
 
         jsonH = AppController.getInstance().getJSONHandlerInstance();
         jsonH.setListener(this);
+
+        stringH = AppController.getInstance().getStringHandlerInstance();
+        stringH.setListener(this);
 
         lvMenu = (ListView) findViewById(R.id.orderLvMenu);
 
@@ -112,7 +119,11 @@ public class OrderingScreen extends AppCompatActivity implements ViewListenerInt
         message = new MessageBoxBuilder();
         message.setContext(this);
 
+        ArrayList<JSONVariable> params = new ArrayList<>();
+        params.add(new JSONVariable("userID", Integer.toString(Profile.currentLogin.getId())));
+        params.add(new JSONVariable("storeID", Integer.toString(Store.currentStore.getID())));
 
+        jsonH.makeJsonObjReqParams(Const.URL_JSON_NEW_ORDER, params, RequestMethod.POST);
 
     }
 
@@ -130,6 +141,46 @@ public class OrderingScreen extends AppCompatActivity implements ViewListenerInt
 
     @Override
     public void onSuccess(JSONObject response) {
+
+        boolean check = false;
+
+        try{
+            currentOrder.setStoreID(response.getInt("store"));
+            currentOrder.setOrderNumber(response.getInt("id"));
+            currentOrder.setStatus(response.getString("status"));
+        }catch (JSONException e){
+            check = true;
+        }
+
+        if(check){
+
+            try{
+
+                response.getInt("quantity");
+                menuAddNUm++;
+                if(menuAddNUm < currentOrder.getNumItems()){
+                    ArrayList<JSONVariable> params = new ArrayList<>();
+                    params.add(new JSONVariable("Order",Integer.toString(currentOrder.getOrderNumber())));
+                    params.add(new JSONVariable("Item", Integer.toString(currentOrder.getItem(menuAddNUm).getId())));
+                    params.add(new JSONVariable("Quantity",Integer.toString(currentOrder.getItem(menuAddNUm).getQuantity())));
+
+                    jsonH.makeJsonObjReqParams(Const.URL_JSON_ADD_ITEM_TO_ORDER,params,RequestMethod.POST);
+                }else {
+                    Order.currentOrder = currentOrder;
+
+                    ArrayList<JSONVariable> params = new ArrayList<>();
+                    params.add(new JSONVariable("orderID",Integer.toString(currentOrder.getOrderNumber())));
+
+                   stringH.makeStringParams(Const.URL_STRING_ADVANCE_STATUS, params, RequestMethod.POST);
+                }
+
+            }catch(JSONException e){
+
+
+
+            }
+
+        }
 
     }
 
@@ -152,6 +203,19 @@ public class OrderingScreen extends AppCompatActivity implements ViewListenerInt
 
     @Override
     public void onSuccess(String response) {
+
+        if(response.equals("true") || response.equals("false")){
+            currentOrder = null;
+            finish();
+        }else {
+            message.dismissMessage();
+            currentOrder.resetMenu();
+            currentOrder.setStatus(response);
+            Intent startConfirmation = new Intent(OrderingScreen.this, OrderConfirmation.class);
+            startActivity(startConfirmation);
+            finish();
+        }
+
 
     }
 
@@ -197,6 +261,15 @@ public class OrderingScreen extends AppCompatActivity implements ViewListenerInt
 
                 if(currentOrder.getNumItems() == 0){
                     message.showMessage("Please Add an Item", 1);
+                }else{
+                    message.showMessage("Placing Order...",3);
+                    ArrayList<JSONVariable> params = new ArrayList<>();
+                    params.add(new JSONVariable("Order",Integer.toString(currentOrder.getOrderNumber())));
+                    params.add(new JSONVariable("Item", Integer.toString(currentOrder.getItem(0).getId())));
+                    params.add(new JSONVariable("Quantity",Integer.toString(currentOrder.getItem(0).getQuantity())));
+
+                    jsonH.makeJsonObjReqParams(Const.URL_JSON_ADD_ITEM_TO_ORDER,params,RequestMethod.POST);
+
                 }
 
                 break;
@@ -212,6 +285,16 @@ public class OrderingScreen extends AppCompatActivity implements ViewListenerInt
     public void onDismiss() {
 
         txtTotal.setText(String.format("Total: $%.2f",currentOrder.getOrderPrice()));
+
+    }
+
+    @Override
+    public void onBackPressed(){
+
+        ArrayList<JSONVariable> params = new ArrayList<>();
+        params.add(new JSONVariable("orderID",Integer.toString(currentOrder.getOrderNumber())));
+
+        stringH.makeStringParams(Const.URL_CANCEL_ORDER,params, RequestMethod.POST);
 
     }
 }
