@@ -1,4 +1,4 @@
-package controllers;
+package com.project.backend;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,13 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ObjectClasses.User;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Repositories.UserRepository;
+import com.project.backend.User;
 
 
 @Controller

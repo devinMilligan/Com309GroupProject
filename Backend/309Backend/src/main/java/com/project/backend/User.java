@@ -1,4 +1,4 @@
-package ObjectClasses;
+package com.project.backend;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

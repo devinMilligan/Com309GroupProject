@@ -1,4 +1,4 @@
-package WebSockets;
+package com.project.backend;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,36 +15,44 @@ import javax.websocket.server.ServerEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-
-@ServerEndpoint("/websocket/{id}")
+/**
+ * 
+ * @author Vamsi Krishna Calpakkam
+ *
+ */
+@ServerEndpoint("/websocket/{username}")
 @Component
 public class WebSocketServer {
 	
 	// Store all socket session and their corresponding username.
-    private static Map<Session, Integer> sessionUsernameMap = new HashMap<>();
-    private static Map<Integer, Session> usernameSessionMap = new HashMap<>();
+    private static Map<Session, String> sessionUsernameMap = new HashMap<>();
+    private static Map<String, Session> usernameSessionMap = new HashMap<>();
     
     private final Logger logger = LoggerFactory.getLogger(WebSocketServer.class);
     
     @OnOpen
     public void onOpen(
     	      Session session, 
-    	      @PathParam("id") int id) throws IOException 
+    	      @PathParam("username") String username) throws IOException 
     {
         logger.info("Entered into Open");
         
-        sessionUsernameMap.put(session, id);
-        usernameSessionMap.put(id, session);
+        sessionUsernameMap.put(session, username);
+        usernameSessionMap.put(username, session);		
     }
  
     @OnMessage
-    public void onMessage(int username, String message) throws IOException 
+    public void onMessage(Session session, String message) throws IOException 
     {
         // Handle new messages
     	logger.info("Entered into Message: Got Message:"+message);
+    	String username = sessionUsernameMap.get(session);
     	
-    	sendMessageToPArticularUser(username, message);
+    	if (message.startsWith("@")) // Direct message to a user using the format "@username <message>"
+    	{
+    		String destUsername = message.split(" ")[0].substring(1); // don't do this in your code!
+    		sendMessageToPArticularUser(destUsername, "[DM] " + username + ": " + message);
+    	}
     }
  
     @OnClose
@@ -52,7 +60,7 @@ public class WebSocketServer {
     {
     	logger.info("Entered into Close");
     	
-    	int username = sessionUsernameMap.get(session);
+    	String username = sessionUsernameMap.get(session);
     	sessionUsernameMap.remove(session);
     	usernameSessionMap.remove(username);
     }
@@ -63,14 +71,13 @@ public class WebSocketServer {
     	logger.info("Entered into Error");
     }
     
-	private void sendMessageToPArticularUser(int id, String message) 
+	private void sendMessageToPArticularUser(String username, String message) 
     {	
     	try {
-    		usernameSessionMap.get(id).getBasicRemote().sendText(message);
+    		usernameSessionMap.get(username).getBasicRemote().sendText(message);
         } catch (IOException e) {
         	logger.info("Exception: " + e.getMessage().toString());
             e.printStackTrace();
         }
     }
 }
-

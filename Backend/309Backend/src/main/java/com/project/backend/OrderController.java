@@ -1,10 +1,7 @@
-package controllers;
+package com.project.backend;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,16 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ObjectClasses.MenuItem;
-import ObjectClasses.Order;
-import ObjectClasses.OrderItem;
-import ObjectClasses.Store;
-import ObjectClasses.Store.NotEnoughOrdersExeption;
-import Repositories.MenuItemRepository;
-import Repositories.OrderItemRepository;
-import Repositories.OrderRepository;
-import Repositories.StoreRepository;
-import WebSockets.WebSocketServer;
+import com.project.backend.Store.NotEnoughOrdersExeption;
 
 @Controller
 @RequestMapping("/orders")
@@ -40,9 +28,6 @@ public class OrderController {
 	
 	@Autowired
 	private StoreRepository storeRepository;
-	
-	private WebSocketServer websocket;
-	private Session thisSession;
 
     
     public class UserAlreadyHasActiveOrderException extends Exception {
@@ -102,7 +87,7 @@ public class OrderController {
     }
 	
 	@PostMapping("/advance")
-    public @ResponseBody String advanceStatus(@RequestParam(value = "orderID") int order) throws NotEnoughOrdersExeption, IOException {
+    public @ResponseBody String advanceStatus(@RequestParam(value = "orderID") int order) throws NotEnoughOrdersExeption {
 
 		Order thisOrder = orderRepository.findById(order);
 		
@@ -132,14 +117,12 @@ public class OrderController {
 			thisOrder.setStatus("Delivered");
 		
         orderRepository.save(thisOrder);
-
-        websocket.onMessage(thisOrder.getOrderingUser(), thisOrder.getStatus());
         
         return thisOrder.getStatus();
     } 
 	
 	@PostMapping("/update")
-    public @ResponseBody String updateStatus(@RequestParam(value = "orderID") int order, @RequestParam(value = "status") String status) throws NotEnoughOrdersExeption, IOException {
+    public @ResponseBody String updateStatus(@RequestParam(value = "orderID") int order, @RequestParam(value = "status") String status) throws NotEnoughOrdersExeption {
 
 		Order thisOrder = orderRepository.findById(order);
 
@@ -168,8 +151,6 @@ public class OrderController {
 		        storeRepository.save(thisStore);
 			}
 		}
-		
-        websocket.onMessage(thisOrder.getOrderingUser(), thisOrder.getStatus());
         
         return thisOrder.getStatus();
     }
