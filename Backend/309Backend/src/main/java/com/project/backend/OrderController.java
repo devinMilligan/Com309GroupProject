@@ -151,6 +151,14 @@ public class OrderController {
         
         return thisOrder.getStatus();
     }
+	
+	@PostMapping("/deliver")
+    public @ResponseBody void addDeliverer(@RequestParam(value = "orderID") int order, @RequestParam(value = "deliverID") int deliver) {
+
+		Order thisOrder = orderRepository.findById(order);
+		thisOrder.setDeliveringUser(deliver);
+		orderRepository.save(thisOrder);
+    }
     
     @GetMapping("/byStore")
     public @ResponseBody List<Order> getOrders(@RequestParam(value = "store") int storeID) {
