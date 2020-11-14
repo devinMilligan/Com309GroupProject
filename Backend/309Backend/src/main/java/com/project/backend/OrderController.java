@@ -37,7 +37,7 @@ public class OrderController {
 	@PostMapping("/new")
     public @ResponseBody Order newOrder(@RequestParam(value = "userID") int userID, @RequestParam(value = "storeID") int storeID) throws UserAlreadyHasActiveOrderException {
 
-		if (orderRepository.findByOrderingUserAndStatus(userID, "Active") != null)
+		if (orderRepository.findByOrderingUserAndStatus(userID, "Active").size() > 0)
 			throw new UserAlreadyHasActiveOrderException();
 		else {
 			Order order = new Order(userID, storeID, "Active");
