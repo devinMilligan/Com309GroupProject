@@ -166,6 +166,11 @@ public class OrderController {
 		return orders;
     }
     
+    @GetMapping("/getStatus")
+    public @ResponseBody String getStatus(@RequestParam(value = "id") int orderID) {    	    	
+		return orderRepository.findById(orderID).getStatus();
+    }
+    
     @GetMapping("/byUser")
     public @ResponseBody List<Order> getUserOrders(@RequestParam(value = "user") int userID) {
     	
