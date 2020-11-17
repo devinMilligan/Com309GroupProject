@@ -1,6 +1,7 @@
 package com.example.project309.app.ui.map;
 
 import android.Manifest;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -19,7 +20,12 @@ import com.example.project309.R;
 import com.example.project309.app.AppController;
 import com.example.project309.app.JSONHandlerInter;
 import com.example.project309.app.MainNavigationScreenDelivery;
+import com.example.project309.app.Menu;
+import com.example.project309.app.MenuItem;
+import com.example.project309.app.OrderPickStore;
+import com.example.project309.app.OrderingScreen;
 import com.example.project309.app.PlaceOrder;
+import com.example.project309.app.Profile;
 import com.example.project309.app.Store;
 import com.example.project309.app.ViewListenerInter;
 import com.example.project309.app.uiDelivery.map.MarkerInfoWindowAdapterDelivery;
@@ -85,47 +91,47 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         this.jsonH.makeJsonArryReq(Const.URL_JSON_GET_ALL_STORES);
         aStores = Store.allStores;
 
-        Store s = new Store();
-        s.setName("Season's");
-        s.setLatitude(42.023858);
-        s.setLongitude(-93.638253);
-        s.setSundayOpen("03:45:00");
-        s.setSundayClose("03:45:00");
-        s.setMondayOpen("03:45:00");
-        s.setMondayClose("03:45:00");
-        s.setTuesdayOpen("03:45:00");
-        s.setTuesdayClose("03:45:00");
-        s.setWednesdayOpen("03:45:00");
-        s.setWednesdayClose("03:45:00");
-        s.setThursdayOpen("03:45:00");
-        s.setThursdayClose("03:45:00");
-        s.setFridayOpen("03:45:00");
-        s.setFridayClose("03:45:00");
-        s.setSaturdayOpen("03:45:00");
-        s.setSaturdayClose("03:45:00");
-        s.setOrders(2);
-        aStores.add(s);
-
-        Store st = new Store();
-        st.setName("Convos");
-        st.setLatitude(42.025289);
-        st.setLongitude(-93.640330);
-        st.setSundayOpen("03:45:00");
-        st.setSundayClose("03:45:00");
-        st.setMondayOpen("03:45:00");
-        st.setMondayClose("03:45:00");
-        st.setTuesdayOpen("03:45:00");
-        st.setTuesdayClose("03:45:00");
-        st.setWednesdayOpen("03:45:00");
-        st.setWednesdayClose("03:45:00");
-        st.setThursdayOpen("03:45:00");
-        st.setThursdayClose("03:45:00");
-        st.setFridayOpen("03:45:00");
-        st.setFridayClose("03:45:00");
-        st.setSaturdayOpen("03:45:00");
-        st.setSaturdayClose("03:45:00");
-        st.setOrders(27);
-        aStores.add(st);
+//        Store s = new Store();
+//        s.setName("Season's");
+//        s.setLatitude(42.023858);
+//        s.setLongitude(-93.638253);
+//        s.setSundayOpen("03:45:00");
+//        s.setSundayClose("03:45:00");
+//        s.setMondayOpen("03:45:00");
+//        s.setMondayClose("03:45:00");
+//        s.setTuesdayOpen("03:45:00");
+//        s.setTuesdayClose("03:45:00");
+//        s.setWednesdayOpen("03:45:00");
+//        s.setWednesdayClose("03:45:00");
+//        s.setThursdayOpen("03:45:00");
+//        s.setThursdayClose("03:45:00");
+//        s.setFridayOpen("03:45:00");
+//        s.setFridayClose("03:45:00");
+//        s.setSaturdayOpen("03:45:00");
+//        s.setSaturdayClose("03:45:00");
+//        s.setOrders(2);
+//        aStores.add(s);
+//
+//        Store st = new Store();
+//        st.setName("Convos");
+//        st.setLatitude(42.025289);
+//        st.setLongitude(-93.640330);
+//        st.setSundayOpen("03:45:00");
+//        st.setSundayClose("03:45:00");
+//        st.setMondayOpen("03:45:00");
+//        st.setMondayClose("03:45:00");
+//        st.setTuesdayOpen("03:45:00");
+//        st.setTuesdayClose("03:45:00");
+//        st.setWednesdayOpen("03:45:00");
+//        st.setWednesdayClose("03:45:00");
+//        st.setThursdayOpen("03:45:00");
+//        st.setThursdayClose("03:45:00");
+//        st.setFridayOpen("03:45:00");
+//        st.setFridayClose("03:45:00");
+//        st.setSaturdayOpen("03:45:00");
+//        st.setSaturdayClose("03:45:00");
+//        st.setOrders(27);
+//        aStores.add(st);
     }
 
     @Override
@@ -148,7 +154,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         addMarkersToMap();
 
         //setMapLongClick(mMap); // Set a long click listener for the map;
-        setPoiClick(mMap); // Set a click listener for points of interest.
+        //setPoiClick(mMap); // Set a click listener for points of interest.
         enableMyLocation(mMap); // Enable location tracking.
 
         // Setting a custom info window adapter for the google map
@@ -193,8 +199,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Intent intent = new Intent(MapsActivity.this, PlaceOrder.class);
-                startActivity(intent);
+                int i;
+                for (i =0; i<aStores.size(); i++){
+                    if (aStores.get(i).getName().equals(marker.getTitle())){
+                        break;
+                    }
+                }
+                Store.currentStore = aStores.get(i);
+                Intent startOrder = new Intent(MapsActivity.this, OrderingScreen.class);
+                startActivity(startOrder);
             }
         });
     }
@@ -228,30 +241,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     break;
                 }
         }
-    }
-
-    /**
-     * A method which shows the info window if the marker is a poi and a store in the list
-     *
-     * @param map the google map the method is using
-     */
-    private void setPoiClick(GoogleMap map) {
-        map.setOnPoiClickListener(new GoogleMap.OnPoiClickListener() {
-            @Override
-            public void onPoiClick(PointOfInterest poi) {
-                text = "poi click";
-                //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-                for (int i=0; i<aStores.size(); i++){
-                    if (poi.name.equals(aStores.get(i).getName())){
-                        Marker poiMarker = mMap.addMarker(new MarkerOptions().position(poi.latLng).title(poi.name));
-                        poiMarker.showInfoWindow();
-                        poiMarker.setTag("poi");
-                        text = "poi click";
-                        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-        });
     }
 
     @Override

@@ -69,15 +69,115 @@ public class MarkerInfoWindowAdapterDelivery implements GoogleMap.InfoWindowAdap
             }
         }
 
+        String sunOpen;
+        if (!allStores.get(i).getSundayOpen().equals("null")){
+            sunOpen = allStores.get(i).getSundayOpen().substring(0, 5) + " - ";
+        }
+        else {
+            sunOpen = "CLOSED       ";
+        }
+        String monOpen;
+        if (allStores.get(i).getMondayOpen() != null){
+            monOpen = allStores.get(i).getMondayOpen().substring(0, 5) + " - ";
+        }
+        else {
+            monOpen = "CLOSED       ";
+        }
+        String tuesOpen;
+        if (allStores.get(i).getTuesdayOpen() != null){
+            tuesOpen = allStores.get(i).getTuesdayOpen().substring(0, 5) + " - ";
+        }
+        else {
+            tuesOpen = "CLOSED       ";
+        }
+        String wedOpen;
+        if (allStores.get(i).getWednesdayOpen() != null){
+            wedOpen = allStores.get(i).getWednesdayOpen().substring(0, 5) + " - ";
+        }
+        else {
+            wedOpen = "CLOSED       ";
+        }
+        String thurOpen;
+        if (allStores.get(i).getThursdayOpen() != null){
+            thurOpen = allStores.get(i).getThursdayOpen().substring(0, 5) + " - ";
+        }
+        else {
+            thurOpen = "CLOSED       ";
+        }
+        String friOpen;
+        if (allStores.get(i).getFridayOpen() != null){
+            friOpen = allStores.get(i).getFridayOpen().substring(0, 5) + " - ";
+        }
+        else {
+            friOpen = "CLOSED       ";
+        }
+        String satOpen;
+        if (!allStores.get(i).getSaturdayOpen().equals("null")){
+            satOpen = allStores.get(i).getSaturdayOpen().substring(0, 5) + " - ";
+        }
+        else {
+            satOpen = "CLOSED       ";
+        }
+//////////
+        String sunClose;
+        if (!allStores.get(i).getSundayOpen().equals("null")){
+            sunClose = allStores.get(i).getSundayClose();
+        }
+        else {
+            sunClose = "       ";
+        }
+        String monClose;
+        if (allStores.get(i).getMondayClose() != null){
+            monClose = allStores.get(i).getMondayClose();
+        }
+        else {
+            monClose = "       ";
+        }
+        String tuesClose;
+        if (allStores.get(i).getTuesdayClose() != null){
+            tuesClose = allStores.get(i).getTuesdayClose();
+        }
+        else {
+            tuesClose = "       ";
+        }
+        String wedClose;
+        if (allStores.get(i).getWednesdayClose() != null){
+            wedClose = allStores.get(i).getWednesdayClose();
+        }
+        else {
+            wedClose = "       ";
+        }
+        String thurClose;
+        if (allStores.get(i).getThursdayClose() != null){
+            thurClose = allStores.get(i).getThursdayClose();
+        }
+        else {
+            thurClose = "       ";
+        }
+        String friClose;
+        if (allStores.get(i).getFridayClose() != null){
+            friClose = allStores.get(i).getFridayClose();
+        }
+        else {
+            friClose = "       ";
+        }
+        String satClose;
+        if (!allStores.get(i).getSaturdayClose().equals("null")){
+            satClose = allStores.get(i).getSaturdayClose();
+        }
+        else {
+            satClose = "       ";
+        }
+
         if (i!=allStores.size()) {
             restName.setText(restaurantName + " (" + allStores.get(i).getOrders() + ")");
-            sun.setText("S  " + allStores.get(i).getSundayOpen().substring(0, 5) + " - " + allStores.get(i).getSundayClose().substring(0, 5));
-            mon.setText("M  " + allStores.get(i).getMondayOpen().substring(0, 5) + " - " + allStores.get(i).getMondayClose().substring(0, 5));
-            tue.setText("T  " + allStores.get(i).getTuesdayOpen().substring(0, 5) + " - " + allStores.get(i).getTuesdayClose().substring(0, 5));
-            wed.setText("W  " + allStores.get(i).getWednesdayOpen().substring(0, 5) + " - " + allStores.get(i).getWednesdayClose().substring(0, 5));
-            thu.setText("T  " + allStores.get(i).getThursdayOpen().substring(0, 5) + " - " + allStores.get(i).getThursdayClose().substring(0, 5));
-            fri.setText("F  " + allStores.get(i).getFridayOpen().substring(0, 5) + " - " + allStores.get(i).getFridayClose().substring(0, 5));
-            sat.setText("S  " + allStores.get(i).getSaturdayOpen().substring(0, 5) + " - " + allStores.get(i).getSaturdayClose().substring(0, 5));
+            sun.setText("S  " + sunOpen + sunClose.substring(0, 5));
+            mon.setText("M  " + monOpen + monClose.substring(0, 5));
+            tue.setText("T  " + tuesOpen + tuesClose.substring(0, 5));
+            wed.setText("W  " + wedOpen + wedClose.substring(0, 5));
+            thu.setText("R  " + thurOpen + thurClose.substring(0, 5));
+            fri.setText("F  " + friOpen + friClose.substring(0, 5));
+            sat.setText("S  " + satOpen + satClose.substring(0, 5));
         }
         return v;
     }
