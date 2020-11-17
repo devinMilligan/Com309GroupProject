@@ -116,10 +116,22 @@ public class MainNavigationScreen extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
 
-        Intent startHistory = new Intent(MainNavigationScreen.this, OrderHistoryCustomer.class);
-        startActivity(startHistory);
+        try {
+            switch (item.getTitle().toString()) {
+                case "Order History":
 
-        return true;
+                    Intent startHistory = new Intent(MainNavigationScreen.this, OrderHistoryCustomer.class);
+                    startActivity(startHistory);
+
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+        }catch (Exception e){
+            return false;
+        }
+
+
     }
 
 
