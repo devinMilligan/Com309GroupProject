@@ -145,7 +145,7 @@ public class MessageBoxBuilder implements MessageBoxInter, MessageBoxListenerInt
     public void onDismiss(String message) {
         Log.d(TAG, message + ": The AlertDialog was dismissed");
 
-        if(mB!=null){
+        if(mB!=null && mB != this){
             mB.onDismiss(message);
         }
 
