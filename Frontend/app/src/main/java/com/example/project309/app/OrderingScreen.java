@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.project309.R;
@@ -124,7 +125,6 @@ public class OrderingScreen extends AppCompatActivity implements ViewListenerInt
         params.add(new JSONVariable("storeID", Integer.toString(Store.currentStore.getID())));
 
         jsonH.makeJsonObjReqParams(Const.URL_JSON_NEW_ORDER, params, RequestMethod.POST);
-
     }
 
     /**
