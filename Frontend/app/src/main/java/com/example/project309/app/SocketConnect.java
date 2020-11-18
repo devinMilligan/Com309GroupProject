@@ -171,6 +171,23 @@ public class SocketConnect {
 
     }
 
+    /**
+     * For testing purposes
+     *
+     * @param message
+     */
+    public void connectOnMessage(String message){
+
+        for(int i = 0; i<arrListeners.size();i++){
+
+            SocketListener temp = arrListeners.get(i);
+
+            if(temp != null) {
+                temp.onMessage(message);
+            }
+        }
+
+    }
 }
 
 
