@@ -31,6 +31,14 @@
         <activity android:name=".app.LogOnTest" />
         <activity android:name=".app.SignUpActivity" />
         <activity android:name=".app.LoginActivity" />
+        <activity android:name=".app.DeliverConnect"
+            android:label="DeliverConnect"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".app.DeliverUpdateOrderStatus"
+            android:label="DeliverUpdateOrderStatus"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".app.MainNavigationScreen"
             android:label="@string/title_activity_main_navigation_screen"

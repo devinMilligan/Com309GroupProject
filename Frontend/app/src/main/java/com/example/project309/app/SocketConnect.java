@@ -80,7 +80,6 @@ public class SocketConnect {
      */
     public static void closeSocket(){
 
-
         if(socket != null && socket.isOpen()) {
             socket.close();
         }
