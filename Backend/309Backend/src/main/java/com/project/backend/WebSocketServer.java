@@ -48,7 +48,7 @@ public class WebSocketServer {
     	
     	if (message.startsWith("@")) // Direct message to a user using the format "@username <message>"
     	{
-    		String destUsername = message.split(" ")[0].substring(1);
+    		String destUsername= message.substring(1, message.indexOf(" "));
     		sendMessageToPArticularUser(destUsername, "[DM] " + username + ": " + message);
     	}
     }
