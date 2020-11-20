@@ -46,10 +46,10 @@ public class WebSocketServer {
     	logger.info("Entered into Message: Got Message:"+message);
     	String username = sessionUsernameMap.get(session);
     	
-    	if (message.startsWith("@")) // Direct message to a user using the format  "@username <message>"
+    	if (message.startsWith("@")) // Direct message to a user using the format "@username <message>"
     	{
     		String destUsername= message.substring(1, message.indexOf(" "));
-    		sendMessageToPArticularUser(destUsername, "[DM] " + username + ": " + message);
+    		sendMessageToPArticularUser(destUsername, destUsername + " [DM] " + username + ": " + message);
     	}
     }
  
