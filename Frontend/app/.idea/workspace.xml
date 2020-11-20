@@ -7,18 +7,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29bbb436-4bb4-455e-a9a4-ff1aa4d7981d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/project309/MessageBoxTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/MessageBoxBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/MessageBoxBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/SocketConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/SocketConnect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/project309/WebSocketTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/project309/WebSocketTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/Create_Update_Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/Create_Update_Store.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/OrderingScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/OrderingScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/Store.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/ui/map/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/ui/map/MapsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/app/uiDelivery/map/MarkerInfoWindowAdapterDelivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/app/uiDelivery/map/MarkerInfoWindowAdapterDelivery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/project309/net_utils/Const.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/project309/net_utils/Const.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/map_marker_info_window.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/map_marker_info_window.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/map_marker_info_window_delivery.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/map_marker_info_window_delivery.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_28" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3a_API_30" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -61,8 +66,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_28" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-10-30T09:08:47.826Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_3a_API_30" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-11-19T23:31:31.620Z" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -283,10 +288,14 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1398" height="118" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1604048845286" />
-    <state x="100" y="100" width="1240" height="700" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1604048231449">
+    <state x="100" y="100" width="1240" height="700" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1605828700946">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="100" y="100" width="1240" height="700" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1440.900@0.0.1440.900" timestamp="1604048231449" />
+    <state x="100" y="100" width="1240" height="700" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1440.900@0.0.1440.900" timestamp="1605828700946" />
+    <state x="848" y="348" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605831887583">
+      <screen x="0" y="23" width="1440" height="803" />
+    </state>
+    <state x="848" y="348" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.803@0.23.1440.803" timestamp="1605831887583" />
     <state x="289" y="193" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1604045303443">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

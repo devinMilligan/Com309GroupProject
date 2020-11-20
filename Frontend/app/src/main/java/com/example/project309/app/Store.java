@@ -231,8 +231,7 @@ public class Store {
         this.longitude = longitude;
     }
     public void setLatitude(double lat) {
-        latitude = lat;
-
+        this.latitude = lat;
     }
 
     public int getManager() {
@@ -342,11 +341,7 @@ public class Store {
             temp.setName(json.getString("name"));
             temp.setLatitude(json.getDouble("latitude"));
             temp.setLongitude(json.getDouble("longitude"));
-            Random rand = new Random(); //instance of random class
-//            int upperbound = 25;
-//            //generate random values from 0-24
-//            int orders = rand.nextInt(upperbound);
-            temp.setOrders(59);
+            temp.setOrders(json.getInt("numOrders"));
 
         } catch (JSONException e) {
             e.printStackTrace();

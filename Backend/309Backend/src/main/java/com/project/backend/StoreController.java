@@ -16,7 +16,7 @@ import com.project.backend.Store;
 
 @Controller
 @RequestMapping("/stores")
-class StoreController {
+public class StoreController {
 	
 	@Autowired
 	private StoreRepository storeRepository;
