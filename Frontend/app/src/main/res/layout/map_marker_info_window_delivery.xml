@@ -64,11 +64,11 @@
         android:layout_height="wrap_content"
         android:textColor="#000"/>
 
-    <Button
-        android:id="@+id/button_delivery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#F00"
-        android:text="Place an order!" />
+<!--    <Button-->
+<!--        android:id="@+id/button_delivery"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="#F00"-->
+<!--        android:text="Place an order!" />-->
 
 </LinearLayout>
