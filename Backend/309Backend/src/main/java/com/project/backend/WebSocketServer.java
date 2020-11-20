@@ -14,7 +14,6 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 
@@ -49,8 +48,10 @@ public class WebSocketServer {
     	if (message.startsWith("@")) // Direct message to a user using the format "@username <message>"
     	{
     		String destUsername= message.substring(1, message.indexOf(" "));
-    		sendMessageToPArticularUser(destUsername, destUsername + " [DM] " + username + ": " + message);
+    		//sendMessageToPArticularUser(destUsername, "user " + destUsername + " [DM] " + username + ": " + message);
     	}
+
+		broadcast(message);
     }
  
     @OnClose
@@ -78,4 +79,19 @@ public class WebSocketServer {
             e.printStackTrace();
         }
     }
+	
+	private void broadcast(String message)
+	{
+		  sessionUsernameMap.forEach((session, username)->{
+				try {
+							session.getBasicRemote().sendText(message);
+				} catch (IOException e) {
+							logger.info("Exception: " + e.getMessage().toString());
+							e.printStackTrace();
+				}
+
+			});
+
+}
+
 }
