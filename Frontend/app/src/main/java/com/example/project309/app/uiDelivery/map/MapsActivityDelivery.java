@@ -8,6 +8,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,8 +23,6 @@ import com.example.project309.R;
 import com.example.project309.app.AppController;
 import com.example.project309.app.JSONHandlerInter;
 import com.example.project309.app.MainNavigationScreenDelivery;
-import com.example.project309.app.Menu;
-import com.example.project309.app.MenuItem;
 import com.example.project309.app.OrderPickStore;
 import com.example.project309.app.OrderingScreen;
 import com.example.project309.app.PlaceOrder;
@@ -46,7 +47,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * This class defines the app's map page's functionality
@@ -81,7 +88,40 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
         SupportMapFragment mapFragment = SupportMapFragment.newInstance();
         getSupportFragmentManager().beginTransaction().add(R.id.nav_map_delivery, mapFragment).commit();
         mapFragment.getMapAsync(this);
-        getListOfStores();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.map_options, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Change the map type based on the user's selection.
+        switch (item.getItemId()) {
+            case R.id.refresh_map:
+                mMap.clear();
+                aStores = new ArrayList<>();
+                this.jsonH.makeJsonArryReq(Const.URL_JSON_GET_ALL_STORES);
+                aStores = Store.allStores;
+                addMarkersToMap();
+                MarkerInfoWindowAdapterDelivery markerInfoWindowAdapterDelivery = new MarkerInfoWindowAdapterDelivery(getApplicationContext(), aStores);
+                mMap.setInfoWindowAdapter(markerInfoWindowAdapterDelivery);
+                return true;
+//            case R.id.hybrid_map:
+//                mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+//                return true;
+//            case R.id.satellite_map:
+//                mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+//                return true;
+//            case R.id.terrain_map:
+//                mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+//                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /**
@@ -90,11 +130,15 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
     public void getListOfStores() {
         this.jsonH.makeJsonArryReq(Const.URL_JSON_GET_ALL_STORES);
         aStores = Store.allStores;
-
+//        aStores.get(0).setFridayOpen("00:10:00");
+//        text = "here open: " + aStores.get(0).getFridayOpen();
+//        String text2 = "here close: " + aStores.get(0).getFridayClose();
+//        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), text2, Toast.LENGTH_LONG).show();
 //        Store s = new Store();
 //        s.setName("Season's");
-//        s.setLatitude(42.023858);
-//        s.setLongitude(-93.638253);
+//        s.setLongitude(42.023858);
+//        s.setLatitude(-93.638253);
 //        s.setSundayOpen("03:45:00");
 //        s.setSundayClose("03:45:00");
 //        s.setMondayOpen("03:45:00");
@@ -114,8 +158,8 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
 //
 //        Store st = new Store();
 //        st.setName("Convos");
-//        st.setLatitude(42.025289);
-//        st.setLongitude(-93.640330);
+//        st.setLongitude(42.025289);
+//        st.setLatitude(-93.640330);
 //        st.setSundayOpen("03:45:00");
 //        st.setSundayClose("03:45:00");
 //        st.setMondayOpen("03:45:00");
@@ -124,8 +168,8 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
 //        st.setTuesdayClose("03:45:00");
 //        st.setWednesdayOpen("03:45:00");
 //        st.setWednesdayClose("03:45:00");
-//        st.setThursdayOpen("03:45:00");
-//        st.setThursdayClose("03:45:00");
+//        st.setThursdayOpen("00:00:00");
+//        st.setThursdayClose("00:00:00");
 //        st.setFridayOpen("03:45:00");
 //        st.setFridayClose("03:45:00");
 //        st.setSaturdayOpen("03:45:00");
@@ -150,7 +194,7 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
         LatLng campanile = new LatLng(42.025408, -93.646074);
 //        mMap.addMarker(new MarkerOptions().position(campanile).title("Campanile"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campanile, zoom));
-
+        getListOfStores();
         addMarkersToMap();
 
         //setMapLongClick(mMap); // Set a long click listener for the map;
@@ -169,25 +213,112 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
      * It does so based on the wait time of each individual store
      */
     public void addMarkersToMap() {
-//        CharSequence cs = (CharSequence) Integer.toString(aStores.size());
+//        String cs = aStores.get(3).getName();
 //        Toast.makeText(getApplicationContext(), cs, Toast.LENGTH_LONG).show();
 
-        for (int i =0; i<aStores.size(); i++){
-            LatLng store_temp = new LatLng(aStores.get(i).getLatitude(), aStores.get(i).getLongitude());
+//        int j =2;
+//        LatLng store_temp = new LatLng(aStores.get(j).getLongitude(), aStores.get(j).getLatitude());
+//        String cs = "name: "  + aStores.get(j).getName();
+//        Toast.makeText(getApplicationContext(), cs, Toast.LENGTH_LONG).show();
+//        String cs1 = "lat: " + Double.toString(store_temp.latitude);
+//        Toast.makeText(getApplicationContext(), cs1, Toast.LENGTH_LONG).show();
+//        String cs2 = "long: " + Double.toString(store_temp.longitude);
+//        Toast.makeText(getApplicationContext(), cs2, Toast.LENGTH_LONG).show();
+//        mMap.addMarker(new MarkerOptions().position(store_temp).title(aStores.get(j).getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+
+        int i;
+        for (i=0; i<aStores.size(); i++){
+            LatLng store_temp = new LatLng(aStores.get(i).getLongitude(), aStores.get(i).getLatitude());
             int a = aStores.get(i).getWaitTimeMin();
-            if (a <= 5){
-                mMap.addMarker(new MarkerOptions().position(store_temp).title(aStores.get(i).getName()).icon(BitmapDescriptorFactory.defaultMarker
-                        (BitmapDescriptorFactory.HUE_GREEN)));
+            if (storeClosed(aStores.get(i))){
+                mMap.addMarker(new MarkerOptions().position(store_temp).title(aStores.get(i).getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             }
-            else if (a <= 30){
-                mMap.addMarker(new MarkerOptions().position(store_temp).title(aStores.get(i).getName()).icon(BitmapDescriptorFactory.defaultMarker
-                        (BitmapDescriptorFactory.HUE_YELLOW)));
+            else if (a <= 5){
+                mMap.addMarker(new MarkerOptions().position(store_temp).title(aStores.get(i).getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             }
             else{
-                mMap.addMarker(new MarkerOptions().position(store_temp).title(aStores.get(i).getName()).icon(BitmapDescriptorFactory.defaultMarker
-                        (BitmapDescriptorFactory.HUE_RED)));
+                mMap.addMarker(new MarkerOptions().position(store_temp).title(aStores.get(i).getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
             }
         }
+    }
+
+    private boolean storeClosed(Store store){
+        Date date = Calendar.getInstance().getTime();
+        String day = getDayStringOld(date);
+        boolean closed = false;
+        switch(day){
+            case "Monday":
+                if(store.getMondayOpen().equals("00:00:00") || isClosed(store.getMondayClose()) || notYetOpen(store.getMondayOpen())){
+                    closed = true;
+                }
+                break;
+            case "Tuesday":
+                if(store.getTuesdayOpen().equals("00:00:00") || isClosed(store.getTuesdayClose()) || notYetOpen(store.getTuesdayOpen())){
+                    closed = true;
+                }
+                break;
+            case "Wednesday":
+                if(store.getWednesdayOpen().equals("00:00:00") || isClosed(store.getWednesdayClose()) || notYetOpen(store.getWednesdayOpen())){
+                    closed = true;
+                }
+                break;
+            case "Thursday":
+                if(store.getThursdayOpen().equals("00:00:00") || isClosed(store.getThursdayClose()) || notYetOpen(store.getThursdayOpen())){
+                    closed = true;
+                }
+                break;
+            case "Friday":
+                if(store.getFridayOpen().equals("00:00:00") || isClosed(store.getFridayClose()) || notYetOpen(store.getFridayOpen())){
+                    closed = true;
+                }
+                break;
+            case "Saturday":
+                if(store.getSaturdayOpen().equals("00:00:00") || isClosed(store.getSaturdayClose()) || notYetOpen(store.getSaturdayOpen())){
+                    closed = true;
+                }
+                break;
+            case "Sunday":
+                if(store.getSundayOpen().equals("00:00:00") || isClosed(store.getSundayClose()) || notYetOpen(store.getSundayOpen())){
+                    closed = true;
+                }
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + day);
+        }
+        return closed;
+    }
+
+    private boolean notYetOpen(String open_time) {
+        int hour = Integer.parseInt(open_time.substring(0,2));
+        int minute = Integer.parseInt(open_time.substring(3,5));
+        Calendar rightNow = Calendar.getInstance();
+        int now_hour = rightNow.get(Calendar.HOUR_OF_DAY);
+        int now_minute = rightNow.get(Calendar.MINUTE);
+        if (now_hour < hour || (now_hour == hour && now_minute < minute)){
+//            text = "not yet open";
+//            Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isClosed(String close_time){
+        int hour = Integer.parseInt(close_time.substring(0,2));
+        int minute = Integer.parseInt(close_time.substring(3,5));
+        Calendar rightNow = Calendar.getInstance();
+        int now_hour = rightNow.get(Calendar.HOUR_OF_DAY);
+        int now_minute = rightNow.get(Calendar.MINUTE);
+        if (now_hour > hour || (now_hour == hour && now_minute > minute)){
+//            text = "after hours";
+//            Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return false;
+    }
+
+    private static String getDayStringOld(Date date) {
+        DateFormat formatter = new SimpleDateFormat("EEEE", Locale.ENGLISH);
+        return formatter.format(date);
     }
 
     /**
@@ -205,9 +336,19 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
                         break;
                     }
                 }
-                Store.currentStore = aStores.get(i);
-                Intent startOrder = new Intent(MapsActivityDelivery.this, OrderingScreen.class);
-                startActivity(startOrder);
+//                aStores.get(0).setFridayOpen("00:10:00");
+                if (storeClosed(aStores.get(i))){
+                    text = "Sorry, this store is currently closed.";
+//                    text = "open: " + aStores.get(0).getFridayOpen();
+//                    String text2 = "close: " + aStores.get(0).getFridayClose();
+                    Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), text2, Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Store.currentStore = aStores.get(i);
+                    Intent startOrder = new Intent(MapsActivityDelivery.this, OrderingScreen.class);
+                    startActivity(startOrder);
+                }
             }
         });
     }
@@ -261,7 +402,8 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
      * @param response the JSON array of stores
      */
     public void onSuccess(JSONArray response) {
-        for(int i = 0; i<response.length();i++){
+        Store.allStores = new ArrayList<>();
+        for(int i = 0; i<response.length();i++) {
             try {
                 onSuccess(response.getJSONObject(i));
             } catch (JSONException e) {
@@ -269,6 +411,8 @@ public class MapsActivityDelivery extends AppCompatActivity implements OnMapRead
             }
         }
         aStores = Store.allStores;
+//        CharSequence cs = (CharSequence) Integer.toString(aStores.size());
+//        Toast.makeText(getApplicationContext(), cs, Toast.LENGTH_LONG).show();
     }
 
     @Override

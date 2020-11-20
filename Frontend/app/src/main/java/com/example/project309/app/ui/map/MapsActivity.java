@@ -1,6 +1,7 @@
 package com.example.project309.app.ui.map;
 
 import android.Manifest;
+import android.app.FragmentTransaction;
 import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,9 +18,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import android.app.Fragment;
 
 import com.android.volley.VolleyError;
 import com.example.project309.R;
+import com.example.project309.app.AccountType;
 import com.example.project309.app.AppController;
 import com.example.project309.app.JSONHandlerInter;
 import com.example.project309.app.MainNavigationScreenDelivery;
@@ -30,6 +33,7 @@ import com.example.project309.app.Profile;
 import com.example.project309.app.Store;
 import com.example.project309.app.ViewListenerInter;
 import com.example.project309.app.uiDelivery.map.MarkerInfoWindowAdapterDelivery;
+import com.example.project309.app.uiDelivery.selectOrder.SelectOrderFragment;
 import com.example.project309.net_utils.Const;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -84,9 +88,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_map_delivery);
+        setContentView(R.layout.fragment_map);
         SupportMapFragment mapFragment = SupportMapFragment.newInstance();
-        getSupportFragmentManager().beginTransaction().add(R.id.nav_map_delivery, mapFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.nav_map, mapFragment).commit();
         mapFragment.getMapAsync(this);
     }
 
@@ -242,43 +246,44 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    private boolean storeClosed(Store store){
+    public boolean storeClosed(Store store){
         Date date = Calendar.getInstance().getTime();
         String day = getDayStringOld(date);
+        Calendar rightNow = Calendar.getInstance();
         boolean closed = false;
         switch(day){
             case "Monday":
-                if(store.getMondayOpen().equals("00:00:00") || isClosed(store.getMondayClose()) || notYetOpen(store.getMondayOpen())){
+                if(store.getMondayOpen().equals("00:00:00") || isClosed(store.getMondayClose()) || notYetOpen(store.getMondayOpen(), rightNow)){
                     closed = true;
                 }
                 break;
             case "Tuesday":
-                if(store.getTuesdayOpen().equals("00:00:00") || isClosed(store.getTuesdayClose()) || notYetOpen(store.getTuesdayOpen())){
+                if(store.getTuesdayOpen().equals("00:00:00") || isClosed(store.getTuesdayClose()) || notYetOpen(store.getTuesdayOpen(), rightNow)){
                     closed = true;
                 }
                 break;
             case "Wednesday":
-                if(store.getWednesdayOpen().equals("00:00:00") || isClosed(store.getWednesdayClose()) || notYetOpen(store.getWednesdayOpen())){
+                if(store.getWednesdayOpen().equals("00:00:00") || isClosed(store.getWednesdayClose()) || notYetOpen(store.getWednesdayOpen(), rightNow)){
                     closed = true;
                 }
                 break;
             case "Thursday":
-                if(store.getThursdayOpen().equals("00:00:00") || isClosed(store.getThursdayClose()) || notYetOpen(store.getThursdayOpen())){
+                if(store.getThursdayOpen().equals("00:00:00") || isClosed(store.getThursdayClose()) || notYetOpen(store.getThursdayOpen(), rightNow)){
                     closed = true;
                 }
                 break;
             case "Friday":
-                if(store.getFridayOpen().equals("00:00:00") || isClosed(store.getFridayClose()) || notYetOpen(store.getFridayOpen())){
+                if(store.getFridayOpen().equals("00:00:00") || isClosed(store.getFridayClose()) || notYetOpen(store.getFridayOpen(), rightNow)){
                     closed = true;
                 }
                 break;
             case "Saturday":
-                if(store.getSaturdayOpen().equals("00:00:00") || isClosed(store.getSaturdayClose()) || notYetOpen(store.getSaturdayOpen())){
+                if(store.getSaturdayOpen().equals("00:00:00") || isClosed(store.getSaturdayClose()) || notYetOpen(store.getSaturdayOpen(), rightNow)){
                     closed = true;
                 }
                 break;
             case "Sunday":
-                if(store.getSundayOpen().equals("00:00:00") || isClosed(store.getSundayClose()) || notYetOpen(store.getSundayOpen())){
+                if(store.getSundayOpen().equals("00:00:00") || isClosed(store.getSundayClose()) || notYetOpen(store.getSundayOpen(), rightNow)){
                     closed = true;
                 }
                 break;
@@ -288,10 +293,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return closed;
     }
 
-    private boolean notYetOpen(String open_time) {
+    public boolean notYetOpen(String open_time, Calendar rightNow) {
         int hour = Integer.parseInt(open_time.substring(0,2));
         int minute = Integer.parseInt(open_time.substring(3,5));
-        Calendar rightNow = Calendar.getInstance();
         int now_hour = rightNow.get(Calendar.HOUR_OF_DAY);
         int now_minute = rightNow.get(Calendar.MINUTE);
         if (now_hour < hour || (now_hour == hour && now_minute < minute)){
@@ -316,7 +320,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return false;
     }
 
-    private static String getDayStringOld(Date date) {
+    public static String getDayStringOld(Date date) {
         DateFormat formatter = new SimpleDateFormat("EEEE", Locale.ENGLISH);
         return formatter.format(date);
     }
@@ -336,13 +340,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         break;
                     }
                 }
-//                aStores.get(0).setFridayOpen("00:10:00");
+                aStores.get(0).setFridayOpen("00:10:00");
                 if (storeClosed(aStores.get(i))){
+                    if (Profile.currentLogin.getAccountType().getAccountType() == null){
+                        text = "null";
+                        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     text = "Sorry, this store is currently closed.";
-//                    text = "open: " + aStores.get(0).getFridayOpen();
-//                    String text2 = "close: " + aStores.get(0).getFridayClose();
+                    text = "open: " + aStores.get(0).getFridayOpen();
+                    String text2 = "close: " + aStores.get(0).getFridayClose();
                     Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-//                    Toast.makeText(getApplicationContext(), text2, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), text2, Toast.LENGTH_LONG).show();
                 }
                 else {
                     Store.currentStore = aStores.get(i);
@@ -411,8 +420,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         }
         aStores = Store.allStores;
-        CharSequence cs = (CharSequence) Integer.toString(aStores.size());
-        Toast.makeText(getApplicationContext(), cs, Toast.LENGTH_LONG).show();
+//        CharSequence cs = (CharSequence) Integer.toString(aStores.size());
+//        Toast.makeText(getApplicationContext(), cs, Toast.LENGTH_LONG).show();
     }
 
     @Override
