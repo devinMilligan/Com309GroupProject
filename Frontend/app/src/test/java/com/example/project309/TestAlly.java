@@ -53,9 +53,9 @@ public class TestAlly {
 
     @Test
     public void testGetThreeStoreRecommendations(){
-        MenuItem pizza = new MenuItem("pizza", "a", 2.00);
-        MenuItem drink = new MenuItem("drink", "a", 1.00);
-        MenuItem salad = new MenuItem("salad", "a", 1.00);
+        MenuItem pizza = new MenuItem("pizza", "cheese, pepperoni",2.00);
+        MenuItem drink = new MenuItem("drink", "coke, water", 1.00);
+        MenuItem salad = new MenuItem("salad", "cobb, caesar",1.00);
 
         Order order = new Order(1, 3.00);
         order.addMenuItem(pizza);
@@ -103,9 +103,9 @@ public class TestAlly {
 
     @Test
     public void testGetThreeStoreRecommendations2(){
-        MenuItem pizza = new MenuItem("pizza", "a", 2.00);
-        MenuItem drink = new MenuItem("drink", "a", 1.00);
-        MenuItem salad = new MenuItem("salad", "a", 1.00);
+        MenuItem pizza = new MenuItem("pizza", "cheese, pepperoni",2.00);
+        MenuItem drink = new MenuItem("drink", "coke, water", 1.00);
+        MenuItem salad = new MenuItem("salad", "cobb, caesar",1.00);
 
         Order order = new Order(1, 3.00);
         order.addMenuItem(pizza);

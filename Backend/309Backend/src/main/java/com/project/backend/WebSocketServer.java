@@ -15,13 +15,11 @@ import javax.websocket.server.ServerEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-/**
- * 
- * @author Vamsi Krishna Calpakkam
- *
- */
+import org.springframework.stereotype.Controller;
+
+
 @ServerEndpoint("/websocket/{username}")
-@Component
+@Controller
 public class WebSocketServer {
 	
 	// Store all socket session and their corresponding username.
@@ -48,9 +46,9 @@ public class WebSocketServer {
     	logger.info("Entered into Message: Got Message:"+message);
     	String username = sessionUsernameMap.get(session);
     	
-    	if (message.startsWith("@")) // Direct message to a user using the format "@username <message>"
+    	if (message.startsWith("@")) // Direct message to a user using the format  "@username <message>"
     	{
-    		String destUsername = message.split(" ")[0].substring(1); // don't do this in your code!
+    		String destUsername= message.substring(1, message.indexOf(" "));
     		sendMessageToPArticularUser(destUsername, "[DM] " + username + ": " + message);
     	}
     }

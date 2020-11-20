@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.project309.R;
@@ -374,14 +375,20 @@ public class Create_Update_Store extends AppCompatActivity implements View.OnCli
         boolean check = true;
 
         if(edAddress.getText().toString().trim().isEmpty()){
+//            String text = "empty";
+//            Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
             check = false;
             edAddress.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         }else{
             pointLocation = Store.getLocationFromAddress(edAddress.getText().toString().trim(), Create_Update_Store.this);
             if(pointLocation == null){
+//                String text = "null";
+//                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
                 check = false;
                 edAddress.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             }else{
+//                String text = "fine";
+//                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
                 edAddress.setTextColor(getResources().getColor(R.color.colorTextSecond));
             }
         }

@@ -18,7 +18,7 @@ import com.project.backend.User;
 
 @Controller
 @RequestMapping("/users")
-class UserController {
+public class UserController {
 	
 	@Autowired
 	private UserRepository userRepository;
