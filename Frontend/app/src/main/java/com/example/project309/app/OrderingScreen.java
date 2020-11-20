@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.project309.R;
@@ -110,21 +109,22 @@ public class OrderingScreen extends AppCompatActivity implements ViewListenerInt
         mAdapter = new MenuListAdapter(OrderingScreen.this, R.layout.menu_list_adapter, currentMenu.menuItems);
         lvMenu.setAdapter(mAdapter);
         lvMenu.setOnItemClickListener(this);
-//
+
         menuItemPopUp = new MenuItemPopUp();
         menuItemPopUp.setListener(this);
-//
+
         txtTotal = (TextView)findViewById(R.id.txtTotal);
         txtTotal.setText(String.format("Total: $%.2f",currentOrder.getOrderPrice()));
-//
+
         message = new MessageBoxBuilder();
         message.setContext(this);
-//
+
         ArrayList<JSONVariable> params = new ArrayList<>();
         params.add(new JSONVariable("userID", Integer.toString(Profile.currentLogin.getId())));
         params.add(new JSONVariable("storeID", Integer.toString(Store.currentStore.getID())));
-//
+
         jsonH.makeJsonObjReqParams(Const.URL_JSON_NEW_ORDER, params, RequestMethod.POST);
+
     }
 
     /**
@@ -171,7 +171,7 @@ public class OrderingScreen extends AppCompatActivity implements ViewListenerInt
                     ArrayList<JSONVariable> params = new ArrayList<>();
                     params.add(new JSONVariable("orderID",Integer.toString(currentOrder.getOrderNumber())));
 
-                   stringH.makeStringParams(Const.URL_STRING_ADVANCE_STATUS, params, RequestMethod.POST);
+                    stringH.makeStringParams(Const.URL_STRING_ADVANCE_STATUS, params, RequestMethod.POST);
                 }
 
             }catch(JSONException e){

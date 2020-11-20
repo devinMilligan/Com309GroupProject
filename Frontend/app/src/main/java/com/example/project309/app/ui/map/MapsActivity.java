@@ -8,6 +8,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,8 +23,6 @@ import com.example.project309.R;
 import com.example.project309.app.AppController;
 import com.example.project309.app.JSONHandlerInter;
 import com.example.project309.app.MainNavigationScreenDelivery;
-import com.example.project309.app.Menu;
-import com.example.project309.app.MenuItem;
 import com.example.project309.app.OrderPickStore;
 import com.example.project309.app.OrderingScreen;
 import com.example.project309.app.PlaceOrder;
@@ -89,12 +90,51 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.map_options, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Change the map type based on the user's selection.
+        switch (item.getItemId()) {
+            case R.id.refresh_map:
+                mMap.clear();
+                aStores = new ArrayList<>();
+                this.jsonH.makeJsonArryReq(Const.URL_JSON_GET_ALL_STORES);
+                aStores = Store.allStores;
+                addMarkersToMap();
+                MarkerInfoWindowAdapterDelivery markerInfoWindowAdapterDelivery = new MarkerInfoWindowAdapterDelivery(getApplicationContext(), aStores);
+                mMap.setInfoWindowAdapter(markerInfoWindowAdapterDelivery);
+                return true;
+//            case R.id.hybrid_map:
+//                mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+//                return true;
+//            case R.id.satellite_map:
+//                mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+//                return true;
+//            case R.id.terrain_map:
+//                mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+//                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     /**
      * A void method which sets aStores using a JSON array request to the backend and some manual store additions
      */
     public void getListOfStores() {
         this.jsonH.makeJsonArryReq(Const.URL_JSON_GET_ALL_STORES);
         aStores = Store.allStores;
+//        aStores.get(0).setFridayOpen("00:10:00");
+//        text = "here open: " + aStores.get(0).getFridayOpen();
+//        String text2 = "here close: " + aStores.get(0).getFridayClose();
+//        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), text2, Toast.LENGTH_LONG).show();
 //        Store s = new Store();
 //        s.setName("Season's");
 //        s.setLongitude(42.023858);
@@ -145,7 +185,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
      * @param  googleMap the google map object used to edit the scene for the map activity
      */
     public void onMapReady(GoogleMap googleMap) {
-        getListOfStores();
         mMap = googleMap;
         float zoom = 15;
 
@@ -155,7 +194,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         LatLng campanile = new LatLng(42.025408, -93.646074);
 //        mMap.addMarker(new MarkerOptions().position(campanile).title("Campanile"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campanile, zoom));
-
+        getListOfStores();
         addMarkersToMap();
 
         //setMapLongClick(mMap); // Set a long click listener for the map;
@@ -209,37 +248,37 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         boolean closed = false;
         switch(day){
             case "Monday":
-                if(store.getMondayOpen().equals("null") || isClosed(store.getMondayClose()) || notYetOpen(store.getMondayOpen())){
+                if(store.getMondayOpen().equals("00:00:00") || isClosed(store.getMondayClose()) || notYetOpen(store.getMondayOpen())){
                     closed = true;
                 }
                 break;
             case "Tuesday":
-                if(store.getTuesdayOpen().equals("null") || isClosed(store.getTuesdayClose()) || notYetOpen(store.getTuesdayOpen())){
+                if(store.getTuesdayOpen().equals("00:00:00") || isClosed(store.getTuesdayClose()) || notYetOpen(store.getTuesdayOpen())){
                     closed = true;
                 }
                 break;
             case "Wednesday":
-                if(store.getWednesdayOpen().equals("null") || isClosed(store.getWednesdayClose()) || notYetOpen(store.getWednesdayOpen())){
+                if(store.getWednesdayOpen().equals("00:00:00") || isClosed(store.getWednesdayClose()) || notYetOpen(store.getWednesdayOpen())){
                     closed = true;
                 }
                 break;
             case "Thursday":
-                if(store.getThursdayOpen().equals("null") || isClosed(store.getThursdayClose()) || notYetOpen(store.getThursdayOpen())){
+                if(store.getThursdayOpen().equals("00:00:00") || isClosed(store.getThursdayClose()) || notYetOpen(store.getThursdayOpen())){
                     closed = true;
                 }
                 break;
             case "Friday":
-                if(store.getFridayOpen().equals("null") || isClosed(store.getFridayClose()) || notYetOpen(store.getFridayOpen())){
+                if(store.getFridayOpen().equals("00:00:00") || isClosed(store.getFridayClose()) || notYetOpen(store.getFridayOpen())){
                     closed = true;
                 }
                 break;
             case "Saturday":
-                if(store.getSaturdayOpen().equals("null") || isClosed(store.getSaturdayClose()) || notYetOpen(store.getSaturdayOpen())){
+                if(store.getSaturdayOpen().equals("00:00:00") || isClosed(store.getSaturdayClose()) || notYetOpen(store.getSaturdayOpen())){
                     closed = true;
                 }
                 break;
             case "Sunday":
-                if(store.getSundayOpen().equals("null") || isClosed(store.getSundayClose()) || notYetOpen(store.getSundayOpen())){
+                if(store.getSundayOpen().equals("00:00:00") || isClosed(store.getSundayClose()) || notYetOpen(store.getSundayOpen())){
                     closed = true;
                 }
                 break;
@@ -297,9 +336,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         break;
                     }
                 }
+//                aStores.get(0).setFridayOpen("00:10:00");
                 if (storeClosed(aStores.get(i))){
-                    text = "Sorry, this store is closed right now!";
+                    text = "Sorry, this store is currently closed.";
+//                    text = "open: " + aStores.get(0).getFridayOpen();
+//                    String text2 = "close: " + aStores.get(0).getFridayClose();
                     Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), text2, Toast.LENGTH_LONG).show();
                 }
                 else {
                     Store.currentStore = aStores.get(i);
@@ -359,6 +402,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
      * @param response the JSON array of stores
      */
     public void onSuccess(JSONArray response) {
+        Store.allStores = new ArrayList<>();
         for(int i = 0; i<response.length();i++) {
             try {
                 onSuccess(response.getJSONObject(i));
@@ -367,8 +411,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         }
         aStores = Store.allStores;
-//        CharSequence cs = (CharSequence) Integer.toString(aStores.size());
-//        Toast.makeText(getApplicationContext(), cs, Toast.LENGTH_LONG).show();
+        CharSequence cs = (CharSequence) Integer.toString(aStores.size());
+        Toast.makeText(getApplicationContext(), cs, Toast.LENGTH_LONG).show();
     }
 
     @Override
