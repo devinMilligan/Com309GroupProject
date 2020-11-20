@@ -340,18 +340,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         break;
                     }
                 }
-                aStores.get(0).setFridayOpen("00:10:00");
+                //aStores.get(0).setFridayOpen("00:10:00");
                 if (storeClosed(aStores.get(i))){
-                    if (Profile.currentLogin.getAccountType().getAccountType() == null){
-                        text = "null";
-                        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-                        return;
-                    }
                     text = "Sorry, this store is currently closed.";
-                    text = "open: " + aStores.get(0).getFridayOpen();
-                    String text2 = "close: " + aStores.get(0).getFridayClose();
                     Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-                    Toast.makeText(getApplicationContext(), text2, Toast.LENGTH_LONG).show();
                 }
                 else {
                     Store.currentStore = aStores.get(i);
