@@ -15,6 +15,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 import static org.mockito.Mockito.*;
@@ -144,5 +146,45 @@ public class TestAlly {
         assertEquals(store3, stores.get(0));
         assertEquals(store2, stores.get(1));
         assertEquals(store1, stores.get(2));
+    }
+
+    @Test
+    public void testStoreClosed(){
+        Calendar rightNow = mock(Calendar.class);
+        when(rightNow.get(Calendar.HOUR_OF_DAY)).thenReturn(11);
+        when(rightNow.get(Calendar.MINUTE)).thenReturn(11);
+        MapsActivity ma = new MapsActivity();
+        boolean result = ma.notYetOpen("12:00:00", rightNow);
+        assertEquals(true, result);
+    }
+
+    @Test
+    public void testStoreClosed2(){
+        Calendar rightNow = mock(Calendar.class);
+        when(rightNow.get(Calendar.HOUR_OF_DAY)).thenReturn(11);
+        when(rightNow.get(Calendar.MINUTE)).thenReturn(11);
+        MapsActivity ma = new MapsActivity();
+        boolean result = ma.notYetOpen("11:30:00", rightNow);
+        assertEquals(true, result);
+    }
+
+    @Test
+    public void testStoreClosed3(){
+        Calendar rightNow = mock(Calendar.class);
+        when(rightNow.get(Calendar.HOUR_OF_DAY)).thenReturn(12);
+        when(rightNow.get(Calendar.MINUTE)).thenReturn(11);
+        MapsActivity ma = new MapsActivity();
+        boolean result = ma.notYetOpen("12:00:00", rightNow);
+        assertEquals(false, result);
+    }
+
+    @Test
+    public void testStoreClosed4(){
+        Calendar rightNow = mock(Calendar.class);
+        when(rightNow.get(Calendar.HOUR_OF_DAY)).thenReturn(11);
+        when(rightNow.get(Calendar.MINUTE)).thenReturn(11);
+        MapsActivity ma = new MapsActivity();
+        boolean result = ma.notYetOpen("08:00:00", rightNow);
+        assertEquals(false, result);
     }
 }
