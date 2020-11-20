@@ -178,10 +178,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     startActivity(loggedIn);
                     return;
                 }
-                else if(response.get("type").toString().equalsIgnoreCase(AccountType.CUSTOMER_DELIVERER_ACCOUNT.getAccountType()) ||
-                        response.get("type").toString().equalsIgnoreCase(AccountType.ORDER.getAccountType()))
-                {
+                else if(response.get("type").toString().equalsIgnoreCase(AccountType.CUSTOMER_DELIVERER_ACCOUNT.getAccountType())) {
                     Profile.currentLogin = CustomerDelivererProfile.getProfileInfo(response);
+                    ((CustomerDelivererProfile)Profile.currentLogin).setDeliveryStatus(true);
                     loggedIn = new Intent(LoginActivity.this, MainNavigationScreen.class);
                     startActivity(loggedIn);
                     return;

@@ -26,6 +26,6 @@ public class Const {
     public static final String URL_GET_ORDERS_BY_STORE = "http://coms-309-mc-08.cs.iastate.edu:8080/orders/byStore";
     public static final String URL_GET_USER_ORDER_HISTORY = " http://coms-309-mc-08.cs.iastate.edu:8080/orders/byUser";
 
-    public static final String URL_SOCKET = "ws://coms-309-mc-08.cs.iastate.edu:8080/";
+    public static final String URL_SOCKET = "ws://coms-309-mc-08.cs.iastate.edu:8080/websocket/";
 
 }

@@ -10,7 +10,7 @@ public enum AccountType {
     /**
      * String values of each account type
      */
-    CUSTOMER_DELIVERER_ACCOUNT("Deliverer"), MANAGER_ACCOUNT("Manager"), ADMIN_ACCOUNT("Admin"), DINING_ACCOUNT("Dining"), ORDER("Orderer");
+    CUSTOMER_DELIVERER_ACCOUNT("Deliverer"), MANAGER_ACCOUNT("Manager"), ADMIN_ACCOUNT("Admin"), DINING_ACCOUNT("Dining");
 
     public final String accountType;
 

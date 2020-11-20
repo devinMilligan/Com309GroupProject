@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -59,6 +60,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
      */
     private StringHandlerInter stringHandler;
 
+    private boolean delivery;
+
     /**
      * Sets up the activity by assigning all variables in preparation for a button to be pressed
      *
@@ -83,6 +86,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         firstName = (EditText) findViewById(R.id.signup_firstName);
         lastName = (EditText) findViewById(R.id.signup_lastName);
         deliveryStatus = (Switch) findViewById(R.id.account_type);
+        if (deliveryStatus != null) {
+            deliveryStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    delivery = isChecked;
+                }
+            });
+        }
 
         createAccountButton = findViewById(R.id.signup_create_account_button);
         createAccountButton.setOnClickListener(this);

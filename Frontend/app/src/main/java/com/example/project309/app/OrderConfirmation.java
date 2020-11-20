@@ -45,7 +45,8 @@ public class OrderConfirmation extends AppCompatActivity implements SocketListen
             if(SocketConnect.isSocketOpen()) {
                 SocketConnect.closeSocket();
             }
-            SocketConnect.connect(Const.URL_SOCKET);
+            SocketConnect.connect(Const.URL_SOCKET + Profile.currentLogin.getId());
+            //SocketConnect.connect("ws://echo.websocket.org");
         }
 
 
